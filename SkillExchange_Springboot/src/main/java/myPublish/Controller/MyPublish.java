@@ -2,6 +2,7 @@ package myPublish.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -38,16 +39,48 @@ public class MyPublish  {
 	@GetMapping(value = "/myPublish")
 	public String myPublish(@SessionAttribute("memberBean") MemberBean member, Model model){
 		List<MyPublishBean> mylist = imps.myPublish(member.getMemberRegNo());
+		
+		//取得現在時間
+		Date date1 = new Date();
+		long time1 = date1.getTime();
+		
+		List<Integer> dayList = new ArrayList<Integer>();
+		
+		for(int i=0; i<mylist.size();i++) {
+			
+			//計算日期差
+			int days = 30-(int)((time1-mylist.get(i).getUpdateTime().getTime())/ (1000*3600*24));
+			System.out.println(days);
+			
+			dayList.add(days);
+		}
+		
+		model.addAttribute("dayList",dayList);
+		
 		model.addAttribute("mypublish",mylist);
 		return "mypublish/myPublish";
 	}
 	
 	@GetMapping(value = "/myPublishImfor")
-	public String myPublishImfor(@RequestParam("publishNo") String publishNo,Model model){
+	public String myPublishImfor(@RequestParam("publishNo") String publishNo,
+			@SessionAttribute("memberBean") MemberBean member,
+			Model model){
+		
+		//刊登資訊
 		int pubNo = Integer.parseInt(publishNo);
 		List<MyPublishBean> publishImfor;
 		publishImfor = imps.myPublishImformation(pubNo);
 		model.addAttribute("publishImfor",publishImfor);
+		
+		//推薦
+		List<MyPublishBean> commList = imps.publishRecomm(pubNo, member.getMemberRegNo());
+		
+		for (MyPublishBean test : commList) {
+			System.out.println("333:"+test.getMyTitle());
+		}
+		
+		model.addAttribute("commList",commList);
+		
 		return "mypublish/myPublishImfor";
 	}
 	

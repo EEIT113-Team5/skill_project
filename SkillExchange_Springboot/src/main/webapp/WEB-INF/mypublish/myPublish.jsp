@@ -71,7 +71,6 @@ legend {
 /* body { */
 /* 	margin: 100px; */
 /* } */
-
 .st1 {
 	width: 450px;
 	border-bottom: 1px solid cornflowerblue;
@@ -120,35 +119,53 @@ tr, td {
 			</div>
 		</div>
 	</section>
-	
+
 	<div class="container">
 
 		<h3>我的刊登</h3>
 
 		<div class="row">
 			<!-- 						<th>刊登編號</th><th>刊登標題</th><th>刊登內容</th><th>刊登地區</th><th></th><th></th>			 -->
-			<c:forEach var="my" items="${mypublish}">
+			<c:forEach var="my" items="${mypublish}" varStatus="mylist">
+				<c:set var="myindex" scope="session" value="${mylist.index}" />
+				<c:forEach var="dl" items="${dayList}" varStatus="dlist">
+					<c:set var="dlindex" scope="session" value="${dlist.index}" />
 
-				<div class="col-sm-3"
-					style="background-color: cornflowerblue; height: 450px; margin-top: 20px">
-					<div class="card" style="height: 450px">
+					<c:if test="${dlindex == myindex}">
 
-						<img src="${my.publishPic}" class="card-img-top" alt="..."
-							style="height: 180px">
-						<div class="" style="height: 124px">
-							<h5 class="card-title">編號:${my.publishNo},${my.myTitle}</h5>
-							<p class="card-text">${my.myDetail}.</p>
+						<div class="col-sm-3"
+							style="background-color: white; height: 550px; margin-top: 20px">
+							<div class="card" style="height: 545px; border: 1px solid black;">
+
+								<img src="${my.publishPic}" class="card-img-top" alt="..."
+									style="height: 180px">
+								<div class="" style="height: 140px">
+									<h5 class="card-title">編號:${my.publishNo},${my.myTitle}</h5>
+									<p class="card-text">${my.myDetail}.</p>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item"><a
+										href='myPublishImfor?publishNo=${my.publishNo}'>刊登資料</a></li>
+									<li class="list-group-item"><a
+										href='myPublishUpdate?publishNo=${my.publishNo}'>修改</a></li>
+									<li class="list-group-item"><a
+										href='myPublishDel?publishNo=${my.publishNo}'>刪除</a></li>
+									<c:choose>
+										<c:when test="${dl < 0}">
+											<li class="list-group-item">刊登時間:${my.updateTime}<br>剩餘天數:0</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="list-group-item">刊登時間:${my.updateTime}<br>剩餘天數:${dl}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</ul>
+							</div>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><a
-								href='myPublishImfor?publishNo=${my.publishNo}'>刊登資料</a></li>
-							<li class="list-group-item"><a
-								href='myPublishUpdate?publishNo=${my.publishNo}'>修改</a></li>
-							<li class="list-group-item"><a
-								href='myPublishDel?publishNo=${my.publishNo}'>刪除</a></li>
-						</ul>
-					</div>
-				</div>
+
+					</c:if>
+
+				</c:forEach>
+
 			</c:forEach>
 		</div>
 	</div>

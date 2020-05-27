@@ -1,6 +1,7 @@
 package myPublish.Model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ public class MyPublishBean implements Serializable {
 	String publishPic;
 	String myOwnSkill;
 	String myWantSkill;
-	Timestamp updateTime;
+	Date updateTime;
 	Integer publishctr;
 	String myMark;
 	String status;
@@ -203,11 +204,11 @@ public class MyPublishBean implements Serializable {
 
 	
 	@Column(name = "updatetime")
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 	@Column(name = "publishCTR")

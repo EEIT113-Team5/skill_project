@@ -13,5 +13,7 @@ public interface iMyPublishDao {
 	MyPublishBean datePublish(MyPublishBean bean);
 
 	List<MyPublishBean> myPublishImformation(int publishNo);
+	
+	List<MyPublishBean> publishRecomm(int publishNo,int memberRegNo);
 
 }

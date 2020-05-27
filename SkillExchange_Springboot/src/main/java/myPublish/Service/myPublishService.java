@@ -55,6 +55,12 @@ public class myPublishService implements imyPublishService {
 		return myPublishImfor;
 	}
 	
+	@Override
+	public List<MyPublishBean> publishRecomm(int publishNo,int memberRegNo){
+		List<MyPublishBean> publishRecomm = myDao.publishRecomm(publishNo, memberRegNo);
+		return publishRecomm;
+	}
+	
 //		public upPubBean datePublish(upPubBean bean) {
 //			return mlDao.datePublish(bean);
 //		}

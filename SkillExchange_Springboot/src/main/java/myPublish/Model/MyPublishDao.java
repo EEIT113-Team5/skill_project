@@ -1,5 +1,7 @@
 package myPublish.Model;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -32,7 +34,6 @@ public class MyPublishDao implements iMyPublishDao {
 		List<MyPublishBean> myPublishBeans = query.list();
 		return myPublishBeans;
 	}
-
 	@Override
 	public boolean myPubDele(int myPubNo) {
 
@@ -64,7 +65,7 @@ public class MyPublishDao implements iMyPublishDao {
 		
 		if (bean.getPublishPic() == null) {
 			String hql = "Update MyPublishBean p set p.myTitle = :myTitle , p.myDetail = :myDetail , p.myArea = :myArea "
-					+ ", p.myCity = :myCity , p.myDistrict = :myDistrict , p.myRoad = :myRoad , p.myPlace = :myPlace ,p.myOwnSkill = :myOwnSkill , p.myWantSkill = :myWantSkill , p.myMark = :myMark , p.skillType = :skillType "
+					+ ", p.myCity = :myCity , p.myDistrict = :myDistrict , p.myRoad = :myRoad , p.myPlace = :myPlace ,p.myOwnSkill = :myOwnSkill , p.myWantSkill = :myWantSkill , p.updateTime = :updateTime , p.myMark = :myMark , p.skillType = :skillType "
 					+ "where p.publishNo = :publishNo";
 			Query query = getSession().createQuery(hql);
 			query.setParameter("myTitle", bean.getMyTitle());
@@ -75,7 +76,12 @@ public class MyPublishDao implements iMyPublishDao {
 			query.setParameter("myRoad", bean.getMyRoad());
 			query.setParameter("myPlace", bean.getMyPlace());
 			query.setParameter("myOwnSkill", bean.getMyOwnSkill());
-			query.setParameter("myWantSkill", bean.getMyWantSkill());		
+			query.setParameter("myWantSkill", bean.getMyWantSkill());
+			
+			Date date = new Date();
+			java.sql.Date updateTime = new java.sql.Date(date.getTime());
+			query.setParameter("updateTime",updateTime);
+			
 			query.setParameter("myMark", bean.getMyMark());
 			query.setParameter("skillType", bean.getSkillType());
 			query.setParameter("publishNo", bean.getPublishNo());
@@ -83,7 +89,7 @@ public class MyPublishDao implements iMyPublishDao {
 			return null;
 		}else {
 			String hql = "Update MyPublishBean p set p.myTitle = :myTitle , p.myDetail = :myDetail , p.myArea = :myArea "
-					+ ", p.myCity = :myCity , p.myDistrict = :myDistrict , p.myRoad = :myRoad , p.myPlace = :myPlace , p.publishPic = :publishPic, p.myOwnSkill = :myOwnSkill , p.myWantSkill = :myWantSkill , p.myMark = :myMark , p.skillType = :skillType "
+					+ ", p.myCity = :myCity , p.myDistrict = :myDistrict , p.myRoad = :myRoad , p.myPlace = :myPlace , p.publishPic = :publishPic, p.myOwnSkill = :myOwnSkill , p.myWantSkill = :myWantSkill , p.updateTime = :updateTime, p.myMark = :myMark , p.skillType = :skillType "
 					+ "where p.publishNo = :publishNo";
 			Query query = getSession().createQuery(hql);
 			query.setParameter("myTitle", bean.getMyTitle());
@@ -95,7 +101,12 @@ public class MyPublishDao implements iMyPublishDao {
 			query.setParameter("myPlace", bean.getMyPlace());
 			query.setParameter("publishPic", bean.getPublishPic());
 			query.setParameter("myOwnSkill", bean.getMyOwnSkill());
-			query.setParameter("myWantSkill", bean.getMyWantSkill());		
+			query.setParameter("myWantSkill", bean.getMyWantSkill());
+			
+			Date date = new Date();
+			java.sql.Date updateTime = new java.sql.Date(date.getTime());
+			query.setParameter("updateTime",updateTime);
+			
 			query.setParameter("myMark", bean.getMyMark());
 			query.setParameter("skillType", bean.getSkillType());
 			query.setParameter("publishNo", bean.getPublishNo());
@@ -108,6 +119,21 @@ public class MyPublishDao implements iMyPublishDao {
 		Query<MyPublishBean> query = getSession().createQuery("from MyPublishBean where PublishNo = :PublishNo",MyPublishBean.class);
 		query.setParameter("PublishNo", publishNo);
 		List<MyPublishBean> myPublishBeans = query.list();
+		return myPublishBeans;
+	}
+	
+	@Override
+	public List<MyPublishBean> publishRecomm(int publishNo,int memberRegNo){
+		Query<MyPublishBean> query = getSession().createQuery("select p from MyPublishBean p where p.myOwnSkill in (select ps.myWantSkill from MyPublishBean ps where ps.publishNo = :publishNo) and p.memberRegNo != :memberRegNo",MyPublishBean.class);
+		System.out.println("111:"+publishNo+"222:"+memberRegNo);
+		query.setParameter("memberRegNo", memberRegNo);
+		query.setParameter("publishNo", publishNo);
+		List<MyPublishBean> myPublishBeans = query.list();
+		System.out.println(myPublishBeans.isEmpty());
+		for (MyPublishBean myPublishBean : myPublishBeans) {
+			System.out.println("345:"+myPublishBean.getMyTitle());
+		}
+		
 		return myPublishBeans;
 	}
 	

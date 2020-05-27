@@ -97,83 +97,76 @@
 	<div class="container">
 
 		<c:forEach var="mylistimfor" items="${publishImfor}">
-			<!--================Banner Area =================-->
-			<section class="banner_area">
-				<div class="container">
-					<div class="banner_inner_text">
-						<h2>Publish Imformation</h2>
-						<p>Your Title:${mylistimfor.myTitle}</p>
+        <!--================Banner Area =================-->
+        <section class="banner_area">
+            <div class="container">
+                <div class="banner_inner_text">
+                    <h2>Publish Imformation</h2>
+                    <p>Your Title:${mylistimfor.myTitle}</p>
+                </div>
+            </div>
+        </section>
+        <!--================End Banner Area =================-->
+        <div style="width: 1200px;">
+        			<div style="float: right;margin-top: 10px;width: 300px">
+					<h2>你可能會喜歡的!</h2>
+					<div style="border: 1px dashed black;margin: 20px;padding: 10px">
+					<c:forEach varStatus="comm" var="commList" items="${commList}">
+						<div>
+							<div onclick="location.href='publish?num=${commList.publishNo}'" style="font-size: 30px">推薦序:${comm.index+1}</div>
+            				<div onclick="location.href='publish?num=${commList.publishNo}'"><img src="${commList.publishPic}" height="50px" /></div>
+            				<div onclick="location.href='publish?num=${commList.publishNo}'">標題:${commList.myTitle}</div>
+            				<div>-----------------------------------</div>		
+            			</div>
+            		</c:forEach>
 					</div>
-				</div>
-			</section>
-			<!--================End Banner Area =================-->
-			<div class="resume">
-				<div class="publishleft" style="display: inline-block">
-					<img src="${mylistimfor.publishPic}" width="250px"
-						style="display: block; margin: auto; margin-top: 25px; box-shadow: 2px 2px 5px #5D9DC7">
-
-					<h2 class="pubtitle">${mylistimfor.myTitle}</h2>
-					<hr style="border: 0; background-color: #009bdd; height: 1px">
-					<p class="imformation">
-						<b>刊登地區:${mylistimfor.myArea}</b><br> <br> <b>希望地點:${mylistimfor.myPlace}</b><br>
-						<br> <br> <b>刊登地點:${mylistimfor.myCity}</b><br> <br>
-						<b>刊登鄉鎮:${mylistimfor.myDistrict}</b><br> <br> <b>刊登路名:${mylistimfor.myRoad}</b><br>
-						<br>
-					</p>
-					<div class="icon"></div>
-				</div>
-				<div class="publishright" style="display: inline-block,">
-					<h3 class="about">
-						刊登內容
-						<hr>
-						<p>
-						<h5>
-							<b>▸內容</b>
-						</h5>
-						<br>
-						<h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myDetail}.</h6>
-						</p>
-					</h3>
-					<br>
-					<h3 class="education">
-						刊登技能
-						<hr>
-						<p>
-						<h5>
-							<b>▸自己的技能</b>
-						</h5>
-						<br>
-						<h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myOwnSkill}</h6>
-						</p>
-						<p>
-						<h5>
-							<b>▸想學的技能</b>
-						</h5>
-						<br>
-						<h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myWantSkill}</h6>
-						</p>
-					</h3>
-					<h3 class="esperience">
-						備註
-						<hr>
-						<p>
-						<h5>
-							<b>▸備註</b>
-						</h5>
-						<br>
-						<h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myMark}</h6>
-						</p>
-					</h3>
-				</div>
-			</div>
-			<!--================End Testimonials Slider Area =================-->
-		</c:forEach>
-
-		<form action="myPublish" method="GET"
-			enctype="application/x-www-form-urlencoded">
-
-			<input type='submit' value='我的刊登'>
-		</form>
+					</div>	
+        			<div class="resume" style="width: 800px;margin-right: auto;"> 
+        				<div class="publishleft" style="display:inline-block">
+          					<img src="${mylistimfor.publishPic}" width="250px" style="display:block;margin:auto;margin-top:25px;box-shadow:2px 2px 5px #5D9DC7">
+      
+          					<h2 class="pubtitle">${mylistimfor.myTitle}</h2>
+          					<hr style="border:0;background-color:#009bdd;height:1px">
+          					<p class="imformation"><b>刊登地區:${mylistimfor.myArea}</b><br><br>
+          					<b>希望地點:${mylistimfor.myPlace}</b><br><br>
+            				<br>
+            				<b>刊登地點:${mylistimfor.myCity}</b><br><br>
+            				<b>刊登鄉鎮:${mylistimfor.myDistrict}</b><br><br>
+            				<b>刊登路名:${mylistimfor.myRoad}</b><br><br>
+           					</p> 
+          					<div class="icon">
+          					</div>
+        				</div>  
+        				<div class="publishright" style="display:inline-block,">
+          					<h3 class="about">刊登內容
+            				<hr>
+            				<p> <h5><b>▸內容</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myDetail}.</h6></p>
+          					</h3><br>
+          					<h3 class="education">刊登技能
+            				<hr>
+            				<p> <h5><b>▸自己的技能</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myOwnSkill}</h6></p>
+            				<p> <h5><b>▸想學的技能</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myWantSkill}</h6></p>
+          					</h3>
+          					<h3 class="esperience">備註
+            				<hr>
+            				<p> <h5><b>▸備註</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myMark}
+            				
+            				
+            				
+            				
+            				</h6></p>
+          					</h3>
+        				</div>
+      				</div>
+						
+      			</div>
+        <!--================End Testimonials Slider Area =================-->
+				</c:forEach>	
+					
+				<form action="myPublish" method="GET" enctype="application/x-www-form-urlencoded">
+     				
+        				<input type='submit' value='我的刊登' >   
+    			</form>
 
 
 	</div>
