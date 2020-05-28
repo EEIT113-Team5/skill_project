@@ -37,8 +37,9 @@
 		<!-- main nav -->
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<!-- logo -->
-			<a class="navbar-brand" href="index.html">
-				<h2 style="color: white; font-family: 'Kalam', cursive">SkillExchange</h2>
+			<a class="navbar-brand" href="${jspPath}/">
+				<h2 class="logo-white" style="color: white; font-family: 'Kalam', cursive">SkillExchange</h2>
+				<h2 class="logo-default" style="color: black; font-family: 'Kalam', cursive">SkillExchange</h2>
 			</a>
 			<!-- /logo -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -103,7 +104,7 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> 活動刊登</a>
+						aria-expanded="false"> 技能刊登</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
 							<a class="dropdown-item" href="myPublish">我的刊登</a>

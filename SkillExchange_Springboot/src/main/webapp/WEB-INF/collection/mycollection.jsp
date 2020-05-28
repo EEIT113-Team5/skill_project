@@ -259,7 +259,7 @@ function delDetail(collectNo,groupName){
 								<c:set var='collectionGroupsKey'
 									value='${collectionGroup.key+0}'></c:set>
 								<div class="card">
-									<div class="card-header" style="background-color:#5f9ea0	;color:white;">
+									<div class="card-header" style="background-color:rgb(95, 165, 180);color:white;">
 										<div class="tabletext" id="collectGroup${vs.index}">
 											<a class="card-link" data-toggle="collapse"
 												id="collectGName${vs.index}" style="font-weight:bold;font-size: 25px">${collectionGroupsMap[collectionGroupsKey]}

@@ -36,12 +36,14 @@ public class MyPublish  {
 	@Autowired
 	imyPublishService imps;
 	
+	Date date1 = new Date();
+	
 	@GetMapping(value = "/myPublish")
 	public String myPublish(@SessionAttribute("memberBean") MemberBean member, Model model){
 		List<MyPublishBean> mylist = imps.myPublish(member.getMemberRegNo());
 		
 		//取得現在時間
-		Date date1 = new Date();
+		
 		long time1 = date1.getTime();
 		
 		List<Integer> dayList = new ArrayList<Integer>();
@@ -70,18 +72,37 @@ public class MyPublish  {
 		int pubNo = Integer.parseInt(publishNo);
 		List<MyPublishBean> publishImfor;
 		publishImfor = imps.myPublishImformation(pubNo);
-		model.addAttribute("publishImfor",publishImfor);
 		
-		//推薦
-		List<MyPublishBean> commList = imps.publishRecomm(pubNo, member.getMemberRegNo());
+		//取得現在時間
+		long time1 = date1.getTime();
+		List<Integer> dayList = new ArrayList<Integer>();
+			
+		//計算日期差
+		int days = 30-(int)((time1-publishImfor.get(0).getUpdateTime().getTime())/ (1000*3600*24));
+		System.out.println(days);	
+		dayList.add(days);
 		
-		for (MyPublishBean test : commList) {
-			System.out.println("333:"+test.getMyTitle());
+		//判斷剩餘天數
+		if(days < 0 || days == 0) {
+			imps.myPubDele(pubNo);
+			return "mypublish/publishRemove";
+		}else {
+			model.addAttribute("publishImfor",publishImfor);
+			
+			//推薦
+			List<MyPublishBean> commList = imps.publishRecomm(pubNo, member.getMemberRegNo());
+			
+			for (MyPublishBean test : commList) {
+				System.out.println("333:"+test.getMyTitle());
+			}
+			
+			model.addAttribute("commList",commList);
+			
+			return "mypublish/myPublishImfor";			
 		}
 		
-		model.addAttribute("commList",commList);
 		
-		return "mypublish/myPublishImfor";
+		
 	}
 	
 	@Autowired
@@ -90,31 +111,47 @@ public class MyPublish  {
 	@GetMapping(value = "/myPublishUpdate")
 	public String myPublishUpdate(@RequestParam("publishNo") String publishNo,Model model) {
 		int pubNo = Integer.parseInt(publishNo);
+		
+		//取得現在時間
+		long time1 = date1.getTime();
+		List<Integer> dayList = new ArrayList<Integer>();
+		
 		MyPublishBean sBean = imps.selUpdatePublish(pubNo);
-		model.addAttribute("myTitle",sBean.getMyTitle());
-		model.addAttribute("myDetail",sBean.getMyDetail());
-		model.addAttribute("myArea",sBean.getMyArea());
-		model.addAttribute("myCity",sBean.getMyCity());
-		model.addAttribute("myDistrict",sBean.getMyDistrict());
-		model.addAttribute("myRoad",sBean.getMyRoad());
-		model.addAttribute("myPlace",sBean.getMyPlace());
-		model.addAttribute("myOwnSkill",sBean.getMyOwnSkill());
-		model.addAttribute("myWantSkill",sBean.getMyWantSkill());
-		model.addAttribute("myMark",sBean.getMyMark());
-		model.addAttribute("publishPic",sBean.getPublishPic());
-		model.addAttribute("skillType",sBean.getSkillType());
 		
-		model.addAttribute("publishNo",pubNo);
+		//計算日期差
+		int days = 30-(int)((time1-sBean.getUpdateTime().getTime())/ (1000*3600*24));
+		System.out.println(days);	
+		dayList.add(days);
 		
-		List<publishSelectBean> list = ipps.Skill();
-		List<publishAreaBean> area = ipps.Area();
-		List<publishCityBean> city = ipps.City();
-		
-		model.addAttribute("skill", list);
-		model.addAttribute("area", area);
-		model.addAttribute("city", city);
-		
-		return "mypublish/UpdatePage";
+		if (days < 0 ||days == 0) {
+			imps.myPubDele(pubNo);
+			return "mypublish/publishRemove";
+		}else {		
+			model.addAttribute("myTitle",sBean.getMyTitle());
+			model.addAttribute("myDetail",sBean.getMyDetail());
+			model.addAttribute("myArea",sBean.getMyArea());
+			model.addAttribute("myCity",sBean.getMyCity());
+			model.addAttribute("myDistrict",sBean.getMyDistrict());
+			model.addAttribute("myRoad",sBean.getMyRoad());
+			model.addAttribute("myPlace",sBean.getMyPlace());
+			model.addAttribute("myOwnSkill",sBean.getMyOwnSkill());
+			model.addAttribute("myWantSkill",sBean.getMyWantSkill());
+			model.addAttribute("myMark",sBean.getMyMark());
+			model.addAttribute("publishPic",sBean.getPublishPic());
+			model.addAttribute("skillType",sBean.getSkillType());
+			
+			model.addAttribute("publishNo",pubNo);
+			
+			List<publishSelectBean> list = ipps.Skill();
+			List<publishAreaBean> area = ipps.Area();
+			List<publishCityBean> city = ipps.City();
+			
+			model.addAttribute("skill", list);
+			model.addAttribute("area", area);
+			model.addAttribute("city", city);
+			
+			return "mypublish/UpdatePage";
+		}
 	}
 	
 	@PostMapping(value = "/myPublishUpSucc")

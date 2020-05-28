@@ -54,40 +54,7 @@
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 <style>
-fieldset {
-	width: 800px;
-	border: 3px solid chocolate;
-	border-radius: 30px;
-	margin: 20px;
-}
 
-
-legend {
-	font-size: 30px;
-	font-family: fantasy;
-	color: lightsteelblue;
-}
-
-/* body { */
-/* 	margin: 100px; */
-/* } */
-.st1 {
-	width: 450px;
-	border-bottom: 1px solid cornflowerblue;
-	margin: 10px;
-	padding-bottom: 10px;
-}
-
-.st2 {
-	width: 450px;
-	text-align: center;
-}
-
-.l1 {
-	width: 100px;
-	float: left;
-	text-align: right;
-}
 /* 讓意見表單不可以被拉大小 */
 textarea {
 	resize: none;
@@ -113,134 +80,147 @@ textarea {
 		</div>
 	</section>
 	<div class="container">
-		<form action="publishPage" method="POST" enctype="multipart/form-data">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="card shadow-lg border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="text-center font-weight-light my-4 ">刊登資訊</h3>
+					</div>
+					<div class="card-body">
+						<form class="form" action="publishPage" method="POST"
+							enctype="multipart/form-data">
 
-			<fieldset>
-				<legend>刊登資訊</legend>
+							<fieldset class="fieldest">
+								<legend class="legend">刊登資訊</legend>
+								<br>
+								<table>
+									<tr>
+										<td><label for="">刊登標題:</label></td>
+										<td><input type='text' name='publishTitle'
+											value="${publishTitle}"></td>
+										<td><font color='red' size='-3'>${error.publishTitle}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">照片:</label></td>
+										<td><input type="file" onchange="readURL(this)"
+											name='publishPic' targetID="prePic"> <br> <img
+											id="prePic" src="${publishPic}" width="200px" name='prePic'
+											value="${publishPic}" /></td>
+									</tr>
+									<tr>
+										<td><label for="">刊登內容:</label></td>
+										<td><textarea cols="40" row="5" name='publishDetail'
+												value='${publishDetail}'>${publishDetail}</textarea></td>
+										<td><font color='red' size='-3'>${error.publishDetail}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">自己的技能:</label></td>
+										<td><select id="myownskill" name='ownSkill'>
+												<option value="${ownSkill}">${ownSkill}</option>
+												<c:forEach varStatus="vs" var="a" items="${skill}">
+													<option value="${a.skillNameCN}">${a.skillNameCN}</option>
+												</c:forEach>
+										</select></td>
+										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">想學的類型:</label></td>
+										<td><select id="selSkill" name='skillType'
+											onchange="showSkill()">
+												<option value="${skillType}">${skillType}</option>
+												<option value="才藝">才藝</option>
+												<option value="運動">運動</option>
+												<option value="語言">語言</option>
+												<option value="寵物">寵物</option>
+												<option value="生活">生活</option>
+										</select></td>
+										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">想學的技能:</label></td>
+										<td><select id="selWantSkill" name='wantSkill'>
+												<option value="${wantSkill}">${wantSkill}</option>
+<%-- 												<c:forEach varStatus="vs" var="a" items="${skill}"> --%>
+<%-- 													<option value="${a.skillNameCN}">${a.skillNameCN}</option> --%>
+<%-- 												</c:forEach> --%>
+										</select></td>
+										<td><font color='red' size='-3'>${error.wantSkill}</font></td>
+									</tr>
+								</table>
+							</fieldset>
 
-				<div class="st1">
-					<label for="" class="l1">刊登標題:</label> <input type='text'
-						name='publishTitle' value="${publishTitle}"> <font
-						color='red' size='-3'>${error.publishTitle}</font>
+							<fieldset class="fieldest">
+								<legend class="legend">刊登地點</legend>
+								<br>
+								<table>
+									<tr>
+										<td><label for="">刊登地區:</label></td>
+										<td><select id="selPubArea1" name='publishArea'
+											onchange="showCity()">
+												<option value="${publishArea}">${publishArea}</option>
+												<option value='北部'>北部</option>
+												<option value='中部'>中部</option>
+												<option value='南部'>南部</option>
+												<option value='東部'>東部</option>
+										</select></td>
+										<td><font color='red' size='-3'>${error.publishArea}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">刊登城市:</label></td>
+										<td><select id="selCity" name='City'>
+												<option value="${City}">${City}</option>
+												<c:forEach varStatus="vs" var="a" items="${city}">
+													<c:if test='${vs.index==0}'>
+														<option disabled>---北部---</option>
+													</c:if>
+													<c:if test='${vs.index==5}'>
+														<option disabled>---中部---</option>
+													</c:if>
+													<c:if test='${vs.index==10}'>
+														<option disabled>---南部---</option>
+													</c:if>
+													<c:if test='${vs.index==14}'>
+														<option disabled>---東部---</option>
+													</c:if>
+													<option value="${a.cityCN}">${a.cityCN}</option>
+												</c:forEach>
+										</select></td>
+										<td><font color='red' size='-3'>${error.City}</font></td>
+									</tr>
+									<tr>
+										<td><label for="">鄉鎮:</label></td>
+										<td><input type='text' name='district'
+											value='${district}'></td>
+										<hr>
+										<td><label for="">路名:</label></td>
+										<td><input type='text' name='road' value='${road}'></td>
+									</tr>
+									<tr>
+										<td><label for="">希望地點:</label></td>
+										<td><input type='text' name='publishPlace'
+											value='${publishPlace}'></td>
+										<hr>
+										<td><font color='red' size='-3'>${error.publishPlace}</font></td>
+									</tr>
+								</table>
+							</fieldset>
+
+							<fieldset class="fieldest">
+								<legend class="legend">備註</legend>
+								<table>
+									<tr>
+										<td><label for="">備註:</label></td>
+										<td><textarea cols="40" row="5" name='publishMark'
+												value='${publishMark}'>${publishMark}</textarea></td>
+									</tr>
+								</table>
+							</fieldset>
+							<input type='submit' value='下一步'>
+						</form>
+					</div>
 				</div>
-
-				<div class="st1">
-					<label for="" class="l1">照片:</label> <input type="file"
-						onchange="readURL(this)" name='publishPic' targetID="prePic"><br>
-					<img id="prePic" src="${publishPic}" width="200px" name='prePic'
-						value="${publishPic}" /><br>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">刊登內容:</label>
-					<textarea cols="40" row="5" name='publishDetail'
-						value='${publishDetail}'>${publishDetail}</textarea>
-					<font color='red' size='-3'>${error.publishDetail}</font>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">技能類型:</label> <select id="selSkill"
-						name='skillType'>
-						<option value="${skillType}">${skillType}</option>
-						<option value="才藝">才藝</option>
-						<option value="運動">運動</option>
-						<option value="語言">語言</option>
-						<option value="寵物">寵物</option>
-						<option value="生活">生活</option>
-					</select> <font color='red' size='-3'>${error.ownSkill}</font>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">自己的技能:</label> <select id="selPubArea"
-						name='ownSkill'>
-						<option value="${ownSkill}">${ownSkill}</option>
-						<c:forEach varStatus="vs" var="a" items="${skill}">
-							<option value="${a.skillNameCN}">${a.skillNameCN}</option>
-						</c:forEach>
-					</select> <font color='red' size='-3'>${error.ownSkill}</font>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">想學的技能:</label> <select id="selPubArea"
-						name='wantSkill'>
-						<option value="${wantSkill}">${wantSkill}</option>
-						<c:forEach varStatus="vs" var="a" items="${skill}">
-							<option value="${a.skillNameCN}">${a.skillNameCN}</option>
-						</c:forEach>
-					</select> <font color='red' size='-3'>${error.wantSkill}</font>
-				</div>
-
-			</fieldset>
-
-			<fieldset>
-				<legend>刊登地點</legend>
-				<div class="st1">
-					<label for="" class="l1">刊登地區:</label> <select id="selPubArea"
-						name='publishArea'>
-						<option value="${publishArea}">${publishArea}</option>
-						<c:forEach var="a" items="${area}">
-							<option value="${a.publishAreaCN}">${a.publishAreaCN}</option>
-						</c:forEach>
-						<!-- 									<option value="North">北部</option> -->
-						<!-- 									<option value="Cen">中部</option> -->
-						<!-- 									<option value="South">南部</option> -->
-						<!-- 									<option vlaue="East">東部</option> -->
-					</select> <font color='red' size='-3'>${error.publishArea}</font>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">刊登城市:</label> <select id="selCity"
-						name='City'>
-						<option value="${City}">${City}</option>
-						<c:forEach varStatus="vs" var="a" items="${city}">
-							<c:if test='${vs.index==0}'>
-								<option disabled>---北部---</option>
-							</c:if>
-							<c:if test='${vs.index==3}'>
-								<option disabled>---中部---</option>
-							</c:if>
-							<c:if test='${vs.index==8}'>
-								<option disabled>---南部---</option>
-							</c:if>
-							<c:if test='${vs.index==12}'>
-								<option disabled>---東部---</option>
-							</c:if>
-							<option value="${a.cityCN}">${a.cityCN}</option>
-						</c:forEach>
-						<!-- 									<option id="N" value="TPE">大台北</option> -->
-						<!-- 									<option id="C" value="TXG">大台中</option> -->
-						<!-- 									<option id="S" value="KHH">高雄</option> -->
-						<!-- 									<option id="E" vlaue="HUA">花蓮</option> -->
-					</select> <font color='red' size='-3'>${error.City}</font>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">鄉鎮:</label> <input type='text'
-						name='district' value='${district}'>
-					<hr>
-					<label for="" class="l1">路名:</label> <input type='text' name='road'
-						value='${road}'>
-				</div>
-
-				<div class="st1">
-					<label for="" class="l1">希望地點:</label> <input type='text'
-						name='publishPlace' value='${publishPlace}'>
-					<hr>
-					<font color='red' size='-3'>${error.publishPlace}</font>
-				</div>
-			</fieldset>
-
-			<fieldset>
-				<legend>備註</legend>
-				<div class="st1">
-					<label for="" class="l1">備註:</label>
-					<textarea cols="40" row="5" name='publishMark'
-						value='${publishMark}'>${publishMark}</textarea>
-				</div>
-			</fieldset>
-
-			<input type='submit' value='下一步'>
-		</form>
+			</div>
+		</div>
 	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->
@@ -276,6 +256,118 @@ textarea {
 				}
 				reader.readAsDataURL(input.files[0]);
 			}
+		}
+	</script>
+	<script type="text/javascript">
+		function showSkill() {
+			var skill = document.getElementById('selSkill').value;
+			document.getElementById("selWantSkill").length = 0;
+			document.getElementById("selWantSkill").options.add(new Option(
+					"請選擇"));
+			if (skill == '才藝') {
+				document.getElementById("selWantSkill").options.add(new Option(
+						"歌唱"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"跳舞"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"繪畫"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"演戲"));
+			}
+			if (skill == '運動') {
+				document.getElementById("selWantSkill").options.add(new Option(
+						"足球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"羽毛球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"網球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"排球"));
+			}
+			if (skill == '語言') {
+				document.getElementById("selWantSkill").options.add(new Option(
+						"法文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"日文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"韓文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"西班牙文"));
+			}
+			if (skill == '寵物') {
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養鸚鵡"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養狗"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養貓"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養魚"));
+			}
+			if (skill == '生活') {
+				document.getElementById("selWantSkill").options.add(new Option(
+						"化妝"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"煮飯"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"居家清潔"));
+			}
+
+		}
+
+		function showCity() {
+			var area = document.getElementById('selPubArea1').value;
+			// 			  var x = document.getElementById("selPubArea1").selectedIndex;
+			// 			  var y = document.getElementById("selPubArea1").options;
+			// 			  var area=y[x].text;
+
+			document.getElementById("selCity").length = 0;
+			document.getElementById("selCity").options.add(new Option("請選擇"));
+
+			console.log(area);
+			if (area == '北部') {
+				document.getElementById("selCity").options
+						.add(new Option("基隆"));
+				document.getElementById("selCity").options
+						.add(new Option("台北"));
+				document.getElementById("selCity").options
+						.add(new Option("新北"));
+				document.getElementById("selCity").options
+						.add(new Option("桃園"));
+				document.getElementById("selCity").options
+						.add(new Option("新竹"));
+			}
+			if (area == '中部') {
+				document.getElementById("selCity").options
+						.add(new Option("苗栗"));
+				document.getElementById("selCity").options
+						.add(new Option("台中"));
+				document.getElementById("selCity").options
+						.add(new Option("彰化"));
+				document.getElementById("selCity").options
+						.add(new Option("南投"));
+				document.getElementById("selCity").options
+						.add(new Option("雲林"));
+			}
+			if (area == '南部') {
+				document.getElementById("selCity").options
+						.add(new Option("嘉義"));
+				document.getElementById("selCity").options
+						.add(new Option("台南"));
+				document.getElementById("selCity").options
+						.add(new Option("高雄"));
+				document.getElementById("selCity").options
+						.add(new Option("屏東"));
+			}
+			if (area == '東部') {
+				document.getElementById("selCity").options
+						.add(new Option("台東"));
+				document.getElementById("selCity").options
+						.add(new Option("花蓮"));
+				document.getElementById("selCity").options
+						.add(new Option("宜蘭"));
+			}
+
 		}
 	</script>
 	<!-- ---------------------要加的部份-------------------- -->
