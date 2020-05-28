@@ -61,6 +61,13 @@
 	var sex = request.getElementsByName('gender');
 </script>
 
+<!-- 卉加 -->
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- 卉加 -->
+
 <style>
 .red-font {
 	color: red;
@@ -70,7 +77,7 @@
 </head>
 
 <!-- ---------------------要加的部份-------------------- -->
-<body id="body">
+<body id="body" background="./images/pattern2.jpg">
 	<jsp:include page="/fragment/top1.jsp" />
 
 	<section class="single-page-header">
@@ -82,164 +89,260 @@
 			</div>
 		</div>
 	</section>
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-7">
-				<div class="card shadow-lg border-0 rounded-lg mt-5">
-					<div class="card-header">
-						<h3 class="text-center font-weight-light my-4 ">加入會員</h3>
-					</div>
-					<div class="card-body">
+<!-- 	卉加 -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+        <div id="login-overlay" class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">
+                </div>
+              
+                <div class="modal-body">
+                  
+                
+                    <form id="registerForm" action="registerCheck" method="POST" enctype="multipart/form-data">
+    <!---form--->           <div class="form-group">
+    <!---input width--->    <div class="col-xs-6">
+                            <tr>
+                                <td><label for="name">姓名</label></td>
+                                <td><font class="red-font small">${errorMsg.memberName}</font></td>
+                            </tr>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="name" name="memberName" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                            <br>
+                            <tr>
+                                <label for="nicname">暱稱</label>
+                                <td><font class="red-font small">${errorMsg.memberNic}</font></td>
+                            </tr>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="nicname" name="memberNic" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
 
-						<form class="form" action="registerCheck" method="post"
-							enctype="multipart/form-data">
-							<fieldset class="fieldset">
-								<legend class="legend">帳號資訊</legend>
-								<br>
-								<table>
-									<tr>
-										<td><label for="acc">帳號：</label></td>
-										<td><input type="text" id="acc" name="memberAcc"></td>
-										<td><font class="red-font small">${errorMsg.memberAcc}</font></td>
-									</tr>
-									<tr>
-										<td><label for="pwd">密碼：</label></td>
-										<td><input type="password" id="pwd" name="memberPwd"></td>
-										<td><font class="red-font small">${errorMsg.memberPwd}</font></td>
-									</tr>
-									<tr>
-										<td><label for="checkpwd">再次確認密碼：</label></td>
-										<td><input type="password" id="checkpwd" name="checkpwd"></td>
-										<td><font class="red-font small">${errorMsg.checkpwd}</font></td>
-									</tr>
+                        <br>
+                        <tr>
+                            <td><label for="">性別</label></td>
+                            <td><font class="red-font small">${errorMsg.memberSex}</font></td>
+                      
+                            <div class="input-group">
+            <td>
+                                <input type="radio" name="memberSex" id="gender_m"
+                                value="1"> 
+                                    <label for="gender_m">男</label> &nbsp; &nbsp; &nbsp;
+                                <input type="radio" name="memberSex" id="gender_w" 
+                                value="2">
+                                    <label for="gender_w">女</label> &nbsp; &nbsp; &nbsp;
+                                <input type="radio" name="memberSex" id="gender_no" 
+                                value="3"> 
+                                    <label for="gender_no">不提供</label> &nbsp; &nbsp; &nbsp;
+                    </td>
+             </tr>
+                            </div>
 
-								</table>
-							</fieldset>
-							<br>
-							<fieldset class="fieldset">
-								<legend class="legend">個人資料</legend>
-								<table>
-									<br>
-									<tr>
-										<td><label for="name">姓名：</label></td>
-										<td><input type="text" id="name" name="memberName"></td>
-										<td><font class="red-font small">${errorMsg.memberName}</font></td>
-									</tr>
-									<tr>
-										<td><label for="nicname">會員暱稱：</label></td>
-										<td><input type="text" id="nicname" name="memberNic"></td>
-										<td><font class="red-font small">${errorMsg.memberNic}</font></td>
-									</tr>
-									<tr>
-										<td><label for="">性別：</label></td>
-										<td><input type="radio" name="memberSex" id="gender_m"
-											value="1"> <label for="gender_m">男</label> <input
-											type="radio" name="memberSex" id="gender_w" value="2">
-											<label for="gender_w">女</label> <input type="radio"
-											name="memberSex" id="gender_no" value="3"> <label
-											for="gender_no">不提供</label></td>
-										<td><font class="red-font small">${errorMsg.memberSex}</font></td>
-									</tr>
-									<tr>
-										<td><label for="birthday">生日：</label></td>
-										<td><input type="date" id="birthday" name="memberBirth"></td>
-										<td><font class="red-font small">${errorMsg.memberBirth}</font></td>
-									</tr>
-									<tr>
-										<td><label for="phone">電話：</label></td>
-										<td><input type="text" id="phone" name="memberPhone"></td>
-										<td><font class="red-font small">${errorMsg.memberPhone}</font></td>
-									</tr>
-									<tr>
-										<td><label for="mail">信箱：</label></td>
-										<td><input type="text" id="mail" name="memberMail"></td>
-										<td><font class="red-font small">${errorMsg.memberMail}</font></td>
-									</tr>
-									<tr>
-										<td>所在縣市：</td>
-										<td><select name="memberCountry" id="">
-												<option value="Keelung">基隆市</option>
-												<option value="Taipei">台北市</option>
-												<option value="Chiayi">嘉義縣</option>
-												<option value="New Taipei">新北市</option>
-												<option value="Tainan">台南市</option>
-												<option value="Taoyuan">桃園市</option>
-												<option value="Kaohsiung">高雄市</option>
-												<option value="Pingtung">屏東縣</option>
-												<option value="Hsinchu">新竹縣</option>
-												<option value="Taitung ">台東縣</option>
-												<option value="Miaoli">苗栗縣</option>
-												<option value="Hualien">花蓮縣</option>
-												<option value="Taichung">台中市</option>
-												<option value="Yilan">宜蘭縣</option>
-												<option value="Changhua">彰化縣</option>
-												<option value="Penghu">澎湖縣</option>
-												<option value="Nantou ">南投縣</option>
-												<option value="Kinmen">金門縣</option>
-												<option value="Yunlin">雲林縣</option>
-												<option value="Lienchiang">連江縣</option>
-										</select></td>
-									</tr>
-								</table>
-								<!-- 											<br> -->
-								<table>
-									<br>
-									<tr>
-										<td><label for="addr">地址：</label></td>
-										<td><input type="text" id="addr" name="memberAddr"
-											size="45"></td>
-										<td><font class="red-font small">${errorMsg.memberAddr}</font></td>
-									</tr>
-								</table>
-							</fieldset>
-							<br>
-							<fieldset class="fieldset">
-								<legend class="legend">關於我</legend>
-								<br>
-								<table>
-									<tr>
-										<td><label for="">照片：</label></td>
-										<td><input type="file" onchange="readURL(this)"
-											name="memberPic" targetID="prePic"></td>
-										<img id="prePic" style="display: none" src="#" width="200px"
+                        
+    <!--------------------------------------separator---------------------------------------------------------------> <hr>
+                    </div>
+                    </div>
+                        <div class="form-group">
+                        <div class="col-xs-6">
+                            <tr>
+                                <td><label for="acc">帳號</label></td>
+                                <td><font class="red-font small">${errorMsg.memberAcc}</font></td>
+                            </tr>
+                            
+                            <div class="input-group">
+                            <input type="text" id="acc" name="memberAcc" class="form-control" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        
+                            <br>
+                            <tr>
+                                <td><label for="pwd">密碼</label></td>
+                                <td><font class="red-font small">${errorMsg.memberPwd}</font></td>
+                            </tr>
+                            <div class="input-group">
+                            <input type="password" id="pwd" name="memberPwd" class="form-control" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+
+                        <br>
+                        <tr>
+                            <td><label for="checkpwd">再次確認密碼</label></td>
+                            <td><font class="red-font small">${errorMsg.checkpwd}</font></td>
+                        </tr>
+
+                            <div class="input-group">
+                            <input type="password" class="form-control" id="checkpwd" name="checkpwd" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+    <!--------------------------------------separator---------------------------------------------------------------> <hr>
+    
+                    </div>       
+                    </div> 
+                    
+                        <div class="form-group"> 
+                            <div class="col-xs-12">
+                                <tr>
+                                    <td><label for="birthday">生日</label></td>
+                                    <td><font class="red-font small">${errorMsg.memberBirth}</font></td>
+                                </tr>
+                            
+                            <div class="input-group">
+                            <input type="date" class="form-control"id="birthday" name="memberBirth" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+    <!----------------------------break-------------------------------------------------------------> <br>
+                         </div>
+                     </div>
+    
+                            <div class="form-group">
+                            <div class="col-xs-12">
+                                <tr>
+                                    <td><label for="phone">電話</label></td>
+                                    <td><font class="red-font small">${errorMsg.memberPhone}</font></td>
+                                </tr>
+                          
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="phone" name="memberPhone" required>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>                     
+                    </div>
+                 
+                            <div class="form-group">
+                            <div class="col-xs-12">
+                            <tr>
+                                <td><label for="mail">信箱</label></td>
+                                <td><font class="red-font small">${errorMsg.memberMail}</font></td>
+                            </tr>
+                            
+                            <div class="input-group">
+                            <input type="text" class="form-control" id="mail" name="memberMail" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>
+                        </div>
+    
+                            <div class="form-group">
+                            <div class="col-xs-12">
+                            <label >所在縣市</label> &nbsp; &nbsp;
+                            <select name="memberCountry" id="">
+                                <option value="Keelung">基隆市</option>
+								<option value="Taipei">台北市</option>
+								<option value="Chiayi">嘉義縣</option>
+								<option value="New Taipei">新北市</option>
+								<option value="Tainan">台南市</option>
+							    <option value="Taoyuan">桃園市</option>
+								<option value="Kaohsiung">高雄市</option>
+                                <option value="Pingtung">屏東縣</option>
+								<option value="Hsinchu">新竹縣</option>
+								<option value="Taitung ">台東縣</option>
+								<option value="Miaoli">苗栗縣</option>
+								<option value="Hualien">花蓮縣</option>
+								<option value="Taichung">台中市</option>
+    							<option value="Yilan">宜蘭縣</option>
+								<option value="Changhua">彰化縣</option>
+								<option value="Penghu">澎湖縣</option>
+	    						<option value="Nantou ">南投縣</option>
+								<option value="Kinmen">金門縣</option>
+								<option value="Yunlin">雲林縣</option>
+								<option value="Lienchiang">連江縣</option>
+										</select>
+                            <div class="input-group">
+                            
+                        </div>
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>
+                        </div>
+
+                            <div class="form-group">
+                            <div class="col-xs-12">
+                                <tr>
+                                    <td><label for="addr">地址</label></td>
+                                    <td><font class="red-font small">${errorMsg.memberAddr}</font></td>
+                                </tr>
+                            
+                            <div class="input-group">
+                            <input type="text" class="form-control" id="addr" name="memberAddr" required>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+                        </div>
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                            <label for="">照片</label>
+                            <div class="input-group"></div>
+                            <input type="file" onchange="readURL(this)"
+                            name="memberPic" targetID="prePic" required>
+<br>
+                            <img id="prePic" style="display: none" src="#" width="200px"
 											name='prePic' value="${memberPic}" />
-										<br>
-									</tr>
-									<tr>
-										<td colspan="2">&nbsp;</td>
-									</tr>
-									<tr>
-										<td><label for="skill"> 有興趣的技能：</label></td>
-										<td><textarea id="skill" cols="20" rows="3"
-												name="memberInSkill"></textarea></td>
-									</tr>
-									<tr>
-										<td><label for="infosource">來源管道：</label></td>
-										<td><input type="checkbox" id="fb" name="infoSource">
-											<label for="fb">FaceBook</label> <input type="checkbox"
-											id="friend" name="infoSource"> <label for="friend">朋友介紹</label>
-											<input type="checkbox" id="ad" name="infoSource"> <label
-											for="ad">廣告</label><br> <input type="checkbox" id="else"
-											name="infoSource"> <label for="else">其他</label> <input
-											type="text" size="30px"></td>
-									</tr>
-								</table>
-							</fieldset>
-							<div style="text-align: center;">
-								<input type="submit" value="送出"> <input type="reset"
-									value="清除">
-							</div>
-						</form>
-					</div>
-					<div class="card-footer text-center">
-						<div class="small">
-							<a href="loginInit">已經有帳戶，我要登入</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>
+                        </div>
+
+ 
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <tr>
+                                    <td><label for=></label></td>
+                                    <td></td>
+                                </tr>
+                            
+                            <div class="input-group">
+                                
+                                <tr>
+                                    <td><label for=>  </label></td>
+                                    <td></td>
+                                </tr>
+                       
+                        </div>
+    <!----------------------------break-------------------------------------------------------------> <br> 
+                        </div>
+                        </div>
+    
+                      <div class="form-group">
+                     
+
+                      <div style="text-align: center;" class="input-group-addon">
+                        <input type="submit" value="送出" class="btn btn-success"> <input type="reset"
+                            value="清除" class="btn btn-danger"></div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="loginInit">已經有帳戶，我要登入</a>
+                        <br>
+                        <p>
+                            
+                        </p>
+                    </div>
+
+                    </form>
+                  </div><!---modal-body--->
+              </div>
+           </div>
+    
+    
+    <script type="text/javascript">
+    
+    </script>
+
+<!-- 	卉加 -->
+
+
+
+
+
+
+
 
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
