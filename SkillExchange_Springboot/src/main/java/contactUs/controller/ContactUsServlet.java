@@ -135,8 +135,6 @@ public class ContactUsServlet {
 		Integer contactNo = Integer.parseInt(contactNoStr);
 		model.addAttribute("MsgMap", errorMsg);
 		model.addAttribute("MsgOK", msgOK);
-		model.addAttribute("type", type);
-
 		try {
 			ContactUsBean cntBean = service.queryContactUsDetail(contactNo);
 			model.addAttribute("cntBean", cntBean);

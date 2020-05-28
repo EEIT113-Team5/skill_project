@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import sendmail.SendMail;
@@ -25,9 +27,14 @@ public class ContactUsBean {
 	private String content;
 	private int isReply;
 	private String replyContent;
-	
 	@Autowired
-	SendMail sendMail;
+	@Qualifier("mail")
+	private MailContent mail;
+	@Autowired
+	private SendMail sendMail;
+	
+
+
 
 	public ContactUsBean(int memberRegNo, String contactUser, String email, String title, String content,String replyContent) {
 		this.memberRegNo = memberRegNo;
@@ -115,34 +122,30 @@ public class ContactUsBean {
 	}
 
 	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException {
+		try {
+		mail.setContactUser(contactUser);
+		mail.setContent(content);
+		
 		String subject;
 		String mailContent;
 		if(cntUs.getReplyContent()!=null) {
-			 subject = "管理者已回覆您的留言！";
-			 mailContent = "<div style='font-family:微軟正黑體;'>"
-						+"<fieldset style='margin: auto;border:	#0066CC solid 1px;border-radius: 15px;width: 700px;background:#FFFFF4;'>"
-		            +"<h3 style='color:	#5B5B5B;text-align: center;margin: 2px;'>Skill Exchange</h3>"
-		            +"<hr style='color: gray;'><div>"
-		            +"親愛的"+contactUser+"：<br>您的留言內容如下：<p>"+content+"</p></div>"
-		            +"<hr style='color: gray;'><div>管理員回覆內容如下：<p>"+replyContent+"</p></div>"
-		            +"<hr style='color: gray;'><div style='text-align: center;'>"
-		            +"<span style='color:blue;'>您的支持是我們進步的動力！！！</span><br>"
-		            + "<span style='color:red;'>此為系統訊息，請勿回覆。</span><br></div></fieldset></div>";
+			this.mail.setReplyContent(replyContent);
+			mailContent = mail.getReplyContactMail();
+			subject = "管理者已回覆您的留言！";
 		}else {
+			
 			 subject = "感謝您的留言，我們將盡快回覆！";
-			 mailContent = "<div style='font-family:微軟正黑體;'>"
-					+"<fieldset style='margin: auto;border:	#0066CC solid 1px;border-radius: 15px;width: 700px;background:#FFFFF4;'>"
-	            +"<h3 style='color:	#5B5B5B;text-align: center;margin: 2px;'>Skill Exchange</h3>"
-	            +"<hr style='color: gray;'><div>"
-	            +"親愛的"+contactUser+"：<br>已收到您的留言，內容如下：<p>"+content+"</p></div>"
-	            +"<hr style='color: gray;'><div style='text-align: center>"
-	            +"<span>感謝您的支持，我們將盡快回覆！！！</span><br>"
-	            + "<span style='color:red;'>此為系統訊息，請勿回覆。</span><br></div></fieldset></div>";
+			 mailContent = mail.getInsertContactMail();
+			 
 		}
 		sendMail.setSubject(subject);
 		sendMail.setEmail(email);
 		sendMail.setMailContent(mailContent);
 		sendMail.sendMail();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("發生SQL例外: " + e.getMessage());	
+			}
 		
 	}
 
