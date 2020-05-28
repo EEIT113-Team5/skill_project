@@ -72,6 +72,7 @@
 	crossorigin="anonymous"></script>
 
 <style>
+
 .confirmBtns {
 	text-align: right;
 	float: right;
@@ -95,9 +96,6 @@ h1 {
 	width: 180px;
 }
 
-#groupNewBtn {
-	
-}
 
 .titleBlock {
 	align-items: center;
@@ -231,7 +229,7 @@ function delDetail(collectNo,groupName){
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>我的收藏</h2>
+					<h2 style="font-family: 微軟正黑體;">我的收藏</h2>
 				</div>
 			</div>
 		</div>
@@ -247,8 +245,8 @@ function delDetail(collectNo,groupName){
 		<div class="tab-content">
 			<div class="tab-pane  active" id="post">
 				<div class="titleBlock" style="vertical-align: center">
-					<h1 class="mt-4">我的收藏</h1>
-					<a class="btn btn-outline-primary" href="#" id="groupNewBtn"
+					<h1 class="mt-4" style="font-family: 微軟正黑體;">我的收藏</h1>
+					<a class="btn btn-primary" href="#" id="groupNewBtn"
 						data-toggle="modal" data-target="#insertModal"
 						style="margin: 20px 5px 5px 5px"> <i class='fa fa-plus'></i>新增類別
 					</a>
@@ -261,19 +259,19 @@ function delDetail(collectNo,groupName){
 								<c:set var='collectionGroupsKey'
 									value='${collectionGroup.key+0}'></c:set>
 								<div class="card">
-									<div class="card-header" style="background-color: #F0F0F0;">
+									<div class="card-header" style="background-color:#5f9ea0	;color:white;">
 										<div class="tabletext" id="collectGroup${vs.index}">
 											<a class="card-link" data-toggle="collapse"
-												id="collectGName${vs.index}">${collectionGroupsMap[collectionGroupsKey]}
-											</a> <input type="hidden" id="collectG${vs.index}"
+												id="collectGName${vs.index}" style="font-weight:bold;font-size: 25px">${collectionGroupsMap[collectionGroupsKey]}
+											</a> <input type="hidden" id="collectG${vs.index}" 
 												value="${collectionGroup.key}">
 										</div>
 										<div class="titleTableBtns" id="titleTableBtns">
-											<a class="btn btn-outline-dark" href="#"
+											<a class="btn btn-light" href="#"
 												id="groupEditBtn${vs.index}"
 												onclick="collectionGNameEdit(${vs.index},'${collectionGroupsMap[collectionGroupsKey]}')">
 												<i class='fa fa-pencil'></i>編輯名稱
-											</a> <a class="btn btn-outline-danger" href="#"
+											</a> <a class="btn btn-danger" href="#"
 												id="groupDelBtn${vs.index}" data-idx="${vs.index}"
 												data-text="${collectionGroupsMap[collectionGroupsKey]}"
 												onclick="collectionGroupDel(${vs.index},'${collectionGroupsMap[collectionGroupsKey]}')">
@@ -287,7 +285,7 @@ function delDetail(collectNo,groupName){
 											<tbody>
 												<c:forEach var='collection' items='${collectionGroup.value}'>
 													<tr>
-														<td><img src="${collection.collectMPic}"
+														<td style="width:200px"><img src="${collection.collectMPic}"
 															class="collectImg">${collection.collectMName}</td>
 														<td>
 															<div style="text-align: left">
@@ -298,9 +296,9 @@ function delDetail(collectNo,groupName){
 
 														<td>
 															<div class="cntTableBtns">
-																<a href="#" class="btn btn-primary"
+																<a href="#" class="btn btn-outline-primary"
 																	onclick="editDetail(${collection.collectNo},'${collectionGroupsKey}','${collection.collectMName}')">編輯</a>
-																<a href="#" class="btn btn-danger"
+																<a href="#" class="btn btn-outline-danger"
 																	onclick="delDetail(${collection.collectNo},'${collectionGroupsMap[collectionGroupsKey]}')">刪除</a>
 															</div>
 														</td>

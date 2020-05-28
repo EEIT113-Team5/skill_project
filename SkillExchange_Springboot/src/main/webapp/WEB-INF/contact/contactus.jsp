@@ -72,14 +72,14 @@ font {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>聯絡我們</h2>
+					<h2 style="font-family: 微軟正黑體;">聯絡我們</h2>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<div class="container w-50">
-		<h2 class="mt-4">聯絡我們</h2>
+		<h2 class="mt-4" style="font-family: 微軟正黑體;">聯絡我們</h2>
 		<form action="InsertContactUs" method="POST">
 			<div class="form-group">
 				<label for="name">姓名(必填)</label> <font>${MsgMap.errorNameEmpty}</font>
