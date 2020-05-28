@@ -28,8 +28,8 @@ public class ContactUsServiceImpl implements ContactUsService {
 	}
 
 	@Override
-	public void sendEmail(ContactUsBean cntUs) throws MessagingException {
-		cntUs.senEmail(cntUs);
+	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException {
+		cntUs.sendContactEmail(cntUs);
 	}
 
 	@Override

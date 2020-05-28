@@ -1,15 +1,6 @@
 package contactUs.model;
 
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import sendmail.SendMail;
 
 @Component
 @Entity
@@ -31,6 +25,9 @@ public class ContactUsBean {
 	private String content;
 	private int isReply;
 	private String replyContent;
+	
+	@Autowired
+	SendMail sendMail;
 
 	public ContactUsBean(int memberRegNo, String contactUser, String email, String title, String content,String replyContent) {
 		this.memberRegNo = memberRegNo;
@@ -117,7 +114,7 @@ public class ContactUsBean {
 		return builder.toString();
 	}
 
-	public void senEmail(ContactUsBean cntUs) throws MessagingException {
+	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException {
 		String subject;
 		String mailContent;
 		if(cntUs.getReplyContent()!=null) {
@@ -132,8 +129,8 @@ public class ContactUsBean {
 		            +"<span style='color:blue;'>您的支持是我們進步的動力！！！</span><br>"
 		            + "<span style='color:red;'>此為系統訊息，請勿回覆。</span><br></div></fieldset></div>";
 		}else {
-			subject = "感謝您的留言，我們將盡快回覆！";
-			mailContent = "<div style='font-family:微軟正黑體;'>"
+			 subject = "感謝您的留言，我們將盡快回覆！";
+			 mailContent = "<div style='font-family:微軟正黑體;'>"
 					+"<fieldset style='margin: auto;border:	#0066CC solid 1px;border-radius: 15px;width: 700px;background:#FFFFF4;'>"
 	            +"<h3 style='color:	#5B5B5B;text-align: center;margin: 2px;'>Skill Exchange</h3>"
 	            +"<hr style='color: gray;'><div>"
@@ -142,38 +139,11 @@ public class ContactUsBean {
 	            +"<span>感謝您的支持，我們將盡快回覆！！！</span><br>"
 	            + "<span style='color:red;'>此為系統訊息，請勿回覆。</span><br></div></fieldset></div>";
 		}
-		String username = "skillexchange2020";
-		String password = "eeit11305";
-		String contentType = "text/html;charset=UTF-8";
+		sendMail.setSubject(subject);
+		sendMail.setEmail(email);
+		sendMail.setMailContent(mailContent);
+		sendMail.sendMail();
 		
-		
-            
-		
-
-
-		Properties props = new Properties();
-		props.setProperty("mail.transport.protocol", "smtp");
-		props.setProperty("mail.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.port", "587");
-		props.setProperty("mail.smtp.auth", "true");
-		props.setProperty("mail.smtp.starttls.enable", "true"); // TLS
-		Session mailSession = Session.getInstance(props, new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
-
-		Transport transport = mailSession.getTransport();
-
-		MimeMessage message = new MimeMessage(mailSession);
-		message.setSubject(subject);
-		message.setContent(mailContent,contentType);
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-
-		transport.connect();
-		transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-		transport.close();
-
 	}
 
 	@Column(name = "isReply")

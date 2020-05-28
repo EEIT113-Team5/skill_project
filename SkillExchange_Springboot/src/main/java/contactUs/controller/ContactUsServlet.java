@@ -89,7 +89,7 @@ public class ContactUsServlet {
 			boolean result = service.insertContactUs(cntUs);
 			if (result) {
 				try {
-					service.sendEmail(cntUs);
+					service.sendContactEmail(cntUs);
 					System.out.println("send mail success!");
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -163,7 +163,7 @@ public class ContactUsServlet {
 			ContactUsBean cntBean= service.updateReplyContent(contactNo, replyContent);
 			if (cntBean !=null) {
 				try {
-					service.sendEmail(cntBean);
+					service.sendContactEmail(cntBean);
 					System.out.println("send mail success!");
 				} catch (Exception e) {
 					e.printStackTrace();
