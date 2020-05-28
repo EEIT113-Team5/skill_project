@@ -104,7 +104,7 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> 活動刊登</a>
+						aria-expanded="false"> 技能刊登</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
 							<a class="dropdown-item" href="myPublish">我的刊登</a>

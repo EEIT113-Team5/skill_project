@@ -122,7 +122,7 @@
 					</div>
 					</div>	
         			<div class="resume" style="width: 800px;margin-right: auto;"> 
-        				<div class="publishleft" style="display:inline-block">
+        				<div class="publishleft" style="display:inline-block;height: 780px">
           					<img src="${mylistimfor.publishPic}" width="250px" style="display:block;margin:auto;margin-top:25px;box-shadow:2px 2px 5px #5D9DC7">
       
           					<h2 class="pubtitle">${mylistimfor.myTitle}</h2>
@@ -138,7 +138,7 @@
           					</div>
         				</div>  
         				<div class="publishright" style="display:inline-block,">
-          					<h3 class="about">刊登內容
+          					<h3 class="about" style="padding-top: 20px;padding-bottom: 20px;">刊登內容
             				<hr>
             				<p> <h5><b>▸內容</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myDetail}.</h6></p>
           					</h3><br>
