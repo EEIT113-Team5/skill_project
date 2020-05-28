@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import search.model.AreaBean;
+import search.model.CityBean;
 import search.model.SkillBean;
 import search.service.AreaService;
+import search.service.CityService;
 import search.service.SkillService;
 
 @Controller
@@ -23,6 +25,12 @@ public class IndexBtnController {
 
 	@Autowired
 	AreaBean aBean;
+	
+	@Autowired
+	CityService cService;
+	
+	@Autowired
+	CityBean cBean;
 
 	@Autowired
 	SkillService sService;
@@ -30,15 +38,18 @@ public class IndexBtnController {
 	@Autowired
 	SkillBean sBean;
 
-	@GetMapping(value = "/GetArea.do", produces = { "application/json" })
+	@GetMapping(value = "/GetIndexBtn.do", produces = { "application/json" })
 	public ResponseEntity<List<Object>> getPublishArea(Model m) {
 		List<AreaBean> list1 = aService.queryArea();
 //		m.addAttribute("areaList", list);
-		List<SkillBean> list2 = sService.querySkill();
+		List<CityBean> list2 = cService.queryCity();
+		
+		List<SkillBean> list3 = sService.querySkill();
 //		m.addAttribute("skillList", list);
 		List<Object> list = new ArrayList<Object>();
 		list.add(list1);
 		list.add(list2);
+		list.add(list3);
 		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
 		return re;
 	}

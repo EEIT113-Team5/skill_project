@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -19,8 +20,18 @@ public class CityBean implements Serializable {
 	private int num;
 	private String cityCN;
 	private String publishAreaID;
+	private String publishAreaCN;
 
 	public CityBean() {
+	}
+
+	
+	public CityBean(int num, String cityCN, String publishAreaID, String publishAreaCN) {
+		super();
+		this.num = num;
+		this.cityCN = cityCN;
+		this.publishAreaID = publishAreaID;
+		this.publishAreaCN = publishAreaCN;
 	}
 
 	public CityBean(int num, String cityCN, String publishAreaID) {
@@ -55,5 +66,14 @@ public class CityBean implements Serializable {
 
 	public void setPublishAreaID(String publishAreaID) {
 		this.publishAreaID = publishAreaID;
+	}
+
+	@Transient
+	public String getPublishAreaCN() {
+		return publishAreaCN;
+	}
+
+	public void setPublishAreaCN(String publishAreaCN) {
+		this.publishAreaCN = publishAreaCN;
 	}
 }

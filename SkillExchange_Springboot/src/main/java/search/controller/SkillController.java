@@ -15,7 +15,7 @@ import search.model.SkillBean;
 import search.service.SkillService;
 
 @Controller
-@SessionAttributes(names = { "skillList" })
+//@SessionAttributes(names = { "skillList" })
 public class SkillController {
 	@Autowired
 	SkillService sService;
@@ -23,17 +23,17 @@ public class SkillController {
 	@Autowired
 	SkillBean sBean;
 	
-	@GetMapping("/index")
-	public String findIndex() {
-		return "/index";
-	}
+//	@GetMapping("/index")
+//	public String findIndex() {
+//		return "/index";
+//	}
 
-	@GetMapping("/GetSkill.do")
-	public ModelAndView getSkill(Model m) {
-		List<SkillBean> list = sService.querySkill();
-		m.addAttribute("skillList", list);
-		return new ModelAndView("redirect:/index");
-	}
+//	@GetMapping("/GetSkill.do")
+//	public ModelAndView getSkill(Model m) {
+//		List<SkillBean> list = sService.querySkill();
+//		m.addAttribute("skillList", list);
+//		return new ModelAndView("redirect:/index");
+//	}
 
 	@PostMapping("/SetSkill.do")
 	public void setSkill(@RequestParam("skill") String skill, Model m) {

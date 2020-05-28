@@ -20,8 +20,11 @@ public class CityDao {
 	}
 	
 	public List<CityBean> queryCity(){
+		String hql = "select new CityBean(C.num, C.cityCN, C.publishAreaID, A.publishAreaCN) from CityBean C, AreaBean A where C.publishAreaID = A.publishAreaCode order by C.num";
+		
 		@SuppressWarnings("unchecked")
-		Query<CityBean> query = getSession().createQuery("from CityBean");
+//		Query<CityBean> query = getSession().createQuery("from CityBean");
+		Query<CityBean> query = getSession().createQuery(hql);
 		List<CityBean> allcities = query.list();
 		
 		return allcities;
