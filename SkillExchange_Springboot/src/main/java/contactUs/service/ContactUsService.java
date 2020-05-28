@@ -11,7 +11,7 @@ public interface ContactUsService {
 	boolean insertContactUs(ContactUsBean cntUs);
 	List<ContactUsBean> queryContactUs();
 	ContactUsBean queryContactUsDetail(Integer contactNo);
-	public void sendEmail(ContactUsBean cntUs) throws MessagingException;
+	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException;
 	ContactUsBean updateReplyContent(Integer contactNo,String replyContent) throws UpdateCollectionsException;
 
 }

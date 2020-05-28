@@ -57,7 +57,7 @@ public class RootAppConfig {
 		// hibernate找sessionFactory掃描的package
 		factory.setPackagesToScan(new String[] { "activity.bean", "comment.bean", "myPublish.Model",
 				"publishCheckPage.Model", "publishPage.Model", "skillClass.model", "contactUs.model", "myCollection",
-				"skillClass.model", "members.Model", "messageboard", "search.model" });
+				"skillClass.model", "members.Model", "messageboard", "search.model"});
 //		if (GlobalService.DB_TYPE == GlobalService.DB_TYPE_SQLSERVER) {
 		factory.setDataSource(sqlServerDataSource());
 		factory.setHibernateProperties(additionalPropertiesMsSQL());

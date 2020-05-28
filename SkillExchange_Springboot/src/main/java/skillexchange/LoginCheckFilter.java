@@ -37,7 +37,7 @@ public class LoginCheckFilter implements Filter {
 		
 		url.add("/");
 		url.add("/contactus");
-		url.add("/InsertContactUs.do");
+		url.add("/InsertContactUs");
 		url.add("/aboutus.jsp");
 		
 		url.add("/GetArea.do");
