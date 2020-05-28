@@ -46,7 +46,7 @@
 		<!-- main nav -->
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<!-- logo -->
-			<a class="navbar-brand" href="index.html"><h2
+			<a class="navbar-brand" href="${jspPath}/"><h2
 					style="color: white; font-family: 'Kalam', cursive">SkillExchange</h2>
 			</a>
 			<!-- /logo -->
