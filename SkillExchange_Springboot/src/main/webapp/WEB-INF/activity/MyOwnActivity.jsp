@@ -15,8 +15,8 @@
 <title>SkillExchange</title>
 <link href="css/styles.css" rel="stylesheet" />
 <!-- <!-- Favicon -->
-<!-- <link rel="shortcut icon" type="image/x-icon" -->
-<!-- 	href="imagestemp/favicon.png" /> -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="imagestemp/SkillLogo2.png" />
 
 <!-- <!-- CSS -->
 <!--   ================================================== -->

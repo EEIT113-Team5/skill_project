@@ -29,7 +29,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="imagestemp/favicon.png" />
+	href="imagestemp/SkillLogo2.png" />
 
 <!-- CSS
   ================================================== -->
