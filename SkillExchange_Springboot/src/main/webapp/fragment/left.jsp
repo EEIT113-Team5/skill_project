@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <c:set var='jspPath' value='${pageContext.request.contextPath}' />
 <head>
@@ -21,7 +23,7 @@ font-color: white;
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<a class="navbar-brand" href="${jspPath}/">Skill Exchange</a>
 	<button class="btn btn-link btn-sm order-1 order-lg-0"
-		id="sidebarToggle" >
+		id="sidebarToggle" href="#">
 		<i class="fa fa-bars"></i>
 	</button>
 	<!-- Navbar Search-->
