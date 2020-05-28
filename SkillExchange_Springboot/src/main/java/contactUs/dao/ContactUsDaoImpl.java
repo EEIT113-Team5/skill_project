@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import contactUs.model.ContactUsBean;
-import myCollection.model.CollectionGroup;
 import myCollection.model.UpdateCollectionsException;
 
 @Repository

@@ -18,7 +18,7 @@ import contactUs.service.ContactUsService;
 import members.Model.MemberBean;
 
 @Controller
-@SessionAttributes({ "MsgOK", "cntUs" })
+@SessionAttributes({ "MsgOK", "cntUs","MsgUpOK" })
 public class ContactUsServlet {
 
 	@Autowired
@@ -43,12 +43,15 @@ public class ContactUsServlet {
 
 	@PostMapping(value = "/InsertContactUs")
 	protected String insertContactUs(@RequestParam("name") String name, @RequestParam("email") String email,
-			@RequestParam("title") String title, @RequestParam("content") String content,
+			@RequestParam("title") String titleStr, @RequestParam("content") String contentStr,
 			@SessionAttribute(value = "memberBean", required = false) MemberBean member, Model model) {
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
 		model.addAttribute("MsgMap", errorMsg);
 		model.addAttribute("MsgOK", msgOK);
+		String title = titleStr.trim();
+		String content = contentStr.trim();
+		
 		System.out.println(name);
 		System.out.println(email);
 		System.out.println(title);
@@ -149,13 +152,13 @@ public class ContactUsServlet {
 
 	@PostMapping(value = "/ReplyContactUs")
 	public String updateReplyContent(@RequestParam("contactNo") String contactNoStr,
-			@RequestParam("replyContent") String replyContent, Model model) {
+			@RequestParam("replyContent") String replyContentStr, Model model) {
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> msgOK = new HashMap<String, String>();
 		model.addAttribute("MsgMap", errorMsg);
-		model.addAttribute("MsgOK", msgOK);
+		model.addAttribute("MsgUpOK", msgOK);
 		Integer contactNo = Integer.parseInt(contactNoStr);
-		
+		String replyContent = replyContentStr.trim();
 		try {
 			ContactUsBean cntBean= service.updateReplyContent(contactNo, replyContent);
 			if (cntBean !=null) {
@@ -176,7 +179,7 @@ public class ContactUsServlet {
 		if (!errorMsg.isEmpty()) {
 			return "contact/replyPage";
 		}
-		return "contact/replyPage";
+		return "redirect:/queryContactUs";
 
 	}
 }

@@ -8,6 +8,9 @@ function closeModal(type){
 	if(type==='C'){
 		$("#insertErr").text("");
 	}
+	if(type==='U'){
+		$("#editErr").text("");
+	}
 }
 function collectionGroupDelConfirm(){
 	let collectGNo=$("#delText").data("collectgno");
@@ -33,11 +36,15 @@ function delDetailConfirm(){
 }
 function editDetailConfirm(){
 	let collectNo=$("#editDetailSel").data("collectno");
-// 	console.log($(":selected").val());
+	let collectGNo=$("#editDetailSel").data("collectgno");
 	let newCollectGNo = $(":selected").val();
+	if(newCollectGNo==collectGNo){
+		$("#editErr").text("未修改類別");
+		}else{
 	document.forms[0].action="<c:url value='changeCollectionGroup?newCollectGNo="+newCollectGNo+"&collectNo=" + collectNo +"' />" ;
 	document.forms[0].method="POST";
 	document.forms[0].submit();
+		}
 }
 </script>
 </head>
@@ -139,11 +146,12 @@ function editDetailConfirm(){
                 <c:forEach var="groupList" items="${collectionGroupsMap}">
                 	<option value="${groupList.key}">${groupList.value}</option>
                 </c:forEach>
-                </select>
+                </select><br>
+                <span id="editErr" style="color:red"></span>
             
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal('U')" >取消</button>
                 <button type="button" class="btn btn-primary" onclick="editDetailConfirm()">確認</button>
             </div>
         </div>

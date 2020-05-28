@@ -106,8 +106,16 @@ font {
 			$("#alertModal").modal('show');
 		</script>
 	</c:if>
+	<c:if test="${not empty MsgUpOK}">
+		<script>
+			let message = "${MsgUpOK.updateOK}";
+			$("#alertText").text(message);
+			$("#alertModal").modal('show');
+		</script>
+	</c:if>
 	<%
 		session.removeAttribute("MsgOK");
+	session.removeAttribute("MsgUpOK");
 	%>
 </body>
 

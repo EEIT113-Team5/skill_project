@@ -59,7 +59,7 @@ label{
 							<textarea class="form-control" id="replyContent" name="replyContent"
 								${(param.type=="V") ? 'style="display:none"' : ''}>${param.replyContent}</textarea>
 						</div>
-						<button type="submit" class="btn btn-primary">送出</button>
+						<button type="submit" class="btn btn-primary" ${(param.type=="V") ? 'style="display:none"' : ''}>送出</button>
 						<a type="button" class="btn btn-outline-dark" href="queryContactUs">回上一頁</a>
 					</form>
 				</div>
@@ -95,7 +95,7 @@ label{
 		crossorigin="anonymous"></script>
 	<c:if test="${not empty MsgOK}">
 		<script>
-			let message = "${MsgOK.updateOK}";
+			let message = "${MsgUpOK.updateOK}";
 			$("#alertText").text(message);
 			$("#alertModal").modal('show');
 		</script>

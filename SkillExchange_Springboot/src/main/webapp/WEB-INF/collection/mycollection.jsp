@@ -205,11 +205,12 @@ function collectionGroupNew(){
 			document.forms[0].submit();
 		}
 }
-function editDetail(collectNo,groupName){
+function editDetail(collectNo,collectGNo,groupName){
 	collectDetail = $("#collectDetail"+collectNo);
 	detailText = collectDetail.text();
 	$("#editDetailModalLabel").text("編輯「"+groupName+"-"+detailText+"」");
-	$("#editDetailSel").attr("data-collectno",collectNo)
+	$("#editDetailSel").attr("data-collectno",collectNo);
+	$("#editDetailSel").attr("data-collectgno",collectGNo);
 	$("#editDetailModal").modal('show');
 	
 }
@@ -298,7 +299,7 @@ function delDetail(collectNo,groupName){
 														<td>
 															<div class="cntTableBtns">
 																<a href="#" class="btn btn-primary"
-																	onclick="editDetail(${collection.collectNo},'${collectionGroupsMap[collectionGroupsKey]}','${collection.collectMName}')">編輯</a>
+																	onclick="editDetail(${collection.collectNo},'${collectionGroupsKey}','${collection.collectMName}')">編輯</a>
 																<a href="#" class="btn btn-danger"
 																	onclick="delDetail(${collection.collectNo},'${collectionGroupsMap[collectionGroupsKey]}')">刪除</a>
 															</div>
