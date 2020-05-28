@@ -29,11 +29,11 @@
 	padding: 20px 13px !important;
 }
 
-.collectImg{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
+.collectImg {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 10px;
 }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap"
@@ -46,7 +46,7 @@
 		<!-- main nav -->
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<!-- logo -->
-			<a class="navbar-brand" href="index.html"><h2
+			<a class="navbar-brand" href="${jspPath}/"><h2
 					style="color: white; font-family: 'Kalam', cursive">SkillExchange</h2>
 			</a>
 			<!-- /logo -->
@@ -124,64 +124,58 @@
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/contactus">聯絡我們</a></li>
 
-				
-				
 
-					
-<!-- 					<li class="nav-item dropdown"><a -->
-<!-- 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown" -->
-<!-- 						role="button" data-toggle="dropdown" aria-haspopup="true" -->
-<!-- 						aria-expanded="false"> <i class="fa fa-bell" -->
-<!-- 							aria-hidden="true"></i></a> -->
-<!-- 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-<!-- 							<a class="dropdown-item" href="#">test</a> -->
-<!-- 						</div></li> -->
-						
-						
-				
-				
-<!-- 						<li class="nav-item dropdown"><a -->
-<!-- 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown" -->
-<!-- 						role="button" data-toggle="dropdown" aria-haspopup="true" -->
-<!-- 						aria-expanded="false">會員</a> -->
-<!-- 						<div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-<%-- 							<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a> --%>
-<%-- 							<c:if test="${empty memberBean}"> --%>
-<%-- 							<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>	 --%>
-<%-- 							</c:if> --%>
-<!-- 						</div></li> -->
-						
-						
-					<!-- 登入按鈕 -->
-<%-- 					<c:if test="${empty memberBean}"> --%>
-<!-- 						<li class="nav-item "><a class="nav-link" -->
-<%-- 							href="${jspPath}/loginInit">我要登入</a></li> --%>
-<%-- 					</c:if> --%>
-						
-						
+
+
+
+
+
+
+
 					<!--加入會員 -->
 					<!--<li class="nav-item "><a class="nav-link" -->
-						<%--href="${jspPath}/registerInit">加入會員</a></li> --%>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
-					<li class="nav-item "><a class="nav-link"
-							></a></li>
+					<%--href="${jspPath}/registerInit">加入會員</a></li> --%>
+					<li class="nav-item "><a class="nav-link"></a></li>
+					<li class="nav-item "><a class="nav-link"></a></li>
+					<li class="nav-item "><a class="nav-link"></a></li>
+					<!-- 										<li class="nav-item "><a class="nav-link"></a></li> -->
+					<!-- 										<li class="nav-item "><a class="nav-link"></a></li> -->
+					<!-- 										<li class="nav-item "><a class="nav-link"></a></li> -->
 
 
-				<!-- 登出按鈕 -->
+					<!-- 登出按鈕 -->
+					<%-- 					<c:if test="${ ! empty memberBean}"> --%>
+					<%-- 						<img class="collectImg" src="${ memberBean.memberPic }" /> --%>
+					<!-- 						<li class="nav-item "><a class="nav-link" -->
+					<%-- 							href="<c:url value='Logout' />">登出</a></li> --%>
+					<%-- 					</c:if> --%>
 					<c:if test="${ ! empty memberBean}">
 						<img class="collectImg" src="${ memberBean.memberPic }" />
-						<li class="nav-item "><a class="nav-link"
-							href="<c:url value='Logout' />">登出</a></li>
 					</c:if>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">會員</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
+							<c:if test="${empty memberBean}">
+								<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
+							</c:if>
+							<c:if test="${ ! empty memberBean}">
+								<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
+							</c:if>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fa fa-bell"
+							aria-hidden="true"></i></a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">test</a>
+						</div></li>
+
+
+
 				</ul>
 			</div>
 		</nav>
