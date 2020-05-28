@@ -129,9 +129,9 @@ window.onload=function(){
 	
 }
 function buttonHide(){
-	titleBtns = $("main").find(".titleTableBtns");
+	titleBtns = $("body").find(".titleTableBtns");
 	titleBtns.hide();
-	cntBtns = $("main").find(".cntTableBtns");
+	cntBtns = $("body").find(".cntTableBtns");
 	cntBtns.attr("style","visibility:hidden");
 }
 function buttonShow(){
@@ -164,7 +164,7 @@ function collectionGroupDel(idx,text){
 }
 function gNameEditCancel(){
 	editName = $("#editname");
-	comfirmBtns = $("main").find(".confirmBtns");
+	comfirmBtns = $("body").find(".confirmBtns");
 	editName.remove();
 	buttonShow();
 	
