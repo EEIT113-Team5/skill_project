@@ -28,6 +28,13 @@
 .navigation .navbar-light .navbar-nav .nav-item .nav-link {
 	padding: 20px 13px !important;
 }
+ 
+.collectImg{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap"
 	rel="stylesheet">
@@ -39,7 +46,7 @@
 		<!-- main nav -->
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<!-- logo -->
-			<a class="navbar-brand" href="index.html"><h2
+			<a class="navbar-brand" href="${jspPath}/"><h2
 					style="color: white; font-family: 'Kalam', cursive">SkillExchange</h2>
 			</a>
 			<!-- /logo -->
@@ -111,8 +118,6 @@
 							<a class="dropdown-item" href="myPublish">我的刊登</a>
 						</div></li>
 
-
-
 					<!-- 					</li> -->
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/QueryCollections.do">我的收藏</a></li>
@@ -120,10 +125,9 @@
 						href="${jspPath}/contactus">聯絡我們</a></li>
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/registerInit">加入會員</a></li>
-					<c:if test="${ ! empty memberBean}">
-						<li class="nav-item "><a class="nav-link"
-							href="<c:url value='Logout' />">登出</a></li>
-					</c:if>
+				
+				
+				<!-- 登入按鈕 -->
 					<c:if test="${empty memberBean}">
 						<li class="nav-item "><a class="nav-link"
 							href="${jspPath}/loginInit">我要登入</a></li>
@@ -137,6 +141,12 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#">test</a>
 						</div></li>
+				<!-- 登出按鈕 -->
+					<c:if test="${ ! empty memberBean}">
+						<img class="collectImg" src="${ memberBean.memberPic }" />
+						<li class="nav-item "><a class="nav-link"
+							href="<c:url value='Logout' />">登出</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</nav>
