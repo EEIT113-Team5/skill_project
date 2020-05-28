@@ -28,7 +28,7 @@
 .navigation .navbar-light .navbar-nav .nav-item .nav-link {
 	padding: 20px 13px !important;
 }
-
+ 
 .collectImg{
   width: 50px;
   height: 50px;
