@@ -63,18 +63,15 @@
 	border: 1px #FAFAFA dashed;
 }
 
-.container1 {
-	float: left;
-	margin-top: 10px;
-}
+
 
 .work {
 	position: relative;
 	float: left;
-	width: 31.3%;
+	width: 22%;
 	height: 600px;
-	margin-bottom: 10px;
-	margin-right: 2%;
+	margin: 15px;
+
 	padding: 15px;
 	background-color: #FAFAFA;
 	border: 1px #171717 solid;
@@ -89,6 +86,7 @@
 	position: absolute;
 	bottom: 0px;
 }
+
 </style>
 </head>
 
@@ -129,7 +127,7 @@
 							</c:if>
 							<div class="work">
 								<div>
-									<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberName}<span
+									<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberNic}<span
 										style="float: right; margin-top: 10px">${skills.updateTime}</span>
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'"
@@ -137,7 +135,7 @@
 									<h3 class="JQellipsis2">${skills.publishTitle}</h3>
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'">
-									<img src="${skills.publishPic}" height="250px" width="315px" />
+									<img src="${skills.publishPic}" height="250px" width="350px" />
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'"
 									class="detail">
@@ -146,8 +144,6 @@
 
 								<div class="bot" style="margin-left: 50px">
 									<span> <c:choose>
-
-
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success "
@@ -175,10 +171,15 @@
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 											</c:otherwise>
 
-										</c:choose>
-
-										<button type="button" onclick=test1() class="btn btn-primary ">發送訊息</button>
+										</c:choose>										
+										
+											<button type="button" id="addchat${skills.publishNo}"
+													class="btn btn-primary "
+													onclick="location.href='publish?num=${skills.publishNo}'">發送訊息
+										    </button>
+																																	
 									</span>
+									
 								</div>
 								<div class="sb-nav-link-icon">
 									<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
@@ -187,8 +188,6 @@
 									<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
 									晚上7時至10時
 								</div>
-
-
 							</div>
 
 						</c:forEach>
@@ -196,23 +195,17 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
-
-
+			
 		<!-- ---------------------要加的部份-------------------- -->
-		<jsp:include page="/fragment/bottom.jsp" />
+		
 	</div>
 	<!-- ---------------------要加的部份-------------------- -->
 
-
+<jsp:include page="/fragment/bottom.jsp" />
 
 	<script>
-	function test1()
-	{
-		console.log("${cc}");
-		console.log("========");
-		console.log("${class1}");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	}
-	
+
+		
 	function collection(publishNo,status,mebNo) {
 		console.log(mebNo);
 		
@@ -338,8 +331,7 @@
 	<script src="pluginstemp/form-validation/jquery.form.js"></script>
 	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>
 
-	<!-- Bootstrap4 -->
-	<script src="pluginstemp/bootstrap/js/bootstrap.min.js"></script>
+
 	<!-- Parallax -->
 	<script src="pluginstemp/parallax/jquery.parallax-1.1.3.js"></script>
 	<!-- lightbox -->
@@ -353,6 +345,7 @@
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
+
 
 	<!-- ---------------------要加的部份-------------------- -->
 

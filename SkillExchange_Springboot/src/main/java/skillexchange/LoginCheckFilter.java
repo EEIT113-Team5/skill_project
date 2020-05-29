@@ -33,7 +33,7 @@ public class LoginCheckFilter implements Filter {
 		url.add("/index");
 		url.add("/searchadvanced");		
 		url.add("/query");
-		url.add("/publish");
+		
 		
 		url.add("/");
 		url.add("/contactus");

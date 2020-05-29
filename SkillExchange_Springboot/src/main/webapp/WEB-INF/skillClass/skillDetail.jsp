@@ -46,16 +46,33 @@
 <link rel="stylesheet" href="pluginstemp/slick/slick.css">
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="csstemp/style.css">
+
 <!-- ---------------------要加的部份-------------------- -->
 
-<link href="${jspPath}/css/styles.css" rel="stylesheet" />
+<link href="css/calalog.css" rel="stylesheet" />
+<link href="css/styles.css" rel="stylesheet" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+	crossorigin="anonymous"></script>
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<script src="${jspPath}/font-awesome/css/font-awesome.min.css"
+<script src="font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
+* {
+	font-family: 微軟正黑體;
+}
+
+.card {
+	background-color: #ECFFFF !important
+}
+
+#catalog {
+	display: none;
+}
 h6 {
 	border: 1px solid #000;
 	margin-left: 40px
@@ -64,6 +81,13 @@ h6 {
 .text {
 	margin-left: 40px
 }
+
+
+
+#left,#right {
+float:left;border:1px   solid   red;   padding:10px;
+}  
+
 </style>
 </head>
 
@@ -75,16 +99,15 @@ h6 {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Login</h2>
+					<h2>技能詳情</h2>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="container">
+
+	<div   id= "main">  
+	<div id="left">
 		<table class="table table-hover">
-
-
-
 			<c:choose>
 				<c:when test="${empty allSkills}">
 					<tr height='36'>
@@ -93,14 +116,57 @@ h6 {
 				</c:when>
 
 				<c:otherwise>
+			
 					<c:forEach var='skills' items='${allSkills}'>
-
+						<c:if test="${not empty memberBean}">
+								<c:forEach var='collects' items='${collectionsMap}'>
+									<c:forEach var='collect' items='${collects.value}'>
+										<c:if test="${collect.collectPNo == skills.publishNo}">
+											<c:set var="have" value="${collect.collectPNo}" />
+										</c:if>
+									</c:forEach>
+								</c:forEach>
+						</c:if>
 						<div class="text" style="margin-top: 20px">
+							<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberNic}
+						<c:set var="pic1" value="${skills.member.memberPic}"/>	
+						<c:set var="sendTo" value="${skills.member.memberNic}"/>
+						<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}"/>
+						<c:set var="sendTo2" value="${skills.member.memberRegNo}"/>
+						<c:set var="sendUser2" value="${sessionScope.memberBean.memberRegNo}"/>
+									<span style="float: right; margin-top: 10px"> <c:choose>
+											<c:when test="${empty memberBean}">
+												<button type="button" id="add${skills.publishNo}"
+													class="btn btn-success "
+													onclick=collection(${skills.publishNo},0)>加入收藏</button>
+												<button type="button" id="cancel${skills.publishNo}"
+													class="btn btn-danger " style="display: none"
+													onclick="location.href='loginInit'">請先登入</button>
+											</c:when>
 
-							<img width="100" height="100"
-								src="${jspPath}/${skills.member.memberPic}"> <br>
-							${skills.member.memberName}
-						</div>
+											<c:when test="${have!=skills.publishNo}">
+												<button type="button" id="add${skills.publishNo}"
+													class="btn btn-success "
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+												<button type="button" id="cancel${skills.publishNo}"
+													class="btn btn-danger " style="display: none"
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+											</c:when>
+
+											<c:otherwise>
+												<button type="button" id="add${skills.publishNo}"
+													class="btn btn-success " style="display: none"
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+												<button type="button" id="cancel${skills.publishNo}"
+													class="btn btn-danger "
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+											</c:otherwise>
+
+										</c:choose>										
+																																	
+									</span>
+									
+								</div>					
 						<hr>
 						<h2 class="text">${skills.publishTitle}</h2>
 						<img style="margin-left: 40px" width="200" height="200"
@@ -115,15 +181,10 @@ h6 {
 
 							<h6 style="width: 145px">提供交流/交換項目:</h6>
 							<div class="text">${skills.ownSkill}</div>
-							<!--提供交流/交換項目-->
 
 							<br>
 							<h6 style="width: 160px">希望交流/交換的內容:</h6>
 							<div class="text">${skills.wantSkill}</div>
-							<!--希望交流/交換的內容-->
-
-							<!-- 											<br><h6 style="width:75px">希望時間:</h6> -->
-							<!-- 											<div class="text"></div> 希望時間 -->
 
 							<br>
 							<h6 style="width: 75px">希望地點:</h6>
@@ -134,21 +195,170 @@ h6 {
 							<div class="text">${skills.updateTime}</div>
 
 						</div>
-
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
 	</div>
+	
+	<div id="right">
+	<div style="background-color: pink; width: auto; margin: 10px auto">
 
+					<div class="card-body">
+						<h4 class="card-title" id='sendto'>${sendTo}</h4>
+						<div class="card-text">
+			
+						</div>
+						<button id="disabled" class="btn btn-primary" onclick="connect('${sendUser}');">發送訊息</button>
+					</div>
+				
+				<div id="catalog">
+					<div class="card">
+						<div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="${pic1}" class="rounded-circle user_img" height="250px" width="350px">
+										<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>${sendTo}</span>
+									
+								</div>
+								<div class="video_cam">
+									<span><i class="fas fa-video"></i></span> <span><i
+										class="fas fa-phone"></i></span>
+								</div>
+								<a type="button" href="Form.jsp" class="btn text-white">結束交換</a>
+							</div>
+							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+							<div class="action_menu">
+								<ul>
+									<li><i class="fas fa-user-circle"></i> View profile</li>
+									<li><i class="fas fa-users"></i> Add to close friends</li>
+									<li><i class="fas fa-plus"></i> Add to group</li>
+									<li><i class="fas fa-ban"></i> Block</li>
+								</ul>
+							</div>
+
+						</div>
+						<div id="cardbody" class="card-body msg_card_body">
+
+						</div>
+						<div class="card-footer">
+							<div class="input-group">
+								<div class="input-group-append">
+									<span class="input-group-text attach_btn"><i
+										class="fas fa-paperclip"></i></span>
+								</div>
+								<textarea name="" class="form-control type_msg" id="textmssg"
+									placeholder="Type your message..."></textarea>
+								<div class="input-group-append">
+									<!-- 							<input type="submit" value="Send" onclick='sendMessage();'/> -->
+									<span class="input-group-text send_btn"
+										onclick="sendMessage('${sendUser}','${sendTo}')"><i
+										class="fas fa-location-arrow"></i></span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					</div>
+				</div>
+		</div>		
+		 <div   style="clear:both"></div>  
+		 </div>
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
+<script>
 
-</body>
+		
+	function collection(publishNo,status,mebNo) {
+		if(status==1){
+	    	
+	    	$.ajax({
+				url : "InsertColletion", //請求的url地址
+				dataType : "json", //返回格式為json
+				async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+				data : {
+					"publishNo" : publishNo,					
+					//"class": "${class1}",
+ 					"memberBean":mebNo
+				}, //引數值
+				type : "GET", //請求方式
+				success : function(req) {
+					console.log("suc");
+					$("#add"+publishNo).css("display","none");
+					 $("#cancel"+publishNo).css("display","inline");
+				//	 alert ( "已加入收藏" );
+					  let message = "已加入收藏";
+						$("#alertText").text(message);
+						$("#alertModal").modal('show');
+				},
+				complete : function() {
+					console.log("com");
+					//請求完成的處理
+				},
+				error : function() {
+					console.log("出錯了!")
+				}
+			});
+	    		  
+			 
+		 } else if (status==2){
+				$.ajax({
+					url : "delColletion", //請求的url地址
+					dataType : "json", //返回格式為json
+					async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+					data : {
+						"publishNo" : publishNo,					
+						//"class": "${class1}",
+	 					"memberBean":mebNo
+					}, //引數值
+					type : "GET", //請求方式
+					success : function(req) {
+						console.log("suc");
+						$("#add"+publishNo).css("display","inline");
+						 $("#cancel"+publishNo).css("display","none");
+						  let message = "已取消收藏";
+							$("#alertText").text(message);
+							$("#alertModal").modal('show');
+
+					},
+					complete : function() {
+						console.log("com");
+						//請求完成的處理
+					},
+					error : function() {
+						console.log("出錯了!")
+					}
+				});
+			 
+		 }
+		 else if (status==0){			 
+			 $("#add"+publishNo).css("display","none");
+			 $("#cancel"+publishNo).css("display","inline");
+		 }
+	}
+	
+
+	
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+		crossorigin="anonymous"></script>
 <!-- ---------------------要加的部份-------------------- -->
 <!-- 
     Essential Scripts
@@ -179,8 +389,12 @@ h6 {
 
 <!-- Custom js -->
 <script src="jstemp/script.js"></script>
+<script src="js/websocket1on1.js"></script>
+<script src="assets/demo/datatables-demo.js"></script>
+<script src="jstemp/script.js"></script>
+<script src="js/websocket1by1.js"></script>
 
 <!-- ---------------------要加的部份-------------------- -->
 
-
+</body>
 </html>

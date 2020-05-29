@@ -5,13 +5,14 @@ var path = window.location.pathname;
 // console.log(path);
 var webCtx = path.substring(0, path.indexOf('/', 1));
 // console.log(webCtx);
-var sendUser = document.getElementById("owner").innerHTML;
-var endPointURL = "ws://" + window.location.host + webCtx + MyPoint+"/"+sendUser;
+
+
 
 var statusOutput = document.getElementById("statusOutput");
 var webSocket;
 
-function connect() {
+function connect(sendUser) {
+	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint+"/"+sendUser;
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
 	// create a websocket
