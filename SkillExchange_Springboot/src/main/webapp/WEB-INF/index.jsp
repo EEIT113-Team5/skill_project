@@ -65,12 +65,13 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>		
+	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	crossorigin="anonymous"></script>
-	
+
 <style>
-.wrapper {
+<
+style>.wrapper {
 	position: relative;
 	width: 100vw;
 	height: 100vh;
@@ -120,6 +121,17 @@
 	transition: 0.5s;
 	margin: 0;
 	padding: 0;
+}
+
+.wrap-level3:active {
+	width: 30%;
+	border: 2px solid #D0D0D0;
+	background-color: #aaa;
+	/* 	border-left: 1px solid #E0E0E0; */
+	/* 	border-radius: 10px; */
+	/* 	transition: 0.5s; */
+	/* 	margin: 0; */
+	/* 	padding: 0; */
 }
 
 .wrap-level4 {
@@ -269,13 +281,9 @@ div.div-list2 li.li-bg2:hover {
 	padding-bottom: 12px;
 }
 
-.ctl-areaC, .ctl-areaS, .ctl-areaE {
+.ctl-areaN, .ctl-areaC, .ctl-areaS, .ctl-areaE {
 	height: 100%;
 	display: none;
-}
-
-.ctl-areaN {
-	height: 100%;
 }
 
 .k1 {
@@ -392,31 +400,31 @@ div.div-list2 li.li-bg2:hover {
 						<div class="k1">熱門關鍵字：</div>
 						<div id='insert-keyword' class="k1"></div>
 					</div>
-<!-- 			<form action="InsertKeyword1.do" method="GET"> -->
-<!-- 				<div class="input-group wrap"> -->
-<!-- 					<div class="input-group-prepend"> -->
-<!-- 						<input type="text" class="form-control searchbar-text" -->
-<!-- 							name="keyword" placeholder="關鍵字..."> -->
-<!-- 					</div> -->
-<!-- 					<div id="getarea" class="input-group-append"> -->
-<!-- 						<select name="area1" id="area" class="btn btn-light searchbar" -->
-<!-- 							style="text-align: center; text-align-last: center;"> -->
-<!-- 							<option value="地區" selected disabled>地區</option> -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					<div id="getskill" class="input-group-append"> -->
-<!-- 						<select name="skill1" id="skill" class="btn btn-light searchbar" -->
-<!-- 							style="text-align: center; text-align-last: center;"> -->
-<!-- 							<option value="技能類別" selected disabled>技能類別</option> -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-<!-- 					<div class="input-group-append"> -->
-<!-- 						<button type="submit" class="btn btn-secondary btn-sm searchbar"> -->
-<!-- 							<i class="fa fa-search"></i>搜尋 -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</form> -->
+					<form action="InsertKeyword1.do" method="GET">
+						<div class="input-group wrap">
+							<div class="input-group-prepend">
+								<input type="text" class="form-control searchbar-text"
+									name="keyword" placeholder="關鍵字...">
+							</div>
+							<div id="getarea" class="input-group-append">
+								<select name="area1" id="area" class="btn btn-light searchbar"
+									style="text-align: center; text-align-last: center;">
+									<option value="地區" selected disabled>地區</option>
+								</select>
+							</div>
+							<div id="getskill" class="input-group-append">
+								<select name="skill1" id="skill" class="btn btn-light searchbar"
+									style="text-align: center; text-align-last: center;">
+									<option value="技能類別" selected disabled>技能類別</option>
+								</select>
+							</div>
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-secondary btn-sm searchbar">
+									<i class="fa fa-search"></i>搜尋
+								</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -513,7 +521,7 @@ div.div-list2 li.li-bg2:hover {
 				let message = "${MsgOK.massage}";
 				$("#alertText").text(message);
 				$("#alertModal").modal('show');
-// 				alert(message);
+				// 				alert(message);
 			</script>
 		</c:if>
 	</c:if>
@@ -543,8 +551,11 @@ div.div-list2 li.li-bg2:hover {
 
 						var content = "";
 						for (var x = 0; x < 10; x++) {
-							content += "<li class='k1 k2'><a href=''>"
-									+ arr[0][x][0] + "</a></li>"
+							var str = "<c:url value='InsertKeyword1.do?keyword="
+									+ arr[0][x][0] + "' />"
+							content += "<li class='k1 k2'><a href='" + str + "'>"
+									+ arr[0][x][0]
+									+ "</a></li>"
 									+ "<div class='div-bar2 k1'></div>";
 						}
 
@@ -620,6 +631,33 @@ div.div-list2 li.li-bg2:hover {
 				}
 			}
 		}
+	</script>
+
+	<!-- 	<script> -->
+	// $(document).on({ // mouseenter: function () { //
+	$(this).css("background-color", "#FFB5B5"); // }, // mouseleave:
+	function () { // $(this).css("background-color", "#F0F0F0"); // }, //
+	click: function(){ //
+	$(this).siblings(".li-bg1").css("background-color", "#F0F0F0"); //
+	$(this).css("background-color", "#FFFFFF"); // } // }, ".li-bg1");
+	<!-- 	</script> -->
+
+	<script>
+		$(document).on("click", ".li-bg1", function() {
+			$(this).siblings(".li-bg1").css("background-color", "#F0F0F0");
+			$(this).css("background-color", "#FFFFFF");
+			var area = $(this).text();
+			console.log("area=" + area);
+
+			// 		if(area == "北部"){
+			// 			$(".ctl-areaN").css("display", "block");
+			// 			$(".ctl-areaN+div").css("display", "none");
+			// 		} else if(area == "中部"){
+			// 			$(".ctl-areaC").css("display", "block");
+			// 			$(".ctl-areaC+div").css("display", "none");
+			// 		}
+
+		})
 	</script>
 
 </body>
