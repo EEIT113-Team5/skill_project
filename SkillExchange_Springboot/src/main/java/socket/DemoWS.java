@@ -33,7 +33,7 @@ public class DemoWS {
 	private String sendUser;// 當前用戶訊息
 	private String toUser;// 接收人
 	private String message;// 聊天信息
-
+	private String pic;//聊天圖片
 	@OnOpen
 	public void onOpen(@PathParam("sendUser") String sendUser, Session userSession) throws IOException {
 		connectedSessions.add(userSession); // client連線時將連線session放入set內儲存
@@ -64,16 +64,15 @@ public class DemoWS {
 		JSONObject jsonOject = JSONObject.fromObject(jsonMsg);
 		sendUser = jsonOject.getString("sendUser");
 		toUser = jsonOject.getString("toUser");
+		pic = jsonOject.getString("pic");
 		message = jsonOject.getString("message");
 		DemoWS user = webSocketMap.get(toUser);
 
 		try {
 			String img = null;
-			if (sendUser.equals("菅田將輝")) {
-				img = "'images/suda.jpeg'";
-			} else {
-				img = "'images/nemotsukensi.jpg'";
-			}
+			
+				img = pic;
+		
 			String msg = "<div class='d-flex justify-content-end mb-4'><div class='msg_cotainer_send'>" + message
 					+ "<span class='msg_time_send'><!-- 時間 --></span></div><div class='img_cont_msg'><img src=" + img
 					+ " class='rounded-circle user_img_msg'></div></div>";

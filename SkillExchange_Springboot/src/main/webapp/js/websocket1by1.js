@@ -11,7 +11,7 @@ var webCtx = path.substring(0, path.indexOf('/', 1));
 var statusOutput = document.getElementById("statusOutput");
 var webSocket;
 
-function connect(sendUser) {
+function connect(sendUser,sendTo) {
 	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint+"/"+sendUser;
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
@@ -55,21 +55,21 @@ function onError(evt) {
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function sendMessage() {
+function sendMessage(sendUser,sendTo,pic1) {
 
 	if (message === "") {
 		alert("Input a message");
 		inputMessage.focus();
 	} else {
-		var toUser = document.getElementById("sendto").innerHTML;
-		var sendUser = document.getElementById("owner").innerHTML;
+
 		var inputMessage = document.getElementById("textmssg");
 		var message = inputMessage.value.trim();
 
 		var jsonMsg = {
 			"sendUser" : sendUser,
-			"toUser" : toUser,
-			"message" : message
+			"toUser" : sendTo,
+			"message" : message,
+			"pic" : pic1
 		}
 		console.log(jsonMsg);
 		webSocket.send(JSON.stringify(jsonMsg)); // !!!! 送留言到endpoint

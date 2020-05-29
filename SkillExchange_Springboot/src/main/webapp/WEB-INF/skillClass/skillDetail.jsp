@@ -130,6 +130,7 @@ float:left;border:1px   solid   red;   padding:10px;
 						<div class="text" style="margin-top: 20px">
 							<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberNic}
 						<c:set var="pic1" value="${skills.member.memberPic}"/>	
+						<c:set var="pic2" value="${sessionScope.memberBean.memberPic}"/>	
 						<c:set var="sendTo" value="${skills.member.memberNic}"/>
 						<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}"/>
 						<c:set var="sendTo2" value="${skills.member.memberRegNo}"/>
@@ -209,7 +210,7 @@ float:left;border:1px   solid   red;   padding:10px;
 						<div class="card-text">
 			
 						</div>
-						<button id="disabled" class="btn btn-primary" onclick="connect('${sendUser}');">發送訊息</button>
+						<button id="disabled" class="btn btn-primary" onclick="connect('${sendUser}','${sendTo}')">發送訊息</button>
 					</div>
 				
 				<div id="catalog">
@@ -255,7 +256,7 @@ float:left;border:1px   solid   red;   padding:10px;
 								<div class="input-group-append">
 									<!-- 							<input type="submit" value="Send" onclick='sendMessage();'/> -->
 									<span class="input-group-text send_btn"
-										onclick="sendMessage('${sendUser}','${sendTo}')"><i
+										onclick="sendMessage('${sendUser}','${sendTo}','${pic2}')"><i
 										class="fas fa-location-arrow"></i></span>
 								</div>
 							</div>
@@ -389,7 +390,6 @@ float:left;border:1px   solid   red;   padding:10px;
 
 <!-- Custom js -->
 <script src="jstemp/script.js"></script>
-<script src="js/websocket1on1.js"></script>
 <script src="assets/demo/datatables-demo.js"></script>
 <script src="jstemp/script.js"></script>
 <script src="js/websocket1by1.js"></script>
