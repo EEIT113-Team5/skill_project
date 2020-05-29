@@ -6,6 +6,16 @@
 <!DOCTYPE html>
 <c:set var='jspPath' value='${pageContext.request.contextPath}' />
 <head>
+<style>
+
+.collectImg{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+</style>
 </head>
 
 
@@ -28,7 +38,7 @@
 
 				<!-- 登出按鈕 -->
 				<c:if test="${ ! empty memberBean}">
-					<%-- 				<img src="${memberBean.memberPic}" /> --%>
+								<img class="collectImg" src="${ memberBean.memberPic }" />
 					<a href="<c:url value='Logout' />"><button type="button"
 							class="btn btn-info">登出</button> </a>
 				</c:if>
@@ -38,8 +48,6 @@
 					<a href="${jspPath}/loginInit"><button type="button"
 							class="btn btn-info">我要登入</button> </a>
 				</c:if>
-				<a href="${jspPath}/loginInit"><button type="button"
-						class="btn btn-info">我要登入</button> </a>
 
 			</div>
 		</div>
@@ -175,7 +183,7 @@
 								class="sb-nav-link-icon">
 								<i class="fa fa-table"></i>
 							</div> 使用者互評分析</a>
-
+							
 						<a class="nav-link" href="Promotion"><div
 								class="sb-nav-link-icon">
 								<i class="fa fa-table"></i>

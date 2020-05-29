@@ -34,12 +34,13 @@ public class DemoWSmulti {
 		String msg = null;
 		for (Session session1 : connectedSessions) {
 			if (session1.isOpen()) {
-				if (!session1.equals(userSession)) {
-					session1.getAsyncRemote().sendText(message);
+				session1.getAsyncRemote().sendText(message);
+				if (session1.equals(userSession)) {
+
 				}
 
 			}
-
+			// 送訊息回client
 		}
 
 		System.out.println("Session ID =" + userSession.getId() + " ,Message received:" + message);
