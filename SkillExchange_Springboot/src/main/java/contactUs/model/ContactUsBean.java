@@ -1,6 +1,5 @@
 package contactUs.model;
 
-import javax.mail.MessagingException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import sendmail.SendMail;
 
 @Component
 @Entity
@@ -27,13 +21,7 @@ public class ContactUsBean {
 	private String content;
 	private int isReply;
 	private String replyContent;
-	@Autowired
-	@Qualifier("mail")
-	private MailContent mail;
-	@Autowired
-	private SendMail sendMail;
 	
-
 
 
 	public ContactUsBean(int memberRegNo, String contactUser, String email, String title, String content,String replyContent) {
@@ -121,33 +109,7 @@ public class ContactUsBean {
 		return builder.toString();
 	}
 
-	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException {
-		try {
-		mail.setContactUser(contactUser);
-		mail.setContent(content);
-		
-		String subject;
-		String mailContent;
-		if(cntUs.getReplyContent()!=null) {
-			this.mail.setReplyContent(replyContent);
-			mailContent = mail.getReplyContactMail();
-			subject = "管理者已回覆您的留言！";
-		}else {
-			
-			 subject = "感謝您的留言，我們將盡快回覆！";
-			 mailContent = mail.getInsertContactMail();
-			 
-		}
-		sendMail.setSubject(subject);
-		sendMail.setEmail(email);
-		sendMail.setMailContent(mailContent);
-		sendMail.sendMail();
-		}catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("發生SQL例外: " + e.getMessage());	
-			}
-		
-	}
+	
 
 	@Column(name = "isReply")
 	public int getIsReply() {

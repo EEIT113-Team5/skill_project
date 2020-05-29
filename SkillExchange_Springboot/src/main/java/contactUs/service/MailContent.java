@@ -1,8 +1,8 @@
-package contactUs.model;
+package contactUs.service;
 
 import org.springframework.stereotype.Component;
 
-@Component("mail")
+@Component
 public class MailContent {
 	private String insertContactMail;
 	private String replyContactMail;
@@ -89,17 +89,17 @@ public class MailContent {
 				"<tr style='padding:0; vertical-align:top; text-align:center'>" + 
 				"<td style='word-break:break-word; padding:0px 0px 10px; vertical-align:top; text-align:center; color:#333333; font-weight:normal; margin:0; line-height:20px; font-size:14px; border-collapse:collapse!important'>" + 
 				"<div class='x_content'>" + 
-				"<h2 class='x_content-heading' style='color:#333; font-weight:300; padding:0; margin:25px 0 20px; text-align:center; line-height:1; word-break:normal; font-size:22px'>" + 
+				"<h2 class='x_content-heading' style='color:#333; font-weight:300; padding:0; margin:25px 0 20px; text-align:center; line-height:1; word-break:normal; font-size:22px;font-family:微軟正黑體;'>" + 
 				"感謝您的留言，我們將盡快回覆！</h2>" + 
-				"<p class='x_copy' style='margin:0 30px; word-wrap:normal;  font-size:16px; font-weight:300; color:#333333; line-height:1.5; padding:0; text-align:left'>" + 
-				"親愛的 "+contactUser+"：<br>" + 
-				"已收到您的留言，內容如下<br>" + 
+				"<p class='x_copy' style='margin:0 30px; word-wrap:normal;  font-size:16px; font-weight:300; color:#333333; line-height:1.5; padding:0; text-align:left;font-family:微軟正黑體;'>" + 
+				"親愛的 "+contactUser+"~<br>" + 
+				"已收到您的留言，內容如下：<br>" + 
 				"<br>" + content + "<br><br>" + 
-				"<span>感謝您的支持，我們將盡快回覆！！！</span><br>" + 
+				"<span style='font-family:微軟正黑體;'>感謝您的支持，我們將盡快回覆！！！</span><br>" + 
 				"</p>" + 
 				"<hr style='color: gray;'>" + 
 				"<div>" + 
-				"<span style='color:#EA0000;font-weight:800;font-size: 1.2em;'>此為系統訊息，請勿回覆。</span><br>" + 
+				"<span style='color:#EA0000;font-weight:800;font-size: 1.2em;font-family:微軟正黑體;'>此為系統訊息，請勿回覆。</span><br>" + 
 				"</div>" + 
 				"</div>" + 
 				"</td>" + 
@@ -192,18 +192,18 @@ public class MailContent {
 				"<tr style='padding:0; vertical-align:top; text-align:center'>" + 
 				"<td style='word-break:break-word; padding:0px 0px 10px; vertical-align:top; text-align:center; color:#333333; font-weight:normal; margin:0; line-height:20px; font-size:14px; border-collapse:collapse!important'>" + 
 				"<div class='x_content'>" + 
-				"<h2 class='x_content-heading' style='color:#333; font-weight:300; padding:0; margin:25px 0 20px; text-align:center; line-height:1; word-break:normal; font-size:22px'>" + 
-				"感謝您的留言，我們將盡快回覆！</h2>" + 
-				"<p class='x_copy' style='margin:0 30px; word-wrap:normal;  font-size:16px; font-weight:300; color:#333333; line-height:1.5; padding:0; text-align:left'>" + 
-				"親愛的 "+contactUser+"：<br>" + 
-				"已收到您的留言，內容如下<br>" + 
+				"<h2 class='x_content-heading' style='color:#333; font-weight:300; padding:0; margin:25px 0 20px; text-align:center; line-height:1; word-break:normal; font-size:22px;font-family:微軟正黑體;'>" + 
+				"管理者已回覆您的留言</h2>" + 
+				"<p class='x_copy' style='margin:0 30px; word-wrap:normal;  font-size:16px; font-weight:300; color:#333333; line-height:1.5; padding:0; text-align:left;font-family:微軟正黑體;'>" + 
+				"親愛的 "+contactUser+"~<br>" + 
+				"已收到您的留言，內容如下：<br>" + 
 				"<br>" + content + "<br><br>" +
-				"管理員回覆內容如下：<br>"+replyContent+ "<br><br>" +
-				"<span>您的支持是我們進步的動力！！！</span><br>" + 
+				"<span style='color:#484891'>管理員回覆內容如下：<br>"+replyContent+ "</span><br><br>" +
+				"<span style='font-family:微軟正黑體;'>您的支持是我們進步的動力！！！</span><br>" + 
 				"</p>" + 
 				"<hr style='color: gray;'>" + 
 				"<div>" + 
-				"<span style='color:#EA0000;font-weight:800;font-size: 1.2em;'>此為系統訊息，請勿回覆。</span><br>" + 
+				"<span style='color:#EA0000;font-weight:800;font-size: 1.2em;font-family:微軟正黑體;'>此為系統訊息，請勿回覆。</span><br>" + 
 				"</div>" + 
 				"</div>" + 
 				"</td>" + 
