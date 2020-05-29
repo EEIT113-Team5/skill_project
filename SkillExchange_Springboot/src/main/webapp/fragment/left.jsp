@@ -88,9 +88,9 @@
 							<a class="nav-link" href="FindUserComment"> <span><i
 									class="fa fa-table"></i> 使用者互評分析</span>
 							</a>
-							<a class="nav-link" href="Promotion"> <span><i
-									class="fa fa-table"></i>推播功能</span>
-							</a>
+<!-- 							<a class="nav-link" href="Promotion"> <span><i -->
+<!-- 									class="fa fa-table"></i>推播功能</span> -->
+<!-- 							</a> -->
 							<a class="nav-link" href="queryContactUs"> <span><i
 									class="fa fa-commenting-o"></i> 回覆留言</span>
 							</a>
