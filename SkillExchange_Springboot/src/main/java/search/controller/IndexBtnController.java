@@ -25,10 +25,10 @@ public class IndexBtnController {
 
 	@Autowired
 	AreaBean aBean;
-	
+
 	@Autowired
 	CityService cService;
-	
+
 	@Autowired
 	CityBean cBean;
 
@@ -39,11 +39,11 @@ public class IndexBtnController {
 	SkillBean sBean;
 
 	@GetMapping(value = "/GetIndexBtn.do", produces = { "application/json" })
-	public ResponseEntity<List<Object>> getPublishArea(Model m) {
+	public ResponseEntity<List<Object>> getIndexBtn(Model m) {
 		List<AreaBean> list1 = aService.queryArea();
 //		m.addAttribute("areaList", list);
 		List<CityBean> list2 = cService.queryCity();
-		
+
 		List<SkillBean> list3 = sService.querySkill();
 //		m.addAttribute("skillList", list);
 		List<Object> list = new ArrayList<Object>();

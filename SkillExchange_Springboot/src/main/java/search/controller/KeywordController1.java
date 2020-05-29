@@ -1,9 +1,12 @@
 package search.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,5 +62,15 @@ public class KeywordController1 {
 		m.addAttribute("skill1", skill);
 
 		return "redirect:/searchadvanced";
+	}
+	
+	@GetMapping(value="/GetTopKeyword.do", produces = { "application/json" })
+	public ResponseEntity<List<Object>> getTopKeyword(Model m) {
+		List<KeywordBean> keywordList = kService.queryTopKeyword();
+		List<Object> list = new ArrayList<Object>();
+		list.add(keywordList);
+		
+		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
+		return re;
 	}
 }

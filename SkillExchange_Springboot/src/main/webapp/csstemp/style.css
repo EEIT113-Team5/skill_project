@@ -3,6 +3,8 @@ body {
   line-height: 1.4;
   font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+/*   overflow-y: scroll; */
 }
 
 p {
@@ -553,8 +555,8 @@ a:focus, a:hover {
 }
 
 .hero-area {
-  background-image: url("../images/home1.jpg");
-  background-size: cover;
+/*   background-image: url("../images/home1.jpg"); */
+/*   background-size: cover; */
   height: 100vh;
   position: relative;
   display: flex;

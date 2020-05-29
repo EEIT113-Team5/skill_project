@@ -17,12 +17,16 @@ import search.model.SearchBean;
 public class KeywordService {
 	@Autowired
 	KeywordDao kDao;
-	
+
 	public boolean insertKeyword(KeywordBean kbean) {
 		return kDao.insertKeyword(kbean);
-	}	
-	
-	public List<SearchBean> queryResult(String keyword, String area, String skill){
+	}
+
+	public List<SearchBean> queryResult(String keyword, String area, String skill) {
 		return kDao.queryResult(keyword, area, skill);
+	}
+
+	public List<KeywordBean> queryTopKeyword() {
+		return kDao.queryTopKeyword();
 	}
 }

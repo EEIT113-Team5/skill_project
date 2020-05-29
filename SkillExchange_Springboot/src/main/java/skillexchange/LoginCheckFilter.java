@@ -40,11 +40,11 @@ public class LoginCheckFilter implements Filter {
 		url.add("/InsertContactUs");
 		url.add("/aboutus.jsp");
 		
-		url.add("/GetArea.do");
-		url.add("/GetSkill.do");
+		url.add("/GetIndexBtn.do");
 		url.add("/SetSkill.do");
 		url.add("/InsertKeyword1.do");
 		url.add("/InsertKeyword2.do");
+		url.add("/GetTopKeyword.do");
 
 		url.add("/login");
 		url.add("/loginInit");

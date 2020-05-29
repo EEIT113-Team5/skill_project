@@ -79,4 +79,14 @@ public class KeywordDao {
 //		String sql = "select M.memberNic, P.* from Publish as P "
 //				+ "left join Member AS M ON P.MemberRegNo = M.memberRegNo " + "WHERE P.Status='1'" + hql1 + hql2 + hql3;
 	}
+	
+	public List<KeywordBean> queryTopKeyword(){
+		String hql = "select keyWord, count(keyWord) as subTotal from KeywordBean group by keyWord order by subTotal desc";
+		
+		@SuppressWarnings("unchecked")
+		Query<KeywordBean> query = getSession().createQuery(hql);
+		List<KeywordBean> topKeyword = query.setMaxResults(10).list();
+		
+		return topKeyword;
+	}
 }
