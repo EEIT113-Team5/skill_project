@@ -81,12 +81,20 @@ h6 {
 .text {
 	margin-left: 40px
 }
-
-
-
-#left,#right {
+#left{
 float:left;border:1px   solid   red;   padding:10px;
+width:60%
+}
+
+
+#right {
+float:left;border:1px   solid   red;   padding:10px;
+width:40%
 }  
+#catalog {
+	position:fixed;
+	bottom:0px
+}
 
 </style>
 </head>
@@ -213,13 +221,15 @@ float:left;border:1px   solid   red;   padding:10px;
 						<button id="disabled" class="btn btn-primary" onclick="connect('${sendUser}','${sendTo}')">發送訊息</button>
 					</div>
 				
-				<div id="catalog">
+				<div id="catalog" >
 					<div class="card">
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
 									<img src="${pic1}" class="rounded-circle user_img" height="250px" width="350px">
-										<span class="online_icon"></span>
+									
+										<span id="on" class="online_icon"></span>
+										<span id="off" class="offline" style="display: none"></span>
 								</div>
 								<div class="user_info">
 									<span>${sendTo}</span>

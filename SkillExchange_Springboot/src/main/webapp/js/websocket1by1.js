@@ -88,8 +88,12 @@ function writeToScreen(message) {
 	console.log(message)
 	if(message.indexOf("count:")!=-1){
 		if(message.split(":")[1]==1){
+			$("#on").css("display","none");
+			 $("#off").css("display","inline");
 			message="<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方已離線<br></p>";
 		} else {
+			$("#on").css("display","inline");
+			 $("#off").css("display","none");
 			message="<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方正在線上<br></p>";
 		}
 	}
