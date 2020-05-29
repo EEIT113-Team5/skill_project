@@ -53,6 +53,22 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+	crossorigin="anonymous"></script>		
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	crossorigin="anonymous"></script>
+	
 <style>
 .wrapper {
 	position: relative;
@@ -281,6 +297,7 @@ div.div-list2 li.li-bg2:hover {
 
 <body id="body">
 	<jsp:include page="/fragment/top.jsp" />
+	<jsp:include page="/fragment/modal.jsp" />
 	<section class="hero-area">
 		<!-- 			輪播 			-->
 		<div id="carouselExampleSlidesOnly" class="carousel slide"
@@ -484,8 +501,7 @@ div.div-list2 li.li-bg2:hover {
 
 	<!-- ---------------------要加的部份-------------------- -->
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
+
 
 	<script>
 		$('.carousel').carousel();
@@ -495,7 +511,9 @@ div.div-list2 li.li-bg2:hover {
 		<c:if test="${not empty MsgOK.massage}">
 			<script>
 				let message = "${MsgOK.massage}";
-				alert(message);
+				$("#alertText").text(message);
+				$("#alertModal").modal('show');
+// 				alert(message);
 			</script>
 		</c:if>
 	</c:if>
@@ -604,20 +622,5 @@ div.div-list2 li.li-bg2:hover {
 		}
 	</script>
 
-
-
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
 </body>
 </html>
