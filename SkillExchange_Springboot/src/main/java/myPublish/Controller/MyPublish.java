@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import members.Model.MemberBean;
 import myPublish.Model.MyPublishBean;
 import myPublish.Service.imyPublishService;
@@ -60,6 +62,11 @@ public class MyPublish  {
 		model.addAttribute("dayList",dayList);
 		
 		model.addAttribute("mypublish",mylist);
+		
+		Gson gson = new Gson();
+		String mypubString = gson.toJson(mylist);
+		model.addAttribute("mypubString",mypubString);
+		
 		return "mypublish/myPublish";
 	}
 	

@@ -54,6 +54,10 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+<!-- <script type="text/javascript"> -->
+// window.onload = function(){ // setInterval(timeDate, 1000); // }
+<!-- </script>	 -->
+
 <style>
 fieldset {
 	width: 800px;
@@ -134,8 +138,8 @@ tr, td {
 					<c:if test="${dlindex == myindex}">
 
 						<div class="col-sm-3"
-							style="background-color: white; height: 550px; margin-top: 20px">
-							<div class="card" style="height: 545px; border: 1px solid black;">
+							style="background-color: white; height: 580px; margin-top: 20px">
+							<div class="card" style="height: 585px; border: 1px solid black;">
 
 								<img src="${my.publishPic}" class="card-img-top" alt="..."
 									style="height: 180px">
@@ -152,12 +156,13 @@ tr, td {
 										href='myPublishDel?publishNo=${my.publishNo}'>刪除</a></li>
 									<c:choose>
 										<c:when test="${dl < 0}">
-											<li class="list-group-item">刊登時間:${my.updateTime}<br>剩餘天數:0</a></li>
+											<li class="list-group-item" id="" style="height: 110px">刊登時間:${my.updateTime}<br>刊登時間已過期!!</li>
 										</c:when>
 										<c:otherwise>
-											<li class="list-group-item">刊登時間:${my.updateTime}<br>剩餘天數:${dl}</a></li>
+											<li class="list-group-item" style="height: 110px">刊登時間:${my.updateTime}<br>剩餘天數:<h5 id="pad${myindex}"></h5></li>
 										</c:otherwise>
 									</c:choose>
+									<span style="DISPLAY:none"><input type="button" value="按下" id="but${myindex}" onclick="timeDate(${myindex})" /></span>
 								</ul>
 							</div>
 						</div>
@@ -232,7 +237,66 @@ tr, td {
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+	<script type="text/javascript">
 
+	
+	$(document).ready(function () {
+
+		var mypubString = JSON.parse('${mypubString}');
+		var count = 0;
+
+		for(var js in mypubString){
+			count++
+		}
+				
+		for (var i = 0; i < count; i++) {
+			$('#but'+i).get(0).click();			
+		}
+	});
+		
+	function timeDate(num) {			
+
+		
+		setTimeout("pad+num.click()", 2000);
+		
+			console.log(num);
+			
+			var mypubString = JSON.parse('${mypubString}');
+			console.log(mypubString[num].updateTime);
+
+			var timeArray = new Array();
+			timeArray = mypubString[num].updateTime.split("月");
+			console.log(timeArray);
+
+			var timeArray2 = timeArray[1].split(",");
+			console.log(timeArray2);
+
+
+			var year = parseInt(timeArray2[1]);
+			var month = parseInt(timeArray[0]);
+			var date = parseInt(timeArray2[0]);
+
+			var startDate = new Date();
+			var endDate = new Date(year,month,date,0,0);
+			var spantime = (endDate - startDate)/1000;
+
+			spantime--;
+			var d = Math.floor(spantime / (24 * 3600));
+		    var h = Math.floor((spantime % (24*3600))/3600);
+		    var m = Math.floor((spantime % 3600)/(60));
+		    var s = Math.floor(spantime%60);
+		    str = d + "天 " + h + "時 " + m + "分 " + s + "秒 ";
+
+			console.log(str);
+		    
+		    document.getElementById("pad"+num).innerHTML = str;
+
+		    setTimeout(function () {
+		    	timeDate(num);
+		    }, 1000)
+		}
+	
+	</script>
 </body>
 
 </html>
