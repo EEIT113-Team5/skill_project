@@ -54,9 +54,6 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
-<!-- <script type="text/javascript"> -->
-// window.onload = function(){ // setInterval(timeDate, 1000); // }
-<!-- </script>	 -->
 
 <style>
 fieldset {

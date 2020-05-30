@@ -316,7 +316,7 @@
 	<script src="pluginstemp/google-map/gmap.js"></script>
 
 	<!-- 	<!-- Form Validation -->
-	-->
+
 	<script src="pluginstemp/form-validation/jquery.form.js"></script>
 	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>
 
