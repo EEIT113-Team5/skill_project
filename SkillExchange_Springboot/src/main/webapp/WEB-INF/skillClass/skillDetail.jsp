@@ -239,7 +239,7 @@ width:40%
 									<span><i class="fas fa-video"></i></span> <span><i
 										class="fas fa-phone"></i></span>
 								</div>
-								<a type="button" href="Form.jsp" class="btn text-white">結束交換</a>
+								<a type="button" href="InsertCommentForm" class="btn text-white">結束交換</a>
 							</div>
 							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
 							<div class="action_menu">
