@@ -68,8 +68,8 @@
 .work {
 	position: relative;
 	float: left;
-	width: 22%;
-	height: 600px;
+	width: 31%;
+	height: 650px;
 	margin: 15px;
 
 	padding: 15px;
@@ -126,55 +126,59 @@
 
 							</c:if>
 							<div class="work">
+							
+							
+							
 								<div>
-									<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberNic}<span
-										style="float: right; margin-top: 10px">${skills.updateTime}</span>
+									<img src="${skills.member.memberPic}" class="collectImg"/>${skills.member.memberNic}
+									
+									<span class="time321" style="float: right; margin-top: 10px">${skills.updateTime}</span>
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'"
 									style="margin-bottom: 10px; margin-top: 20px">
 									<h3 class="JQellipsis2">${skills.publishTitle}</h3>
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'">
-									<img src="${skills.publishPic}" height="250px" width="350px" />
+									<img src="${skills.publishPic}" height="280px" width="500px" />
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'"
 									class="detail">
 									<p class="JQellipsis">${skills.publishDetail}</p>
 								</div>
 
-								<div class="bot" style="margin-left: 50px">
+								<div class="bot" style="margin-left: 135px">
 									<span> <c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success "
+													class="btn btn-success btn-lg"
 													onclick=collection(${skills.publishNo},0)>加入收藏</button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger " style="display: none"
+													class="btn btn-danger btn-lg" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
 											</c:when>
 
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success "
+													class="btn btn-success btn-lg"
 													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger " style="display: none"
+													class="btn btn-danger btn-lg " style="display: none"
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 											</c:when>
 
 											<c:otherwise>
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success " style="display: none"
+													class="btn btn-success-lg " style="display: none"
 													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger "
+													class="btn btn-danger btn-lg "
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 											</c:otherwise>
 
 										</c:choose>										
 										
 											<button type="button" id="addchat${skills.publishNo}"
-													class="btn btn-primary "
+													class="btn btn-primary btn-lg"
 													onclick="location.href='publish?num=${skills.publishNo}'">發送訊息
 										    </button>
 																																	
@@ -204,7 +208,21 @@
 <jsp:include page="/fragment/bottom.jsp" />
 
 	<script>
-
+/* 	(function () {
+		var strAry = pubtime.split('T');
+		console.log(strAry);
+        document.getElementById("time321").innerHTML = '543';
+    })(); */
+    $(function(){
+	    var len = 11; // Pubulish Detail超過40個字以"..."取代
+	    $(".time321").each(function(i){
+	        if($(this).text().length>len){
+	            $(this).attr("title",$(this).text());
+	            var text=$(this).text().substring(0,len-1);
+	            $(this).text(text);
+	        }
+	    });
+	});
 		
 	function collection(publishNo,status,mebNo) {
 		console.log(mebNo);
@@ -276,6 +294,7 @@
 		 }
 	   
 	}
+	
 	$(function(){
 	    var len = 40; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){

@@ -1,14 +1,11 @@
 package skillClass.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import skillClass.dao.SkillDao;
 import skillClass.model.Publish;
 
@@ -31,7 +28,7 @@ public class SkillDaoImpl implements SkillDao {
 	@Override
 	public List<Publish> skillQuery(String skillType) {
 		
-		String hql  = "from Publish P join fetch P.member WHERE P.skillType = :skillType order by updateTime DESC";
+		String hql  = "from Publish P join fetch P.member WHERE P.skillType = :skillType order by UpdateTime DESC";
 		Session session = getSession();
 		Query<Publish> query =session.createQuery(hql);
 		query.setParameter("skillType",skillType);
@@ -52,16 +49,17 @@ public class SkillDaoImpl implements SkillDao {
 	@SuppressWarnings("unchecked")
 	public List<Publish> allskill() {
 		
-		String hql  = "from Publish P join fetch P.member order by updateTime DESC";
+		String hql  = "from Publish P join fetch P.member order by UpdateTime DESC";
 		Session session = getSession();
 		List<Publish> list =session.createQuery(hql).getResultList();
 		return list;
 	}
 	@Override
-	@SuppressWarnings("unchecked")
+	
 	public boolean CTRUpdate(Integer PublishNo) {
 		String hql=" update Publish P set P.publishCTR=publishCTR+1 where P.publishNo=:publishNo";
 		Session session = getSession();
+		@SuppressWarnings("rawtypes")
 		Query query = session.createQuery(hql).setParameter("publishNo",PublishNo );
 		query.executeUpdate();
 		return true;

@@ -11,7 +11,7 @@ var webCtx = path.substring(0, path.indexOf('/', 1));
 var statusOutput = document.getElementById("statusOutput");
 var webSocket;
 
-function connect(sendUser,sendTo) {
+function connect_skill(sendUser,sendTo) {
 	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint+"/"+sendUser;
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
@@ -40,7 +40,7 @@ function connect(sendUser,sendTo) {
 	}
 }
 function onOpen(evt) { // 連線時觸發
-	writeToScreen("<p style='background-color:#FFD1A4' class='rounded-lg text-center text-secondary py-2'>向對方打個招呼吧</p>");
+	
 	
 }
 function onMessage(evt) { // 收到訊息時觸發
@@ -55,7 +55,7 @@ function onError(evt) {
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function sendMessage(sendUser,sendTo,pic1) {
+function sendMessage_skill(sendUser,sendTo,pic1) {
 	var inputMessage = document.getElementById("textmssg");
 	var message = inputMessage.value.trim();
 

@@ -201,7 +201,7 @@ width:40%
 
 							<br>
 							<h6 style="width: 75px">更新時間:</h6>
-							<div class="text">${skills.updateTime}</div>
+							<div class="text">${time1}</div>
 
 						</div>
 					</c:forEach>
@@ -218,7 +218,7 @@ width:40%
 						<div class="card-text">
 			
 						</div>
-						<button id="disabled" class="btn btn-primary" onclick="connect('${sendUser}','${sendTo}')">發送訊息</button>
+						<button id="disabled" class="btn btn-primary" onclick="connect_skill('${sendUser}','${sendTo}')">發送訊息</button>
 					</div>
 				
 				<div id="catalog" >
@@ -266,7 +266,7 @@ width:40%
 								<div class="input-group-append">
 								
 									<span id="sendmss" class="input-group-text send_btn"
-										onclick="sendMessage('${sendUser}','${sendTo}','${pic2}')"><i
+										onclick="sendMessage_skill('${sendUser}','${sendTo}','${pic2}')"><i
 										class="fas fa-location-arrow"></i></span>
 								</div>
 							</div>

@@ -3,6 +3,8 @@ package skillClass.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 
@@ -23,7 +25,7 @@ public class Publish implements Serializable {
 	private String PublishPic;
 	private String OwnSkill; 	
 	private String WantSkill;  	
-	private Date UpdateTime; 	
+	private LocalDateTime UpdateTime; 	
 	private Integer PublishCTR; 	
 	private String PublishMark;
 	private String Status;
@@ -127,10 +129,10 @@ public class Publish implements Serializable {
 		WantSkill = wantSkill;
 	}
 
-	public Date getUpdateTime() {
+	public LocalDateTime getUpdateTime() {
 		return UpdateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(LocalDateTime updateTime) {
 		UpdateTime = updateTime;
 	}
 
