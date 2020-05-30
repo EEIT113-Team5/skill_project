@@ -56,14 +56,12 @@
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
-<link 
-	rel="stylesheet" 
-	href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	crossorigin="anonymous"></script>
-<script	
+<script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
 <script src="../js/scripts.js"></script>
@@ -75,12 +73,13 @@
 	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>	
+	crossorigin="anonymous"></script>
 <style>
 .red-font {
 	color: red;
 	margin-left: 20px;
 }
+
 * {
 	font-family: 微軟正黑體;
 }
@@ -90,7 +89,7 @@
 <!-- ---------------------要加的部份-------------------- -->
 <body id="body">
 	<jsp:include page="/fragment/top1.jsp" />
-		<jsp:include page="/fragment/modal.jsp" />
+	<jsp:include page="/fragment/modal.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -100,9 +99,9 @@
 			</div>
 		</div>
 	</section>
-<!--     <div class="container"> -->
-<!--     </div> -->
-<!-- ---------------------要加的部份-------------------- -->
+	<!--     <div class="container"> -->
+	<!--     </div> -->
+	<!-- ---------------------要加的部份-------------------- -->
 
 
 
@@ -169,20 +168,20 @@
 			</div>
 		</div>
 	</div>
-<!-- ---------------------要加的部份-------------------- -->
+	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
-<!-- ---------------------要加的部份-------------------- -->
+	<!-- ---------------------要加的部份-------------------- -->
 	<c:if test="${not empty MsgMap}">
 		<c:if test="${not empty MsgMap.LoginError}">
 			<script>
 				let message = "${MsgMap.LoginError}";
 				$("#alertText").text(message);
 				$("#alertModal").modal('show');
-// 				alert(message);
+				// 				alert(message);
 			</script>
 		</c:if>
 	</c:if>
-	
+
 
 	<!-- 	這裡 -->
 	<script>
@@ -195,8 +194,15 @@
 		}
 	</script>
 
-<!-- -- -->
+	<!-- -- -->
 	<script>
+		var str = "${pageContext.request.requestURL}";
+		console.log(str.length)
+		var strlength = str.length - 25;
+// 		console.log(strlength);
+// 		console.log(str.substr(0, strlength));
+		var home = str.substr(0, strlength);
+		console.log(home);
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '747521719120979',
@@ -240,7 +246,7 @@
 								'/me?fields=id,name,picture,email',
 								function(response) {
 									// 					window.location.href="http://localhost:8085/skillExchange/Facebooklogin?email="+response.email+"&userid="+response.id+"&memberName="+response.name+"&memberPic="+response.picture.data.url;
-									var home = "${fn:substring(pageContext.request.requestURL, 0, 36)}";
+// 									var home = "${fn:substring(pageContext.request.requestURL, 0, 36)}";
 									var reqUrl = home + "Facebooklogin";
 									console.log(home);
 									console.log(reqUrl);
