@@ -159,6 +159,52 @@
 		padding: 10px;
 		position: relative;
 	}
+
+
+.timetip {
+    position: relative;
+    display: inline-block;
+   
+}
+
+.timetip .timetiptext {
+    visibility: hidden;
+    width: 220px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.timetip:hover .timetiptext {
+    visibility: visible;
+}
+.timetip .timetiplefttext {
+    visibility: hidden;
+    width: 220px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+.timetip:hover .timetiplefttext {
+    visibility: visible;
+}
+
 	.msg_cotainer_send{
 		margin-top: auto;
 		margin-bottom: auto;

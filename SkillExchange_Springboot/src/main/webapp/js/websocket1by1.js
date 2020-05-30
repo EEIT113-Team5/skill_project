@@ -41,7 +41,7 @@ function connect(sendUser,sendTo) {
 }
 function onOpen(evt) { // 連線時觸發
 	writeToScreen("<p style='background-color:#FFD1A4' class='rounded-lg text-center text-secondary py-2'>向對方打個招呼吧</p>");
-
+	
 }
 function onMessage(evt) { // 收到訊息時觸發
 	writeToScreen(evt.data);
@@ -56,12 +56,14 @@ function onError(evt) {
 }
 
 function sendMessage(sendUser,sendTo,pic1) {
+	var inputMessage = document.getElementById("textmssg");
+	var message = inputMessage.value.trim();
 
+	
 	if (message === "") {
-		alert("Input a message");
+		inputMessage.value = "";
 		inputMessage.focus();
 	} else {
-
 		var inputMessage = document.getElementById("textmssg");
 		var message = inputMessage.value.trim();
 

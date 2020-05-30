@@ -1,7 +1,9 @@
 package socket;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -67,15 +69,15 @@ public class DemoWS {
 		pic = jsonOject.getString("pic");
 		message = jsonOject.getString("message");
 		DemoWS user = webSocketMap.get(toUser);
-
+	
 		try {
-			String img = null;
+			String img = null;			
+			img = pic;
 			
-				img = pic;
-		
-			String msg = "<div class='d-flex justify-content-end mb-4'><div class='msg_cotainer_send'>" + message
-					+ "<span class='msg_time_send'><!-- 時間 --></span></div><div class='img_cont_msg'><img src=" + img
-					+ " class='rounded-circle user_img_msg'></div></div>";
+			Date date = new Date();
+		    SimpleDateFormat ft = new SimpleDateFormat ("yyyy'年'MM'月'dd'日' a HH:mm");
+			String msg = "<div class='d-flex justify-content-end mb-4'><div class='timetip'><div class='msg_cotainer'>" + message
+					+ "<span class='timetiplefttext'>"+ft.format(date)+"</span></div></div></div>";
 //		    System.out.println(msg);
 
 			if (user != null) {
@@ -125,10 +127,11 @@ public class DemoWS {
 			this.session.getAsyncRemote().sendText("count:" + message);// 在jsp判断是否包含count
 
 		} else {
-
+			Date date = new Date();
+		    SimpleDateFormat ft = new SimpleDateFormat ("yyyy'年'MM'月'dd'日' a HH:mm");
 			String msg1 = "<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src=" + img
-					+ " class='rounded-circle user_img_msg'></div><div class='msg_cotainer'>" + message
-					+ "<span class='msg_time'><!-- 時間 --></span></div></div>";
+					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
+					+ "<span class='timetiptext'>"+ft.format(date)+"</span></div></div></div>";
 			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
 
 			// this.session.getAsyncRemote().sendText(message);//提供非阻塞式的消息传输方式。

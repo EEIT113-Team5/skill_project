@@ -261,11 +261,11 @@ width:40%
 									<span class="input-group-text attach_btn"><i
 										class="fas fa-paperclip"></i></span>
 								</div>
-								<textarea name="" class="form-control type_msg" id="textmssg"
+								<textarea  name="" class="form-control type_msg" id="textmssg"
 									placeholder="Type your message..."></textarea>
 								<div class="input-group-append">
-									<!-- 							<input type="submit" value="Send" onclick='sendMessage();'/> -->
-									<span class="input-group-text send_btn"
+								
+									<span id="sendmss" class="input-group-text send_btn"
 										onclick="sendMessage('${sendUser}','${sendTo}','${pic2}')"><i
 										class="fas fa-location-arrow"></i></span>
 								</div>
@@ -282,8 +282,16 @@ width:40%
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 <script>
-
+	$(function(){
 		
+	 $('#textmssg').keydown(function(event){
+	  
+	    if( event.which == 13 ) {
+	        $('#sendmss').click()
+	    }
+	});
+})
+	
 	function collection(publishNo,status,mebNo) {
 		if(status==1){
 	    	
