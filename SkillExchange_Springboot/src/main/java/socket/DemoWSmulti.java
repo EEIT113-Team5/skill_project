@@ -1,8 +1,10 @@
 package socket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.websocket.CloseReason;
@@ -15,8 +17,17 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import messageAnn.model.imessageAnnDao;
+import messageAnn.model.messageAnnBean;
+import messageAnn.service.imessageAnnService;
+
 @ServerEndpoint("/DemoWSmulti")
 public class DemoWSmulti {
+	
+	
 	private static final Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<>());
 
 	@OnOpen
@@ -32,9 +43,11 @@ public class DemoWSmulti {
 		// 收到訊息時 message
 		// 在此可以做分流比如說room number
 		String msg = null;
+		String[] messageStrings = message.split("&&&");
 		for (Session session1 : connectedSessions) {
 			if (session1.isOpen()) {
-				session1.getAsyncRemote().sendText(message);
+//				session1.getAsyncRemote().sendText(message);
+				session1.getAsyncRemote().sendText("標題:"+messageStrings[1]+",內容:"+messageStrings[0]);
 				if (session1.equals(userSession)) {
 
 				}
@@ -42,8 +55,10 @@ public class DemoWSmulti {
 			}
 			// 送訊息回client
 		}
-
 		System.out.println("Session ID =" + userSession.getId() + " ,Message received:" + message);
+		
+		System.out.println("標題:"+messageStrings[1]);
+		System.out.println("內容:"+messageStrings[0]);
 	}
 
 	@OnClose

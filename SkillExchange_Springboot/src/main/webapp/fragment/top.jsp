@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <c:set var='jspPath' value='${pageContext.request.contextPath}' />
+<script src="pluginstemp/jquery/jquery.min.js"></script>
 
 <!--
   Start Preloader
@@ -185,7 +186,7 @@
 						aria-expanded="false"> <i class="fa fa-bell" id="navbarbell"
 							aria-hidden="true"></i></a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">test</a>
+							<a class="dropdown-item" href="#" id="mess"></a>
 						</div></li>
 
 
@@ -295,6 +296,55 @@
 	// 			console.log(message)
 	// 			cardbody.innerHTML += message;
 	// 		}
+</script>
+<script>
+	$(document).ready(function() {
+        window.onload=function(){
+// 		$("#navbarbell").click(function() {
+			$.ajax({
+				url : "CallMessageAnn", // 請求的url地址
+				dataType : "json", // 返回格式為json
+				async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特
+				type : "GET", // 請求方式
+				success : function(req) {
+					console.log(req);
+
+					
+					var d = new Date(req[0].anntime);
+					var formattedDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+
+					var d1 = new Date(req[1].anntime);
+					var formattedDate1 = d1.getFullYear() + "-" + (d1.getMonth() + 1) + "-" + d1.getDate();
+
+					var d2 = new Date(req[2].anntime);
+					var formattedDate2 = d2.getFullYear() + "-" + (d2.getMonth() + 1) + "-" + d2.getDate();
+
+					messArray = req[0].message.split("&&&");
+					console.log(messArray[1]);
+
+					messArray1 = req[1].message.split("&&&");
+
+					messArray2 = req[2].message.split("&&&");
+					
+					content="<div class='card'><div class='card-header' style='color:black'>最新公告:"+messArray[1]+"(公告時間:"+formattedDate+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
+				    content+="<p>公告內容:"+messArray[0]+"</p></blockquote></div>";
+				    content+="<div class='card-header' style='color:black'>過往公告:"+messArray1[1]+"(公告時間:"+formattedDate1+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
+					content+="<p>公告內容:"+messArray1[0]+"</p></blockquote></div>";
+				    content+="<div class='card-header' style='color:black'>過往公告:"+messArray2[1]+"(公告時間:"+formattedDate2+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
+					content+="<p>公告內容:"+messArray2[0]+"</p></blockquote></div></div>";
+				    
+				document.getElementById('mess').innerHTML=content;
+				},
+				complete : function() {
+					// 請求完成的處理
+				},
+				error : function() {
+					console.log("出錯了!")
+				}
+			});
+// 		})
+        }
+	})
 </script>
 
 
