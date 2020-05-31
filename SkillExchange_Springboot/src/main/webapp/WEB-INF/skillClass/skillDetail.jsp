@@ -82,13 +82,13 @@ h6 {
 	margin-left: 40px
 }
 #left{
-float:left;padding:10px;
+float:left;border:1px   solid   red;   padding:10px;
 width:60%
 }
 
 
 #right {
-float:left; padding:10px;
+float:left;border:1px   solid   red;   padding:10px;
 width:40%
 }  
 #catalog {
@@ -112,6 +112,7 @@ width:40%
 			</div>
 		</div>
 	</section>
+
 	<div   id= "main">  
 	<div id="left">
 		<table class="table table-hover">
@@ -121,7 +122,9 @@ width:40%
 						<td colspan='7' align='center'><font color='red'>查無技能資料</font></td>
 					</tr>
 				</c:when>
-				<c:otherwise>			
+
+				<c:otherwise>
+			
 					<c:forEach var='skills' items='${allSkills}'>
 						<c:if test="${not empty memberBean}">
 								<c:forEach var='collects' items='${collectionsMap}'>
@@ -132,26 +135,24 @@ width:40%
 									</c:forEach>
 								</c:forEach>
 						</c:if>
+						<div class="text" style="margin-top: 20px">
+							<img src="${skills.member.memberPic}" class="collectImg">${skills.member.memberNic}
 						<c:set var="pic1" value="${skills.member.memberPic}"/>	
 						<c:set var="pic2" value="${sessionScope.memberBean.memberPic}"/>	
 						<c:set var="sendTo" value="${skills.member.memberNic}"/>
 						<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}"/>
 						<c:set var="sendTo2" value="${skills.member.memberRegNo}"/>
 						<c:set var="sendUser2" value="${sessionScope.memberBean.memberRegNo}"/>
-						<c:set var="memberski" value="${skills.member.memberInSkill}"/>
-						<!-- 以下主要為排版 -->
-						<div class="text" >
-						<div class="top1">
-						<div class="wrap">
-						<img src="${skills.member.memberPic}" style="float:left;width:100px ;height:100px;" class="rounded-circle user_img"/>
-						<div class="txt">
-							<h2>${skills.member.memberNic}</h2>
-							</div>
-						</div>
-						</div>
-							
-									<span style="float: right; "> 						
-									<c:choose>											
+									<span style="float: right; margin-top: 10px"> <c:choose>
+											<c:when test="${empty memberBean}">
+												<button type="button" id="add${skills.publishNo}"
+													class="btn btn-success "
+													onclick=collection(${skills.publishNo},0)>加入收藏</button>
+												<button type="button" id="cancel${skills.publishNo}"
+													class="btn btn-danger " style="display: none"
+													onclick="location.href='loginInit'">請先登入</button>
+											</c:when>
+
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success "
@@ -170,15 +171,14 @@ width:40%
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 											</c:otherwise>
 
-										</c:choose>																																								
-									</span><br><br>
+										</c:choose>										
+																																	
+									</span>
 									
-									
-								</div>				
+								</div>					
 						<hr>
-						<span style="float: right" class="text">上次更新時間:${time1}</span>
 						<h2 class="text">${skills.publishTitle}</h2>
-						<img style="margin-left: 40px" width="400px" height="300px"
+						<img style="margin-left: 40px" width="200" height="200"
 							src="${jspPath}/${skills.publishPic}">
 						<!--刊登圖片-->
 						<div class="text">
@@ -199,7 +199,9 @@ width:40%
 							<h6 style="width: 75px">希望地點:</h6>
 							<div class="text">${skills.publishPlace}</div>
 
-					
+							<br>
+							<h6 style="width: 75px">更新時間:</h6>
+							<div class="text">${time1}</div>
 
 						</div>
 					</c:forEach>
@@ -212,11 +214,7 @@ width:40%
 	<div style="background-color: pink; width: auto; margin: 10px auto">
 
 					<div class="card-body">
-						<h4 class="card-title" id='sendto'>關於我:</h4>
-						<br>
-						<h5>擁有的技能:${memberski}</h5>
-						<h5>居住區域:${sessionScope.memberBean.memberCountry}  ${sessionScope.memberBean.memberAddr}</h5>
-						<h5>Email:${sessionScope.memberBean.memberMail}</h5>
+						<h4 class="card-title" id='sendto'>${sendTo}</h4>
 						<div class="card-text">
 			
 						</div>
