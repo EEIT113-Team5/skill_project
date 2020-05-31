@@ -19,6 +19,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import net.sf.json.JSONObject;
@@ -67,6 +69,23 @@ public class DemoWS {
 		this.sendUser = sendUser;
 		this.session = userSession;
 		addOnlineCount();
+		List<Chat> history = DemoWS.Dao.LogQuery(sendUser);
+		System.out.println(history);
+		
+		if(CollectionUtils.isEmpty(history)) {
+			this.session.getAsyncRemote().sendText("沒有歷史紀錄");
+//		this.session.getAsyncRemote().sendText(hmsg);
+		}
+		else {				
+				for (Chat chat : history) {
+						hmsg = chat.getChatLog();
+						System.out.println(hmsg);
+//						this.session.getAsyncRemote().sendText(hmsg); 
+					};
+				this.session.getAsyncRemote().sendText(hmsg);
+							
+		}
+		
 		System.out.println("有新連接加入！當前在線人數為" + getOnlineCount());
 		System.out.println(text);
 		webSocketMap.put(sendUser, this);// 當前用户的websocket
@@ -103,6 +122,9 @@ public class DemoWS {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");		   
 			String msg = "<div class='d-flex justify-content-end mb-4'><div class='timetip'><div class='msg_cotainer'>" + message
 					+ "<span class='timetiplefttext'>"+dtf.format(currentTime)+"</span></div></div></div>";
+			String msg1 = "<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src=" + img
+					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
+					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
 //		    System.out.println(msg);
 
 			if (user != null) {
@@ -112,6 +134,7 @@ public class DemoWS {
 					
 				} 
 			} else {
+				DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);
 				System.out.println("信息存到數據庫");
 			};
 			userSession.getAsyncRemote().sendText(msg);
@@ -163,18 +186,8 @@ public class DemoWS {
 					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
 					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
 			System.out.println("sendmess:"+sendNo);
-			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);
-			
-			List<Chat> history = DemoWS.Dao.LogQuery(sendNo);
-			System.out.println(history);
-			for (Chat chat : history) {
-					hmsg = chat.getChatLog();
-					System.out.println(hmsg);
-//					this.session.getAsyncRemote().sendText(hmsg); 
-				};
-			
-			
-			this.session.getAsyncRemote().sendText(hmsg+msg1);// 提供阻塞式的消息发送方式
+//			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);			
+			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
 
 			// this.session.getAsyncRemote().sendText(message);//提供非阻塞式的消息传输方式。
 		}

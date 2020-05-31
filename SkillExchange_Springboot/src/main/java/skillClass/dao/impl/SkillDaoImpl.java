@@ -1,9 +1,11 @@
 package skillClass.dao.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -63,14 +65,27 @@ public class SkillDaoImpl implements SkillDao {
 		return list;
 	}
 	@Override	
-	public List<Chat> LogQuery(Integer sendNo){
+	public List<Chat> LogQuery(String sendUser){
 		System.out.println("觸發logquery");
-		String hql  = "from Chat C WHERE C.sendNo = :sendNo";
+		
+		String hql  = "from Chat C WHERE C.toUser = :toUser";
 		Session session = getSession();
 		@SuppressWarnings("unchecked")
-		Query<Chat> query =session.createQuery(hql).setParameter("sendNo",sendNo);
+		Query<Chat> query =session.createQuery(hql).setParameter("toUser",sendUser);
+		
 		System.out.println(query.list());
-		return query.list();
+		
+		if(CollectionUtils.isEmpty(query.list())) {
+				
+			System.out.println("no data");
+			
+			return null;
+		}
+		else {	
+			System.out.println("had data");
+			return query.list();
+	
+		}
 	}
 	@Override	
 	public boolean CTRUpdate(Integer PublishNo) {
