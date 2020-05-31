@@ -381,9 +381,9 @@
 								</div>
 							</div>
 						</div>
-						<form method="GET" action="">
+<!-- 						<form method="GET" action=""> -->
 						
-						</form>
+<!-- 						</form> -->
 						<div class="input-group-append wrap-level6">
 							<button type="submit" class="btn btn-secondary btn-sm last-btn">
 								<i class="fa fa-search"></i>搜尋
@@ -493,9 +493,8 @@
 		})
 		
 	</script>
-
+	
 	<script>
-		window.onload = function() {
 			var xhr1 = new XMLHttpRequest();
 			xhr1.open("GET", "<c:url value='GetTopKeyword.do' />", true);
 			xhr1.send();
@@ -504,11 +503,11 @@
 					if (xhr1.status == 200) {
 						console.log(JSON.parse(xhr1.responseText));
 						var arr = JSON.parse(xhr1.responseText);
-// 						console.log(arr[0][0][0]);
-// 						console.log(arr[0][1][0]);
+						console.log(arr[0][0][0]);
+						console.log(arr[0][1][0]);
 						var content = "";
 						for (var x = 0; x < 5; x++) {
-// 							console.log(arr[0][x][0]);
+							console.log(arr[0][x][0]);
 							var str = "<c:url value='InsertKeyword1.do?keyword=" + arr[0][x][0] + "' />";
 							content += "<li class='k1 k2'><a href='" + str + "'>"
 									+ arr[0][x][0]
@@ -520,6 +519,11 @@
 					}
 				}
 			}
+	</script>
+	
+	<script>
+	var btn = document.getElementById("iarea");
+	btn.onclick = function() {
 			var xhr2 = new XMLHttpRequest();
 			xhr2.open("GET", "<c:url value='GetIndexBtn.do' />", true);
 			xhr2.send();
