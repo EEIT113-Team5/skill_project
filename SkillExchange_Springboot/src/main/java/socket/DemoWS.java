@@ -1,11 +1,9 @@
 package socket;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,10 +52,11 @@ public class DemoWS {
 	private Integer receiveNo;// 接收訊息會員編號
 	private String message;// 聊天信息
 	private String pic;//聊天圖片
-	private String hmsg;//歷史訊息
+//	private String history;//歷史訊息
 	@Autowired
 	private SkillDao Dao; 
     public static DemoWS DemoWS;
+    
     @PostConstruct
     public void init() {
     	DemoWS = this;
@@ -70,20 +69,21 @@ public class DemoWS {
 		this.session = userSession;
 		addOnlineCount();
 		List<Chat> history = DemoWS.Dao.LogQuery(sendUser);
-		System.out.println(history);
 		
 		if(CollectionUtils.isEmpty(history)) {
 			this.session.getAsyncRemote().sendText("沒有歷史紀錄");
 //		this.session.getAsyncRemote().sendText(hmsg);
 		}
-		else {				
-				for (Chat chat : history) {
-						hmsg = chat.getChatLog();
-						System.out.println(hmsg);
-//						this.session.getAsyncRemote().sendText(hmsg); 
+		else {	
+			
+				System.out.println("歷史訊息處理中");
+				 StringBuilder hmsg = new StringBuilder();
+				for (int i=0;i<history.size();i++) {
+					hmsg.append(history.get(i).getChatLog());															 
 					};
-				this.session.getAsyncRemote().sendText(hmsg);
-							
+					System.out.println(hmsg);
+					String hmsg2=hmsg.toString();
+				this.session.getAsyncRemote().sendText(hmsg2);							
 		}
 		
 		System.out.println("有新連接加入！當前在線人數為" + getOnlineCount());
@@ -95,7 +95,7 @@ public class DemoWS {
 			//如何隔離不同房間
 			if (Demows.session.isOpen()) {
 			    
-				Demows.sendMessage("null", "count", getOnlineCount() + "",sendNo,receiveNo,sendUser,toUser);
+				Demows.sendMessage("null", "count", getOnlineCount() + "");
 			}
 		}
 
@@ -130,15 +130,17 @@ public class DemoWS {
 			if (user != null) {
 				if (user.session.isOpen()) {
 					System.out.println("session.isOpen:"+sendNo);
-					user.sendMessage(img, "send", message,sendNo,receiveNo,sendUser,toUser);
+					user.sendMessage(img, "send", message);
 					
 				} 
 			} else {
-				DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);
-				System.out.println("信息存到數據庫");
+
+//				System.out.println("信息存到數據庫");
 			};
-			userSession.getAsyncRemote().sendText(msg);
 			
+			System.out.println("保存訊息到資料庫");
+			userSession.getAsyncRemote().sendText(msg);
+			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);
 			
 			
 			
@@ -159,7 +161,7 @@ public class DemoWS {
 			// 使用if判断是要统计人数还是发送消息
 			try {
 				if (Demows.session.isOpen()) {
-					Demows.sendMessage("null", "count", getOnlineCount() + "",sendNo,receiveNo,sendUser,toUser);
+					Demows.sendMessage("null", "count", getOnlineCount() + "");
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -174,7 +176,7 @@ public class DemoWS {
 		System.out.println("Error: " + e.toString());
 	}
 
-	public void sendMessage(String img, String type, String message,Integer sendNo,Integer receiveNo,String sendUser,String toUser) throws IOException {
+	public void sendMessage(String img, String type, String message) throws IOException {
 		if (type.equals("count")) {
 
 			this.session.getAsyncRemote().sendText("count:" + message);// 在jsp判断是否包含count
@@ -185,7 +187,7 @@ public class DemoWS {
 			String msg1 = "<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src=" + img
 					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
 					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
-			System.out.println("sendmess:"+sendNo);
+			System.out.println("sendmess:");
 //			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);			
 			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
 
