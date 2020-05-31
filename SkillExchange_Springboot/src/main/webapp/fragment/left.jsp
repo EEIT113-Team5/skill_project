@@ -16,12 +16,16 @@
 	font-color: white;
 }
 </style>
-
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap"
+	rel="stylesheet">
 </head>
+
 <body>
 	<jsp:include page="/fragment/pmodal.jsp" />
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="BackendIndex">Skill Exchange</a>
+
+		<a class="navbar-brand" href="BackendIndex" 
+			style="color: white; font-family: 'Kalam', cursive; font-size:30px">SkillExchange</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle">
 			<i class="fa fa-bars"></i>
@@ -88,9 +92,9 @@
 							<a class="nav-link" href="FindUserComment"> <span><i
 									class="fa fa-table"></i> 使用者互評分析</span>
 							</a>
-<!-- 							<a class="nav-link" href="Promotion"> <span><i -->
-<!-- 									class="fa fa-table"></i>推播功能</span> -->
-<!-- 							</a> -->
+							<!-- 							<a class="nav-link" href="Promotion"> <span><i -->
+							<!-- 									class="fa fa-table"></i>推播功能</span> -->
+							<!-- 							</a> -->
 							<a class="nav-link" href="queryContactUs"> <span><i
 									class="fa fa-commenting-o"></i> 回覆留言</span>
 							</a>

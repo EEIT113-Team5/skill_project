@@ -52,7 +52,7 @@
 						<!-- 						<div style="display: flex; flex-direction: row; justify-content:space-evenly" > -->
 						<div>
 							<div style="float: left">
-								<div id="main" style="width: 750px; height: 500px;"></div>
+								<div id="main" style="width: 500px; height: 340px;"></div>
 
 								<select name="year" id="year" class="btn border border-primary">
 									<c:forEach var="n" begin="2019" end="2020">
@@ -67,7 +67,7 @@
 
 							</div>
 							<div style="float: right">
-								<div id="second" style="width: 750px; height: 500px;"></div>
+								<div id="second" style="width: 500px; height:340px;"></div>
 								<input style="float: left" class="btn btn-primary" type="submit"
 									id="queryyear" value="查詢年報表"> <select name="yearmonths"
 									id="yearmonths" class="btn border border-primary">

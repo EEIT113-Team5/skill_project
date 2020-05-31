@@ -20,6 +20,7 @@
 	crossorigin="anonymous"></script>
 <script src="js/echarts.min.js"></script>
 <!-- e chart CDN -->
+<!-- e chart CDN -->
 <style>
 </style>
 </head>
@@ -29,11 +30,11 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item active"><h1 class="text-center"
-								stylle="color:black">
-								<b>後台首頁</b>
-							</h1></li>
+					<ol class="breadcrumb my-4">
+						<li class="breadcrumb-item active"><h4 class="text-center"
+								style="color: black">
+								<b>Dashboard </b>
+							</h4></li>
 					</ol>
 					<div class="row">
 
@@ -45,7 +46,8 @@
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-primary my-4 h4">會員人數
 											</div>
-											<div class="h4 mb-4 font-weight-bold text-gray-800" id="board1"></div>
+											<div class="h4 mb-4 font-weight-bold text-gray-800"
+												id="board1"></div>
 										</div>
 										<div class="col-auto">
 											<i class="fa fa-users fa-4x" aria-hidden="true"></i>
@@ -63,7 +65,8 @@
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-primary my-4 h4">活動數量
 											</div>
-											<div class="h4 mb-4 font-weight-bold text-gray-800" id="board2"></div>
+											<div class="h4 mb-4 font-weight-bold text-gray-800"
+												id="board2"></div>
 										</div>
 										<div class="col-auto">
 											<i class="fa fa-calendar fa-4x" aria-hidden="true"></i>
@@ -81,7 +84,8 @@
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-primary my-4 h4">留言總數
 											</div>
-											<div class="h4 mb-4 font-weight-bold text-gray-800" id="board3"></div>
+											<div class="h4 mb-4 font-weight-bold text-gray-800"
+												id="board3"></div>
 										</div>
 										<div class="col-auto">
 											<i class="fa fa-comments fa-4x" aria-hidden="true"></i>
@@ -98,7 +102,8 @@
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-primary my-4 h4">交換次數
 											</div>
-											<div class="h4 mb-4 font-weight-bold text-gray-800" id="board4"></div>
+											<div class="h4 mb-4 font-weight-bold text-gray-800"
+												id="board4"></div>
 										</div>
 										<div class="col-auto">
 											<i class="fa fa-exchange fa-4x" aria-hidden="true"></i>
@@ -112,20 +117,26 @@
 						<div class="col-xl-6">
 							<div class="card mb-4">
 								<div class="card-header">
-									<i class="fas fa-chart-area mr-1"></i>上週活動刊登情況
+									<i class="fas fa-chart-area mr-1"></i>
+									<h4 style="text-align: center">
+										<b>上週活動刊登情況</b>
+									</h4>
 								</div>
 								<div class="card-body">
-									<div id="myAreaChart" width="100%" height="40"></div>
+									<div id="myBarChart" style="width: 100%; height: 500px;"></div>
 								</div>
 							</div>
 						</div>
 						<div class="col-xl-6">
 							<div class="card mb-4">
 								<div class="card-header">
-									<i class="fas fa-chart-bar mr-1"></i>上週交換次數情況
+									<i class="fas fa-chart-bar mr-1"></i>
+									<h4 style="text-align: center">
+										<b>今年每月交換次數分布</b>
+									</h4>
 								</div>
 								<div class="card-body">
-									<div id="myBarChart" width="100%" height="40"></div>
+									<div id="myBarChart1" style="width: 100%; height: 500px;"></div>
 								</div>
 							</div>
 						</div>
@@ -167,10 +178,10 @@
 					type : "GET", //請求方式
 					success : function(req) {
 						console.log(req);
-						$("#board1").html(req[0]+"人");
-						$("#board2").html(req[1]+"篇");
-						$("#board3").html(req[2]+"則");
-						$("#board4").html(Math.round(req[3]/2)+"次");
+						$("#board1").html(req[0] + "人");
+						$("#board2").html(req[1] + "篇");
+						$("#board3").html(req[2] + "則");
+						$("#board4").html(Math.round(req[3] / 2) + "次");
 					},
 					complete : function() {
 						//請求完成的處理
@@ -179,8 +190,115 @@
 						console.log("出錯了!")
 					}
 				});
+
 			}
 		})
+		var myChart = echarts.init(document.getElementById('myBarChart'));
+		//		 		var myChart1 = echarts.init(document.getElementById('myBarChart1'));
+		var option = {
+			color : [ '#3398DB' ],
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend : {
+				data : [ '活動篇數' ]
+			},
+			grid : {
+				left : '3%',
+				right : '4%',
+				bottom : '3%',
+				containLabel : true
+			},
+			xAxis : [ {
+				type : 'category',
+				data : [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ],
+				fontSize : 18,
+				axisTick : {
+					alignWithLabel : true
+				}
+			} ],
+			yAxis : [ {
+				type : 'value',
+				name : '篇數',
+				fontSize : 24,
+			} ],
+			series : [ {
+				type : 'bar',
+				barWidth : '60%',
+				name : '活動篇數',
+				data : [ 0, 1, 2, 0, 1, 1, 4 ],
+				markPoint : {
+					data : [ {
+						name : '週最高',
+						value : 4,
+						xAxis : 6,
+						yAxis : 4
+					}, {
+						name : '週最低',
+						value : 0,
+						xAxis : 0,
+						yAxis : 0
+					}, {
+						name : '週最低',
+						value : 0,
+						xAxis : 3,
+						yAxis : 0
+					} ]
+				},
+			} ]
+		};
+
+		myChart.setOption(option);
+		// 		myChart.hideLoading();
+
+		var myChart1 = echarts.init(document.getElementById('myBarChart1'));
+		option1 = {
+			// 			color : [ '	#F75000' ],
+			tooltip : {
+				trigger : 'axis',
+				axisPointer : { // 坐标轴指示器，坐标轴触发有效
+					type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+
+			legend : {
+				data : [ '交換次數' ]
+			},
+			// 			calculable : true,
+			xAxis : [ {
+				type : 'category',
+				data : [ '1月', '2月', '3月', '4月', '5月', '6月' ],
+				axisTick : {
+					alignWithLabel : true
+				}
+			} ],
+			yAxis : [ {
+				type : 'value',
+				name : '次數',
+			} ],
+			series : [ {
+				name : '交換次數',
+				type : 'bar',
+				data : [ 8, 12, 52, 72, 44, 14 ],
+				markPoint : {
+					data : [ {
+						name : '年最高',
+						value : 72,
+						xAxis : 3,
+						yAxis : 72
+					}, {
+						name : '年最低',
+						value : 8,
+						xAxis : 0,
+						yAxis : 8
+					} ]
+				},
+			} ]
+		};
+		myChart1.setOption(option1);
 	</script>
 </body>
 </html>

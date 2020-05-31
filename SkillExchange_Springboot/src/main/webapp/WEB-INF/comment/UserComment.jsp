@@ -43,7 +43,7 @@
 							</form>
 							<div style="display: flex">
 								<div class="table-responsive tableshow"
-									style="flex: 2; max-height: 500px;">
+									style="flex: 3; max-height: 500px;">
 									<table class="table table-bordered" id="dataTable1"
 										cellspacing="0">
 										<thead>
@@ -152,7 +152,7 @@
 									</table>
 								</div>
 
-								<div id="main" style="flex: 4; width: 750px; height: 600px;"></div>
+								<div id="main" style="flex: 4; width: 500px; height: 400px; margin-left:40px"></div>
 							</div>
 						</div>
 
