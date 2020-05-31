@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan(basePackages = { "activity", "comment", "myPublish", "exchange.init", "publishCheckPage", "publishPage",
 		"publishSkill", "skillClass", "home.controller", "contactUs", "myCollection", "members", "messageboard","messageAnn","socket",
-		"search" ,"sendmail"})
+		"search" ,"sendmail","scheduler"})
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Autowired

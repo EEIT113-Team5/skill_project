@@ -171,4 +171,9 @@ public class ActivityServiceimpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<ActivityBean> getAllActivityYesterday() {
+		return ac.getAllActivityYesterday();
+	}
 }
