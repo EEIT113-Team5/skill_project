@@ -17,6 +17,10 @@ public class SkillService {
 	@Autowired
 	SkillDao sDao;
 	
+	public List<SkillBean> queryType(){
+		return sDao.queryType();
+	}
+	
 	public List<SkillBean> querySkill(){
 		return sDao.querySkill();
 	}

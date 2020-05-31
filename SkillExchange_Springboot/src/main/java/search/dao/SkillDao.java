@@ -19,6 +19,15 @@ public class SkillDao {
 		return factory.getCurrentSession();
 	}
 	
+	public List<SkillBean> queryType(){
+		String hql = "select distinct typeCN from SkillBean";
+		@SuppressWarnings("unchecked")
+		Query<SkillBean> query = getSession().createQuery(hql);
+		List<SkillBean> allTypes = query.list();
+		
+		return allTypes;
+	}
+	
 	public List<SkillBean> querySkill(){
 		@SuppressWarnings("unchecked")
 		Query<SkillBean> query = getSession().createQuery("from SkillBean");

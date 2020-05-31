@@ -43,13 +43,16 @@ public class IndexBtnController {
 		List<AreaBean> list1 = aService.queryArea();
 //		m.addAttribute("areaList", list);
 		List<CityBean> list2 = cService.queryCity();
-
-		List<SkillBean> list3 = sService.querySkill();
+		
+		List<SkillBean> list3 = sService.queryType();
+		
+		List<SkillBean> list4 = sService.querySkill();
 //		m.addAttribute("skillList", list);
 		List<Object> list = new ArrayList<Object>();
 		list.add(list1);
 		list.add(list2);
 		list.add(list3);
+		list.add(list4);
 		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
 		return re;
 	}
