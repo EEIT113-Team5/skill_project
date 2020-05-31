@@ -211,6 +211,7 @@ width:40%
 	<div id="right">
 	<div style="background-color: pink; width: auto; margin: 10px auto">
 
+
 					<div class="card-body">
 						<h4 class="card-title" id='sendto'>關於我:</h4>
 						<br>
@@ -218,6 +219,8 @@ width:40%
 						<h5>居住區域:${sessionScope.memberBean.memberCountry}  ${sessionScope.memberBean.memberAddr}</h5>
 						<h5>Email:${sessionScope.memberBean.memberMail}</h5>
 						<div class="card-text">
+			
+			
 			
 						</div>
 						<button id="disabled" class="btn btn-primary" onclick="connect_skill('${sendUser}','${sendTo}')">發送訊息</button>
