@@ -133,5 +133,10 @@ public class CommentController {
 	public String RedirectToFeedback(Model model) {
 		return "comment/feedback";
 	}
+	
+	@GetMapping("/BackendIndex")
+	public String BackendIndex(Model model) {
+		return "comment/backendindex";
+	}
 
 }

@@ -21,7 +21,7 @@
 <body>
 	<jsp:include page="/fragment/pmodal.jsp" />
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="${jspPath}/">Skill Exchange</a>
+		<a class="navbar-brand" href="BackendIndex">Skill Exchange</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle">
 			<i class="fa fa-bars"></i>

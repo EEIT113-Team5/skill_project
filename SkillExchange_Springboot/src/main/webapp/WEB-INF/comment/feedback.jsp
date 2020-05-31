@@ -122,9 +122,14 @@
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
-<%-- 	<% --%>
-// 		response.setHeader("refresh", "2;URL=/");
-<%-- 	%> --%>
-<!-- 	<!-- ---------------------要加的部份-------------------- --> -->
+	<script>
+		setTimeout(transfer, 1200);
+		function transfer() {
+// 			
+			window.location.href = "${pageContext.request.contextPath}/";
+		}
+	</script>
+	<!-- 	<!-- ---------------------要加的部份-------------------- -->
+	-->
 </body>
 </html>

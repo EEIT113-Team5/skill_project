@@ -136,7 +136,7 @@ public class LoginServlet extends HttpServlet {
 			// String targetURL = (String) session.getAttribute("target");
 //			response.sendRedirect(request.getContextPath()+"/index.jsp");
 			if (userId.equals("eeit11321") && password.equals("eeit11321")) {
-                return "comment/Webcomment";
+                return "comment/backendindex";
 			} else {
 				return "index";
 			}
