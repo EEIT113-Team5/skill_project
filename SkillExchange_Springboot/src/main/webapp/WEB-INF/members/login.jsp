@@ -57,14 +57,14 @@
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<script src="../font-awesome/css/font-awesome.min.css"
+<script src="/font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
-<script src="../js/scripts.js"></script>
+<script src="/js/scripts.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 	crossorigin="anonymous"></script>
@@ -102,9 +102,6 @@
 	<!--     <div class="container"> -->
 	<!--     </div> -->
 	<!-- ---------------------要加的部份-------------------- -->
-
-
-
 
 	<!-- &autoLogAppEvents=1 -->
 	<div id="fb-root"></div>
@@ -171,17 +168,6 @@
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
-	<c:if test="${not empty MsgMap}">
-		<c:if test="${not empty MsgMap.LoginError}">
-			<script>
-				let message = "${MsgMap.LoginError}";
-				$("#alertText").text(message);
-				$("#alertModal").modal('show');
-				// 				alert(message);
-			</script>
-		</c:if>
-	</c:if>
-
 
 	<!-- 	這裡 -->
 	<script>
@@ -311,8 +297,17 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
-
-
+	
+	<c:if test="${not empty MsgMap}">
+		<c:if test="${not empty MsgMap.LoginError}">
+			<script>
+				let message = "${MsgMap.LoginError}";
+				$("#alertText").text(message);
+				$("#alertModal").modal('show');
+				// 				alert(message);
+			</script>
+		</c:if>
+	</c:if>
 
 </body>
 

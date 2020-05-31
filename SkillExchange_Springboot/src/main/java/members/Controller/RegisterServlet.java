@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import members.Model.CheckMailBean;
 import members.Model.MemberBean;
+import members.Model.MemberDao;
+import members.Service.CheckMailService;
 import members.Service.RegisterService;
 
 @Controller
@@ -37,6 +39,66 @@ public class RegisterServlet extends HttpServlet {
 	HttpSession httpSession;
 	@Autowired
 	RegisterService service;
+	
+	@Autowired
+	CheckMailService mailService;
+	@Autowired
+	MemberDao memberDao;
+	
+	
+	
+	@GetMapping(value = "/goUse")
+	public String goUse(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		
+		httpSession = request.getSession();
+		
+		//收到驗證碼
+		request.setCharacterEncoding("UTF-8");
+		String captcha = request.getParameter("numer");
+		String seq = request.getParameter("op");
+		
+		Integer checkMailNo = Integer.parseInt(seq);
+		
+		//利用驗證碼去資料庫查找相同驗證碼
+		CheckMailBean checkMailBean = mailService.selectCheckMailBeanByCaptcha(captcha, checkMailNo);
+		
+		// boolean statusIsN = mailService.checkCaptcha(captcha);
+		boolean statusIsN = false;
+		if (checkMailBean != null) {
+			if ("N".equals(checkMailBean.getCheckStatus())) {
+				statusIsN = true;
+			}
+			// statusIsN = "N".equals(checkBean.getCheckStatus());
+		}
+			
+		// 檢核資料庫有此驗證CheckStatus
+		// 1.可能驗證過了
+		// 2.可能很久都沒驗證
+		// if(狀態N)到member資料表更新狀態else(狀態Y)回滾錯誤訊息或跳已驗證過
+		Map<String, String> msgOK = new HashMap<String, String>();
+		httpSession.setAttribute("MsgOK", msgOK);
+		
+		if (checkMailBean == null) {
+			msgOK.put("massage", "無此資料");
+		} else if(statusIsN) {
+			try {
+				mailService.updateStatus(captcha, checkMailNo);
+				memberDao.updateStatus(checkMailBean.getMemberMail());
+				msgOK.put("massage", "驗證成功");
+			} catch (Exception e) {
+				e.printStackTrace();
+				msgOK.put("massage", "驗證失敗");
+			}
+		} else {
+			msgOK.put("massage", "已驗證");
+		}
+		
+		return "index";
+	}
+	
+	
+	
 	
 	@GetMapping(value = "/registerInit")
 	public String registerInit(HttpServletRequest request,
@@ -170,13 +232,14 @@ public class RegisterServlet extends HttpServlet {
 //			檢核資料庫有無此帳號email重複
 			// if(mbean != null) {
 			if(emailRegistered) {
+//todo email已被註冊alert
 //				RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
 //				rd.forward(request, response);
 				return "members/register";
 			}
 			
 			MemberBean mbean = new MemberBean(null, memberAcc, memberPwd, 
-												"1",0, 
+												"0",0, 
 												memberName, memberNic, memberSex, 
 											   dateB, memberPhone, memberCountry, 
 											   memberAddr, memberMail, memberPic, 
@@ -191,16 +254,46 @@ public class RegisterServlet extends HttpServlet {
 //				rd.forward(request, response);
 				return "members/register";
 			}
+			
+//			// 1 
+//			CheckMailBean checkBean = new CheckMailBean (null, memberMail, "", "0", null, null);
+//			checkBean = mailService.generateCaptcha(checkBean);
+//			checkBean.getCaptcha();
+			
+			// 2
+			
+			//取得驗證碼
+			String newCaptcha = mailService.getNewCaptcha();
+			//把驗證碼塞到Bean
+			java.sql.Timestamp sendTime = new Timestamp(System.currentTimeMillis());
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sendTime);
+			cal.add(Calendar.DAY_OF_WEEK, 1);
+			java.sql.Timestamp dateLine = new Timestamp(cal.getTime().getTime()); 
+			/* or 
+			 dateLine.setTime(cal.getTime().getTime()); 
+			 */
+			
+			CheckMailBean checkBean = new CheckMailBean (null, memberMail, newCaptcha, "N", sendTime, dateLine);
+			//儲存
+			mailService.saveCheckMail(checkBean);
+			//寄發驗證碼
+			mailService.sendCaptchaMail(checkBean);
 			 
-		}catch(SQLException e) {
+		} catch(SQLException e) {
 			e.printStackTrace();
 			
-		}catch (ParseException e) {
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 //		response.sendRedirect(request.getContextPath()+"/index.jsp");
 		return "index";
 	}
+
+	
 }
 		
 		

@@ -123,7 +123,11 @@ public class LoginServlet extends HttpServlet {
 			MemberBean mb = ls.checkIDPassword(userId, password);
 
 			if (mb != null) {
-				httpSession.setAttribute("memberBean", mb);
+				if (!"1".equals(mb.getAccStatus())) {
+					errorMsg.put("LoginError", "該帳號不存在或還未驗證");
+				} else {
+					httpSession.setAttribute("memberBean", mb);
+				}
 			} else {
 				errorMsg.put("LoginError", "該帳號不存在或密碼錯誤");
 			}

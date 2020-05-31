@@ -19,6 +19,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import myCollection.model.CollectionGroup;
 
 @Repository
 public class MemberDao {
@@ -36,7 +39,7 @@ public class MemberDao {
 	@SuppressWarnings("unchecked")
 	public MemberBean selectAcc(String memberAcc) {
 		Query<MemberBean> query = getSession()
-				.createQuery("select m from MemberBean m where m.memberAcc = :memberAcc");
+				.createQuery("Select m From MemberBean m Where m.memberAcc = :memberAcc");
 		query.setParameter("memberAcc", memberAcc);
 		
 		List<MemberBean> memberBeanList = query.list();
@@ -48,7 +51,6 @@ public class MemberDao {
 				memberBean = memberBeanList.get(0);
 			}
 		}
-		
 		return memberBean;
 	}
 	
@@ -67,9 +69,9 @@ public class MemberDao {
 				memberBean = memberBeanList.get(0);
 			}
 		}
-		
 		return memberBean;
 	}
+	
 	
 	public MemberBean saveMember(MemberBean mbean) throws SQLException, ParseException {
 			
@@ -79,10 +81,22 @@ public class MemberDao {
 			this.getSession().save(mbean);
 			return mbean;
 		}
-		
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public void updateStatus(String email)throws SQLException, ParseException {
 		
+		String hql = "UPDATE MemberBean m Set m.accStatus = '1' Where m.memberMail = :memberMail ";
+		Query<CollectionGroup> query = getSession().createQuery(hql);
+		query.setParameter("memberMail", email);
+
+		int n = query.executeUpdate();
+		if (n < 1) {
+			throw new SQLException("更新失敗");
+		} 
+	}
 	
 }
 
