@@ -149,7 +149,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="container">
+	<div class="container-fluid" style="width:80%" >
 		<div class="row">
 			<div style="display: flex">
 				<div style="flex: 0.5"></div>

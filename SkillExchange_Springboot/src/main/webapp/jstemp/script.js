@@ -41,9 +41,11 @@
     if (scroll > 125) {
       //console.log('a');
       $('.navigation').addClass('sticky-header');
+      $('.navigation').removeClass('original-header');
     } else {
       //console.log('a');
       $('.navigation').removeClass('sticky-header');
+      $('.navigation').addClass('original-header');
     }
   });
 

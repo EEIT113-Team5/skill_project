@@ -53,7 +53,7 @@
 
 </head>
 
-<header class="navigation fixed-top">
+<header class="navigation fixed-top original-header">
 	<div class="container">
 		<!-- main nav -->
 		<nav class="navbar navbar-expand-lg navbar-light">
