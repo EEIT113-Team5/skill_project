@@ -19,7 +19,7 @@ function connect_skill(sendUser,sendTo) {
 	console.log(sendUser);
 	console.log(endPointURL);
 	webSocket = new WebSocket(endPointURL);
-
+	console.log("conn");
 	webSocket.onopen = function(event) {
 		onOpen(event)
 	};
@@ -41,9 +41,10 @@ function connect_skill(sendUser,sendTo) {
 }
 function onOpen(evt) { // 連線時觸發
 	
-	
+	console.log("open");
 }
 function onMessage(evt) { // 收到訊息時觸發
+	console.log("mess");
 	writeToScreen(evt.data);
 	// websocket.close();
 }

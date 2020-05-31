@@ -11,7 +11,7 @@ public interface SkillDao {
 	List<Publish> skillQuery(String skillType);
 	List<Publish> allskill();
 	List<Publish> detailQuery(Integer PublishNo);
-	List<Chat> LogQuery(Integer receiveNo);
+	List<Chat> LogQuery(Integer sendNo);
 	boolean CTRUpdate(Integer PublishNo);
 	boolean LogUpdate(Integer sendNo,Integer receiveNo,String sendUser,String toUser,String ChatLog,LocalDateTime LogTime);
 }

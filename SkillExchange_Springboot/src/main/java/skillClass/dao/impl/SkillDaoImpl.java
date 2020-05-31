@@ -63,11 +63,12 @@ public class SkillDaoImpl implements SkillDao {
 		return list;
 	}
 	@Override	
-	public List<Chat> LogQuery(Integer receiveNo){
-		String hql  = "from Chat C WHERE C.receiveNo = :receiveNo";
+	public List<Chat> LogQuery(Integer sendNo){
+		System.out.println("觸發logquery");
+		String hql  = "from Chat C WHERE C.sendNo = :sendNo";
 		Session session = getSession();
 		@SuppressWarnings("unchecked")
-		Query<Chat> query =session.createQuery(hql).setParameter("sendNo",receiveNo);
+		Query<Chat> query =session.createQuery(hql).setParameter("sendNo",sendNo);
 		System.out.println(query.list());
 		return query.list();
 	}
