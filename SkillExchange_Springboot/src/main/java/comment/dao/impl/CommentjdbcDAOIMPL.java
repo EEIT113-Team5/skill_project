@@ -207,5 +207,39 @@ public class CommentjdbcDAOIMPL implements CommentDAO {
 		List<Object> list = query.list();
 		return (Long)list.get(0);
     }
-
+	
+	//後臺專用
+	//後臺專用
+		@Override
+		public Long getTotalMember() {
+			String hql="select count(*) from MemberBean m";
+			Query query = getSession().createQuery(hql);
+			List<Object> result = query.list();
+			return (Long) result.get(0);
+	    }
+       
+		
+		@Override
+		public Long getTotalExchangenum() {
+			String hql="select count(*) from  CommentBean p";
+			Query query = getSession().createQuery(hql);
+			List<Object> result = query.list();
+			return (Long) result.get(0);
+	    }
+		
+		@Override
+		public Long getTotalActivitynum() {
+			String hql="select count(*) from ActivityBean a";
+			Query query = getSession().createQuery(hql);
+			List<Object> result = query.list();
+			return (Long) result.get(0);
+	    }
+		
+		@Override
+		public Long getMessagenum() {
+			String hql="select count(*) from MessageBean m";
+			Query query = getSession().createQuery(hql);
+			List<Object> result = query.list();
+			return (Long) result.get(0);
+	    }
 }

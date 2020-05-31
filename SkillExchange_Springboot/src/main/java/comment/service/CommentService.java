@@ -2,7 +2,7 @@ package comment.service;
 
 import java.util.List;
 
-
+import org.hibernate.tool.schema.internal.exec.GenerationTarget;
 
 import comment.bean.BarcharBean;
 import comment.bean.CommentBean;
@@ -26,4 +26,7 @@ public interface CommentService {
 	 
 	public Integer UpdateMemberStat(Integer memberid, String action);
 	public List<Long> SelectExgrading();
+	
+	//
+	public List<Long>  getBackstatistic();
 }

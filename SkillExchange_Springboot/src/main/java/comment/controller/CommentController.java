@@ -3,6 +3,7 @@ package comment.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -137,6 +138,13 @@ public class CommentController {
 	@GetMapping("/BackendIndex")
 	public String BackendIndex(Model model) {
 		return "comment/backendindex";
+	}
+	//後台
+	@GetMapping(value = "/GetBackendStatis", produces = { "application/json" })
+	public ResponseEntity<List<Long>> GetBackendStatis(Model model) {
+		List<Long> list = commentServiceIMPL.getBackstatistic();
+		ResponseEntity<List<Long>> re = new ResponseEntity<>(list, HttpStatus.OK);
+		return re;
 	}
 
 }

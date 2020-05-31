@@ -28,5 +28,9 @@ public interface CommentDAO {
     public List<BarcharBean> watchingList(int grade);
     public Integer UpdateMemberStat(Integer memberid, String action);
     public Long SelectExgrading(Integer exgrading);
-
+   //後台
+    public Long getTotalMember();
+    public Long getTotalExchangenum();
+    public Long getTotalActivitynum();
+    public Long getMessagenum();
 }

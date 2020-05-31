@@ -116,4 +116,19 @@ public class CommentServiceIMPL implements CommentService {
 		}
 		return arr;
 	}
+	
+	//後台
+	public List<Long> getBackstatistic() {
+		Long totalMember = uDao.getTotalMember();
+		Long activitynum = uDao.getTotalActivitynum();
+		Long messagenum = uDao.getMessagenum();
+		Long totalExchangenum = uDao.getTotalExchangenum();
+		List<Long> arrayList = new ArrayList<Long>();
+		arrayList.add(totalMember);
+		arrayList.add(activitynum);
+		arrayList.add(messagenum);
+		arrayList.add(totalExchangenum);
+		return arrayList;
+		
+	}
 }
