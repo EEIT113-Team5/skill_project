@@ -123,7 +123,7 @@ width:40%
 				</c:when>
 				<c:otherwise>			
 					<c:forEach var='skills' items='${allSkills}'>
-						<c:if test="${not empty memberBean}">
+						
 								<c:forEach var='collects' items='${collectionsMap}'>
 									<c:forEach var='collect' items='${collects.value}'>
 										<c:if test="${collect.collectPNo == skills.publishNo}">
@@ -131,7 +131,7 @@ width:40%
 										</c:if>
 									</c:forEach>
 								</c:forEach>
-						</c:if>
+					
 						<c:set var="pic1" value="${skills.member.memberPic}"/>	
 						<c:set var="pic2" value="${sessionScope.memberBean.memberPic}"/>	
 						<c:set var="sendTo" value="${skills.member.memberNic}"/>
@@ -148,10 +148,9 @@ width:40%
 							<h2>${skills.member.memberNic}</h2>
 							</div>
 						</div>
-						</div>
-							
-									<span style="float: right; "> 						
-									<c:choose>											
+						</div>						
+								 <span style="float: right"> 						
+									<c:choose>										
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success "
@@ -170,8 +169,9 @@ width:40%
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 											</c:otherwise>
 
-										</c:choose>																																								
-									</span><br><br>
+									</c:choose>																																							
+									</span>
+									<br><br>
 									
 									
 								</div>				
@@ -359,10 +359,7 @@ width:40%
 				});
 			 
 		 }
-		 else if (status==0){			 
-			 $("#add"+publishNo).css("display","none");
-			 $("#cancel"+publishNo).css("display","inline");
-		 }
+	
 	}
 	
 

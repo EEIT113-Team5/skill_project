@@ -45,7 +45,8 @@ public class QueryskillClassController {
 	}
 	
 	@GetMapping("/query")
-	public String skill(Model model,@RequestParam("class") String skillType) {		
+	public String skill(Model model,@RequestParam("class") String skillType) {
+		
 		if (skillType.equals("all")) {		
 			model.addAttribute("allSkills",service.allskill());
 		}
@@ -76,7 +77,12 @@ public class QueryskillClassController {
 	}
 	
 	@GetMapping("publish")
-	public String skillDetail(Model model,@RequestParam("num") Integer PublishNo) {
+	public String skillDetail(Model model,@RequestParam("num") Integer PublishNo,@SessionAttribute("memberBean") MemberBean member) {
+		Integer memberRegNo = member.getMemberRegNo();
+		Map<Long, String> collectionGroupsMap = service2.queryCollectionGroups(memberRegNo);
+		Map<Integer, List<CollectionBean>> collectionsMap = service2.queryCollections(memberRegNo);
+		model.addAttribute("collectionsMap", collectionsMap);
+		model.addAttribute("collectionGroupsMap", collectionGroupsMap);
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");
 		List<Publish> skill = service.detailQuery(PublishNo);
 		for (Publish ski : skill) {

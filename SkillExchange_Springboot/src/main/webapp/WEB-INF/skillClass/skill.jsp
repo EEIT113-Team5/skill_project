@@ -212,8 +212,7 @@
 		var strAry = pubtime.split('T');
 		console.log(strAry);
         document.getElementById("time321").innerHTML = '543';
-    })(); */
-    $(function(){
+    })(); */    $(function(){
 	    var len = 11; // Pubulish Detail超過40個字以"..."取代
 	    $(".time321").each(function(i){
 	        if($(this).text().length>len){
@@ -223,6 +222,7 @@
 	        }
 	    });
 	});
+
 		
 	function collection(publishNo,status,mebNo) {
 		console.log(mebNo);

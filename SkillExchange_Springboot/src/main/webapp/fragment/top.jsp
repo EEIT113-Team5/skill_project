@@ -78,14 +78,36 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> 技能類別 </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="${jspPath}/query?class=all">全部</a>
-							<a class="dropdown-item" href="${jspPath}/query?class=才藝">才藝</a>
-							<a class="dropdown-item" href="${jspPath}/query?class=運動">運動</a>
-							<a class="dropdown-item" href="${jspPath}/query?class=語言">語言</a>
-							<a class="dropdown-item" href="${jspPath}/query?class=寵物">寵物</a>
-							<a class="dropdown-item" href="${jspPath}/query?class=生活">生活</a>
+							<c:choose>
+						<c:when test="${empty memberBean}">
+						
+								<a class="dropdown-item" href="${jspPath}/query?class=all">全部</a> <a
+									class="dropdown-item" href="${jspPath}/query?class=才藝">才藝</a> <a
+									class="dropdown-item" href="${jspPath}/query?class=運動">運動</a> <a
+									class="dropdown-item" href="${jspPath}/query?class=語言">語言</a> <a
+									class="dropdown-item" href="${jspPath}/query?class=寵物">寵物</a> <a
+									class="dropdown-item" href="${jspPath}/query?class=生活">生活</a>
+								
+							
+						</c:when>
+						
+						<c:otherwise>
+							
+								
+								<a class="dropdown-item" href="${jspPath}/query2?class=all">全部</a> <a
+									class="dropdown-item" href="${jspPath}/query2?class=才藝">才藝</a> <a
+									class="dropdown-item" href="${jspPath}/query2?class=運動">運動</a> <a
+									class="dropdown-item" href="${jspPath}/query2?class=語言">語言</a> <a
+									class="dropdown-item" href="${jspPath}/query2?class=寵物">寵物</a> <a
+									class="dropdown-item" href="${jspPath}/query2?class=生活">生活</a>
+								
+							
+						</c:otherwise>
+						
+					</c:choose>
 
-						</div></li>
+						</div>
+					</li>
 
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
