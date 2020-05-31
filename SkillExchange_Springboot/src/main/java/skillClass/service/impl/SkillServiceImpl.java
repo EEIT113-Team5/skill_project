@@ -1,5 +1,6 @@
 package skillClass.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,9 @@ public class SkillServiceImpl implements SkillService {
 		return skillDao.CTRUpdate(PublishNo);
 	}
 	
+//	@Override
+//	public boolean LogUpdate(Integer sendNo,Integer receiveNo,String sendUser,String toUser) {
+//		
+//		return skillDao.LogUpdate(sendNo,receiveNo,sendUser,toUser);
+//	}
 }

@@ -55,7 +55,7 @@ function onError(evt) {
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function sendMessage_skill(sendUser,sendTo,pic1) {
+function sendMessage_skill(sendUser,sendTo,sendUser2,sendTo2,pic1) {
 	var inputMessage = document.getElementById("textmssg");
 	var message = inputMessage.value.trim();
 
@@ -66,10 +66,12 @@ function sendMessage_skill(sendUser,sendTo,pic1) {
 	} else {
 		var inputMessage = document.getElementById("textmssg");
 		var message = inputMessage.value.trim();
-
+		console.log(sendUser2);
 		var jsonMsg = {
 			"sendUser" : sendUser,
 			"toUser" : sendTo,
+			"sendUserNo" : sendUser2,
+			"toUserNo" : sendTo2,	
 			"message" : message,
 			"pic" : pic1
 		}

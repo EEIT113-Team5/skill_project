@@ -266,7 +266,7 @@ width:40%
 								<div class="input-group-append">
 								
 									<span id="sendmss" class="input-group-text send_btn"
-										onclick="sendMessage_skill('${sendUser}','${sendTo}','${pic2}')"><i
+										onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}')"><i
 										class="fas fa-location-arrow"></i></span>
 								</div>
 							</div>

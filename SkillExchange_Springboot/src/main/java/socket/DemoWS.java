@@ -2,14 +2,16 @@ package socket;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
+import javax.annotation.PostConstruct;
 import javax.websocket.CloseReason;
-import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -17,11 +19,23 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import net.sf.json.JSONObject;
+import skillClass.dao.SkillDao;
+import skillClass.model.Chat;
 
+
+
+@Component
 @ServerEndpoint("/DemoWS/{sendUser}")
 public class DemoWS {
+
+	
+
+//	ApplicationContext appCtx = SpringUtils.getApplicationContext();
+//	public  SkillService Scc = SpringUtils.getBean(SkillService.class);
+	
 	private static final Set<Session> connectedSessions = Collections.synchronizedSet(new HashSet<>());
 	// 用户在線數
 	private static int onLineCount = 0;
@@ -34,8 +48,17 @@ public class DemoWS {
 	// 從client送來
 	private String sendUser;// 當前用戶訊息
 	private String toUser;// 接收人
+	private Integer sendNo;// 發出訊息會員編號
+	private Integer receiveNo;// 接收訊息會員編號
 	private String message;// 聊天信息
 	private String pic;//聊天圖片
+	@Autowired
+	private SkillDao Dao; 
+    public static DemoWS DemoWS;
+    @PostConstruct
+    public void init() {
+    	DemoWS = this;
+    }
 	@OnOpen
 	public void onOpen(@PathParam("sendUser") String sendUser, Session userSession) throws IOException {
 		connectedSessions.add(userSession); // client連線時將連線session放入set內儲存
@@ -52,7 +75,7 @@ public class DemoWS {
 			//如何隔離不同房間
 			if (Demows.session.isOpen()) {
 			    
-				Demows.sendMessage("null", "count", getOnlineCount() + "");
+				Demows.sendMessage("null", "count", getOnlineCount() + "",receiveNo);
 			}
 		}
 
@@ -64,6 +87,8 @@ public class DemoWS {
 		// 收到訊息時 message
 		// 在此可以做分流比如說room number
 		JSONObject jsonOject = JSONObject.fromObject(jsonMsg);
+		sendNo = Integer.parseInt(jsonOject.getString("sendUserNo"));
+		receiveNo = Integer.parseInt(jsonOject.getString("toUserNo"));
 		sendUser = jsonOject.getString("sendUser");
 		toUser = jsonOject.getString("toUser");
 		pic = jsonOject.getString("pic");
@@ -73,22 +98,25 @@ public class DemoWS {
 		try {
 			String img = null;			
 			img = pic;
-			
-			Date date = new Date();
-		    SimpleDateFormat ft = new SimpleDateFormat ("yyyy'年'MM'月'dd'日' a HH:mm");
+			LocalDateTime currentTime = LocalDateTime.now();		
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");		   
 			String msg = "<div class='d-flex justify-content-end mb-4'><div class='timetip'><div class='msg_cotainer'>" + message
-					+ "<span class='timetiplefttext'>"+ft.format(date)+"</span></div></div></div>";
+					+ "<span class='timetiplefttext'>"+dtf.format(currentTime)+"</span></div></div></div>";
 //		    System.out.println(msg);
 
 			if (user != null) {
 				if (user.session.isOpen()) {
-					user.sendMessage(img, "send", message);
+					
+					user.sendMessage(img, "send", message,sendNo);
 				} 
 			} else {
 				System.out.println("信息存到數據庫");
-			}
-			;
+			};
 			userSession.getAsyncRemote().sendText(msg);
+			
+			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg,currentTime);
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,7 +134,7 @@ public class DemoWS {
 			// 使用if判断是要统计人数还是发送消息
 			try {
 				if (Demows.session.isOpen()) {
-					Demows.sendMessage("null", "count", getOnlineCount() + "");
+					Demows.sendMessage("null", "count", getOnlineCount() + "",receiveNo);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -121,17 +149,26 @@ public class DemoWS {
 		System.out.println("Error: " + e.toString());
 	}
 
-	public void sendMessage(String img, String type, String message) throws IOException {
+	public void sendMessage(String img, String type, String message,Integer sendNo) throws IOException {
 		if (type.equals("count")) {
 
 			this.session.getAsyncRemote().sendText("count:" + message);// 在jsp判断是否包含count
 
 		} else {
-			Date date = new Date();
-		    SimpleDateFormat ft = new SimpleDateFormat ("yyyy'年'MM'月'dd'日' a HH:mm");
+			LocalDateTime currentTime = LocalDateTime.now();		
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");	
 			String msg1 = "<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src=" + img
 					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
-					+ "<span class='timetiptext'>"+ft.format(date)+"</span></div></div></div>";
+					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
+			
+//			List<Chat> history = DemoWS.Dao.LogQuery(receiveNo);
+//			System.out.println(history);
+//			for (Chat chat : history) {
+//					String hmsg = chat.getChatLog();
+//					this.session.getAsyncRemote().sendText(hmsg);
+//				};
+//			
+			
 			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
 
 			// this.session.getAsyncRemote().sendText(message);//提供非阻塞式的消息传输方式。
@@ -153,5 +190,8 @@ public class DemoWS {
 	public static synchronized void subOnlineCount() {
 		DemoWS.onLineCount--;
 	}
+	  
+
+
 
 }
