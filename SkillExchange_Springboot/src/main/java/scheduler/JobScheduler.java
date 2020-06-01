@@ -25,7 +25,7 @@ public class JobScheduler {
 		Trigger trigger = TriggerBuilder.newTrigger()
 				.withIdentity("myTrigger")
 //				.withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 37 16 * * ?"))
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 58 16 * * ?"))
 				.build();
 		
 		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();

@@ -14,12 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import skillClass.model.Publish;
 
 import java.sql.Date;
 
+@Component
 @Entity
 @Table(name = "member")
 public class MemberBean implements Serializable {

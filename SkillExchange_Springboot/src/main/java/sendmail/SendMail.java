@@ -21,9 +21,19 @@ public class SendMail {
 	private String email;
 	private String subject;
 	private String mailContent;
-	
+	private String hideEmail;
+
 	public void sendMail() throws MessagingException {
-		
+		try {
+			if (subject == null) {
+				throw new Exception("subject cannot null");
+			} else if (email == null && hideEmail == null) {
+				throw new Exception("hideEmail and mail cannot both null");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "smtp");
 		props.setProperty("mail.host", "smtp.gmail.com");
@@ -40,15 +50,19 @@ public class SendMail {
 
 		MimeMessage message = new MimeMessage(mailSession);
 		message.setSubject(subject);
-		message.setContent(mailContent,contentType);
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+		message.setContent(mailContent, contentType);
+		if (email != null) {
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+		}
+		if (hideEmail != null) {
+			message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(hideEmail));
+		}
 
 		transport.connect();
-		transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+		transport.sendMessage(message, message.getAllRecipients());
 		transport.close();
 
 	}
-
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
@@ -64,5 +78,9 @@ public class SendMail {
 
 	public void setMailContent(String mailContent) {
 		this.mailContent = mailContent;
+	}
+
+	public void setHideEmail(String hideEmail) {
+		this.hideEmail = hideEmail;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 public class MailContent {
 	private String insertContactMail;
 	private String replyContactMail;
+	private String activityMail;
 	private String contactUser;
 	private String content;
 	private String replyContent;
@@ -227,6 +228,11 @@ public class MailContent {
 				"</table>" + 
 				"";
 		return replyContactMail;
+	}
+
+	public String getActivityMail() {
+		String activityMail = "";
+		return activityMail;
 	}
 
 
