@@ -1,5 +1,6 @@
 package comment.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -11,7 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "webusercomment")
-public class CommentBean {
+public class CommentBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public String toString() {
 		return "CommentBean [commentNo=" + commentNo + ", commentorNo=" + commentorNo + ", memberName=" + memberName

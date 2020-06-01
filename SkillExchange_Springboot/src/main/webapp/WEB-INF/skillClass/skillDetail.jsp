@@ -240,31 +240,76 @@ h6 {
 
 		<div id="right">
 			<div style="background-color: pink; width: auto; margin: 10px auto">
+				<c:choose>
+					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+						<table>
+							<tbody>
+
+								<c:forEach var='data' varStatus='var' items='${reqchat}'>
+									<tr>
+										<td>${data.reqid}</td>
+										<td id="requestid${var.index}">${data.sendNo}</td>
+										<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
+										<td><img id="requestPic${var.index}"
+											class="rounded-circle user_img" height="250px" width="350px"
+											src='${data.sendNomember.memberPic}' /></td>
+										<td style="width: 180px"><button class="btn btn-primary"
+												onclick="connect_skillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+
+					</c:when>
+					<c:otherwise>
+						<div class="card-body">
+							<h4 class="card-title" id='sendto'>關於我:</h4>
+							<br>
+							<h5>擁有的技能:${memberski}</h5>
+							<h5>居住區域:${sessionScope.memberBean.memberCountry}
+								${sessionScope.memberBean.memberAddr}</h5>
+							<h5>Email:${sessionScope.memberBean.memberMail}</h5>
+							<div class="card-text"></div>
+							<button id="disabled" class="btn btn-primary"
+								onclick="connect_skill('${sendUser}','${sendTo}')">發送訊息</button>
+						</div>
 
 
-				<div class="card-body">
-					<h4 class="card-title" id='sendto'>關於我:</h4>
-					<br>
-					<h5>擁有的技能:${memberski}</h5>
-					<h5>居住區域:${sessionScope.memberBean.memberCountry}
-						${sessionScope.memberBean.memberAddr}</h5>
-					<h5>Email:${sessionScope.memberBean.memberMail}</h5>
-					<div class="card-text"></div>
-					<button id="disabled" class="btn btn-primary"
-						onclick="connect_skill('${sendUser}','${sendTo}')">發送訊息</button>
-				</div>
+					</c:otherwise>
+				</c:choose>
+
 
 				<div id="catalog">
 					<div class="card">
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="${pic1}" class="rounded-circle user_img"> <span
-										id="on" class="online_icon"></span> <span id="off"
+									<c:choose>
+										<c:when
+											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+											<img src="" id="user_img1" class="rounded-circle user_img"
+												height="250px" width="350px">
+										</c:when>
+										<c:otherwise>
+											<img src="${pic1}" class="rounded-circle user_img">
+										</c:otherwise>
+									</c:choose>
+
+									<span id="on" class="online_icon"></span> <span id="off"
 										class="offline" style="display: none"></span>
 								</div>
 								<div class="user_info">
-									<span>${sendTo}</span>
+									<c:choose>
+										<c:when
+											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+											<span id="user_name1"></span>
+										</c:when>
+										<c:otherwise>
+											<span>${sendTo}</span>
+
+
+										</c:otherwise>
+									</c:choose>
 
 								</div>
 								<div class="video_cam">
@@ -294,10 +339,19 @@ h6 {
 								<textarea name="" class="form-control type_msg" id="textmssg"
 									placeholder="Type your message..."></textarea>
 								<div class="input-group-append">
-
-									<span id="sendmss" class="input-group-text send_btn"
-										onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}')"><i
-										class="fas fa-location-arrow"></i></span>
+									<c:choose>
+										<c:when
+											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+											<span id="sendmss" class="input-group-text send_btn"
+												onclick="sendMessage_skillowner()"><i
+												class="fas fa-location-arrow"></i></span>
+										</c:when>
+										<c:otherwise>
+											<span id="sendmss" class="input-group-text send_btn"
+												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}')"><i
+												class="fas fa-location-arrow"></i></span>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>
@@ -437,7 +491,108 @@ h6 {
 	<script src="jstemp/script.js"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
 	<script src="jstemp/script.js"></script>
+
+	<script>
+	var arrindex;
+    function connect_skillowner(sendUser, sendTo, index) {
+    	
+    	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
+    			+ sendUser;
+    	document.getElementById("catalog").style.display = 'block';
+    	output = document.getElementById("output");
+    	arrindex = index;
+    	$("#user_img1").attr("src",$("#requestPic"+index).attr("src"));
+    	$("#user_name1").text($("#requestNic"+index).text());
+    	
+    	// create a websocket
+    	console.log(sendUser);
+    	console.log(endPointURL);
+    	webSocket = new WebSocket(endPointURL);
+    	console.log("conn");
+    	webSocket.onopen = function(event) {
+    		onOpen(event)
+    	};
+
+    	webSocket.onmessage = function(event) {
+    		onMessage(event)
+    	};
+
+    	webSocket.onclose = function(event) {
+    		onClose(event)
+    	};
+    	webSocket.onerror = function(event) {
+    		onError(event)
+    	};
+    	// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    	window.onbeforeunload = function() {
+    		webSocket.close();
+    	}
+    }
+    <%-- 							${reqchat[0].receiveNomember.memberNic}','${reqchat[0].sendNomember.memberNic}','${reqchat[0].receiveNomember.memberRegNo}','${reqchat[0].sendNomember.memberRegNo}','${reqchat[0].receiveNomember.memberPic} --%>
+    function sendMessage_skillowner() {
+    	var inputMessage = document.getElementById("textmssg");
+    	var message = inputMessage.value.trim();
+
+    	if (message === "") {
+    		inputMessage.value = "";
+    		inputMessage.focus();
+    	} else {
+    		var inputMessage = document.getElementById("textmssg");
+    		var message = inputMessage.value.trim();
+//     		console.log(sendUser2);
+    		var jsonMsg = {
+    			"sendUser" : "${memberBean.memberNic}",
+    			"toUser" : $("#requestNic"+arrindex).text(),
+    			"sendUserNo" :${memberBean.memberRegNo},
+    			"toUserNo" : $("#requestid"+arrindex).text(),
+    			"message" : message,
+    			"pic" : "${memberBean.memberPic}"
+    		}
+    		console.log(jsonMsg);
+    		webSocket.send(JSON.stringify(jsonMsg)); // !!!! 送留言到endpoint
+
+    		inputMessage.value = "";
+    		inputMessage.focus();
+    	}
+    }
+
+
+
+
+    </script>
+
+
+
 	<script src="js/websocket1by1.js"></script>
+
+	<script>
+function insertRequest(sendNo, recieveNo,  skillId){
+	var sendNo=sendNo;
+	var recieveNo=recieveNo;
+	var skillId=skillId;
+	$.ajax({
+		url : "InsertchatReq", // 請求的url地址
+		dataType : "json", // 返回格式為json
+		async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特性
+		type : "GET", // 請求方式
+		data : {
+			"sendUser" : sendNo,
+			"sendTo" : recieveNo,
+			"skillId" : skillId
+		},
+		success : function(req) {
+			console.log(req);
+		},
+		complete : function() {
+			// 請求完成的處理
+		},
+		error : function() {
+			console.log("出錯了!")
+		}
+	})
+}
+
+</script>
 
 	<!-- ---------------------要加的部份-------------------- -->
 
