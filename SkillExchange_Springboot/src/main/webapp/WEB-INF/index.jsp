@@ -129,10 +129,6 @@
 }
 
 .wrap-level6 {
-	width: 9.75%;
-}
-
-.wrap-level7 {
 	width: 80%;
 	margin-top: 12px;
 	margin-left: 8px;
@@ -169,8 +165,7 @@
 }
 
 .last-btn {
-	width: 75%;
-	height: 80%;
+	width: 8%;
 	margin: 6px auto;
 	/*  	border: 1px solid gray; */
 }
@@ -206,7 +201,7 @@
 
 .li-bg0 {
 	background-color: #FFFFFF !important;
-	cursor: default;2
+	cursor: default;
 }
 
 .li-bg1 {
@@ -218,15 +213,33 @@
 	list-style: none;
 }
 
-.active{
+.active {
 	background-color: #FFFFFF !important;
 	cursor: default;
+}
+
+.active2 {
+	/* 	background-color: #FFFFFF !important; */
+	cursor: default !important;
+}
+
+.disabled{
+	checked: checked;
 }
 
 .li-bg2 {
 	width: 100%;
 	height: 25%;
 	background-color: #F0F0F0;
+	border-bottom: 1px solid #E0E0E0;
+	cursor: pointer;
+	list-style: none;
+}
+
+.li-bg3 {
+	width: 100%;
+	height: 25%;
+	background-color: #FFFFFF;
 	border-bottom: 1px solid #E0E0E0;
 	cursor: pointer;
 	list-style: none;
@@ -260,7 +273,6 @@
 .ctl-area1 {
 	height: 100%;
 }
-
 
 .ctl-area2, .ctl-area3, .ctl-area4 {
 	height: 100%;
@@ -327,9 +339,8 @@
 							<div class="wrap-level5 search-btn">地區</div>
 						</button>
 						<!-- Area Modal -->
-						<div class="modal fade" id="areaModal" tabindex="-1"
-							role="dialog" aria-labelledby="areaModalLabel"
-							aria-hidden="true">
+						<div class="modal fade" id="areaModal" tabindex="-1" role="dialog"
+							aria-labelledby="areaModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -344,7 +355,7 @@
 										<div id="cityList" class="input-group-prepend list-level2"></div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
+										<button id="areaClick" type="button" class="btn btn-secondary"
 											data-dismiss="modal">確定</button>
 									</div>
 								</div>
@@ -352,7 +363,7 @@
 						</div>
 						<div class="div-bar"></div>
 						<!-- Skill Button trigger modal -->
-						<button id="iarea"
+						<button id="iskill"
 							class="input-group-append wrap-level3 searchbar-bgcolor"
 							data-toggle="modal" data-target="#skillModal">
 							<div class="wrap-level5 search-btn">技能類別</div>
@@ -365,8 +376,8 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<h6 class="modal-title title" id="skillModalTitle">技能類別選單</h6>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
+										<button id="skillClick" type="button" class="close"
+											data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
@@ -381,16 +392,35 @@
 								</div>
 							</div>
 						</div>
-<!-- 						<form method="GET" action=""> -->
-						
-<!-- 						</form> -->
-						<div class="input-group-append wrap-level6">
-							<button type="submit" class="btn btn-secondary btn-sm last-btn">
-								<i class="fa fa-search"></i>搜尋
-							</button>
-						</div>
+						<form method="GET" action="<c:url value='InsertKeyword1.do' />">
+							<div id="container">
+								<input type="hidden" id="keyword" name="keyword" value="">
+								<input type="hidden" id="area-1" name="area-1" value="">
+								<input type="hidden" id="area-2" name="area-2" value="">
+								<input type="hidden" id="area-3" name="area-3" value="">
+								<input type="hidden" id="area-4" name="area-4" value="">
+								<input type="hidden" id="city-1" name="city-1" value="">
+								<input type="hidden" id="city-2" name="city-2" value="">
+								<input type="hidden" id="city-3" name="city-3" value="">
+								<input type="hidden" id="city-4" name="city-4" value="">
+								<input type="hidden" id="city-5" name="city-5" value="">
+								<input type="hidden" id="type-1" name="type-1" value="">
+								<input type="hidden" id="type-2" name="type-2" value="">
+								<input type="hidden" id="type-3" name="type-3" value="">
+								<input type="hidden" id="type-4" name="type-4" value="">
+								<input type="hidden" id="type-5" name="type-5" value="">
+								<input type="hidden" id="skill-1" name="skill-1" value="">
+								<input type="hidden" id="skill-2" name="skill-2" value="">
+								<input type="hidden" id="skill-3" name="skill-3" value="">
+								<input type="hidden" id="skill-4" name="skill-4" value="">
+								<input type="hidden" id="skill-5" name="skill-5" value="">
+							</div>
+						</form>
+						<button type="submit" class="btn btn-secondary btn-sm last-btn">
+							<i class="fa fa-search"></i>搜尋
+						</button>
 					</div>
-					<div class="wrap-level7">
+					<div class="wrap-level6">
 						<div class="k1">熱門關鍵字：</div>
 						<div id='insert-keyword' class="k1"></div>
 					</div>
@@ -487,58 +517,57 @@
 		$('#areaModal').on('shown.bs.modal', function() {
 			$('#areaModal').modal('show');
 		})
-		
+
 		$('#skillModal').on('shown.bs.modal', function() {
 			$('#skillModal').modal('show');
 		})
-		
 	</script>
-	
+
 	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='GetTopKeyword.do' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					// 					console.log(JSON.parse(xhr.responseText));
+					var arr = JSON.parse(xhr.responseText);
+					// 					console.log(arr[0][0][0]);
+					// 					console.log(arr[0][1][0]);
+					var content = "";
+					for (var x = 0; x < 5; x++) {
+						// 						console.log(arr[0][x][0]);
+						var str = "<c:url value='InsertKeyword1.do?keyword="
+								+ arr[0][x][0] + "' />";
+						content += "<li class='k1 k2'><a href='" + str + "'>"
+								+ arr[0][x][0] + "</a></li>"
+								+ "<div class='div-bar2 k1'></div>";
+					}
+					content = content.substring(0, content.length - 32);
+					document.getElementById("insert-keyword").innerHTML = content;
+				}
+			}
+		}
+	</script>
+
+	<script>
+		var btn1 = document.getElementById("iarea");
+		btn1.onclick = function() {
 			var xhr1 = new XMLHttpRequest();
-			xhr1.open("GET", "<c:url value='GetTopKeyword.do' />", true);
+			xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
 			xhr1.send();
 			xhr1.onreadystatechange = function() {
 				if (xhr1.readyState == 4) {
 					if (xhr1.status == 200) {
-						console.log(JSON.parse(xhr1.responseText));
+						// 						console.log(JSON.parse(xhr1.responseText));
 						var arr = JSON.parse(xhr1.responseText);
-						console.log(arr[0][0][0]);
-						console.log(arr[0][1][0]);
-						var content = "";
-						for (var x = 0; x < 5; x++) {
-							console.log(arr[0][x][0]);
-							var str = "<c:url value='InsertKeyword1.do?keyword=" + arr[0][x][0] + "' />";
-							content += "<li class='k1 k2'><a href='" + str + "'>"
-									+ arr[0][x][0]
-									+ "</a></li>"
-									+ "<div class='div-bar2 k1'></div>";
-						}
-						content = content.substring(0, content.length - 32);
-						document.getElementById("insert-keyword").innerHTML = content;
-					}
-				}
-			}
-	</script>
-	
-	<script>
-	var btn = document.getElementById("iarea");
-	btn.onclick = function() {
-			var xhr2 = new XMLHttpRequest();
-			xhr2.open("GET", "<c:url value='GetIndexBtn.do' />", true);
-			xhr2.send();
-			xhr2.onreadystatechange = function() {
-				if (xhr2.readyState == 4) {
-					if (xhr2.status == 200) {
-						console.log(JSON.parse(xhr2.responseText));
-						var arr = JSON.parse(xhr2.responseText);
-						console.log(arr[0][0].publishAreaCN);
+						// 						console.log(arr[0][0].publishAreaCN);
 						// 						-> for showing area A<-
 						var contentA = "<div class='div-list1'>";
 						contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
 								+ arr[0][0].publishAreaCN
 								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						
+
 						for (var i = 1; i < arr[0].length; i++) {
 							contentA += "<li class='li-bg1'><div class='li-div li-div1'>"
 									+ arr[0][i].publishAreaCN
@@ -548,45 +577,22 @@
 						document.getElementById("areaList").innerHTML = contentA;
 						// 						-> for showing area-city B<-
 						var contentB = "";
-						for (var i = 0; i < arr[0].length; i++){
-							contentB += "<div class='ctl-area" + (i+1)+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>" + arr[0][i].publishAreaCN +"</div></li></div>";
+						for (var i = 0; i < arr[0].length; i++) {
+							contentB += "<div class='ctl-area"
+									+ (i + 1)
+									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>"
+									+ arr[0][i].publishAreaCN
+									+ "</div></li></div>";
 							contentB += "<div class='div-list2'>";
-							for (var j = 0; j < arr[1].length; j++){
-								if(arr[0][i].publishAreaCN == arr[1][j].publishAreaCN){
-									contentB += "<li class='li-bg2'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
+							for (var j = 0; j < arr[1].length; j++) {
+								if (arr[0][i].publishAreaCN == arr[1][j].publishAreaCN) {
+									contentB += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
 											+ arr[1][j].cityCN + "</div></li>";
 								}
 							}
 							contentB += "</div></div>";
 						}
 						document.getElementById("cityList").innerHTML = contentB;
-// 						-> for showing skillType C <-
-						var contentC = "<div class='div-list1'>";
-						contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
-								+ arr[2][0]
-								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-								
-						for(var m = 1; m < arr[2].length; m++){
-							contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
-									+ arr[2][m]
-									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						}
-						contentC += "</div>";
-						document.getElementById("skillL1List").innerHTML = contentC;
-// 						-> for showing skills D<-
-						var contentD1 = "";
-						for (var m = 0; m < arr[2].length; m++){
-							contentD1 += "<div class='ctl-type" + (m+1) +"'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"+ arr[2][m] +"</div></li></div>";
-							contentD1 += "<div class='div-list2'>";
-							for (var n = 0; n < arr[3].length; n++){
-								if(arr[2][m] == arr[3][n].typeCN){
-								contentD1 += "<li class='li-bg2'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
-										+ arr[3][n].skillNameCN + "</div></li>";
-								}
-							}
-							contentD1 += "</div></div>";
-						}
-						document.getElementById("skillL2List").innerHTML = contentD1;
 					}
 				}
 			}
@@ -594,45 +600,126 @@
 	</script>
 
 	<script>
-		$(document).on({
-			mouseenter : function() {
-				$(this).css("background-color", "#FFB5B5");
-			},
-			mouseleave : function() {
-				$(this).css("background-color", "#F0F0F0");
-			},
-			click : function() {
-				$(this).addClass('active').siblings().removeClass('active li-bg0');
-				i = $(this).index();
-				console.log(i);
-				$("#cityList").children().eq(i).slideDown({
-					duration: 10,
-				}).siblings().slideUp({
-					duration: 10,
-				});
+		var btn2 = document.getElementById("iskill");
+		btn2.onclick = function() {
+			var xhr2 = new XMLHttpRequest();
+			xhr2.open("GET", "<c:url value='GetIndexBtn.do' />", true);
+			xhr2.send();
+			xhr2.onreadystatechange = function() {
+				if (xhr2.readyState == 4) {
+					if (xhr2.status == 200) {
+						// 						console.log(JSON.parse(xhr2.responseText));
+						var arr = JSON.parse(xhr2.responseText);
+						// 						console.log(arr[0][0].publishAreaCN);
+						// 						-> for showing skillType C <-
+						var contentC = "<div class='div-list1'>";
+						contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
+								+ arr[2][0]
+								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+
+						for (var m = 1; m < arr[2].length; m++) {
+							contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
+									+ arr[2][m]
+									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+						}
+						contentC += "</div>";
+						document.getElementById("skillL1List").innerHTML = contentC;
+						// 						-> for showing skills D<-
+						var contentD = "";
+						for (var m = 0; m < arr[2].length; m++) {
+							contentD += "<div class='ctl-type"
+									+ (m + 1)
+									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"
+									+ arr[2][m] + "</div></li></div>";
+							contentD += "<div class='div-list2'>";
+							for (var n = 0; n < arr[3].length; n++) {
+								if (arr[2][m] == arr[3][n].typeCN) {
+									contentD += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
+											+ arr[3][n].skillNameCN
+											+ "</div></li>";
+								}
+							}
+							contentD += "</div></div>";
+						}
+						document.getElementById("skillL2List").innerHTML = contentD;
+					}
+				}
 			}
-		}, ".li-bg1");
+		}
+	</script>
+
+	<script>
+		$(document).on(
+				{
+					mouseenter : function() {
+						$(this).css("background-color", "#FFB5B5");
+					},
+					mouseleave : function() {
+						$(this).css("background-color", "#F0F0F0");
+					},
+					click : function() {
+						$(this).addClass('active').siblings().removeClass(
+								'active li-bg0');
+						i = $(this).index();
+						// 						console.log(i);
+						$("#cityList").children().eq(i).slideDown({
+							duration : 10,
+						}).siblings().slideUp({
+							duration : 10,
+						});
+					}
+				}, ".li-bg1");
+	</script>
+
+	<script>
+		$(document).on(
+				{
+					mouseenter : function() {
+						$(this).css("background-color", "#FFB5B5");
+					},
+					mouseleave : function() {
+						$(this).css("background-color", "#F0F0F0");
+					},
+					click : function() {
+						$(this).addClass('active').siblings().removeClass(
+								'active li-bg0');
+						i = $(this).index();
+// 						console.log(i);
+						$("#skillL2List").children().eq(i).slideDown({
+							duration : 10,
+						}).siblings().slideUp({
+							duration : 10,
+						});
+					}
+				}, ".li-bg1");
 	</script>
 	
+<!-- 	<script> -->
+<!-- 		$(document).on("toggle", ".li-bg2:checkbox", function(){ -->
+<!-- 			$(this).parent("div").addClass("disabled"); -->
+<!-- 		}) -->
+<!-- 	</script> -->
+
+	<!-- 	<script> -->
+	<!-- 		$(document).on("toggle", ".li-bg3", function() { -->
+	<!-- 			$(this).addClass('active2'); -->
+	<!-- 		}, function() { -->
+	<!-- 			$(this).removeClass('active2'); -->
+	<!-- 		}) -->
+	<!-- 	</script> -->
+
 	<script>
-	$(document).on({
-		mouseenter : function() {
-			$(this).css("background-color", "#FFB5B5");
-		},
-		mouseleave : function() {
-			$(this).css("background-color", "#F0F0F0");
-		},
-		click : function() {
-			$(this).addClass('active').siblings().removeClass('active li-bg0');
-			i = $(this).index();
-			console.log(i);
-			$("#skillL2List").children().eq(i).slideDown({
-				duration: 10,
-			}).siblings().slideUp({
-				duration: 10,
-			});
+		var btn3 = document.getElementById("areaClick");
+		btn3.onclick = function() {
+			console.log($("#cityList >div div:first-child input:checkbox:checked")); //抓區域
+			console.log($("#cityList >div div:last-child input:checkbox:checked"));
+// 			console.log($("#cityList div:first-child div:last-child input:checkbox:checked")); //抓城市
+			
+// 			for(var i = 0; i < $("#cityList").children().length; i++){
+// 				console.log($("#cityList").children().length);
+// 			}
+// 			console.log($("#cityList:eq(" + i + ") div:first input:checkbox:checked"));
 		}
-	}, ".li-bg1");
 	</script>
 
 </body>
