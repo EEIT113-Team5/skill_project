@@ -73,7 +73,7 @@
 	position: absolute;
 	bottom: 0px;
 }
-
+.card-img-top{ cursor: pointer; }
 </style>
 </head>
 
@@ -111,35 +111,42 @@
 								</c:forEach>
 							</c:if>
 							<div class="col-sm-4 mt-3">
-							<div class="card" style="width: 90%; height: 650px">
+							<div class="card" style="width: 90%; height: 700px">
 											
 								<div>
-									<img src="${skills.member.memberPic}" class="collectImg"/>${skills.member.memberNic}
-									
-									<span class="time321" style="float: right; margin-top: 10px">${skills.updateTime}</span>
+									<span>
+									<img src="${skills.member.memberPic}" style="width: 70px; height: 70px;margin-left:12px; margin-top: 5px" class="collectImg"/>
+									${skills.member.memberNic}
+									</span>
+									<span class="time321" style="float: right; margin-top: 5px">${skills.updateTime}</span>
 								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'"
-									style="margin-bottom: 10px; margin-top: 20px">
-									<h3 class="JQellipsis2">${skills.publishTitle}</h3>
-								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">
-									<img src="${skills.publishPic}" height="60%" width="80%" />
-								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'"
-									class="detail">
-									<p class="JQellipsis">${skills.publishDetail}</p>
-								</div>
-
-								<div class="bot">
-								<div class="sb-nav-link-icon" style="margin-bottom: 15px" >
-									<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
-								</div>
-								<div class="sb-nav-link-icon" style="margin-bottom: 15px">
-									<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
-									晚上7時至10時
-								</div>
+															
+							<div class="card"  style="height:460px;margin:10px" onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">
 								
-									<span style="margin-left: 135px"> 
+								<img class="card-img-top" style="height:75%"src="${skills.publishPic}" alt="Card image cap"/>
+								<div class="card-body">
+									<div style="margin-bottom: 7px;">
+										<h3 class="JQellipsis2">${skills.publishTitle}</h3>
+									</div>
+									<div class="detail">
+										<h6 style="margin-bottom: 7px; class="JQellipsis">${skills.publishDetail}</h6>
+									</div>
+								
+								</div>
+							</div>
+								
+								
+								
+								<div class="bot" style="margin-left: 15px">
+									<div class="sb-nav-link-icon" style="margin-bottom: 15px" >
+										<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
+									</div>
+									<div class="sb-nav-link-icon" style="margin-bottom: 15px">
+										<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
+										晚上7時至10時
+									</div>
+								
+									<span style="margin-left: 120px"> 
 									<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
@@ -185,7 +192,7 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-		</table>
+	
 			
 		<!-- ---------------------要加的部份-------------------- -->
 		
