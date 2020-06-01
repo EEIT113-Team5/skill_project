@@ -2,7 +2,7 @@ var MyPoint = "/DemoWS";
 var host = window.location.host;
 // console.log(host);
 var path = window.location.pathname;
-// console.log(path);
+
 var webCtx = path.substring(0, path.indexOf('/', 1));
 // console.log(webCtx);
 
@@ -13,12 +13,13 @@ var webSocket;
 //
 function connect_skill(sendUser, sendTo) {
 	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
-			+ sendUser;
+			+ sendUser+ "/"+sendTo;
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
 
 	// create a websocket
 	console.log(sendUser);
+	console.log(sendTo);
 	console.log(endPointURL);
 	webSocket = new WebSocket(endPointURL);
 	console.log("conn");

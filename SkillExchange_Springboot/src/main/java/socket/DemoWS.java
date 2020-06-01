@@ -28,7 +28,7 @@ import skillClass.model.Chat;
 
 
 @Component
-@ServerEndpoint("/DemoWS/{sendUser}")
+@ServerEndpoint("/DemoWS/{sendUser}/{sendTo}")
 public class DemoWS {
 
 	
@@ -47,7 +47,7 @@ public class DemoWS {
 
 	// 從client送來
 	private String sendUser="";// 當前用戶訊息
-	private String toUser;// 接收人
+	private String toUser="";// 接收人
 	private Integer sendNo;// 發出訊息會員編號
 	private Integer receiveNo;// 接收訊息會員編號
 	private String message;// 聊天信息
@@ -62,13 +62,15 @@ public class DemoWS {
     	DemoWS = this;
     }
 	@OnOpen
-	public void onOpen(@PathParam("sendUser") String sendUser, Session userSession) throws IOException {
+	public void onOpen(@PathParam("sendUser") String sendUser,@PathParam("sendTo") String sendTo, Session userSession) throws IOException {
 		connectedSessions.add(userSession); // client連線時將連線session放入set內儲存
-		String text = String.format("Session ID = %s, 當前session = %s, 使用者User= %s, connected;", userSession.getId(),userSession.hashCode(), sendUser );
+		String text = String.format("Session ID = %s, 當前session = %s, 使用者User= %s,對方User= %s, connected;", userSession.getId(),userSession.hashCode(), sendUser, sendTo);
 		this.sendUser = sendUser;
+		this.toUser = sendTo;
 		this.session = userSession;
+		
 		addOnlineCount();
-		List<Chat> history = DemoWS.Dao.LogQuery(sendUser);
+		List<Chat> history = DemoWS.Dao.LogQuery(sendTo,sendUser);
 		
 		if(CollectionUtils.isEmpty(history)) {
 			this.session.getAsyncRemote().sendText("沒有歷史紀錄");
@@ -85,7 +87,7 @@ public class DemoWS {
 					String hmsg2=hmsg.toString();
 				this.session.getAsyncRemote().sendText(hmsg2);							
 		}
-		
+		System.out.println("這是對面:"+sendTo);
 		System.out.println("有新連接加入！當前在線人數為" + getOnlineCount());
 		System.out.println(text);
 		webSocketMap.put(sendUser, this);// 當前用户的websocket
@@ -140,7 +142,9 @@ public class DemoWS {
 			
 			System.out.println("保存訊息到資料庫");
 			userSession.getAsyncRemote().sendText(msg);
-			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);
+			System.out.println("發出訊息者:"+sendUser+"收到訊息者:"+toUser);
+			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg,currentTime);
+			DemoWS.Dao.LogUpdate(receiveNo,sendNo,toUser,sendUser,msg1,currentTime);
 			
 			
 			
@@ -188,9 +192,9 @@ public class DemoWS {
 					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
 					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
 			System.out.println("sendmess:");
-//			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg1,currentTime);			
+						
 			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
-
+			
 			// this.session.getAsyncRemote().sendText(message);//提供非阻塞式的消息传输方式。
 		}
 
