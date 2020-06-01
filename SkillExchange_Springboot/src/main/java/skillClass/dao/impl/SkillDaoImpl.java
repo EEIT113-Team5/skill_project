@@ -15,102 +15,105 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
+import members.Model.MemberBean;
 import skillClass.dao.SkillDao;
 import skillClass.model.Chat;
+import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
-
 
 @Transactional
 @Repository
 public class SkillDaoImpl implements SkillDao {
 	SessionFactory factory;
-	
-	
+
 	@Autowired
 	public void setFactory(SessionFactory factory) {
-		this.factory=factory;		
+		this.factory = factory;
 	}
-	
-	public SkillDaoImpl() {}
-	
-	
+
+	public SkillDaoImpl() {
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Publish> skillQuery(String skillType) {
-		
-		String hql  = "from Publish P join fetch P.member WHERE P.skillType = :skillType order by UpdateTime DESC";
+
+		String hql = "from Publish P join fetch P.member WHERE P.skillType = :skillType order by UpdateTime DESC";
 		Session session = getSession();
-		Query<Publish> query =session.createQuery(hql);
-		query.setParameter("skillType",skillType);
+		Query<Publish> query = session.createQuery(hql);
+		query.setParameter("skillType", skillType);
 		return query.list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Publish> detailQuery(Integer PublishNo) {
-		
-		String hql  = "from Publish P join fetch P.member WHERE P.publishNo = :publishNo";
+
+		String hql = "from Publish P join fetch P.member WHERE P.publishNo = :publishNo";
 		Session session = getSession();
-		Query<Publish> query =session.createQuery(hql).setParameter("publishNo",PublishNo);
+		Query<Publish> query = session.createQuery(hql).setParameter("publishNo", PublishNo);
 		return query.list();
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Publish> allskill() {
-		
-		String hql  = "from Publish P join fetch P.member order by UpdateTime DESC";
+
+		String hql = "from Publish P join fetch P.member order by UpdateTime DESC";
 		Session session = getSession();
-		List<Publish> list =session.createQuery(hql).getResultList();
+		List<Publish> list = session.createQuery(hql).getResultList();
 		return list;
 	}
-	@Override	
-	public List<Chat> LogQuery(String sendUser){
+
+	@Override
+	public List<Chat> LogQuery(String sendUser) {
 		System.out.println("觸發logquery");
-		
-		String hql  = "from Chat C WHERE C.toUser = :toUser order by LogTime ASC";
+
+		String hql = "from Chat C WHERE C.toUser = :toUser order by LogTime ASC";
 		Session session = getSession();
 		@SuppressWarnings("unchecked")
-		Query<Chat> query =session.createQuery(hql).setParameter("toUser",sendUser);
-		
+		Query<Chat> query = session.createQuery(hql).setParameter("toUser", sendUser);
+
 		System.out.println(query.list());
-		
-		if(CollectionUtils.isEmpty(query.list())) {
-				
+
+		if (CollectionUtils.isEmpty(query.list())) {
+
 			System.out.println("no data");
-			
+
 			return null;
-		}
-		else {	
+		} else {
 			System.out.println("had data");
 			return query.list();
-	
+
 		}
 	}
-	@Override	
+
+	@Override
 	public boolean CTRUpdate(Integer PublishNo) {
-		String hql=" update Publish P set P.publishCTR=publishCTR+1 where P.publishNo=:publishNo";
+		String hql = " update Publish P set P.publishCTR=publishCTR+1 where P.publishNo=:publishNo";
 		Session session = getSession();
 		@SuppressWarnings("rawtypes")
-		Query query = session.createQuery(hql).setParameter("publishNo",PublishNo );
+		Query query = session.createQuery(hql).setParameter("publishNo", PublishNo);
 		query.executeUpdate();
 		return true;
-	}	
-	@Override	
-	public boolean LogUpdate(Integer sendNo,Integer receiveNo,String sendUser,String toUser,String ChatLog,LocalDateTime LogTime) {
+	}
+
+	@Override
+	public boolean LogUpdate(Integer sendNo, Integer receiveNo, String sendUser, String toUser, String ChatLog,
+			LocalDateTime LogTime) {
 //		String hql="insert into Chat(sendNo, receiveNo, sendUser,toUser,ChatLog,LogTime) "+
 //		    "select sendNo, receiveNo, sendUser,toUser,ChatLog,LogTime from Chat";
-		System.out.println("呼叫Log方法");		
+		System.out.println("呼叫Log方法");
 //		String hql="update Chat set sendNo=? , receiveNo=? , sendUser=? , toUser=? , chatLog=? , logTime=?";
 		Session session = getSession();
-		Chat log=new Chat();
+		Chat log = new Chat();
 		log.setSendNo(sendNo);
 		log.setReceiveNo(receiveNo);
 		log.setSendUser(sendUser);
 		log.setToUser(toUser);
 		log.setChatLog(ChatLog);
 		log.setLogTime(LogTime);
-	      
+
 		session.save(log);
 //		Query query = session.createQuery(hql);		
 //		query.setParameter("sendNo",sendNo );
@@ -120,12 +123,43 @@ public class SkillDaoImpl implements SkillDao {
 //		query.setParameter("chatLog",ChatLog );
 //		query.setParameter("logTime",LogTime );
 //		query.executeUpdate();
-		
-		System.out.println(sendNo+sendUser+receiveNo+toUser);
+
+		System.out.println(sendNo + sendUser + receiveNo + toUser);
 		return true;
 	}
-	
+
+	// 對話框
+	@Override
+	public ChatRequest InsertChatReq(ChatRequest cr) {
+		Query query = getSession().createQuery(
+				"select m from ChatRequest m where m.sendNo = :sendNo and m.receiveNo = :receiveNo and m.publishNo = :publishNo");
+		query.setParameter("sendNo", cr.getSendNo());
+		query.setParameter("receiveNo", cr.getReceiveNo());
+		query.setParameter("publishNo", cr.getPublishNo());
+		System.out.println(cr.getSendNo() + "@@@@" + cr.getReceiveNo() + "@@@@" + cr.getPublishNo());
+		List<ChatRequest> ChatRequestList = query.list();
+		if (ChatRequestList.isEmpty()) {
+			getSession().save(cr);
+			return cr;
+		}
+
+		return cr;
+	}
+
+	@Override
+	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo) {
+		Query query = getSession()
+				.createQuery("select m from ChatRequest m where m.receiveNo = :receiveNo and m.publishNo = :publishNo");
+		query.setParameter("receiveNo", receiveNo);
+		query.setParameter("publishNo", publishNo);
+		List<ChatRequest> ChatRequestList = query.list();
+		return ChatRequestList;
+	}
+
+//		return cr;
+//	}
+
 	public Session getSession() {
-        return factory.getCurrentSession();			
+		return factory.getCurrentSession();
 	}
 }

@@ -134,14 +134,14 @@
 									
 									<span class="time321" style="float: right; margin-top: 10px">${skills.updateTime}</span>
 								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}'"
+								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'"
 									style="margin-bottom: 10px; margin-top: 20px">
 									<h3 class="JQellipsis2">${skills.publishTitle}</h3>
 								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}'">
-									<img src="${skills.publishPic}" height="280px" width="500px" />
+								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">
+									<img src="${skills.publishPic}" height="60%" width="80%" />
 								</div>
-								<div onclick="location.href='publish?num=${skills.publishNo}'"
+								<div onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'"
 									class="detail">
 									<p class="JQellipsis">${skills.publishDetail}</p>
 								</div>

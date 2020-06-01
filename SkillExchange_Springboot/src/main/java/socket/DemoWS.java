@@ -90,14 +90,14 @@ public class DemoWS {
 		System.out.println(text);
 		webSocketMap.put(sendUser, this);// 當前用户的websocket
 		// 刷新在線人數
-		for (DemoWS Demows : webSocketMap.values()) {
-			// 使用if判断是要统计人数还是发送消息
-			//如何隔離不同房間
-			if (Demows.session.isOpen()) {
-			    
-				Demows.sendMessage("null", "count", getOnlineCount() + "");
-			}
-		}
+//		for (DemoWS Demows : webSocketMap.values()) {
+//			// 使用if判断是要统计人数还是发送消息
+//			//如何隔離不同房間
+//			if (Demows.session.isOpen()) {
+//			    
+//				Demows.sendMessage("null", "count", getOnlineCount() + "");
+//			}
+//		}
 
 		
 	}
@@ -157,17 +157,17 @@ public class DemoWS {
 		String text = String.format("session ID = %s, disconnected; close code = %d; reason phrase = %s",
 				userSession.getId(), reason.getCloseCode().getCode(), reason.getReasonPhrase());
 		subOnlineCount();
-		for (DemoWS Demows : webSocketMap.values()) {
-			// 使用if判断是要统计人数还是发送消息
-			try {
-				if (Demows.session.isOpen()) {
-					Demows.sendMessage("null", "count", getOnlineCount() + "");
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		for (DemoWS Demows : webSocketMap.values()) {
+//			// 使用if判断是要统计人数还是发送消息
+//			try {
+//				if (Demows.session.isOpen()) {
+//					Demows.sendMessage("null", "count", getOnlineCount() + "");
+//				}
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		System.out.println(text);
 	}
 

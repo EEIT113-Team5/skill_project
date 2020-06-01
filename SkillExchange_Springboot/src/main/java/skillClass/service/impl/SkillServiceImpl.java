@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skillClass.dao.SkillDao;
+import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
 import skillClass.service.SkillService;
 
@@ -35,6 +36,20 @@ public class SkillServiceImpl implements SkillService {
 	@Override
 	public boolean CTRUpdate(Integer PublishNo) {
 		return skillDao.CTRUpdate(PublishNo);
+	}
+
+	
+	//對話框
+	@Override
+	public ChatRequest InsertChatReq(ChatRequest cr) {
+		// TODO Auto-generated method stub
+		return skillDao.InsertChatReq(cr);
+	}
+
+	@Override
+	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo) {
+		// TODO Auto-generated method stub
+		return skillDao.selectChatReq(receiveNo, publishNo);
 	}
 	
 //	@Override

@@ -6,15 +6,17 @@ var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
 // console.log(webCtx);
 
-
-
 var statusOutput = document.getElementById("statusOutput");
 var webSocket;
+// 新加
 
-function connect_skill(sendUser,sendTo) {
-	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint+"/"+sendUser;
+//
+function connect_skill(sendUser, sendTo) {
+	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
+			+ sendUser;
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
+
 	// create a websocket
 	console.log(sendUser);
 	console.log(endPointURL);
@@ -39,8 +41,10 @@ function connect_skill(sendUser,sendTo) {
 		webSocket.close();
 	}
 }
+
+
 function onOpen(evt) { // 連線時觸發
-	
+
 	console.log("open");
 }
 function onMessage(evt) { // 收到訊息時觸發
@@ -56,11 +60,10 @@ function onError(evt) {
 	writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function sendMessage_skill(sendUser,sendTo,sendUser2,sendTo2,pic1) {
+function sendMessage_skill(sendUser, sendTo, sendUser2, sendTo2, pic1) {
 	var inputMessage = document.getElementById("textmssg");
 	var message = inputMessage.value.trim();
 
-	
 	if (message === "") {
 		inputMessage.value = "";
 		inputMessage.focus();
@@ -72,7 +75,7 @@ function sendMessage_skill(sendUser,sendTo,sendUser2,sendTo2,pic1) {
 			"sendUser" : sendUser,
 			"toUser" : sendTo,
 			"sendUserNo" : sendUser2,
-			"toUserNo" : sendTo2,	
+			"toUserNo" : sendTo2,
 			"message" : message,
 			"pic" : pic1
 		}
@@ -84,6 +87,9 @@ function sendMessage_skill(sendUser,sendTo,sendUser2,sendTo2,pic1) {
 	}
 }
 
+//
+
+//
 function disconnect() {
 	webSocket.close();
 }
@@ -91,18 +97,18 @@ function disconnect() {
 var cardbody = document.getElementById("cardbody");
 function writeToScreen(message) {
 	console.log(message)
-	if(message.indexOf("count:")!=-1){
-		if(message.split(":")[1]==1){
-			$("#on").css("display","none");
-			 $("#off").css("display","inline");
-			message="<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方已離線<br></p>";
+	if (message.indexOf("count:") != -1) {
+		if (message.split(":")[1] == 1) {
+			$("#on").css("display", "none");
+			$("#off").css("display", "inline");
+			message = "<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方已離線<br></p>";
 		} else {
-			$("#on").css("display","inline");
-			 $("#off").css("display","none");
-			message="<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方正在線上<br></p>";
+			$("#on").css("display", "inline");
+			$("#off").css("display", "none");
+			message = "<p style='background-color:#ddd' class='rounded-lg text-center text-secondary py-2'>對方正在線上<br></p>";
 		}
 	}
 	cardbody.innerHTML += message;
-	
+
 }
 // window.addEventListener("load", init, false);
