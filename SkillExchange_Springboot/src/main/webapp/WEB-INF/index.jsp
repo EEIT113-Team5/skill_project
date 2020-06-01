@@ -223,7 +223,7 @@
 	cursor: default !important;
 }
 
-.disabled{
+.disabled {
 	checked: checked;
 }
 
@@ -240,6 +240,15 @@
 	width: 100%;
 	height: 25%;
 	background-color: #FFFFFF;
+	border-bottom: 1px solid #E0E0E0;
+	cursor: pointer;
+	list-style: none;
+}
+
+.li-bg3:hover {
+	width: 100%;
+	height: 25%;
+	background-color: #FFB5B5;
 	border-bottom: 1px solid #E0E0E0;
 	cursor: pointer;
 	list-style: none;
@@ -684,7 +693,7 @@
 						$(this).addClass('active').siblings().removeClass(
 								'active li-bg0');
 						i = $(this).index();
-// 						console.log(i);
+						// 						console.log(i);
 						$("#skillL2List").children().eq(i).slideDown({
 							duration : 10,
 						}).siblings().slideUp({
@@ -693,12 +702,12 @@
 					}
 				}, ".li-bg1");
 	</script>
-	
-<!-- 	<script> -->
-<!-- 		$(document).on("toggle", ".li-bg2:checkbox", function(){ -->
-<!-- 			$(this).parent("div").addClass("disabled"); -->
-<!-- 		}) -->
-<!-- 	</script> -->
+
+	<!-- 	<script> -->
+	<!-- 		$(document).on("toggle", ".li-bg2:checkbox", function(){ -->
+	<!-- 			$(this).parent("div").addClass("disabled"); -->
+	<!-- 		}) -->
+	<!-- 	</script> -->
 
 	<!-- 	<script> -->
 	<!-- 		$(document).on("toggle", ".li-bg3", function() { -->
@@ -709,16 +718,108 @@
 	<!-- 	</script> -->
 
 	<script>
+		var north = [ "基隆", "台北", "新北", "桃園", "新竹" ];
+		var middle = [ "苗栗", "台中", "彰化", "南投", "雲林" ];
+		var south = [ "嘉義", "台南", "高雄", "屏東" ];
+		var east = [ "台東", "花蓮", "宜蘭" ];
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="北部"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < north.length; i++) {
+							$('.checkbox-input[value*="' + north[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < north.length; i++) {
+							$('.checkbox-input[value*="' + north[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="中部"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < middle.length; i++) {
+							$('.checkbox-input[value*="' + middle[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < middle.length; i++) {
+							$('.checkbox-input[value*="' + middle[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="東部"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < east.length; i++) {
+							$('.checkbox-input[value*="' + east[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < east.length; i++) {
+							$('.checkbox-input[value*="' + east[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="南部"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < south.length; i++) {
+							$('.checkbox-input[value*="' + south[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < south.length; i++) {
+							$('.checkbox-input[value*="' + south[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+	</script>
+
+	<script>
 		var btn3 = document.getElementById("areaClick");
 		btn3.onclick = function() {
-			console.log($("#cityList >div div:first-child input:checkbox:checked")); //抓區域
-			console.log($("#cityList >div div:last-child input:checkbox:checked"));
-// 			console.log($("#cityList div:first-child div:last-child input:checkbox:checked")); //抓城市
-			
-// 			for(var i = 0; i < $("#cityList").children().length; i++){
-// 				console.log($("#cityList").children().length);
-// 			}
-// 			console.log($("#cityList:eq(" + i + ") div:first input:checkbox:checked"));
+			console.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
+			var list = $("#cityList >div div:first-child input:checkbox:checked");
+			//console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
+			var m = 1;
+			var n = 1;
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].value.includes("部")) {
+					var id1 = "area-" + m;
+					var A = document.getElementById(id1);
+					A.value = list[i].value;
+					m++;
+				} else {
+					var id2 = "city-" + n;
+					var B = document.getElementById(id2);
+					B.value = list[i].value;
+					n++;
+				}
+			}
 		}
 	</script>
 
