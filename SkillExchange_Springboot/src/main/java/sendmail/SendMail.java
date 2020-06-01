@@ -33,6 +33,7 @@ public class SendMail {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("====sending email====");
 
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "smtp");

@@ -6,12 +6,13 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import activity.bean.ActivityBean;
 import activity.service.ActivityService;
 import contactUs.service.MailContent;
 import exchange.init.ApplicationContextHelper;
-import members.Model.MemberBean;
 import sendmail.ActivityMailDao;
 import sendmail.SendMail;
 
@@ -32,7 +33,7 @@ public class SendActivityMailJob implements Job {
 					String mailString = dao.getAllMembersEmail();
 
 					mail.setHideEmail(mailString);
-					mail.setSubject("test");
+					mail.setSubject("新活動通知~趕快來參加！");
 					mail.setMailContent("testmail");
 					mail.sendMail();
 					
