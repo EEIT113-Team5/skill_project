@@ -39,13 +39,10 @@ public class RegisterServlet extends HttpServlet {
 	HttpSession httpSession;
 	@Autowired
 	RegisterService service;
-	
 	@Autowired
 	CheckMailService mailService;
 	@Autowired
 	MemberDao memberDao;
-	
-	
 	
 	@GetMapping(value = "/goUse")
 	public String goUse(HttpServletRequest request,
@@ -96,10 +93,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		return "index";
 	}
-	
-	
-	
-	
+
 	@GetMapping(value = "/registerInit")
 	public String registerInit(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -164,7 +158,7 @@ public class RegisterServlet extends HttpServlet {
 		String infoSource = request.getParameter("infoSource");
 		
 		// 讀取使用者所輸入，由瀏覽器送來的 memberPic 欄位內的資料
-//		String memberPic = request.getParameter("memberPic");
+		// String memberPic = request.getParameter("memberPic");
 		
 		//進行必要的資料轉換
 		java.sql.Date dateB = null;
@@ -217,14 +211,11 @@ public class RegisterServlet extends HttpServlet {
 		if (memberPhone == null || memberPhone.trim().length() == 0) {
 			errorMsg.put("memberPhone", "(電話欄必須輸入)");
 		}
-		
 		if (!errorMsg.isEmpty()) {
 //			RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
 //			rd.forward(request, response);
 			return "members/register";
 		}
-		
-		
 		try {
 			// MemberBean mbean = service.checkEmail(memberMail);
 			boolean emailRegistered = service.emailIsRegistered(memberMail);
@@ -261,12 +252,11 @@ public class RegisterServlet extends HttpServlet {
 //			checkBean.getCaptcha();
 			
 			// 2
-			
-			//取得驗證碼
+			//取得驗證碼 
 			String newCaptcha = mailService.getNewCaptcha();
-			//把驗證碼塞到Bean
+			//驗證碼發送日期
 			java.sql.Timestamp sendTime = new Timestamp(System.currentTimeMillis());
-			
+			//驗證碼期限
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(sendTime);
 			cal.add(Calendar.DAY_OF_WEEK, 1);
@@ -274,9 +264,9 @@ public class RegisterServlet extends HttpServlet {
 			/* or 
 			 dateLine.setTime(cal.getTime().getTime()); 
 			 */
-			
+			//把驗證碼塞到Bean
 			CheckMailBean checkBean = new CheckMailBean (null, memberMail, newCaptcha, "N", sendTime, dateLine);
-			//儲存
+			//儲存到資料庫
 			mailService.saveCheckMail(checkBean);
 			//寄發驗證碼
 			mailService.sendCaptchaMail(checkBean);
@@ -289,11 +279,10 @@ public class RegisterServlet extends HttpServlet {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+		return "members/login";
 //		response.sendRedirect(request.getContextPath()+"/index.jsp");
-		return "index";
 	}
 
-	
 }
 		
 		

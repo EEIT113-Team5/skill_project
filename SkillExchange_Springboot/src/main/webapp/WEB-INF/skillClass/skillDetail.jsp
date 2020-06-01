@@ -271,7 +271,7 @@ h6 {
 							<h5>Email:${sessionScope.memberBean.memberMail}</h5>
 							<div class="card-text"></div>
 							<button id="disabled" class="btn btn-primary"
-								onclick="connect_skill('${sendUser}','${sendTo}')">發送訊息</button>
+								onclick="connect_skill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息</button>
 						</div>
 
 

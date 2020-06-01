@@ -79,7 +79,7 @@
 <!-- ---------------------要加的部份-------------------- -->
 <body id="body" background="./images/pattern2.jpg">
 	<jsp:include page="/fragment/top1.jsp" />
-
+	<jsp:include page="/fragment/modal.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -314,8 +314,9 @@
                      
 
                       <div style="text-align: center;" class="input-group-addon">
-                        <input type="submit" value="送出" class="btn btn-success"> <input type="reset"
-                            value="清除" class="btn btn-danger"></div>
+                        <input type="submit" value="送出" class="btn btn-success">
+                        <input type="reset"  value="清除" class="btn btn-danger"></div>
+						
                     </div>
                     <div style="text-align: center;">
                         <a href="loginInit">已經有帳戶，我要登入</a>
@@ -324,6 +325,11 @@
                             
                         </p>
                     </div>
+<!--                     一鍵加入會員按鈕 -->
+                    <div><input type="button" onclick='oneKey()' value=".&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp." 
+                    class="btn" ></div>
 
                     </form>
                   </div><!---modal-body--->
@@ -334,16 +340,7 @@
     <script type="text/javascript">
     
     </script>
-
-<!-- 	卉加 -->
-
-
-
-
-
-
-
-
+    
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
@@ -388,8 +385,7 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 	<script src="pluginstemp/google-map/gmap.js"></script>
 
-	<!-- 	<!-- Form Validation -->
-	-->
+	<!-- Form Validation -->
 	<script src="pluginstemp/form-validation/jquery.form.js"></script>
 	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>
 
@@ -410,6 +406,20 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+<!--一鍵加入會員 這裡 -->
+	<script>
+		function oneKey() {
+			$("#name").val("楊一元");
+			$("#nicname").val("幾摳");
+			$("#acc").val("happy");
+			$("#pwd").val("1qazxsw2");
+			$("#checkpwd").val("1qazxsw2");
+			$("#phone").val("0912345678");
+			$("#mail").val("shuhuei727@gmail.com");
+			$("#addr").val("台北市杉樹區北森花路6巷5號");
+		}
+	</script>
+<!--一鍵加入會員 這裡 -->
 	
 </body>
 

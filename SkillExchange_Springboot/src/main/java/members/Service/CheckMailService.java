@@ -46,7 +46,6 @@ public class CheckMailService {
 		int stringLength = (int) (Math.random()*10);
 		
 		//再利用 for 迴圈就可以生成一條長度為10以內的隨機字串
-		
 		for (int j = 0; j < stringLength; j++  ) {
 			
 			//利用其中的 nextInt(str.length) 方法生成一個隨機數。
@@ -73,16 +72,16 @@ public class CheckMailService {
 		return mbDao.saveCheckMail(checkBean);
 	}
 	
+	//寄發驗證信
 	public void sendCaptchaMail(CheckMailBean checkBean) throws MessagingException {
 		String subject = "感謝您加入會員，請點選驗證碼，即可加入成功！";
-		String mailContent = "感謝您加入會員，請點選下列網址進行驗證，即可加入成功！<br>"
+		String mailContent = "請點選下列網址進行驗證，即可加入成功！SkillExchange團隊  感謝您加入會員！<br>"
 				+ "http://localhost:8080/SkillExchange_Springboot/goUse?numer=" + checkBean.getCaptcha() + "&op=" + checkBean.getCheckMailNo();
 
 		sendMail.setSubject(subject);
 		sendMail.setMailContent(mailContent);
 		sendMail.setEmail(checkBean.getMemberMail());
 		sendMail.sendMail();
-
 	}
 	
 	public CheckMailBean selectCheckMailBeanByCaptcha(String captcha, Integer checkMailNo)  {
@@ -93,7 +92,8 @@ public class CheckMailService {
 	public void updateStatus(String captcha, Integer checkMailNo) throws SQLException, ParseException {
 		mbDao.updateStatus(captcha, checkMailNo);
 	}
-	
+}	
+
 	/*
 	public boolean checkCaptcha(String captcha)  {
 		boolean statusIsN = false;
@@ -109,4 +109,3 @@ public class CheckMailService {
 		return statusIsN;
 	}
 	*/
-}
