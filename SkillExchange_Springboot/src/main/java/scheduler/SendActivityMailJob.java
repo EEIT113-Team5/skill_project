@@ -13,8 +13,8 @@ import activity.bean.ActivityBean;
 import activity.service.ActivityService;
 import contactUs.service.MailContent;
 import exchange.init.ApplicationContextHelper;
-import sendmail.ActivityMailDao;
 import sendmail.SendMail;
+import sendmail.model.ActivityMailDao;
 
 @Component
 public class SendActivityMailJob implements Job {
@@ -23,11 +23,10 @@ public class SendActivityMailJob implements Job {
 	@Override
 	public void execute(JobExecutionContext jobContext) throws JobExecutionException {
 		try {
-			ActivityService aService = ApplicationContextHelper.getBean(ActivityService.class);
 			SendMail mail = ApplicationContextHelper.getBean(SendMail.class);
 			MailContent content = ApplicationContextHelper.getBean(MailContent.class);
 			ActivityMailDao dao = ApplicationContextHelper.getBean(ActivityMailDao.class);
-			List<ActivityBean> aBean = aService.getAllActivityYesterday();
+			List<ActivityBean> aBean = dao.getAllActivityYesterday();
 			if (aBean.size() > 0) {
 				for (ActivityBean bean : aBean) {
 					String mailString = dao.getAllMembersEmail();

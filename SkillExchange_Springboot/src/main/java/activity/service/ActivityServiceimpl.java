@@ -172,8 +172,4 @@ public class ActivityServiceimpl implements ActivityService {
 		return null;
 	}
 
-	@Override
-	public List<ActivityBean> getAllActivityYesterday() {
-		return ac.getAllActivityYesterday();
-	}
 }

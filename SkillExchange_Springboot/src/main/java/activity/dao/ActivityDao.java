@@ -23,8 +23,6 @@ public interface ActivityDao {
 	boolean insert(ActivityBean ab);
 
 	List<ActivityBean> getAllActivity();
-	
-	List<ActivityBean> getAllActivityYesterday();
 
 	List<ActivityBean> getActivityClass(String name);
 

@@ -26,8 +26,6 @@ public interface ActivityService {
 	int updateMyOwnSpecificActivity(ActivityBean ab);
 
 	List<ActivityBean> getAllActivity();
-	
-	List<ActivityBean> getAllActivityYesterday();
 
 	List<ActivityBean> getActivityClass(String name);
 

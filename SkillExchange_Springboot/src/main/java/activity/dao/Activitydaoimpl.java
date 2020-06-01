@@ -229,11 +229,5 @@ public class Activitydaoimpl implements ActivityDao {
 		
 	}
 
-	@Override
-	public List<ActivityBean> getAllActivityYesterday() {
-		String hql = "from ActivityBean AB where convert(date,AB.insertime,112)= convert(date,GETDATE()-1,112)";
-		Query query = getSession().createQuery(hql);
-		List<ActivityBean> list = query.list();
-		return list;
-	}
+
 }

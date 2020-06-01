@@ -1,4 +1,4 @@
-package sendmail;
+package sendmail.model;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import activity.bean.ActivityBean;
 import members.Model.MemberBean;
 
 @Repository
@@ -37,6 +38,14 @@ public class ActivityMailDaoImpl implements ActivityMailDao {
 		emailList = mails.deleteCharAt(mails.length()-1).toString();
 		System.out.println(emailList);
 		return emailList;
+	}
+	
+	@Override
+	public List<ActivityBean> getAllActivityYesterday() {
+		String hql = "from ActivityBean AB where convert(date,AB.insertime,112)= convert(date,GETDATE()-1,112)";
+		Query query = getSession().createQuery(hql);
+		List<ActivityBean> list = query.list();
+		return list;
 	}
 
 }
