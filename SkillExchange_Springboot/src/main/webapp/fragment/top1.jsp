@@ -303,10 +303,18 @@
 	// 			console.log(message)
 	// 			cardbody.innerHTML += message;
 	// 		}
+	
 </script>
 <script>
 	$(document).ready(function() {
         window.onload=function(){
+        	var collectGNameNum = $('[id^="collectGName"]').length;
+        	for(let i=0;i<collectGNameNum;i++){
+        		groupName = $("#collectGName"+i).text().trim();
+        		if(groupName=='未分類'){
+        			$("#collectGName"+i).closest("div").next("div").hide();
+        			}
+        		}
 // 		$("#navbarbell").click(function() {
 			$.ajax({
 				url : "CallMessageAnn", // 請求的url地址

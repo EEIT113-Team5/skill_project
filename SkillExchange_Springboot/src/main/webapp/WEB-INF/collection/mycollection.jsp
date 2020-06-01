@@ -103,7 +103,7 @@ h1 {
 }
 </style>
 <script>
-window.onload=function(){
+
 	let group;
 	let groupName;
 	let groupNameText;
@@ -116,16 +116,10 @@ window.onload=function(){
 	let header;
 	let collectDetail;
 	let scrollPosition;
-	var collectGNameNum = $('[id^="collectGName"]').length;
-	for(let i=0;i<collectGNameNum;i++){
-		groupName = $("#collectGName"+i).text().trim();
-		if(groupName=='未分類'){
-			$("#collectGName"+i).closest("div").next("div").hide();
-			}
-		}
+
 	
 	
-}
+
 function buttonHide(){
 	titleBtns = $("body").find(".titleTableBtns");
 	titleBtns.hide();
@@ -222,6 +216,23 @@ function delDetail(collectNo,groupName){
 	
 }
 </script>
+<c:choose>
+		<c:when test="${not empty MsgOK}">
+			<script>
+        let message = "${MsgOK.updateOK}${MsgOK.delOK}${MsgOK.insertOK}";
+		$("#alertText").text(message);
+		$("#alertModal").modal('show');
+        
+    </script>
+		</c:when>
+		<c:when test="${not empty MsgMap}">
+			<script>
+        let message = "${MsgMap.updateError}${MsgMap.delError}";
+        $("#alertText").text(message);
+        $("#alertModal").modal('show');
+    </script>
+		</c:when>
+	</c:choose>
 </head>
 <body id="body">
 	<jsp:include page="/fragment/top1.jsp" />
@@ -330,24 +341,7 @@ function delDetail(collectNo,groupName){
 	<form>
 		<input type="hidden" name="a" />
 	</form>
-	<c:choose>
-		<c:when test="${not empty MsgOK}">
-			<script>
-        let message = "${MsgOK.updateOK}${MsgOK.delOK}${MsgOK.insertOK}";
-		$("#alertText").text(message);
-		$("#alertModal").modal('show');
-        
-    </script>
-		</c:when>
-		<c:when test="${not empty MsgMap}">
-			<script>
-        let message = "${MsgMap.updateError}${MsgMap.delError}";
-        $("#alertText").text(message);
-        $("#alertModal").modal('show');
-    </script>
-		</c:when>
-
-	</c:choose>
+	
 	<%
 		session.removeAttribute("MsgOK");
 	%>
