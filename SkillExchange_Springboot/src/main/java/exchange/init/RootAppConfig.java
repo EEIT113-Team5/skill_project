@@ -9,13 +9,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-
-import activity.function.GlobalService;
 
 @Configuration
 @EnableTransactionManagement
@@ -57,7 +57,7 @@ public class RootAppConfig {
 		// hibernate找sessionFactory掃描的package
 		factory.setPackagesToScan(new String[] { "activity.bean", "comment.bean", "myPublish.Model",
 				"publishCheckPage.Model", "publishPage.Model", "skillClass.model", "contactUs.model", "myCollection",
-				"skillClass.model", "members.Model", "messageboard", "search.model","messageAnn.model"});
+				"skillClass.model", "members.Model", "messageboard", "search.model", "messageAnn.model" });
 //		if (GlobalService.DB_TYPE == GlobalService.DB_TYPE_SQLSERVER) {
 		factory.setDataSource(sqlServerDataSource());
 		factory.setHibernateProperties(additionalPropertiesMsSQL());
@@ -75,6 +75,8 @@ public class RootAppConfig {
 		txManager.setSessionFactory(sessionFactory);
 		return txManager;
 	}
+
+
 
 //	private Properties additionalPropertiesMySQL() {
 //		Properties properties=new Properties(); 

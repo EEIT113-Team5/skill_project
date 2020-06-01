@@ -1,6 +1,7 @@
 package exchange.init;
 
 import javax.servlet.ServletContext;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -47,6 +47,11 @@ public class WebAppConfig implements WebMvcConfigurer {
 		resolver.setMaxUploadSize(81920000);
 		return resolver;
 	}
+	
+	@Bean
+	public ApplicationContextHelper applicationContextHelper() {
+		return new ApplicationContextHelper();
+	}
 
 //分派器如果找不到資源(css, 圖檔等等)會交給此default方法來找這些資源
 	@Override
@@ -69,4 +74,5 @@ public class WebAppConfig implements WebMvcConfigurer {
 		openSessionInViewInterceptor.setSessionFactory(sessionFactory);
 		registry.addWebRequestInterceptor(openSessionInViewInterceptor).addPathPatterns("/**");
 	}
+	
 }

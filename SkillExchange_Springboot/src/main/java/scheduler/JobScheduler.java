@@ -24,8 +24,8 @@ public class JobScheduler {
 //		每天上午10點觸發
 		Trigger trigger = TriggerBuilder.newTrigger()
 				.withIdentity("myTrigger")
-//				.withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 29 22 * * ?"))
+				.withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+//				.withSchedule(CronScheduleBuilder.cronSchedule("0 32 13 * * ?"))
 				.build();
 		
 		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
