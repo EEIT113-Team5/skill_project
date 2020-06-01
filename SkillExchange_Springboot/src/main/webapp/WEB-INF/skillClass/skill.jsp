@@ -64,22 +64,9 @@
 }
 
 
-
-.work {
-	position: relative;
-	float: left;
-	width: 31%;
-	height: 650px;
-	margin: 15px;
-
-	padding: 15px;
-	background-color: #FAFAFA;
-	border: 1px #171717 solid;
-}
-
 .detail {
-	margin-top: 20px;
-	height: 100px;
+	margin-top: 5px;
+	height: 50px;
 }
 
 .bot {
@@ -103,7 +90,6 @@
 		</div>
 	</section>
 	<div style="width:90%; margin:auto">
-		<table class="table table-hover">
 			<c:choose>
 				<c:when test="${empty allSkills}">
 					<tr height='36'>
@@ -112,7 +98,7 @@
 				</c:when>
 
 				<c:otherwise>
-					<div class="container1">
+					<div class="row">
 						<c:forEach var='skills' items='${allSkills}'>
 							<c:if test="${not empty memberBean}">
 
@@ -123,12 +109,10 @@
 										</c:if>
 									</c:forEach>
 								</c:forEach>
-
 							</c:if>
-							<div class="work">
-							
-							
-							
+							<div class="col-sm-4 mt-3">
+							<div class="card" style="width: 90%; height: 650px">
+											
 								<div>
 									<img src="${skills.member.memberPic}" class="collectImg"/>${skills.member.memberNic}
 									
@@ -146,8 +130,17 @@
 									<p class="JQellipsis">${skills.publishDetail}</p>
 								</div>
 
-								<div class="bot" style="margin-left: 135px">
-									<span> <c:choose>
+								<div class="bot">
+								<div class="sb-nav-link-icon" style="margin-bottom: 15px" >
+									<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
+								</div>
+								<div class="sb-nav-link-icon" style="margin-bottom: 15px">
+									<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
+									晚上7時至10時
+								</div>
+								
+									<span style="margin-left: 135px"> 
+									<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success btn-lg"
@@ -179,18 +172,12 @@
 										
 											<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary btn-lg"
-													onclick="location.href='publish?num=${skills.publishNo}'">發送訊息
+													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">發送訊息
 										    </button>
 																																	
-									</span>
-									
-								</div>
-								<div class="sb-nav-link-icon">
-									<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
-								</div>
-								<div class="sb-nav-link-icon">
-									<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
-									晚上7時至10時
+									</span>								
+								
+									</div>							
 								</div>
 							</div>
 

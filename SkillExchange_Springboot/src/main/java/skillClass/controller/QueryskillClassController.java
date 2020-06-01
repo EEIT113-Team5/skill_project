@@ -82,7 +82,13 @@ public class QueryskillClassController {
 	}
 	
 	@GetMapping("publish")
-	public String skillDetail(Model model, @RequestParam("num") Integer PublishNo,  @RequestParam("hostid") Integer hostid) {
+	public String skillDetail(Model model, @RequestParam("num") Integer PublishNo,  @RequestParam("hostid") Integer hostid,
+			@SessionAttribute("memberBean") MemberBean member) {
+		Integer memberRegNo = member.getMemberRegNo();	
+		Map<Long, String> collectionGroupsMap = service2.queryCollectionGroups(memberRegNo);	
+		Map<Integer, List<CollectionBean>> collectionsMap = service2.queryCollections(memberRegNo);	
+		model.addAttribute("collectionsMap", collectionsMap);	
+		model.addAttribute("collectionGroupsMap", collectionGroupsMap);
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");
 		List<Publish> skill = service.detailQuery(PublishNo);
 		//對話框
@@ -101,7 +107,7 @@ public class QueryskillClassController {
 	}
 	
 	// 對話框用
-	@GetMapping(value = "/InsertchatReq", produces = { "application/json" })
+	@GetMapping(value = "InsertchatReq", produces = { "application/json" })
 	public ResponseEntity<ChatRequest> InsertchatReq(Model model, @RequestParam("sendUser") Integer sendUser,
 			@RequestParam("sendTo") Integer sendTo, @RequestParam("skillId") Integer skillId) {
 		java.sql.Timestamp dateTime = new Timestamp(System.currentTimeMillis());
