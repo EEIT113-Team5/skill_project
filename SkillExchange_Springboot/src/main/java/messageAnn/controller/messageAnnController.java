@@ -53,7 +53,7 @@ public class messageAnnController {
 		
 		System.out.println("HEBE");
 		
-		System.out.println("222:"+messList.get(0).getAnntime());
+//		System.out.println("222:"+messList.get(0).getAnntime());
 		ResponseEntity<List<messageAnnBean>> re  = new ResponseEntity<>(messList, HttpStatus.OK);
   		return re;
 

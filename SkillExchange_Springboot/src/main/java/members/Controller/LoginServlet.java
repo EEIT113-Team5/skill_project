@@ -48,6 +48,31 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		return "members/login";
 	}
+	
+	@GetMapping(value = "/Googlelogin", produces = { "application/json" })
+	public ResponseEntity<Map<String, String>> Googlelogin(Model model, @RequestParam("email") String email,
+			@RequestParam("userid") String userid, @RequestParam("memberName") String memberName,
+			@RequestParam("memberPic") String memberPic)
+			throws ServletException, IOException, SQLException, ParseException, java.text.ParseException {
+		System.out.println(email);
+		System.out.println(userid);
+		System.out.println(memberName);
+		System.out.println(memberPic);
+		MemberBean mbean = null;
+		mbean = ls.checkIDPassword(userid, userid);
+		if (mbean == null) {
+			java.sql.Timestamp memberRegTime = new Timestamp(System.currentTimeMillis());
+			mbean = new MemberBean(userid, userid, memberName, memberName, email, memberRegTime, memberPic);
+			mbean.setAccStatus("1");
+			service.saveMember(mbean);
+		}
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("登入狀態", "登入Google成功");
+		model.addAttribute("memberBean", mbean);
+		System.out.println("hello@@@@@@@@");
+		ResponseEntity<Map<String, String>> re = new ResponseEntity<Map<String, String>>(map, HttpStatus.OK);
+		return re;
+	}
 
 	@GetMapping(value = "/Facebooklogin", produces = { "application/json" })
 	public ResponseEntity<Map<String, String>> FBlogin(Model model, @RequestParam("email") String email,

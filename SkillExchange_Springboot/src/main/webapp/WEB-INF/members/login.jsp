@@ -150,7 +150,9 @@
 									<button type="submit" class="btn btn-info">登入</button>
 									<!-- 											這裡 -->
 									<input type='button' class="btn btn-primary"
-										onclick='fbLogin()' value="FaceBook登入" />
+										onclick='fbLogin()' value="FaceBook登入" /> <input
+										type='button' class="btn btn-primary" onclick='googleSignIn()'
+										value="Google登入" />
 								</div>
 								<!-- 										這裡 -->
 							</div>
@@ -185,8 +187,8 @@
 		var str = "${pageContext.request.requestURL}";
 		console.log(str.length)
 		var strlength = str.length - 25;
-// 		console.log(strlength);
-// 		console.log(str.substr(0, strlength));
+		// 		console.log(strlength);
+		// 		console.log(str.substr(0, strlength));
 		var home = str.substr(0, strlength);
 		console.log(home);
 		window.fbAsyncInit = function() {
@@ -227,44 +229,110 @@
 
 		function statusChangeCallback(response) {
 			if (response.status === 'connected') {
-				FB
-						.api(
-								'/me?fields=id,name,picture,email',
-								function(response) {
-									// 					window.location.href="http://localhost:8085/skillExchange/Facebooklogin?email="+response.email+"&userid="+response.id+"&memberName="+response.name+"&memberPic="+response.picture.data.url;
-// 									var home = "${fn:substring(pageContext.request.requestURL, 0, 36)}";
-									var reqUrl = home + "Facebooklogin";
-									console.log(home);
-									console.log(reqUrl);
-									$
-											.ajax({
-												url : reqUrl, //請求的url地址
-												dataType : "json", //返回格式為json
-												async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
-												data : {
-													"email" : response.email,
-													"userid" : response.id,
-													"memberName" : response.name,
-													"memberPic" : response.picture.data.url
-												}, //引數值
-												type : "GET", //請求方式
-												success : function(req) {
-													console.log(req);
-													window.location.href = home;
-												},
-												complete : function() {
-													//請求完成的處理
-												},
-												error : function() {
-													console.log("出錯了!")
-												}
-											});
-								})
+				FB.api('/me?fields=id,name,picture,email', function(response) {
+					// 					window.location.href="http://localhost:8085/skillExchange/Facebooklogin?email="+response.email+"&userid="+response.id+"&memberName="+response.name+"&memberPic="+response.picture.data.url;
+					// 									var home = "${fn:substring(pageContext.request.requestURL, 0, 36)}";
+					var reqUrl = home + "Facebooklogin";
+					console.log(home);
+					console.log(reqUrl);
+					$.ajax({
+						url : reqUrl, //請求的url地址
+						dataType : "json", //返回格式為json
+						async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+						data : {
+							"email" : response.email,
+							"userid" : response.id,
+							"memberName" : response.name,
+							"memberPic" : response.picture.data.url
+						}, //引數值
+						type : "GET", //請求方式
+						success : function(req) {
+							console.log(req);
+							window.location.href = home;
+						},
+						complete : function() {
+							//請求完成的處理
+						},
+						error : function() {
+							console.log("出錯了!")
+						}
+					});
+				})
 			}
 		}
 	</script>
 
+	<!--     google -->
+	<script>
+		var GoogleAuth;
+		var SCOPE = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+		function handleClientLoad() {
+			gapi.load('client:auth2', initClient);
+		}
 
+		function initClient() {
+			var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+			gapi.client
+					.init({
+						// 				'apiKey' : 'YOUR_API_KEY',
+						'clientId' : '1091047644691-9n09ogl42pfjfqc5b6kfivumfodr2rgl.apps.googleusercontent.com',
+						'discoveryDocs' : [ discoveryUrl ],
+						'scope' : 'profile email openid'
+					});
+		}
+		function googleSignIn() {
+			gapi.auth2.getAuthInstance().signIn().then(function() {
+				updateSigninStatus();
+			})
+		}
+
+		function googleSignOut() {
+			gapi.auth2.getAuthInstance().signOut().then(function() {
+				updateSigninStatus();
+			})
+		}
+
+		function updateSigninStatus() {
+			if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+				var profile = gapi.auth2.getAuthInstance().currentUser.get()
+						.getBasicProfile();
+				console.log(profile);
+				console.log(profile.Eu);
+				var reqUrl1 = home + "Googlelogin";
+				console.log(home);
+				console.log(reqUrl1);
+				$.ajax({
+					url : reqUrl1, //請求的url地址
+					dataType : "json", //返回格式為json
+					async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+					data : {
+						"email" : profile.Eu,
+						"userid" : profile.bV,
+						"memberName" : profile.Bd,
+						"memberPic" : profile.iL
+					}, //引數值
+					type : "GET", //請求方式
+					success : function(req) {
+						console.log(req);
+						window.location.href = home;
+					},
+					complete : function() {
+						//請求完成的處理
+					},
+					error : function() {
+						console.log("出錯了!!!!!!!!!!!!!")
+					}
+				});
+
+			}
+		}
+	</script>
+
+	<script async defer src="https://apis.google.com/js/api.js"
+		onload="this.onload=function(){};handleClientLoad()"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+		
+	</script>
 	<!-- ---------------------要加的部份-------------------- -->
 	<!-- 
     Essential Scripts
@@ -297,7 +365,7 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
-	
+
 	<c:if test="${not empty MsgMap}">
 		<c:if test="${not empty MsgMap.LoginError}">
 			<script>
