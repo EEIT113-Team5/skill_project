@@ -50,6 +50,7 @@ function onOpen(evt) { // 連線時觸發
 function onMessage(evt) { // 收到訊息時觸發
 	console.log("mess");
 	writeToScreen(evt.data);
+	$(cardbody).scrollTop(99999);
 	// websocket.close();
 }
 function onClose(evt) { // 關閉連線時時觸發
@@ -63,7 +64,7 @@ function onError(evt) {
 function sendMessage_skill(sendUser, sendTo, sendUser2, sendTo2, pic1) {
 	var inputMessage = document.getElementById("textmssg");
 	var message = inputMessage.value.trim();
-
+	
 	if (message === "") {
 		inputMessage.value = "";
 		inputMessage.focus();
@@ -83,6 +84,7 @@ function sendMessage_skill(sendUser, sendTo, sendUser2, sendTo2, pic1) {
 		webSocket.send(JSON.stringify(jsonMsg)); // !!!! 送留言到endpoint
 
 		inputMessage.value = "";
+		$(cardbody).scrollTop(999);
 		inputMessage.focus();
 	}
 }
