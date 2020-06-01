@@ -139,7 +139,7 @@
 									<h3 class="JQellipsis2">${skills.publishTitle}</h3>
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'">
-									<img src="${skills.publishPic}" height="280px" width="500px" />
+									<img src="${skills.publishPic}" height="60%" width="80%" />
 								</div>
 								<div onclick="location.href='publish?num=${skills.publishNo}'"
 									class="detail">
