@@ -10,4 +10,5 @@ public interface imessageAnnService {
 	
 	List<messageAnnBean> callMessage(); 
 
+	List<messageAnnBean> msgAnnImfor(int msgid);
 }

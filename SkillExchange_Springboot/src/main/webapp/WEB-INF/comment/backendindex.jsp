@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+<script src="pluginstemp/jquery/jquery.min.js"></script>
 <script src="js/echarts.min.js"></script>
 <!-- e chart CDN -->
 <!-- e chart CDN -->
@@ -167,7 +168,6 @@
 		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
 		crossorigin="anonymous"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
-	<script src="pluginstemp/jquery/jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			window.onload = function() {

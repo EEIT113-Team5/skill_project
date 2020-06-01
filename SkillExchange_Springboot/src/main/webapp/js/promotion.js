@@ -55,7 +55,25 @@ function sendMessage() {
 //	alert(insertText + insertTitle);
 	var message = insertText + "&&&" + insertTitle;
 //	if (window.confirm("確認要送出嗎?")) {
-		webSocket.send(message);
+	$.ajax({
+		url : "MessageAnn", // 請求的url地址
+		dataType : "json", // 返回格式為json
+		async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特性
+		data : {
+			"message" : message
+		}, // 引數值
+		type : "GET", // 請求方式
+		success : function(req) {
+		},
+		complete : function() {
+			// 請求完成的處理
+		},
+		error : function() {
+			console.log("出錯了!")
+		}
+	});	
+	
+	webSocket.send(message);
 //	}
 	// !!!! 送留言到endpoint
 	// inputMessage.value = "";

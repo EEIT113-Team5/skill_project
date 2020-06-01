@@ -71,28 +71,28 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> 技能類別 </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<c:choose>
-						<c:when test="${empty memberBean}">						
-								<a class="dropdown-item" href="${jspPath}/query?class=all">全部</a> <a
-									class="dropdown-item" href="${jspPath}/query?class=才藝">才藝</a> <a
-									class="dropdown-item" href="${jspPath}/query?class=運動">運動</a> <a
-									class="dropdown-item" href="${jspPath}/query?class=語言">語言</a> <a
-									class="dropdown-item" href="${jspPath}/query?class=寵物">寵物</a> <a
-									class="dropdown-item" href="${jspPath}/query?class=生活">生活</a>
-								
-						
-						</c:when>
-						
-						<c:otherwise>															
-								<a class="dropdown-item" href="${jspPath}/query2?class=all">全部</a> <a
-									class="dropdown-item" href="${jspPath}/query2?class=才藝">才藝</a> <a
-									class="dropdown-item" href="${jspPath}/query2?class=運動">運動</a> <a
-									class="dropdown-item" href="${jspPath}/query2?class=語言">語言</a> <a
-									class="dropdown-item" href="${jspPath}/query2?class=寵物">寵物</a> <a
-									class="dropdown-item" href="${jspPath}/query2?class=生活">生活</a>								
-						
-						</c:otherwise>						
-					</c:choose>
+							<c:choose>
+								<c:when test="${empty memberBean}">
+									<a class="dropdown-item" href="${jspPath}/query?class=all">全部</a>
+									<a class="dropdown-item" href="${jspPath}/query?class=才藝">才藝</a>
+									<a class="dropdown-item" href="${jspPath}/query?class=運動">運動</a>
+									<a class="dropdown-item" href="${jspPath}/query?class=語言">語言</a>
+									<a class="dropdown-item" href="${jspPath}/query?class=寵物">寵物</a>
+									<a class="dropdown-item" href="${jspPath}/query?class=生活">生活</a>
+
+
+								</c:when>
+
+								<c:otherwise>
+									<a class="dropdown-item" href="${jspPath}/query2?class=all">全部</a>
+									<a class="dropdown-item" href="${jspPath}/query2?class=才藝">才藝</a>
+									<a class="dropdown-item" href="${jspPath}/query2?class=運動">運動</a>
+									<a class="dropdown-item" href="${jspPath}/query2?class=語言">語言</a>
+									<a class="dropdown-item" href="${jspPath}/query2?class=寵物">寵物</a>
+									<a class="dropdown-item" href="${jspPath}/query2?class=生活">生活</a>
+
+								</c:otherwise>
+							</c:choose>
 						</div></li>
 
 					<li class="nav-item dropdown"><a
@@ -189,9 +189,11 @@
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> <i class="fa fa-bell"  id="navbarbell"
+						aria-expanded="false"> <i class="fa fa-bell" id="navbarbell"
 							aria-hidden="true"></i></a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu"
+							style="left: -200px; background: transparent;"
+							aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="#" id="mess"></a>
 						</div></li>
 
@@ -216,6 +218,70 @@
 </div>
 
 <script>
+	function CallMessageAnn() {
+		// 		$("#navbarbell").click(function() {
+		$
+				.ajax({
+					url : "CallMessageAnn", // 請求的url地址
+					dataType : "json", // 返回格式為json
+					async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特
+					type : "GET", // 請求方式
+					success : function(req) {
+						console.log(req);
+
+						var d = new Date(req[0].anntime);
+						var formattedDate = d.getFullYear() + "-"
+								+ (d.getMonth() + 1) + "-" + d.getDate();
+
+						var d1 = new Date(req[1].anntime);
+						var formattedDate1 = d1.getFullYear() + "-"
+								+ (d1.getMonth() + 1) + "-" + d1.getDate();
+
+						var d2 = new Date(req[2].anntime);
+						var formattedDate2 = d2.getFullYear() + "-"
+								+ (d2.getMonth() + 1) + "-" + d2.getDate();
+
+						messArray = req[0].message.split("&&&");
+						console.log(messArray[1]);
+
+						messArray1 = req[1].message.split("&&&");
+
+						messArray2 = req[2].message.split("&&&");
+
+						content = "<div class='card'><div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
+								+ req[0].msgid
+								+ "'>最新公告:"
+								+ messArray[1]
+								+ "(公告時間:" + formattedDate + ")</a></div>";
+						content += "<div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
+								+ req[1].msgid
+								+ "'>過往公告:"
+								+ messArray1[1]
+								+ "(公告時間:" + formattedDate1 + ")</a></div>";
+						content += "<div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
+								+ req[2].msgid
+								+ "'>過往公告:"
+								+ messArray2[1]
+								+ "(公告時間:"
+								+ formattedDate2
+								+ ")</a></div></div>";
+
+						document.getElementById('mess').innerHTML = content;
+					},
+					complete : function() {
+						// 請求完成的處理
+					},
+					error : function() {
+						console.log("出錯了!")
+					}
+				});
+		// 		})
+	}
+
+	$(document).ready(function() {
+		window.onload = CallMessageAnn;
+
+	})
 	var MyPoint = "/DemoWSmulti";
 	var host = window.location.host;
 	//		console.log(host);
@@ -268,6 +334,7 @@
 		$("#popupmsg").fadeIn(3000);
 		$("#broadcast").text(evt.data)
 		setTimeout(fadeaway, 5000);
+		CallMessageAnn();
 		// 	    alert(evt.data);
 	}
 	function onClose(evt) { //關閉連線時時觸發
@@ -303,63 +370,6 @@
 	// 			console.log(message)
 	// 			cardbody.innerHTML += message;
 	// 		}
-	
-</script>
-<script>
-	$(document).ready(function() {
-        window.onload=function(){
-        	var collectGNameNum = $('[id^="collectGName"]').length;
-        	for(let i=0;i<collectGNameNum;i++){
-        		groupName = $("#collectGName"+i).text().trim();
-        		if(groupName=='未分類'){
-        			$("#collectGName"+i).closest("div").next("div").hide();
-        			}
-        		}
-// 		$("#navbarbell").click(function() {
-			$.ajax({
-				url : "CallMessageAnn", // 請求的url地址
-				dataType : "json", // 返回格式為json
-				async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特
-				type : "GET", // 請求方式
-				success : function(req) {
-					console.log(req);
-
-					
-					var d = new Date(req[0].anntime);
-					var formattedDate = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-
-					var d1 = new Date(req[1].anntime);
-					var formattedDate1 = d1.getFullYear() + "-" + (d1.getMonth() + 1) + "-" + d1.getDate();
-
-					var d2 = new Date(req[2].anntime);
-					var formattedDate2 = d2.getFullYear() + "-" + (d2.getMonth() + 1) + "-" + d2.getDate();
-
-					messArray = req[0].message.split("&&&");
-					console.log(messArray[1]);
-
-					messArray1 = req[1].message.split("&&&");
-
-					messArray2 = req[2].message.split("&&&");
-					
-					content="<div class='card'><div class='card-header' style='color:black'>最新公告:"+messArray[1]+"(公告時間:"+formattedDate+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
-				    content+="<p>公告內容:"+messArray[0]+"</p></blockquote></div>";
-				    content+="<div class='card-header' style='color:black'>過往公告:"+messArray1[1]+"(公告時間:"+formattedDate1+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
-					content+="<p>公告內容:"+messArray1[0]+"</p></blockquote></div>";
-				    content+="<div class='card-header' style='color:black'>過往公告:"+messArray2[1]+"(公告時間:"+formattedDate2+")</div><div class='card-body'><blockquote class='blockquote mb-0'>";
-					content+="<p>公告內容:"+messArray2[0]+"</p></blockquote></div></div>";
-				    
-				document.getElementById('mess').innerHTML=content;
-				},
-				complete : function() {
-					// 請求完成的處理
-				},
-				error : function() {
-					console.log("出錯了!")
-				}
-			});
-// 		})
-        }
-	})
 </script>
 
 

@@ -29,4 +29,9 @@ public class messageAnnService implements imessageAnnService {
 		return msgDao.callMessage();
 	}
 	
+	@Override
+	public List<messageAnnBean> msgAnnImfor(int msgid){
+		return msgDao.msgAnnImfor(msgid);
+	}
+	
 }
