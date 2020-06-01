@@ -178,9 +178,14 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">會員</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
+							<c:if test="${empty memberBean}">
+								<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
+							</c:if>
 							<c:if test="${empty memberBean}">
 								<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
+							</c:if>
+							<c:if test="${ ! empty memberBean}">
+								<a class="dropdown-item" href="<c:url value='Logout' />">修改會員</a>
 							</c:if>
 							<c:if test="${ ! empty memberBean}">
 								<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
