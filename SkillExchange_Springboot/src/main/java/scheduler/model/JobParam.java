@@ -91,11 +91,11 @@ public class JobParam {
 	}
 
 	@Column(name="updateTime")
-	public Date getUpdatedTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdatedTime(Date updatedTime) {
+	public void setUpdateTime(Date updatedTime) {
 		this.updateTime = updatedTime;
 	}
 

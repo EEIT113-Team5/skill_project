@@ -98,6 +98,9 @@
 							<a class="nav-link" href="queryContactUs"> <span><i
 									class="fa fa-commenting-o"></i> 回覆留言</span>
 							</a>
+							<a class="nav-link" href="getAllJob"> <span><i
+									class="fa fa-list-alt"></i> 排程管理</span>
+							</a>
 						</c:if>
 					</div>
 

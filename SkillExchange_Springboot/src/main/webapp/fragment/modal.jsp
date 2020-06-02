@@ -176,3 +176,30 @@ function editDetailConfirm(){
         </div>
     </div>
 </div>
+<!-- 編輯排程modal -->
+<div class="modal fade" id="editScheduleModal" tabindex="-1" role="dialog" aria-labelledby="editScheduleLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editScheduleLabel">編輯明細</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>請選擇類別</label>
+                <select class="btn btn-light searchbar" style="width:400px" id="editScheduleSel">
+                <c:forEach var="groupList" items="${collectionGroupsMap}">
+                	<option value="${groupList.key}">${groupList.value}</option>
+                </c:forEach>
+                </select><br>
+                <span id="editErr" style="color:red"></span>
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal('U')" >取消</button>
+                <button type="button" class="btn btn-primary" onclick="editDetailConfirm()">確認</button>
+            </div>
+        </div>
+    </div>
+</div>

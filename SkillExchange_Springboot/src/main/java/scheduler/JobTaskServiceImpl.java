@@ -1,5 +1,8 @@
 package scheduler;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
@@ -38,5 +41,10 @@ public class JobTaskServiceImpl implements JobTaskService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<JobParam> getJobParam() {
+		return jobDao.getJobParam();
 	}
 }
