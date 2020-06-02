@@ -270,8 +270,12 @@ h6 {
 								${sessionScope.memberBean.memberAddr}</h5>
 							<h5>Email:${sessionScope.memberBean.memberMail}</h5>
 							<div class="card-text"></div>
+							<c:if test="${status==1}">
+							<c:set var="chatstatus" value="${status}" />
+							</c:if>
 							<button id="disabled" class="btn btn-primary"
-								onclick="connect_skill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息</button>
+								onclick="connect_skill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
+							</button>
 						</div>
 
 
@@ -366,8 +370,16 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
+	
 	$(function(){
-		
+		console.log('${chatstatus}');
+		 if('${chatstatus}' == 1 ) {
+		        $('#disabled').click()
+		    }
+	});
+	
+	$(function(){
+		console.log("觸發enter");
 	 $('#textmssg').keydown(function(event){
 	  
 	    if( event.which == 13 ) {

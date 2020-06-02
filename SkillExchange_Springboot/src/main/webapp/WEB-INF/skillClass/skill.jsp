@@ -121,7 +121,7 @@
 									<span class="time321" style="float: right; margin-top: 5px">${skills.updateTime}</span>
 								</div>
 															
-							<div class="card"  style="height:460px;margin:10px" onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">
+							<div class="card"  style="height:460px;margin:10px" onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'">
 								
 								<img class="card-img-top" style="height:75%"src="${skills.publishPic}" alt="Card image cap"/>
 								<div class="card-body">
@@ -176,11 +176,25 @@
 											</c:otherwise>
 
 										</c:choose>										
-										
+											<c:choose>
+											<c:when test="${empty memberBean}">
 											<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary btn-lg"
-													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}'">發送訊息
+													onclick=checkmember(${skills.publishNo},1)>發送訊息
 										    </button>
+												<button type="button" id="cancelchat${skills.publishNo}"
+													class="btn btn-danger btn-lg" style="display: none"
+													onclick="location.href='loginInit'">請先登入</button>
+											</c:when>
+											
+											<c:otherwise>
+												<button type="button" id="addchat${skills.publishNo}"
+													class="btn btn-primary btn-lg"
+													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">發送訊息
+										    </button>
+											</c:otherwise>
+											</c:choose>	
+											
 																																	
 									</span>								
 								
@@ -202,21 +216,14 @@
 <jsp:include page="/fragment/bottom.jsp" />
 
 	<script>
-/* 	(function () {
-		var strAry = pubtime.split('T');
-		console.log(strAry);
-        document.getElementById("time321").innerHTML = '543';
-    })(); */    $(function(){
-	    var len = 11; // Pubulish Detail超過40個字以"..."取代
-	    $(".time321").each(function(i){
-	        if($(this).text().length>len){
-	            $(this).attr("title",$(this).text());
-	            var text=$(this).text().substring(0,len-1);
-	            $(this).text(text);
-	        }
-	    });
-	});
-
+	function checkmember(publishNo,status) {		
+	    if(status==1){
+	    	
+					$("#addchat"+publishNo).css("display","none");
+					 $("#cancelchat"+publishNo).css("display","inline");
+				}				
+	  	    
+	}
 		
 	function collection(publishNo,status,mebNo) {
 		console.log(mebNo);
@@ -287,8 +294,18 @@
 			 $("#cancel"+publishNo).css("display","inline");
 		 }
 	   
+	    
 	}
-	
+	$(function(){
+	    var len = 11; // Pubulish Detail超過40個字以"..."取代
+	    $(".time321").each(function(i){
+	        if($(this).text().length>len){
+	            $(this).attr("title",$(this).text());
+	            var text=$(this).text().substring(0,len-1);
+	            $(this).text(text);
+	        }
+	    });
+	});
 	$(function(){
 	    var len = 40; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){
@@ -310,7 +327,7 @@
 	            $(this).text(text);
 	        }
 	    });
-	});
+	})
 	
 	</script>
 
