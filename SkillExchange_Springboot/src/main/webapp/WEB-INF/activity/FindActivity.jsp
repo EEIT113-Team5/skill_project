@@ -55,6 +55,20 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+
+<!-- 行事曆 -->
+<!-- Moment.js v2.20.0 -->
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.0/moment.min.js"></script>
+<!-- FullCalendar v3.8.1 -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.css"
+	rel="stylesheet" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.print.css"
+	rel="stylesheet" media="print">
+</script>
+
 <style>
 * {
 	font-family: 微軟正黑體;
@@ -69,10 +83,10 @@
 	font-size: 0.8em;
 	color: #9D9D9D;
 }
-.btn {
-    color:black !important;
-}
 
+.btn {
+	color: black !important;
+}
 </style>
 
 </head>
@@ -95,131 +109,138 @@
 
 	<div class="container-fluid ">
 		<div style="display: flex">
-			<input class="btn btn-primary m-3" type="button" value="+建立活動"
-				onclick=insertform() /> <a class="btn btn-primary m-3 text-white"
+			<input class="btn btn-info m-3" style="color:white" type="button" value="+建立活動"
+				onclick=insertform() /> <a class="btn btn-info m-3" style="color:white"
 				type="button" href="MyOwnActivity?memberid=5">v由我主辦</a>
 		</div>
 	</div>
 	<div class="container-fluid m-2">
-		<c:choose>
-			<c:when test="${empty searchList}">
-				<div>查無符合資料</div>
-			</c:when>
-			<c:otherwise>
-				<div class="row">
-					<c:forEach var='search' varStatus="var" items='${searchList}'>
-						<c:if test="${search.memberid!=memberBean.memberRegNo}">
-							<div class="col-sm-4 mt-3">
-								<div class="card" style="width: 90%; height: 550px">
-									<c:choose>
-										<c:when test="${search.imgB64==null}">
-											<!-- 												class="stretched-link" -->
-											<a href="ChooseOneActivity?activityid=${search.activityid}"><img
-												src="activityimg/default.jpg" class="card-img-top"
-												style="width: 100%; height: 300px;" /></a>
-										</c:when>
-										<c:otherwise>
-											<!-- 												class="stretched-link" -->
-											<a href="ChooseOneActivity?activityid=${search.activityid}"><img
-												src="data:image/jpg;base64,${search.imgB64}"
-												class="card-img-top" style="width: 100%; height: 300px" /></a>
-										</c:otherwise>
-									</c:choose>
-									<div class="card-body">
-										<h4 class="card-title">
-											<div style="display: flex">
-												<div style="flex: 2">
-													<h4>${search.beginDay}</h4>
-												</div>
-												<div style="flex: 3">
-													<h4>${fn:substring(search.title,0,8)}</h4>
-												</div>
+		<div style="display: flex">
+			<div style="flex: 30">
+				<c:choose>
+					<c:when test="${empty searchList}">
+						<div>查無符合資料</div>
+					</c:when>
+					<c:otherwise>
+						<div class="row">
+							<c:forEach var='search' varStatus="var" items='${searchList}'>
+								<c:if test="${search.memberid!=memberBean.memberRegNo}">
+									<div class="col-sm-4 mt-3">
+										<div class="card" style="width: 100%; height: 550px">
+											<c:choose>
+												<c:when test="${search.imgB64==null}">
+													<!-- 												class="stretched-link" -->
+													<a href="ChooseOneActivity?activityid=${search.activityid}"><img
+														src="activityimg/default.jpg" class="card-img-top"
+														style="width: 100%; height: 300px;" /></a>
+												</c:when>
+												<c:otherwise>
+													<!-- 												class="stretched-link" -->
+													<a href="ChooseOneActivity?activityid=${search.activityid}"><img
+														src="data:image/jpg;base64,${search.imgB64}"
+														class="card-img-top" style="width: 100%; height: 300px" /></a>
+												</c:otherwise>
+											</c:choose>
+											<div class="card-body">
+												<h4 class="card-title">
+													<div style="display: flex">
+														<div style="flex: 2">
+															<h4>${search.beginDay}</h4>
+														</div>
+														<div style="flex: 3">
+															<h4>${fn:substring(search.title,0,8)}</h4>
+														</div>
+													</div>
+												</h4>
+												<p class="card-text">
+													<i class="fa fa-map-marker" aria-hidden="true"></i>${fn:substring(search.position, 0, 24)}</p>
+												<p class="card-text" id="interest${search.activityid}">${search.interest}人有興趣</p>
+												<span class="card-text" id="attendency${search.activityid}">${search.attendency}人要參加</span>
+												<c:choose>
+													<c:when test="${search.group2!=null }">
+														<span id="limit${search.activityid}">/${search.group2}人為上限</span>
+													</c:when>
+													<c:otherwise>
+														<span>/不限</span>
+													</c:otherwise>
+												</c:choose>
+												<c:choose>
+													<c:when
+														test="${search.attendency<search.group2 ||search.group2==null }">
+														<p class="mt-2">
+															<c:choose>
+																<c:when test="${empty memberBean}">
+																	<input type="button" class="btn btn-secondary interest"
+																		value="有興趣" disabled />
+																</c:when>
+																<c:when test="${search.result2 == 1}">
+																	<a type="button" class="btn btn-secondary interest"
+																		onclick=attendency(${search.activityid},0)
+																		id="cancelint${search.activityid}">取消興趣</a>
+																	<a type="button" class="btn btn-secondary interest"
+																		style="display: none"
+																		onclick=attendency(${search.activityid},1)
+																		id="hasinterest${search.activityid}">有興趣</a>
+																</c:when>
+
+																<c:otherwise>
+																	<a type="button" class="btn btn-secondary interest"
+																		onclick=attendency(${search.activityid},1)
+																		id="hasinterest${search.activityid}">有興趣</a>
+																	<a type="button" class="btn btn-secondary interest"
+																		onclick=attendency(${search.activityid},0)
+																		style="display: none"
+																		id="cancelint${search.activityid}">取消興趣</a>
+
+																</c:otherwise>
+															</c:choose>
+															<c:choose>
+																<c:when test="${empty memberBean}">
+																	<input type="button" class="btn btn-info" value="會參加"
+																		disabled />
+																</c:when>
+																<c:when test="${search.result == 1}">
+																	<a type="button"
+																		onclick=attendency(${search.activityid},3)
+																		class="btn btn-info cancel"
+																		id="cancel${search.activityid}">取消參加</a>
+																	<a type="button"
+																		onclick=attendency(${search.activityid},2)
+																		style="display: none" class="btn btn-info attend"
+																		id="attend${search.activityid}">會參加</a>
+																</c:when>
+																<c:otherwise>
+																	<a type="button"
+																		onclick=attendency(${search.activityid},2)
+																		class="btn btn-info attend"
+																		id="attend${search.activityid}">會參加</a>
+																	<a type="button"
+																		onclick=attendency(${search.activityid},3)
+																		style="display: none" class="btn btn-info cancel"
+																		id="cancel${search.activityid}">取消參加</a>
+																</c:otherwise>
+															</c:choose>
+															<span class="updatetime">最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
+														</p>
+													</c:when>
+													<c:otherwise>
+														<h3>活動已報名額滿!</h3>
+														<span class="updatetime">&nbsp;最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
+													</c:otherwise>
+												</c:choose>
+
 											</div>
-										</h4>
-										<p class="card-text">
-											<i class="fa fa-map-marker" aria-hidden="true"></i>${fn:substring(search.position, 0, 24)}</p>
-										<p class="card-text" id="interest${search.activityid}">${search.interest}人有興趣</p>
-										<span class="card-text" id="attendency${search.activityid}">${search.attendency}人要參加</span>
-										<c:choose>
-											<c:when test="${search.group2!=null }">
-												<span id="limit${search.activityid}">/${search.group2}人為上限</span>
-											</c:when>
-											<c:otherwise>
-												<span>/不限</span>
-											</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when
-												test="${search.attendency<search.group2 ||search.group2==null }">
-												<p class="mt-2">
-													<c:choose>
-														<c:when test="${empty memberBean}">
-															<input type="button" class="btn btn-secondary interest"
-																value="有興趣" disabled />
-														</c:when>
-														<c:when test="${search.result2 == 1}">
-															<a type="button" class="btn btn-secondary interest"
-																onclick=attendency(${search.activityid},0)
-																id="cancelint${search.activityid}">取消有興趣</a>
-															<a type="button" class="btn btn-secondary interest"
-																style="display: none"
-																onclick=attendency(${search.activityid},1)
-																id="hasinterest${search.activityid}">有興趣</a>
-														</c:when>
-
-														<c:otherwise>
-															<a type="button" class="btn btn-secondary interest"
-																onclick=attendency(${search.activityid},1)
-																id="hasinterest${search.activityid}">有興趣</a>
-															<a type="button" class="btn btn-secondary interest"
-																onclick=attendency(${search.activityid},0)
-																style="display: none" id="cancelint${search.activityid}">取消有興趣</a>
-
-														</c:otherwise>
-													</c:choose>
-													<c:choose>
-														<c:when test="${empty memberBean}">
-															<input type="button" class="btn btn-info" value="會參加"
-																disabled />
-														</c:when>
-														<c:when test="${search.result == 1}">
-															<a type="button"
-																onclick=attendency(${search.activityid},3)
-																class="btn btn-info cancel"
-																id="cancel${search.activityid}">取消參加</a>
-															<a type="button"
-																onclick=attendency(${search.activityid},2)
-																style="display: none" class="btn btn-info attend"
-																id="attend${search.activityid}">會參加</a>
-														</c:when>
-														<c:otherwise>
-															<a type="button"
-																onclick=attendency(${search.activityid},2)
-																class="btn btn-info attend"
-																id="attend${search.activityid}">會參加</a>
-															<a type="button"
-																onclick=attendency(${search.activityid},3)
-																style="display: none" class="btn btn-info cancel"
-																id="cancel${search.activityid}">取消參加</a>
-														</c:otherwise>
-													</c:choose>
-													<span class="updatetime">最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
-												</p>
-											</c:when>
-											<c:otherwise>
-												<h3>活動已報名額滿!</h3>
-												<span class="updatetime">&nbsp;最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
-											</c:otherwise>
-										</c:choose>
-
+										</div>
 									</div>
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
-				</div>
-			</c:otherwise>
-		</c:choose>
+								</c:if>
+							</c:forEach>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div style="flex: 1"></div>
+			<div id="calendar" style="flex: 10"></div>
+		</div>
 	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->
@@ -258,7 +279,7 @@
                  $("#hasinterest"+activityid).css("display","none");
 				 $("#cancelint"+activityid).css("display","inline");
 			 } else if (num==0){
-				 var interest="取消有興趣"
+				 var interest="取消興趣"
 				$("#cancelint"+activityid).css("display","none");
 				 $("#hasinterest"+activityid).css("display","inline");
 			 }else if(num==2){
@@ -309,6 +330,55 @@
 	<!-- 
     Essential Scripts
     =====================================-->
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.1/fullcalendar.min.js"></script>
+	<script>
+	var eventlist=[];
+	var calen=$('#calendar');
+	function getactivitydate(){
+		$.ajax({
+			url : "SelectActivityJson", //請求的url地址
+			dataType : "json", //返回格式為json
+			async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+			type : "GET", //請求方式
+			success : function(req) {
+				console.log(req)
+				for(i=0;i<req.length;i++){
+				var event = {
+					title: req[i].title.substr(0,5),
+	  				start: req[i].beginDay ,
+	  				end: req[i].endDay  ,
+	  				url: "ChooseOneActivity?activityid="+req[i].activityid,
+				}
+				eventlist.push(event);
+				
+			}			
+				console.log(eventlist);
+				calen.fullCalendar({
+						// 參數設定[註1]
+					  		header: { // 頂部排版
+					  			left: "prev,next today", // 左邊放置上一頁、下一頁和今天
+					  			center: "title", // 中間放置標題
+					  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
+					  		},
+					  		defaultDate: "2020-06-12", // 起始日期
+//					  		weekends: false, // 顯示星期六跟星期日
+					  		editable: true,  // 啟動拖曳調整日期
+					  		events: eventlist
+			     });
+			},
+			complete : function() {
+			},
+			error : function() {
+				console.log("出錯了!")
+			}
+		});
+		
+	}
+	getactivitydate();
+	
+	</script>
 	<!-- Main jQuery -->
 	<script src="pluginstemp/jquery/jquery.min.js"></script>
 	<!-- Google Map -->
@@ -338,6 +408,8 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+
+
 
 </body>
 </html>

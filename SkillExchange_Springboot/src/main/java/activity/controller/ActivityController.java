@@ -53,7 +53,7 @@ public class ActivityController {
 
 	@Autowired
 	ActivityService as;
-	
+
 	public static final String url = "https://www.google.com/recaptcha/api/siteverify";
 	public static final String secret = "6LcVo_sUAAAAAKGXZlJjqcnn6PhDo0N-2tAXJmLw";
 //	private final static String USER_AGENT = "Mozilla/5.0";
@@ -82,7 +82,7 @@ public class ActivityController {
 
 	@PostMapping(value = "/VerifyRecaptcha", produces = { "application/json" })
 	public ResponseEntity<String> verify(@RequestParam("token") String token) throws IOException {
-		if (token== null || "".equals(token)) {
+		if (token == null || "".equals(token)) {
 			ResponseEntity<String> re = new ResponseEntity<>("false", HttpStatus.OK);
 			return re;
 		}
@@ -157,6 +157,15 @@ public class ActivityController {
 		}
 		return "activity/FindActivity";
 	}
+	
+    //for calendar
+	@GetMapping(value = "/SelectActivityJson", produces = { "application/json" })
+	public ResponseEntity<List<ActivityBean>> SelectActivityJson(Model model) {
+		List<ActivityBean> activity = as.getAllActivity();
+		ResponseEntity<List<ActivityBean>> re = new ResponseEntity<>(activity, HttpStatus.OK);
+		return re;
+	}
+	
 
 	@GetMapping(value = "/ChooseOneActivity")
 	public String ChooseOneActivity(@RequestParam("activityid") String activityid,
