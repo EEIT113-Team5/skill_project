@@ -138,7 +138,8 @@
 						aria-expanded="false"> 技能刊登</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
-							<a class="dropdown-item" href="myPublish">我的刊登</a>
+							<a class="dropdown-item" href="myPublish">我的刊登</a> <a
+								class="dropdown-item" href="myPublish">歷史刊登</a>
 						</div></li>
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/QueryCollections.do">我的收藏</a></li>
@@ -148,29 +149,51 @@
 					<li class="nav-item "><a class="nav-link"></a></li>
 					<li class="nav-item "><a class="nav-link"></a></li>
 					<li class="nav-item "><a class="nav-link"></a></li>
-					
+
 					<c:if test="${ ! empty memberBean}">
 						<img class="collectImg" src="${ memberBean.memberPic }" />
 					</c:if>
-					
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">會員</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<c:if test="${empty memberBean}">
-								<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
-							</c:if>
-							<c:if test="${empty memberBean}">
-								<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
-							</c:if>
-							<c:if test="${ ! empty memberBean}">
-								<a class="dropdown-item" href="<c:url value='Logout' />">修改會員</a>
-							</c:if>
-							<c:if test="${ ! empty memberBean}">
-								<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
-							</c:if>
-						</div></li>
+					<c:if test="${ ! empty memberBean}">
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">${memberBean.memberName}</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<c:if test="${empty memberBean}">
+									<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
+								</c:if>
+								<c:if test="${empty memberBean}">
+									<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
+								</c:if>
+								<c:if test="${ ! empty memberBean}">
+									<a class="dropdown-item" href="<c:url value='Logout' />">修改會員</a>
+								</c:if>
+								<c:if test="${ ! empty memberBean}">
+									<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
+								</c:if>
+							</div></li>
+					</c:if>
+					<c:if test="${empty memberBean}">
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">會員</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<c:if test="${empty memberBean}">
+									<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
+								</c:if>
+								<c:if test="${empty memberBean}">
+									<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
+								</c:if>
+								<c:if test="${ ! empty memberBean}">
+									<a class="dropdown-item" href="<c:url value='Logout' />">修改會員</a>
+								</c:if>
+								<c:if test="${ ! empty memberBean}">
+									<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
+								</c:if>
+							</div></li>
+
+					</c:if>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -226,27 +249,27 @@
 						var formattedDate2 = d2.getFullYear() + "-"
 								+ (d2.getMonth() + 1) + "-" + d2.getDate();
 
-						messArray = req[0].message.split("&&&");
+						messArray = req[0].messtitle;
 						console.log(messArray[1]);
 
-						messArray1 = req[1].message.split("&&&");
+						messArray1 = req[1].messtitle;
 
-						messArray2 = req[2].message.split("&&&");
+						messArray2 = req[2].messtitle;
 
 						content = "<div class='card'><div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
 								+ req[0].msgid
 								+ "'>最新公告:"
-								+ messArray[1]
+								+ messArray
 								+ "(公告時間:" + formattedDate + ")</a></div>";
 						content += "<div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
 								+ req[1].msgid
 								+ "'>過往公告:"
-								+ messArray1[1]
+								+ messArray1
 								+ "(公告時間:" + formattedDate1 + ")</a></div>";
 						content += "<div class='card-header' style='color:black'><a onclick=location.href='msgAnnImfor?msgid="
 								+ req[2].msgid
 								+ "'>過往公告:"
-								+ messArray2[1]
+								+ messArray2
 								+ "(公告時間:"
 								+ formattedDate2
 								+ ")</a></div></div>";

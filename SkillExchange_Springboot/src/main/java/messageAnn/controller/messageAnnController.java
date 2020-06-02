@@ -31,10 +31,14 @@ public class messageAnnController {
 		
 		System.out.println("我我我我:"+message);
 		
+		String[] messStrings = message.split("&&&");
+		String messTitle = messStrings[1];
+		String messDetail = messStrings[0];
+		
 		Date date = new Date();
 		java.sql.Date annTime = new java.sql.Date(date.getTime());
 		
-		messageAnnBean msgBean = new messageAnnBean(message,annTime);
+		messageAnnBean msgBean = new messageAnnBean(messTitle,messDetail,annTime);
 		imsgs.saveMessage(msgBean);
 		
 		return msgBean;
@@ -53,7 +57,8 @@ public class messageAnnController {
 		
 		System.out.println("HEBE");
 		
-//		System.out.println("222:"+messList.get(0).getAnntime());
+		System.out.println("222:"+messList.get(0).getAnntime());
+		System.out.println("333:"+messList.get(0).getMesstitle());
 		ResponseEntity<List<messageAnnBean>> re  = new ResponseEntity<>(messList, HttpStatus.OK);
   		return re;
 
@@ -63,18 +68,23 @@ public class messageAnnController {
 	public String myPublishImfor(@RequestParam("msgid") String msgid,
 			Model model){
 		
-		//公告內容
+		//公告內容，單筆
 		int msid = Integer.parseInt(msgid);
 		List<messageAnnBean> msgAnnImfor;
 		msgAnnImfor = imsgs.msgAnnImfor(msid);
 		
-		String[] msgList = msgAnnImfor.get(0).getMessage().split("&&&");
+//		String[] msgList = msgAnnImfor.get(0).getMessage().split("&&&");
 		
-		model.addAttribute("msgtitle",msgList[1]);
-		model.addAttribute("msgdetail",msgList[0]);
+		model.addAttribute("msgtitle",msgAnnImfor.get(0).getMesstitle());
+		model.addAttribute("msgdetail",msgAnnImfor.get(0).getMessage());
+		
+		//公告清單
+		List<messageAnnBean> msgAnnList;
+		msgAnnList = imsgs.callMessage();
+		
+		model.addAttribute("msgAnnList",msgAnnList);
 			
 			return "messageAnn/messageAnnImfor";			
 		}
-	
 	
 }

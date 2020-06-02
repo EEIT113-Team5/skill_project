@@ -1,5 +1,8 @@
+<%@page import="messageAnn.model.messageAnnBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page language="java" import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zt-TW">
@@ -76,7 +79,47 @@
 
 <link href="css/style.css" rel="stylesheet">
 <link href="css/responsive.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
+#DIV1 {
+	flex: 1;
+	/* 	width: 600px; */
+	/* 	line-height: 50px; */
+	/* 	padding: 20px; */
+	/* 	border: 2px blue solid; */
+	/* 	margin-right: 10px; */
+	/* 	float: left; */
+}
+
+.banner_inner_text {
+	padding-top: 30px;
+	position: relative;
+	padding-bottom: 50px;
+}
+
+#DIV2 {
+	flex: 1;
+	/* 	width: 600px; */
+	/* 	height:auto; */
+	/* 	line-height: 50px; */
+	/* 	padding: 20px; */
+	/* 	border: 2px green solid; */
+	/* 	float: left; */
+}
+
+.card-header1 {
+	/*     padding: .75rem 1.25rem; */
+	/*     margin-bottom: 0; */
+	background-color: rgba(0, 0, 0, .03);
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
 </style>
 
 </head>
@@ -94,72 +137,54 @@
 			</div>
 		</div>
 	</section>
-	<div class="container">
+	<div class="container"
+		style="display: flex; margin-top: 50px; margin-bottom: 50px;">
 
-		
-        <!--================Banner Area =================-->
-        <section class="banner_area">
-            <div class="container">
-                <div class="banner_inner_text">
-                    <h3 style="font-size: 40px">${msgtitle}</h3>
-                    <p>公告內容:${msgdetail}</p>
-                </div>
-            </div>
-        </section>
-       
-        <!--================End Banner Area =================-->
-<!--         <div style="width: 1200px;"> -->
-<!--         			<div class="resume" style="width: 800px;margin-right: auto;">  -->
-<!--         				<div class="publishleft" style="display:inline-block;height: 780px"> -->
-<%--           					<img src="${mylistimfor.publishPic}" width="250px" style="display:block;margin:auto;margin-top:25px;box-shadow:2px 2px 5px #5D9DC7"> --%>
-      
-<%--           					<h2 class="pubtitle">${mylistimfor.myTitle}</h2> --%>
-<!--           					<hr style="border:0;background-color:#009bdd;height:1px"> -->
-<%--           					<p class="imformation"><b>刊登地區:${mylistimfor.myArea}</b><br><br> --%>
-<%--           					<b>希望地點:${mylistimfor.myPlace}</b><br><br> --%>
-<!--             				<br> -->
-<%--             				<b>刊登地點:${mylistimfor.myCity}</b><br><br> --%>
-<%--             				<b>刊登鄉鎮:${mylistimfor.myDistrict}</b><br><br> --%>
-<%--             				<b>刊登路名:${mylistimfor.myRoad}</b><br><br> --%>
-<!--            					</p>  -->
-<!--           					<div class="icon"> -->
-<!--           					</div> -->
-<!--         				</div>   -->
-<!--         				<div class="publishright" style="display:inline-block,"> -->
-<!--           					<h3 class="about" style="padding-top: 20px;padding-bottom: 20px;">刊登內容 -->
-<!--             				<hr> -->
-<%--             				<p> <h5><b>▸內容</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myDetail}.</h6></p> --%>
-<!--           					</h3><br> -->
-<!--           					<h3 class="education">刊登技能 -->
-<!--             				<hr> -->
-<%--             				<p> <h5><b>▸自己的技能</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myOwnSkill}</h6></p> --%>
-<%--             				<p> <h5><b>▸想學的技能</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myWantSkill}</h6></p> --%>
-<!--           					</h3> -->
-<!--           					<h3 class="esperience">備註 -->
-<!--             				<hr> -->
-<%--             				<p> <h5><b>▸備註</b></h5><br><h6>&nbsp;&nbsp;&nbsp;${mylistimfor.myMark} --%>
-<!--             				</h6></p> -->
-<!--           					</h3> -->
-<!--         				</div> -->
-<!--       				</div> -->
-						
-<!--       			</div> -->
-<!--         ================End Testimonials Slider Area ================= -->
-				
-					
-<!-- 				<form action="myPublish" method="GET" enctype="application/x-www-form-urlencoded"> -->
-     				
-<!--         				<input type='submit' value='我的刊登' >    -->
-<!--     			</form> -->
-
-
+		<div id="DIV1" class="123">
+			<!--================Banner Area =================-->
+			<section class="banner_area">
+				<div class="container">
+					<div class="banner_inner_text">
+						<h3 style="font-size: 40px">${msgtitle}</h3>
+						<p>公告內容:${msgdetail}</p>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div id="DIV2">
+			<div id="accordion">
+				<div class="card" style="border: 1px solid transparent">
+					<div>
+						<h3>歷史公告:</h3>
+					</div>
+					<c:forEach items="${msgAnnList}" var="msgAl" varStatus="msg">
+						<div class="card-header1" style="font-size: 25px">
+							<a class="card-link" data-toggle="collapse"
+								href="#collapse${msg.index}" id="messtitle">
+								${msgAl.messtitle}(${msgAl.anntime})</a>
+						</div>
+						<div id="collapse${msg.index}" class="panel-collapse collapse"
+							data-parent="#accordion">
+							<div class="card-body" id="messmessage">${msgAl.message}</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<!-- 			<ul class="pagination"> -->
+			<%-- 				<c:forEach items="${msgAnnList}" var="msgAl" varStatus="msg"> --%>
+			<%-- 					<c:if test="${0 == (msg.index+1)%5 }"> --%>
+			<%-- 						<li><a href="#" onclick="msgList(${msg.index})">${(msg.index+1)/5}</a></li> --%>
+			<%-- 					</c:if> --%>
+			<%-- 				</c:forEach> --%>
+			<!-- 			</ul> -->
+		</div>
 	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
+	<!-- 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" -->
+	<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
@@ -178,7 +203,7 @@
 	<script src="assets/demo/datatables-demo.js"></script>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/jquery-3.2.1.min.js"></script>
+	<!-- 	<script src="js/jquery-3.2.1.min.js"></script> -->
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -212,14 +237,14 @@
     Essential Scripts
     =====================================-->
 	<!-- Main jQuery -->
-	<script src="pluginstemp/jquery/jquery.min.js"></script>
+	<!-- 	<script src="pluginstemp/jquery/jquery.min.js"></script> -->
 	<!-- Google Map -->
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 	<script src="pluginstemp/google-map/gmap.js"></script>
 
 	<!-- 	<!-- Form Validation -->
-	
+
 	<script src="pluginstemp/form-validation/jquery.form.js"></script>
 	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>
 
@@ -238,6 +263,13 @@
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
+	<script type="text/javascript">
+		<c:forEach items="${msgAnnList}" var="msgAl" varStatus="msg">
+		$(function() {
+			$('#collapse${msg.index}').collapse('hide')
+		})
+		</c:forEach>
+	</script>
 
 	<!-- ---------------------要加的部份-------------------- -->
 

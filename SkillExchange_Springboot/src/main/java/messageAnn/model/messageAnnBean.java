@@ -19,6 +19,7 @@ public class messageAnnBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	int msgid;
+	String messtitle;
 	String message;
 	Date anntime;
 	
@@ -26,12 +27,13 @@ public class messageAnnBean implements Serializable {
 		
 	}
 	
-	public messageAnnBean(String message,Date anntime) {
+	public messageAnnBean(String messtitle,String message,Date anntime) {
 		super();
+		this.messtitle = messtitle;
 		this.message = message;
 		this.anntime = anntime;
 	}
-	
+
 	@Id
 	@Column(name = "msgid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,15 @@ public class messageAnnBean implements Serializable {
 
 	public void setMsgid(int msgid) {
 		this.msgid = msgid;
+	}
+	
+	@Column(name = "messtitle")
+	public String getMesstitle() {
+		return messtitle;
+	}
+	
+	public void setMesstitle(String messtitle) {
+		this.messtitle = messtitle;
 	}
 	@Column(name = "message")
 	public String getMessage() {
