@@ -28,7 +28,7 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="imagestemp/favicon.png" />
+	href="imagestemp/SkillLogo2.png" />
 
 <!-- CSS
   ================================================== -->
@@ -77,7 +77,7 @@
 </head>
 <body id="body">
 	<jsp:include page="/fragment/top1.jsp" />
-
+	<jsp:include page="/fragment/modal2.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -161,6 +161,18 @@
 
 	<!-- ---------------------要加的部份-------------------- -->
 	${ logoutBean.logout }
+	
+		<c:if test="${!not empty MsgMap}">
+		<c:if test="${!not empty MsgMap.LoginError}">
+			<script>
+				let message = " 登 出 成 功 !";
+				$("#alertText").text(message);
+				$("#alertModal").modal('show');
+				// 				alert(message);
+			</script>
+		</c:if>
+	</c:if>
+	
 </body>
 
 </html>

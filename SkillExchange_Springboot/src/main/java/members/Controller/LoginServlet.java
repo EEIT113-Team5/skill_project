@@ -161,7 +161,7 @@ public class LoginServlet extends HttpServlet {
 			errorMsg.put("LoginError", "查詢資料時發生異常,訊息:" + e.getMessage());
 		}
 		if (errorMsg.isEmpty()) {
-			msgOK.put("massage", "登入成功");
+			msgOK.put("message", "登入成功");
 			// String targetURL = (String) session.getAttribute("target");
 //			response.sendRedirect(request.getContextPath()+"/index.jsp");
 			if (userId.equals("eeit11321") && password.equals("eeit11321")) {

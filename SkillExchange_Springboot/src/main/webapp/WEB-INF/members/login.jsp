@@ -90,7 +90,7 @@
 <!-- ---------------------要加的部份-------------------- -->
 <body id="body">
 	<jsp:include page="/fragment/top1.jsp" />
-	<jsp:include page="/fragment/modal.jsp" />
+	<jsp:include page="/fragment/modal2.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -143,7 +143,6 @@
 							
 							<div
 								class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-								<!-- 											<a class="small" href="password.html">忘記密碼?</a> -->
 								<div class="btn-group">
 									<input type='button' class="btn btn-primary"
 										onclick='fbLogin()' value="FaceBook" /> 
@@ -153,8 +152,31 @@
 								<div>
 									<button type="submit" class="btn btn-info">登入</button>								
 								</div>
-								<!-- 										這裡 -->
 							</div>
+							
+							
+							
+							<div class="btn-group form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+									<input type='button' class="btn btn-primary"
+										onclick='fbLogin()' value="FaceBook" /> 
+									<input type='button' class="btn btn-danger" 
+									    onclick='googleSignIn()' value="Google" />
+									<button type="submit" class="btn btn-info">登入</button>								
+							</div>
+							
+							
+							<div
+								class="btn-group-vertical form-group d-flex align-items-center 
+										justify-content-between mt-4 mb-0">
+									<input type='button' class="btn btn-primary"
+										onclick='fbLogin()' value="FaceBook" /> 
+									<input type='button' class="btn btn-danger" 
+									    onclick='googleSignIn()' value="Google" />
+									<button type="submit" class="btn btn-info">登入</button>								
+
+							</div>
+					
+							
 						</form>
 					</div>
 					<div class="card-footer text-center">

@@ -508,9 +508,9 @@
 	</script>
 
 	<c:if test="${not empty MsgOK}">
-		<c:if test="${not empty MsgOK.massage}">
+		<c:if test="${not empty MsgOK.message}">
 			<script>
-				let message = "${MsgOK.massage}";
+				let message = "${MsgOK.message}";
 				$("#alertText").text(message);
 				$("#alertModal").modal('show');
 				// 				alert(message);

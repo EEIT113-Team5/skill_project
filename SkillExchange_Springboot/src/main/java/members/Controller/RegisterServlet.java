@@ -77,18 +77,18 @@ public class RegisterServlet extends HttpServlet {
 		httpSession.setAttribute("MsgOK", msgOK);
 		
 		if (checkMailBean == null) {
-			msgOK.put("massage", "無此資料");
+			msgOK.put("message", "無此資料");
 		} else if(statusIsN) {
 			try {
 				mailService.updateStatus(captcha, checkMailNo);
 				memberDao.updateStatus(checkMailBean.getMemberMail());
-				msgOK.put("massage", "驗證成功");
+				msgOK.put("message", "驗證成功");
 			} catch (Exception e) {
 				e.printStackTrace();
-				msgOK.put("massage", "驗證失敗");
+				msgOK.put("message", "驗證失敗");
 			}
 		} else {
-			msgOK.put("massage", "已驗證");
+			msgOK.put("message", "已驗證");
 		}
 		
 		return "index";
