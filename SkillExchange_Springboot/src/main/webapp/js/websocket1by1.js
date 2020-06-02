@@ -15,7 +15,7 @@ function connect_skill(sendUser, sendTo) {
 	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
 			+ sendUser+ "/"+sendTo;
 	
-	document.getElementById("catalog").style.display = 'none';
+
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
 

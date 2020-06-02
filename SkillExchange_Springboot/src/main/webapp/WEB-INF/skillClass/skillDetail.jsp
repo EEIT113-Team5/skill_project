@@ -257,11 +257,13 @@ h6 {
 								<c:forEach var='data' varStatus='var' items='${reqchat}'>
 									<tr>
 										<td>您有來自</td>
-										<td id="requestid${var.index}"></td>
-										<td id="requestNic${var.index}"></td>
+										<td id="requestid${var.index}" style="display:none">${data.sendNo}</td>
+										
 										<td><img id="requestPic${var.index}"
 											class="rounded-circle user_img" height="250px" width="350px"
-											src='${data.sendNomember.memberPic}' />${data.sendNomember.memberNic} 的訊息</td>
+											src='${data.sendNomember.memberPic}' /></td>
+											<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
+											<td>的訊息</td>
 										<td style="width: 180px"><button class="btn btn-primary"
 												onclick="connectskillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
 									</tr>
@@ -330,7 +332,7 @@ h6 {
 							</div>
 								<span id="action_menu_btn" >								
 								<a type="button" href="InsertCommentForm" class="btn text-white">結束交換</a>
-								<i class="fa fa-times" aria-hidden="true" onclick=colsewindow() ></i>
+								<i class="fa fa-times" aria-hidden="true" onclick=closewindow() ></i>
 								</span>
 						
 
@@ -349,8 +351,8 @@ h6 {
 										<c:when
 											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 											<span id="sendmss" class="input-group-text send_btn"
-												onclick="sendMessage_skillowner()"><i
-												class="fas fa-location-arrow"></i></span>
+												onclick="sendMessage_skillowner('${sendUser}','${sendUser2}','${pic2}')">
+												<i class="fas fa-location-arrow"></i></span>
 										</c:when>
 										<c:otherwise>
 											<span id="sendmss" class="input-group-text send_btn"
@@ -372,6 +374,15 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
+	$(function(){
+		console.log("觸發enter");
+	 $('#textmssg').keydown(function(event){
+	  
+	    if( event.which == 13 ) {
+	        $('#sendmss').click()
+	    }
+	});
+})
 	function connectskillowner(receive,send,index){
 		cardbody.innerHTML ="";
 		connect_skillowner(receive,send,index)
@@ -381,7 +392,7 @@ h6 {
 		connect_skill(User,To)
 	}
 	
-	function colsewindow(){
+	function closewindow(){
 		cardbody.innerHTML ="";
 	document.getElementById("catalog").style.display = 'none';
 	}
@@ -392,15 +403,6 @@ h6 {
 		    }
 	});
 	
-	$(function(){
-		console.log("觸發enter");
-	 $('#textmssg').keydown(function(event){
-	  
-	    if( event.which == 13 ) {
-	        $('#sendmss').click()
-	    }
-	});
-})
 	
 	function collection(publishNo,status,mebNo) {
 		if(status==1){
@@ -555,7 +557,7 @@ h6 {
     	}
     }
     <%-- 							${reqchat[0].receiveNomember.memberNic}','${reqchat[0].sendNomember.memberNic}','${reqchat[0].receiveNomember.memberRegNo}','${reqchat[0].sendNomember.memberRegNo}','${reqchat[0].receiveNomember.memberPic} --%>
-    function sendMessage_skillowner() {
+    function sendMessage_skillowner(sendUser,sendUserNo,pic) {
     	var inputMessage = document.getElementById("textmssg");
     	var message = inputMessage.value.trim();
 
@@ -567,12 +569,12 @@ h6 {
     		var message = inputMessage.value.trim();
 //     		console.log(sendUser2);
     		var jsonMsg = {
-    			"sendUser" : "${memberBean.memberNic}",
+    			"sendUser" : sendUser,
     			"toUser" : $("#requestNic"+arrindex).text(),
-    			"sendUserNo" :${memberBean.memberRegNo},
+    			"sendUserNo" :sendUserNo,
     			"toUserNo" : $("#requestid"+arrindex).text(),
     			"message" : message,
-    			"pic" : "${memberBean.memberPic}"
+    			"pic" : pic
     		}
     		console.log(jsonMsg);
     		webSocket.send(JSON.stringify(jsonMsg)); // !!!! 送留言到endpoint
@@ -581,9 +583,6 @@ h6 {
     		inputMessage.focus();
     	}
     }
-
-
-
 
     </script>
 
