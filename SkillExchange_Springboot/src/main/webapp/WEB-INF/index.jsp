@@ -165,9 +165,9 @@
 }
 
 .last-btn {
-	width: 100%;
+	width: 90%;
 	height: 40px;
-	margin: 10px auto;
+	margin: 10px 7.5px;
 	/*  	border: 1px solid gray; */
 }
 
@@ -314,7 +314,7 @@
 }
 
 form {
-	width: 8%;
+	width: 9.5%;
 }
 </style>
 </head>
@@ -409,23 +409,23 @@ form {
 						<form method="GET" action="<c:url value='InsertKeyword1.do' />">
 							<div id="container">
 								<input type="hidden" id="keyword" name="keyword" value="">
-								<input type="hidden" id="area1" name="area1" value=""> <input
-									type="hidden" id="area2" name="area2" value=""> <input
-									type="hidden" id="area3" name="area3" value=""> <input
-									type="hidden" id="city1" name="city1" value=""> <input
-									type="hidden" id="city2" name="city2" value=""> <input
-									type="hidden" id="city3" name="city3" value=""> <input
-									type="hidden" id="city4" name="city4" value=""> <input
-									type="hidden" id="city5" name="city5" value=""> <input
-									type="hidden" id="type1" name="type1" value=""> <input
-									type="hidden" id="type2" name="type2" value=""> <input
-									type="hidden" id="type3" name="type3" value=""> <input
-									type="hidden" id="type4" name="type4" value=""> <input
-									type="hidden" id="skill1" name="skill1" value=""> <input
-									type="hidden" id="skill2" name="skill2" value=""> <input
-									type="hidden" id="skill3" name="skill3" value=""> <input
-									type="hidden" id="skill4" name="skill4" value=""> <input
-									type="hidden" id="skill5" name="skill5" value="">
+								<input type="hidden" id="area1" name="area1" value=""> 
+								<input type="hidden" id="area2" name="area2" value=""> 
+								<input type="hidden" id="area3" name="area3" value=""> 
+								<input type="hidden" id="city1" name="city1" value=""> 
+								<input type="hidden" id="city2" name="city2" value="">
+								<input type="hidden" id="city3" name="city3" value=""> 
+								<input type="hidden" id="city4" name="city4" value="">
+								<input type="hidden" id="city5" name="city5" value=""> 
+								<input type="hidden" id="type1" name="type1" value="">
+								<input type="hidden" id="type2" name="type2" value=""> 
+								<input type="hidden" id="type3" name="type3" value=""> 
+								<input type="hidden" id="type4" name="type4" value=""> 
+								<input type="hidden" id="skill1" name="skill1" value="">
+								<input type="hidden" id="skill2" name="skill2" value=""> 
+								<input type="hidden" id="skill3" name="skill3" value="">
+								<input type="hidden" id="skill4" name="skill4" value=""> 
+								<input type="hidden" id="skill5" name="skill5" value="">
 								<button type="submit" class="btn btn-secondary btn-sm last-btn">
 									<i class="fa fa-search"></i>搜尋
 								</button>
@@ -503,6 +503,9 @@ form {
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+
+
+
 	<script>
 		$('.carousel').carousel();
 	</script>

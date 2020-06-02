@@ -185,95 +185,96 @@ h2 {
 			</div>
 		</div>
 	</section>
-	<div id="searchbar">
-		<form action="InsertKeyword2.do" method="GET">
-			<div class="input-group wrap">
-				<div class="input-group-prepend">
-					<c:choose>
-						<c:when test="${((empty keyword1) && (empty keyword2))}">
-							<input type="text" class="form-control searchbar-text"
-								name="keyword2" placeholder="關鍵字...">
-						</c:when>
-						<c:when test="${(not empty keyword1) && (empty keyword2)}">
-							<input type="text" class="form-control searchbar-text"
-								name="keyword2" value="${keyword1}">
-						</c:when>
-						<c:otherwise>
-							<input type="text" class="form-control searchbar-text"
-								name="keyword2" value="${keyword2}">
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div class="input-group-append">
-					<select name="area2" id="area" class="btn btn-light searchbar"
-						style="text-align: center; text-align-last: center;">
-						<c:choose>
-							<c:when test="${empty area2}">
-								<c:choose>
-									<c:when test="${area1 eq 地區}">
-										<option selected disabled>地區</option>
-										<c:forEach var='area' items='${areaList}'>
-											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<option disabled>地區</option>
-										<c:forEach var='area' items='${areaList}' begin='0' end='4'>
-											<option
-												<c:if test="${area1 eq area.publishAreaCN}">selected="selected"</c:if>
-												value="${area.publishAreaCN}">${area.publishAreaCN}</option>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</c:when>
-							<c:otherwise>
-								<c:choose>
-									<c:when test="${area2 eq 地區}">
-										<option selected disabled>地區</option>
-										<c:forEach var='area' items='${areaList}'>
-											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<option disabled>地區</option>
-										<c:forEach var='area' items='${areaList}' begin='0' end='4'>
-											<option
-												<c:if test="${area2 eq area.publishAreaCN}">selected="selected"</c:if>
-												value="${area.publishAreaCN}">${area.publishAreaCN}</option>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</c:otherwise>
-						</c:choose>
-					</select>
-				</div>
-				<select name="skill2" id="skill" class="btn btn-light searchbar"
-					style="text-align: center; text-align-last: center;">
-					<c:choose>
-						<c:when test="${skill1 eq 技能類別}">
-							<option selected disabled>技能類別</option>
-							<c:forEach var='skill' items='${skillList}'>
-								<option value="${skill.skillNameCN}">${skill.skillNameCN}</option>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<option disabled>技能類別</option>
-							<c:forEach var='skill' items='${skillList}' begin='0' end='5'>
-								<option
-									<c:if test="${skill1 eq skill.skillNameCN}">selected="selected"</c:if>
-									value="${skill.skillNameCN}">${skill.skillNameCN}</option>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</select>
-				<div class="input-group-append">
-					<button type="submit" class="btn btn-secondary btn-sm searchbar">
-						<i class="fa fa-search"></i>搜尋
-					</button>
-				</div>
-			</div>
-		</form>
-	</div>
+<!-- 搜尋bar-start -->
+<!-- 	<div id="searchbar"> -->
+<!-- 		<form action="InsertKeyword2.do" method="GET"> -->
+<!-- 			<div class="input-group wrap"> -->
+<!-- 				<div class="input-group-prepend"> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${((empty keyword1) && (empty keyword2))}"> --%>
+<!-- 							<input type="text" class="form-control searchbar-text" -->
+<!-- 								name="keyword2" placeholder="關鍵字..."> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:when test="${(not empty keyword1) && (empty keyword2)}"> --%>
+<!-- 							<input type="text" class="form-control searchbar-text" -->
+<%-- 								name="keyword2" value="${keyword1}"> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<input type="text" class="form-control searchbar-text" -->
+<%-- 								name="keyword2" value="${keyword2}"> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 				</div> -->
+<!-- 				<div class="input-group-append"> -->
+<!-- 					<select name="area2" id="area" class="btn btn-light searchbar" -->
+<!-- 						style="text-align: center; text-align-last: center;"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${empty area2}"> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${area1 eq 地區}"> --%>
+<!-- 										<option selected disabled>地區</option> -->
+<%-- 										<c:forEach var='area' items='${areaList}'> --%>
+<%-- 											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
+<%-- 										</c:forEach> --%>
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										<option disabled>地區</option> -->
+<%-- 										<c:forEach var='area' items='${areaList}' begin='0' end='4'> --%>
+<!-- 											<option -->
+<%-- 												<c:if test="${area1 eq area.publishAreaCN}">selected="selected"</c:if> --%>
+<%-- 												value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
+<%-- 										</c:forEach> --%>
+<%-- 									</c:otherwise> --%>
+<%-- 								</c:choose> --%>
+<%-- 							</c:when> --%>
+<%-- 							<c:otherwise> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${area2 eq 地區}"> --%>
+<!-- 										<option selected disabled>地區</option> -->
+<%-- 										<c:forEach var='area' items='${areaList}'> --%>
+<%-- 											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
+<%-- 										</c:forEach> --%>
+<%-- 									</c:when> --%>
+<%-- 									<c:otherwise> --%>
+<!-- 										<option disabled>地區</option> -->
+<%-- 										<c:forEach var='area' items='${areaList}' begin='0' end='4'> --%>
+<!-- 											<option -->
+<%-- 												<c:if test="${area2 eq area.publishAreaCN}">selected="selected"</c:if> --%>
+<%-- 												value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
+<%-- 										</c:forEach> --%>
+<%-- 									</c:otherwise> --%>
+<%-- 								</c:choose> --%>
+<%-- 							</c:otherwise> --%>
+<%-- 						</c:choose> --%>
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 				<select name="skill2" id="skill" class="btn btn-light searchbar" -->
+<!-- 					style="text-align: center; text-align-last: center;"> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${skill1 eq 技能類別}"> --%>
+<!-- 							<option selected disabled>技能類別</option> -->
+<%-- 							<c:forEach var='skill' items='${skillList}'> --%>
+<%-- 								<option value="${skill.skillNameCN}">${skill.skillNameCN}</option> --%>
+<%-- 							</c:forEach> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<option disabled>技能類別</option> -->
+<%-- 							<c:forEach var='skill' items='${skillList}' begin='0' end='5'> --%>
+<!-- 								<option -->
+<%-- 									<c:if test="${skill1 eq skill.skillNameCN}">selected="selected"</c:if> --%>
+<%-- 									value="${skill.skillNameCN}">${skill.skillNameCN}</option> --%>
+<%-- 							</c:forEach> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 				</select> -->
+<!-- 				<div class="input-group-append"> -->
+<!-- 					<button type="submit" class="btn btn-secondary btn-sm searchbar"> -->
+<!-- 						<i class="fa fa-search"></i>搜尋 -->
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
 <!-- 	<div id="searchbar-new" class="wrap-lv1"> -->
 <!-- 		<div><input type="text" -->
 <!-- 								class="form-control wrap-level4 searchbar-bgcolor searchbar-text text-truncate" -->
@@ -281,6 +282,7 @@ h2 {
 
 
 <!-- 	</div> -->
+<!-- 搜尋bar-end -->
 	<div class="container2">
 		<c:choose>
 			<c:when test="${empty searchList}">
