@@ -503,9 +503,6 @@ form {
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
-
-
-
 	<script>
 		$('.carousel').carousel();
 	</script>

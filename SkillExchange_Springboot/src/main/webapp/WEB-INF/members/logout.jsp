@@ -98,17 +98,11 @@
 			<br> ${ x } 登出成功，歡迎下次再來 ^^ 。
 		</h5>
 		<br>
-
 		<jsp:useBean id='logoutBean' class='members.Model.LogoutBean'
 			scope='page' />
-
-
 		<c:set target='${logoutBean}' property='session'
 			value='${pageContext.session}' />
-
-
 	</div>
-
 	<img src="img/logout.png" class='resize' />
 
 	<!-- ---------------------要加的部份-------------------- -->

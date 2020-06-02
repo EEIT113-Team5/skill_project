@@ -412,11 +412,11 @@
 			$("#name").val("楊一元");
 			$("#nicname").val("幾摳");
 			$("#acc").val("happy");
-			$("#pwd").val("1qazxsw2");
-			$("#checkpwd").val("1qazxsw2");
+// 			$("#pwd").val("1qazxsw2");
+// 			$("#checkpwd").val("1qazxsw2");
 			$("#phone").val("0912345678");
-			$("#mail").val("shuhuei727@gmail.com");
-			$("#addr").val("台北市杉樹區北森花路6巷5號");
+			$("#mail").val("eeit11321@gmail.com");
+			$("#addr").val("杉樹區北森花路6巷5號");
 		}
 	</script>
 <!--一鍵加入會員 這裡 -->

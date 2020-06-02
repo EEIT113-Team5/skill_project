@@ -140,39 +140,19 @@
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
 							<a class="dropdown-item" href="myPublish">我的刊登</a>
 						</div></li>
-
-
-
-					<!-- 					</li> -->
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/QueryCollections.do">我的收藏</a></li>
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/contactus">聯絡我們</a></li>
 
-					<%-- 					<c:if test="${ ! empty memberBean}"> --%>
-					<!-- 						<li class="nav-item "><a class="nav-link" -->
-					<%-- 							href="<c:url value='Logout' />">登出</a></li> --%>
-					<%-- 					</c:if> --%>
-					<%-- 					<c:if test="${empty memberBean}"> --%>
-					<!-- 						<li class="nav-item "><a class="nav-link" -->
-					<%-- 							href="${jspPath}/loginInit">我要登入</a></li> --%>
-					<!-- 						<li class="nav-item "><a class="nav-link" -->
-					<%-- 							href="${jspPath}/registerInit">加入會員</a></li> --%>
-					<%-- 					</c:if> --%>
-
-
-
-
 					<li class="nav-item "><a class="nav-link"></a></li>
 					<li class="nav-item "><a class="nav-link"></a></li>
 					<li class="nav-item "><a class="nav-link"></a></li>
-					<!-- 					<li class="nav-item "><a class="nav-link"></a></li> -->
-					<!-- 					<li class="nav-item "><a class="nav-link"></a></li> -->
-					<!-- 					<li class="nav-item "><a class="nav-link"></a></li> -->
-
+					
 					<c:if test="${ ! empty memberBean}">
 						<img class="collectImg" src="${ memberBean.memberPic }" />
 					</c:if>
+					
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
