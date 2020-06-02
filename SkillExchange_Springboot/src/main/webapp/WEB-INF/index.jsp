@@ -165,8 +165,9 @@
 }
 
 .last-btn {
-	width: 8%;
-	margin: 6px auto;
+	width: 100%;
+	height: 40px;
+	margin: 10px auto;
 	/*  	border: 1px solid gray; */
 }
 
@@ -311,6 +312,10 @@
 	border-right: 1px solid #8E8E8E !important;
 	height: 12px;
 }
+
+form {
+	width: 8%;
+}
 </style>
 </head>
 
@@ -336,9 +341,9 @@
 					<h2 class="title input-group">想學什麼技能嗎?</h2>
 					<div class="input-group wrap-level2">
 						<div class="input-group-prepend wrap-level3">
-							<input type="text"
+							<input type="text" id="typing-keyword"
 								class="form-control wrap-level4 searchbar-bgcolor searchbar-text text-truncate"
-								name="keyword" placeholder="關鍵字...">
+								name="typing-keyword" placeholder="關鍵字...">
 						</div>
 						<div class="div-bar"></div>
 						<!-- Area Button trigger modal -->
@@ -385,8 +390,8 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<h6 class="modal-title title" id="skillModalTitle">技能類別選單</h6>
-										<button id="skillClick" type="button" class="close"
-											data-dismiss="modal" aria-label="Close">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
@@ -395,8 +400,8 @@
 										<div id="skillL2List" class="input-group-prepend list-level2"></div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">確定</button>
+										<button id="skillClick" type="button"
+											class="btn btn-secondary" data-dismiss="modal">確定</button>
 									</div>
 								</div>
 							</div>
@@ -404,30 +409,28 @@
 						<form method="GET" action="<c:url value='InsertKeyword1.do' />">
 							<div id="container">
 								<input type="hidden" id="keyword" name="keyword" value="">
-								<input type="hidden" id="area-1" name="area-1" value="">
-								<input type="hidden" id="area-2" name="area-2" value="">
-								<input type="hidden" id="area-3" name="area-3" value="">
-								<input type="hidden" id="area-4" name="area-4" value="">
-								<input type="hidden" id="city-1" name="city-1" value="">
-								<input type="hidden" id="city-2" name="city-2" value="">
-								<input type="hidden" id="city-3" name="city-3" value="">
-								<input type="hidden" id="city-4" name="city-4" value="">
-								<input type="hidden" id="city-5" name="city-5" value="">
-								<input type="hidden" id="type-1" name="type-1" value="">
-								<input type="hidden" id="type-2" name="type-2" value="">
-								<input type="hidden" id="type-3" name="type-3" value="">
-								<input type="hidden" id="type-4" name="type-4" value="">
-								<input type="hidden" id="type-5" name="type-5" value="">
-								<input type="hidden" id="skill-1" name="skill-1" value="">
-								<input type="hidden" id="skill-2" name="skill-2" value="">
-								<input type="hidden" id="skill-3" name="skill-3" value="">
-								<input type="hidden" id="skill-4" name="skill-4" value="">
-								<input type="hidden" id="skill-5" name="skill-5" value="">
+								<input type="hidden" id="area1" name="area1" value=""> <input
+									type="hidden" id="area2" name="area2" value=""> <input
+									type="hidden" id="area3" name="area3" value=""> <input
+									type="hidden" id="city1" name="city1" value=""> <input
+									type="hidden" id="city2" name="city2" value=""> <input
+									type="hidden" id="city3" name="city3" value=""> <input
+									type="hidden" id="city4" name="city4" value=""> <input
+									type="hidden" id="city5" name="city5" value=""> <input
+									type="hidden" id="type1" name="type1" value=""> <input
+									type="hidden" id="type2" name="type2" value=""> <input
+									type="hidden" id="type3" name="type3" value=""> <input
+									type="hidden" id="type4" name="type4" value=""> <input
+									type="hidden" id="skill1" name="skill1" value=""> <input
+									type="hidden" id="skill2" name="skill2" value=""> <input
+									type="hidden" id="skill3" name="skill3" value=""> <input
+									type="hidden" id="skill4" name="skill4" value=""> <input
+									type="hidden" id="skill5" name="skill5" value="">
+								<button type="submit" class="btn btn-secondary btn-sm last-btn">
+									<i class="fa fa-search"></i>搜尋
+								</button>
 							</div>
 						</form>
-						<button type="submit" class="btn btn-secondary btn-sm last-btn">
-							<i class="fa fa-search"></i>搜尋
-						</button>
 					</div>
 					<div class="wrap-level6">
 						<div class="k1">熱門關鍵字：</div>
@@ -560,102 +563,80 @@
 	</script>
 
 	<script>
-		var btn1 = document.getElementById("iarea");
-		btn1.onclick = function() {
-			var xhr1 = new XMLHttpRequest();
-			xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
-			xhr1.send();
-			xhr1.onreadystatechange = function() {
-				if (xhr1.readyState == 4) {
-					if (xhr1.status == 200) {
-						// 						console.log(JSON.parse(xhr1.responseText));
-						var arr = JSON.parse(xhr1.responseText);
-						// 						console.log(arr[0][0].publishAreaCN);
-						// 						-> for showing area A<-
-						var contentA = "<div class='div-list1'>";
-						contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
-								+ arr[0][0].publishAreaCN
-								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+		var xhr1 = new XMLHttpRequest();
+		xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
+		xhr1.send();
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4) {
+				if (xhr1.status == 200) {
+					// 						console.log(JSON.parse(xhr1.responseText));
+					var arr = JSON.parse(xhr1.responseText);
+					// 						console.log(arr[0][0].publishAreaCN);
+					// 						-> for showing area A<-
+					var contentA = "<div class='div-list1'>";
+					contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
+							+ arr[0][0].publishAreaCN
+							+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
 
-						for (var i = 1; i < arr[0].length; i++) {
-							contentA += "<li class='li-bg1'><div class='li-div li-div1'>"
-									+ arr[0][i].publishAreaCN
-									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						}
-						contentA += "</div>";
-						document.getElementById("areaList").innerHTML = contentA;
-						// 						-> for showing area-city B<-
-						var contentB = "";
-						for (var i = 0; i < arr[0].length; i++) {
-							contentB += "<div class='ctl-area"
-									+ (i + 1)
-									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>"
-									+ arr[0][i].publishAreaCN
-									+ "</div></li></div>";
-							contentB += "<div class='div-list2'>";
-							for (var j = 0; j < arr[1].length; j++) {
-								if (arr[0][i].publishAreaCN == arr[1][j].publishAreaCN) {
-									contentB += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
-											+ arr[1][j].cityCN + "</div></li>";
-								}
-							}
-							contentB += "</div></div>";
-						}
-						document.getElementById("cityList").innerHTML = contentB;
+					for (var i = 1; i < arr[0].length; i++) {
+						contentA += "<li class='li-bg1'><div class='li-div li-div1'>"
+								+ arr[0][i].publishAreaCN
+								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
 					}
+					contentA += "</div>";
+					document.getElementById("areaList").innerHTML = contentA;
+					// 						-> for showing area-city B<-
+					var contentB = "";
+					for (var i = 0; i < arr[0].length; i++) {
+						contentB += "<div class='ctl-area"
+								+ (i + 1)
+								+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>"
+								+ arr[0][i].publishAreaCN + "</div></li></div>";
+						contentB += "<div class='div-list2'>";
+						for (var j = 0; j < arr[1].length; j++) {
+							if (arr[0][i].publishAreaCN == arr[1][j].publishAreaCN) {
+								contentB += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
+										+ arr[1][j].cityCN + "</div></li>";
+							}
+						}
+						contentB += "</div></div>";
+					}
+					document.getElementById("cityList").innerHTML = contentB;
+					// 						-> for showing skillType C <-
+					var contentC = "<div class='div-list1'>";
+					contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
+							+ arr[2][0]
+							+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+
+					for (var m = 1; m < arr[2].length; m++) {
+						contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
+								+ arr[2][m]
+								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+					}
+					contentC += "</div>";
+					document.getElementById("skillL1List").innerHTML = contentC;
+					// 						-> for showing skills D<-
+					var contentD = "";
+					for (var m = 0; m < arr[2].length; m++) {
+						contentD += "<div class='ctl-type"
+								+ (m + 1)
+								+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"
+								+ arr[2][m] + "</div></li></div>";
+						contentD += "<div class='div-list2'>";
+						for (var n = 0; n < arr[3].length; n++) {
+							if (arr[2][m] == arr[3][n].typeCN) {
+								contentD += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
+										+ arr[3][n].skillNameCN + "</div></li>";
+							}
+						}
+						contentD += "</div></div>";
+					}
+					document.getElementById("skillL2List").innerHTML = contentD;
 				}
 			}
 		}
 	</script>
 
-	<script>
-		var btn2 = document.getElementById("iskill");
-		btn2.onclick = function() {
-			var xhr2 = new XMLHttpRequest();
-			xhr2.open("GET", "<c:url value='GetIndexBtn.do' />", true);
-			xhr2.send();
-			xhr2.onreadystatechange = function() {
-				if (xhr2.readyState == 4) {
-					if (xhr2.status == 200) {
-						// 						console.log(JSON.parse(xhr2.responseText));
-						var arr = JSON.parse(xhr2.responseText);
-						// 						console.log(arr[0][0].publishAreaCN);
-						// 						-> for showing skillType C <-
-						var contentC = "<div class='div-list1'>";
-						contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
-								+ arr[2][0]
-								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-
-						for (var m = 1; m < arr[2].length; m++) {
-							contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
-									+ arr[2][m]
-									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						}
-						contentC += "</div>";
-						document.getElementById("skillL1List").innerHTML = contentC;
-						// 						-> for showing skills D<-
-						var contentD = "";
-						for (var m = 0; m < arr[2].length; m++) {
-							contentD += "<div class='ctl-type"
-									+ (m + 1)
-									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"
-									+ arr[2][m] + "</div></li></div>";
-							contentD += "<div class='div-list2'>";
-							for (var n = 0; n < arr[3].length; n++) {
-								if (arr[2][m] == arr[3][n].typeCN) {
-									contentD += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
-											+ arr[3][n].skillNameCN
-											+ "</div></li>";
-								}
-							}
-							contentD += "</div></div>";
-						}
-						document.getElementById("skillL2List").innerHTML = contentD;
-					}
-				}
-			}
-		}
-	</script>
 
 	<script>
 		$(document).on(
@@ -719,7 +700,7 @@
 
 	<script>
 		var north = [ "基隆", "台北", "新北", "桃園", "新竹" ];
-		var middle = [ "苗栗", "台中", "彰化", "南投", "雲林" ];
+		var center = [ "苗栗", "台中", "彰化", "南投", "雲林" ];
 		var south = [ "嘉義", "台南", "高雄", "屏東" ];
 		var east = [ "台東", "花蓮", "宜蘭" ];
 		$(document).on(
@@ -746,14 +727,14 @@
 				'.checkbox-input[value*="中部"]',
 				function() {
 					if ($(this).is(":checked")) {
-						for (i = 0; i < middle.length; i++) {
-							$('.checkbox-input[value*="' + middle[i] + '"]')
+						for (i = 0; i < center.length; i++) {
+							$('.checkbox-input[value*="' + center[i] + '"]')
 									.prop("checked", true).attr("disabled",
 											true);
 						}
 					} else {
-						for (i = 0; i < middle.length; i++) {
-							$('.checkbox-input[value*="' + middle[i] + '"]')
+						for (i = 0; i < center.length; i++) {
+							$('.checkbox-input[value*="' + center[i] + '"]')
 									.prop("checked", false).attr("disabled",
 											false);
 						}
@@ -800,21 +781,121 @@
 	</script>
 
 	<script>
+		var art = [ "歌唱", "跳舞", "繪畫", "演戲" ];
+		var life = [ "化妝", "煮飯", "居家清潔" ];
+		var sport = [ "足球", "羽毛球", "網球", "排球" ];
+		var language = [ "法文", "日文", "韓文", "西班牙文" ];
+		var pet = [ "養鸚鵡", "養狗", "養貓", "養魚" ]
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="才藝"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < art.length; i++) {
+							$('.checkbox-input[value*="' + art[i] + '"]').prop(
+									"checked", true).attr("disabled", true);
+						}
+					} else {
+						for (i = 0; i < art.length; i++) {
+							$('.checkbox-input[value*="' + art[i] + '"]').prop(
+									"checked", false).attr("disabled", false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="生活"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < life.length; i++) {
+							$('.checkbox-input[value*="' + life[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < life.length; i++) {
+							$('.checkbox-input[value*="' + life[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="運動"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < sport.length; i++) {
+							$('.checkbox-input[value*="' + sport[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < sport.length; i++) {
+							$('.checkbox-input[value*="' + sport[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="語言"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < language.length; i++) {
+							$('.checkbox-input[value*="' + language[i] + '"]')
+									.prop("checked", true).attr("disabled",
+											true);
+						}
+					} else {
+						for (i = 0; i < language.length; i++) {
+							$('.checkbox-input[value*="' + language[i] + '"]')
+									.prop("checked", false).attr("disabled",
+											false);
+						}
+					}
+				})
+
+		$(document).on(
+				"change",
+				'.checkbox-input[value*="寵物"]',
+				function() {
+					if ($(this).is(":checked")) {
+						for (i = 0; i < pet.length; i++) {
+							$('.checkbox-input[value*="' + pet[i] + '"]').prop(
+									"checked", true).attr("disabled", true);
+						}
+					} else {
+						for (i = 0; i < pet.length; i++) {
+							$('.checkbox-input[value*="' + pet[i] + '"]').prop(
+									"checked", false).attr("disabled", false);
+						}
+					}
+				})
+	</script>
+
+	<script>
 		var btn3 = document.getElementById("areaClick");
 		btn3.onclick = function() {
-			console.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
-			var list = $("#cityList >div div:first-child input:checkbox:checked");
+			// 			console.log($("#cityList"));
+			console
+					.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
+			var list = $("#cityList >div div:first-child input:checkbox:checked:not(:disabled)");
 			//console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
 			for (var i = 0; i < list.length; i++) {
 				if (list[i].value.includes("部")) {
-					var id1 = "area-" + m;
+					var id1 = "area" + m;
 					var A = document.getElementById(id1);
 					A.value = list[i].value;
 					m++;
 				} else {
-					var id2 = "city-" + n;
+					var id2 = "city" + n;
 					var B = document.getElementById(id2);
 					B.value = list[i].value;
 					n++;
@@ -823,5 +904,45 @@
 		}
 	</script>
 
+	<script>
+		var btn4 = document.getElementById("skillClick");
+		btn4.onclick = function() {
+			// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked"));
+			console
+					.log($("#skillL2List >div div:first-child input:checkbox:checked")[0].value);
+			var list = $("#skillL2List >div div:first-child input:checkbox:checked:not(:disabled)");
+			//console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
+			var m = 1;
+			var n = 1;
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].value.includes("才藝")
+						|| list[i].value.includes("生活")
+						|| list[i].value.includes("運動")
+						|| list[i].value.includes("語言")
+						|| list[i].value.includes("寵物")) {
+					var id1 = "type" + m;
+					var A = document.getElementById(id1);
+					A.value = list[i].value;
+					m++;
+				} else {
+					var id2 = "skill" + n;
+					var B = document.getElementById(id2);
+					B.value = list[i].value;
+					n++;
+				}
+			}
+		}
+	</script>
+
+	<script>
+		$(function() {
+			$("#typing-keyword").keyup(function() {
+				var input = $(this).val();
+				console.log(input);
+				var A = document.getElementById("keyword");
+				A.value = input;
+			})
+		})
+	</script>
 </body>
 </html>

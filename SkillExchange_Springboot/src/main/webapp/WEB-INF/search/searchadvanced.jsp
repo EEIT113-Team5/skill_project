@@ -337,19 +337,19 @@ h2 {
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		crossorigin="anonymous"></script>
 <!-- 	<script> -->
-// 		$(function() {
-// 			let divPosition = $("#searchbar").offset().top;
-// 			console.log("divPosition=" + divPosition);
-// 			$(window).scroll(function() {
-// 				let scrollTop = $(this).scrollTop();
-// 				//             console.log("scrollTop="+scrollTop);    
-// 				if (scrollTop > divPosition) {
-// 					$("#searchbar").addClass("fixed_div");
-// 				} else {
-// 					$("#searchbar").removeClass("fixed_div");
-// 				}
-// 			});
-// 		});
+<!-- 		$(function() { -->
+<!-- 			let divPosition = $("#searchbar").offset().top; -->
+<!-- 			console.log("divPosition=" + divPosition); -->
+<!-- 			$(window).scroll(function() { -->
+<!-- 				let scrollTop = $(this).scrollTop(); -->
+<!-- 				//             console.log("scrollTop="+scrollTop);     -->
+<!-- 				if (scrollTop > divPosition) { -->
+<!-- 					$("#searchbar").addClass("fixed_div"); -->
+<!-- 				} else { -->
+<!-- 					$("#searchbar").removeClass("fixed_div"); -->
+<!-- 				} -->
+<!-- 			}); -->
+<!-- 		}); -->
 <!-- 	</script> -->
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
