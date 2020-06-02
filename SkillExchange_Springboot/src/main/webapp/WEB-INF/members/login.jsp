@@ -47,6 +47,7 @@
 <link rel="stylesheet" href="pluginstemp/slick/slick.css">
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="csstemp/style.css">
+
 <!-- ---------------------要加的部份-------------------- -->
 
 
@@ -134,25 +135,23 @@
 							</div>
 							<div class="form-group">
 								<div class="custom-control custom-checkbox">
-									<input class="custom-control-input" id="rememberPasswordCheck"
-										name="rememberPasswordCheck" type="checkbox" /><label
-										class="custom-control-label" for="rememberPasswordCheck">記住密碼</label>
+									<input class="custom-control-input" id="oneInput"
+										onclick='oneKey()' name="rememberPasswordCheck" type="checkbox" />
+									<label class="custom-control-label" for="oneInput">記住密碼</label>
 								</div>
 							</div>
+							
 							<div
 								class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
 								<!-- 											<a class="small" href="password.html">忘記密碼?</a> -->
-
-								<input type="button" id="oneInput" class="btn btn-danger"
-									onclick='oneKey()' value='一鍵登入' />
-
-								<div>
-									<button type="submit" class="btn btn-info">登入</button>
-									<!-- 											這裡 -->
+								<div class="btn-group">
 									<input type='button' class="btn btn-primary"
-										onclick='fbLogin()' value="FaceBook登入" /> <input
-										type='button' class="btn btn-primary" onclick='googleSignIn()'
-										value="Google登入" />
+										onclick='fbLogin()' value="FaceBook" /> 
+									<input type='button' class="btn btn-danger" 
+									    onclick='googleSignIn()' value="Google" />
+								</div>
+								<div>
+									<button type="submit" class="btn btn-info">登入</button>								
 								</div>
 								<!-- 										這裡 -->
 							</div>
@@ -161,6 +160,8 @@
 					<div class="card-footer text-center">
 						<div class="small">
 							<a href="registerInit">還沒有帳號 ! 點我加入會員!</a>
+<!-- 							<input type="button" id="oneInput" class="btn" -->
+<!-- 									onclick='oneKey()' value='一鍵登入' /> -->
 						</div>
 					</div>
 				</div>
