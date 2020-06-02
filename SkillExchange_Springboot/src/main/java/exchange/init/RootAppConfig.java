@@ -57,7 +57,7 @@ public class RootAppConfig {
 		// hibernate找sessionFactory掃描的package
 		factory.setPackagesToScan(new String[] { "activity.bean", "comment.bean", "myPublish.Model",
 				"publishCheckPage.Model", "publishPage.Model", "skillClass.model", "contactUs.model", "myCollection",
-				"skillClass.model", "members.Model", "messageboard", "search.model", "messageAnn.model","sendmail" });
+				"skillClass.model", "members.Model", "messageboard", "search.model", "messageAnn.model","sendmail","scheduler" });
 //		if (GlobalService.DB_TYPE == GlobalService.DB_TYPE_SQLSERVER) {
 		factory.setDataSource(sqlServerDataSource());
 		factory.setHibernateProperties(additionalPropertiesMsSQL());
@@ -90,7 +90,7 @@ public class RootAppConfig {
 	private Properties additionalPropertiesMsSQL() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", org.hibernate.dialect.SQLServer2012Dialect.class);
-		properties.put("hibernate.show_sql", Boolean.TRUE);
+		properties.put("hibernate.show_sql", Boolean.FALSE);
 		properties.put("hibernate.format_sql", Boolean.TRUE);
 		properties.put("default_batch_fetch_size", 10);
 //		properties.put("hibernate.hbm2ddl.auto", "update");

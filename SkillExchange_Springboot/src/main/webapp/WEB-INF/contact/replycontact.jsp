@@ -37,7 +37,6 @@
 	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
 	crossorigin="anonymous"></script>
 
-
 <style>
 font {
 	color: red;
@@ -48,6 +47,7 @@ font {
 	color:white;
 }
 </style>
+
 
 </head>
 
@@ -153,6 +153,7 @@ font {
   
 
 </script>
+
 	<%
 		session.removeAttribute("MsgOK");
 		session.removeAttribute("MsgUpOK");

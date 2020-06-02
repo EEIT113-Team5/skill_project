@@ -1,13 +1,17 @@
 package exchange.init;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.hibernate.SessionFactory;
+import org.quartz.CronTrigger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -20,8 +24,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "activity", "comment", "myPublish", "exchange.init", "publishCheckPage", "publishPage",
-		"publishSkill", "skillClass", "home.controller", "contactUs", "myCollection", "members", "messageboard","messageAnn","socket",
-		"search" ,"sendmail","scheduler"})
+		"publishSkill", "skillClass", "home.controller", "contactUs", "myCollection", "members", "messageboard",
+		"messageAnn", "socket", "search", "sendmail", "scheduler" })
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Autowired
@@ -47,10 +51,19 @@ public class WebAppConfig implements WebMvcConfigurer {
 		resolver.setMaxUploadSize(81920000);
 		return resolver;
 	}
-	
+
 	@Bean
 	public ApplicationContextHelper applicationContextHelper() {
 		return new ApplicationContextHelper();
+	}
+
+	@Bean(name = "scheduler")
+	public SchedulerFactoryBean schedulerFactoryBean(List<CronTrigger> triggerFactoryBeans) {
+		SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
+		CronTrigger[] cronTriggers = new CronTrigger[triggerFactoryBeans.size()];
+		cronTriggers = triggerFactoryBeans.toArray(cronTriggers);
+		scheduler.setTriggers(cronTriggers);
+		return scheduler;
 	}
 
 //分派器如果找不到資源(css, 圖檔等等)會交給此default方法來找這些資源
@@ -74,5 +87,5 @@ public class WebAppConfig implements WebMvcConfigurer {
 		openSessionInViewInterceptor.setSessionFactory(sessionFactory);
 		registry.addWebRequestInterceptor(openSessionInViewInterceptor).addPathPatterns("/**");
 	}
-	
+
 }
