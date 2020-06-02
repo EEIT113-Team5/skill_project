@@ -149,7 +149,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="container-fluid" style="width:80%" >
+	<div class="container-fluid" style="width:83%" >
 		<div class="row">
 			<div style="display: flex">
 				<div style="flex: 0.5"></div>
@@ -275,7 +275,7 @@
 
 				</div>
 				<div style="flex: 0.1"></div>
-				<div style="flex: 5">
+				<div style="flex: 6.4">
 					<div id="reply">
 						<!-- 放對話框 -->
 					</div>
@@ -398,9 +398,9 @@
 	     var w_width = 1000; 
 	     var w_height = 500; 
 	     var x = (screen.width - w_width) /2;
-	     var y = (screen.height - w_height) / 3; 
+	     var y = (screen.height - w_height) / 5; 
 // 	url='UpdateActivity?activityid='+activityid+"&memberid="+memberid+"&title="+title+"&category="+category+"&descript="+descript+"&beginDay="+beginDay+"&beginTime="+beginTime+"&endDay="+endDay+"&endTime="+endTime+"&position="+position+"&lat="+lat+"&long1="+long1+"&group1="+group1+"&group2="+group2+"&imgB64="+imgB64;
-	     window.open('OpenMap?activityid='+activityid,'地圖', config = 'height=515,width=720,top=' + y + ',left=' + x +',location=no,resizable=no,toolbar=no'); }
+	     window.open('OpenMap?activityid='+activityid,'地圖', config = 'height=670,width=936,left=' + x +',location=no,resizable=no,toolbar=no'); }
    window.setInterval(fetch,20000);
    window.onload = fetch;
    function fetch(){

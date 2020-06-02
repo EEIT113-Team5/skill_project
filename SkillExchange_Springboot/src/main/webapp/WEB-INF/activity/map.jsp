@@ -44,6 +44,20 @@ li a:hover {
 	margin: 0;
 	padding: 0;
 }
+.leaflet-popup-content-wrapper {
+    padding: 0.5px 0.5px;
+    text-align: left;
+    border-radius: 12px;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background:white;
+    color: #333;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+.leaflet-popup-content {
+    margin: 13px 8px 8px 8px;
+    line-height: 0.8;
+}
 </style>
 </head>
 <body>
@@ -51,8 +65,8 @@ li a:hover {
 	<%-- 		<%-- 		<jsp:include page="/fragment/left.jsp" /> --%>
 	<!-- 		<div id="layoutSidenav_content"> -->
 	<!-- 			<main class="a"> -->
-	<div style="width: 1000px; height: 55px;">
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<div style="width: 100%; height: 55px;">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link" href="#"
 					id="place">本活動地點</a></li>
@@ -72,7 +86,7 @@ li a:hover {
 		</nav>
 	</div>
 
-	<div id="mapid" style="width: 1000px; height: 685px;"></div>
+	<div id="mapid" style="width: 100%; height: 80vw;"></div>
 
 
 
@@ -99,7 +113,8 @@ li a:hover {
        var btn=document.getElementById("place");
        btn.onclick=initial;
        window.onload=initial;
-       var mymap = L.map('mapid').setView([25.043631, 121.457477 ], 11);		
+//        .setView([24.976099, 121.585693], 10);	
+       var mymap = L.map('mapid')	
 		var tile = L.tileLayer(
 				'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 					minZoom : 8,
@@ -132,10 +147,14 @@ li a:hover {
 //     	    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     	});
 		var myLocation;
+		
 		mymap.on('locationfound', function(e) {
 			 myLocation = e.latlng
+			
 //	 		  var radius = e.accuracy / 2;
 			  L.marker(e.latlng,  {icon: Icon}).addTo(mymap).bindPopup("<h4>目前位置</h4>").openPopup();
+
+			  mymap.setView(e.latlng, 11);
 //	 		  L.circle(e.latlng, radius).addTo(mymap);
 			  
 			});
@@ -152,7 +171,7 @@ li a:hover {
 	    var clickplace = L.latLng(e.latlng)
 	      popup
           .setLatLng(e.latlng)
-          .setContent("<h5>座標：" + e.latlng.toString().substr(6,27)+"<br>距離目前位置:"+(myLocation.distanceTo(clickplace)/1000).toString().substr(0,4)+"km</h5>")
+          .setContent("<h5><b>距離目前位置:"+(myLocation.distanceTo(clickplace)/1000).toString().substr(0,4)+"km</b></h5>")
           .openOn(mymap);
 
 	}
@@ -187,12 +206,25 @@ li a:hover {
                     sitemarker.clearLayers(); 
 					for(var i=0; i<req.length; i++){
 						if(req[i].lat+"1" !="1" && req[i].long1+"1" !="1"){
-					    L.marker([ req[i].lat,req[i].long1 ]).bindPopup('<h4>'+req[i].title+'</h4>')
+							if(req[i].imgB64==null){
+							img="<img src='activityimg/default.jpg' class='card-img-top' style='width: 100%; height: 130px;' />";
+							} else {
+							img="<img src='data:image/jpg;base64,"+req[i].imgB64+"' class='card-img-top' style='width: 100%; height: 130px' />";
+								}
+							popcontent="<div class='card'>"+img;
+							popcontent+="<div class='card-body'><h5 class='card-title'><b>"+req[i].title+"</b></h5>";
+							popcontent+= "<p class='card-text'><i class='fa fa-calendar' aria-hidden='true'></i>&nbsp;"+req[i].beginDay+"</p>";
+							popcontent+= "<p class='card-text'><i class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;"+req[i].position.substr(0,12)+"...</p>";
+							popcontent+= "<a href='ChooseOneActivity?activityid="+req[i].activityid+"' style='color:black' class='btn btn-primary'>查看詳情</a></div></div>";								
+							var popup = L.popup()
+							.setContent(popcontent)
+							.openOn(sitemarker);
+// 							'<h4>'+req[i].title+'</h4>'
+					    L.marker([ req[i].lat,req[i].long1 ]).bindPopup(popup)
 						.addTo(sitemarker).on('mouseover', function() {
 							this.openPopup();
-						}).on('mouseout', function (e) {
-				            this.closePopup();
-				        });
+// 							mymap.setView([ req[i].lat,req[i].long1 ].latlng, 11);
+						});
 						}
 					}
 // 					mymap.setView([ req[1].lat,req[1].long1 ], 11)
