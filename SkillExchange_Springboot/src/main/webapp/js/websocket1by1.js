@@ -14,6 +14,8 @@ var webSocket;
 function connect_skill(sendUser, sendTo) {
 	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
 			+ sendUser+ "/"+sendTo;
+	
+	document.getElementById("catalog").style.display = 'none';
 	document.getElementById("catalog").style.display = 'block';
 	output = document.getElementById("output");
 
@@ -45,7 +47,7 @@ function connect_skill(sendUser, sendTo) {
 
 
 function onOpen(evt) { // 連線時觸發
-
+	
 	console.log("open");
 }
 function onMessage(evt) { // 收到訊息時觸發

@@ -52,7 +52,7 @@ public class DemoWS {
 	private Integer receiveNo;// 接收訊息會員編號
 	private String message;// 聊天信息
 	private String pic;//聊天圖片
-//	private String history;//歷史訊息
+	private String hmsg2;//歷史訊息
 	@Autowired
 	private SkillDao Dao; 
     public static DemoWS DemoWS;
@@ -84,7 +84,7 @@ public class DemoWS {
 					hmsg.append(history.get(i).getChatLog());															 
 					};
 					System.out.println(hmsg);
-					String hmsg2=hmsg.toString();
+					hmsg2=hmsg.toString();
 				this.session.getAsyncRemote().sendText(hmsg2);							
 		}
 		System.out.println("這是對面:"+sendTo);
@@ -143,8 +143,10 @@ public class DemoWS {
 			System.out.println("保存訊息到資料庫");
 			userSession.getAsyncRemote().sendText(msg);
 			System.out.println("發出訊息者:"+sendUser+"收到訊息者:"+toUser);
-			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg,currentTime);
+			
+			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg,currentTime);			
 			DemoWS.Dao.LogUpdate(receiveNo,sendNo,toUser,sendUser,msg1,currentTime);
+			
 			
 			
 			
@@ -188,13 +190,14 @@ public class DemoWS {
 		} else {
 			LocalDateTime currentTime = LocalDateTime.now();		
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy'年'MM'月'dd'日' a HH:mm");	
+
 			String msg1 = "<div class='d-flex justify-content-start mb-4'><div class='img_cont_msg'><img src=" + img
 					+ " class='rounded-circle user_img_msg'></div><div class='timetip'><div class='msg_cotainer'>" + message
 					+ "<span class='timetiptext'>"+dtf.format(currentTime)+"</span></div></div></div>";
 			System.out.println("sendmess:");
 						
 			this.session.getAsyncRemote().sendText(msg1);// 提供阻塞式的消息发送方式
-			
+	
 			// this.session.getAsyncRemote().sendText(message);//提供非阻塞式的消息传输方式。
 		}
 

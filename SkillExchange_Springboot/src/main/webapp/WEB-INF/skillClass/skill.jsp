@@ -110,26 +110,27 @@
 									</c:forEach>
 								</c:forEach>
 							</c:if>
+							
 							<div class="col-sm-4 mt-3">
-							<div class="card" style="width: 90%; height: 700px">
+							<div class="card" style="width: 100%; height: 600px;margin-top:20px">
 											
 								<div>
 									<span>
 									<img src="${skills.member.memberPic}" style="width: 70px; height: 70px;margin-left:12px; margin-top: 5px" class="collectImg"/>
 									${skills.member.memberNic}
 									</span>
-									<span class="time321" style="float: right; margin-top: 5px">${skills.updateTime}</span>
+									<span class="time321" style="float: right;margin-top:22px; margin-right:10px;font-size:18px;">${skills.updateTime}</span>
 								</div>
 															
-							<div class="card"  style="height:460px;margin:10px" onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'">
+							<div class="card"  style="height:360px;margin:5px">
 								
-								<img class="card-img-top" style="height:75%"src="${skills.publishPic}" alt="Card image cap"/>
+								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:72%"src="${skills.publishPic}" alt="Card image cap"/>
 								<div class="card-body">
 									<div style="margin-bottom: 7px;">
 										<h3 class="JQellipsis2">${skills.publishTitle}</h3>
 									</div>
 									<div class="detail">
-										<h6 style="margin-bottom: 7px; class="JQellipsis">${skills.publishDetail}</h6>
+										<h6 style="margin-bottom: 7px;margin-left: 5px" class="JQellipsis">${skills.publishDetail}</h6>
 									</div>
 								
 								</div>
@@ -307,7 +308,7 @@
 	    });
 	});
 	$(function(){
-	    var len = 40; // Pubulish Detail超過40個字以"..."取代
+	    var len = 49; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());
@@ -319,7 +320,7 @@
 	
 	
 	$(function(){
-	    var len = 10; // Publish Title超過10個字以"..."取代
+	    var len = 14; // Publish Title超過10個字以"..."取代
 	    $(".JQellipsis2").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());

@@ -115,10 +115,16 @@ h6 {
 }
 
 #catalog {
+	
 	position: fixed;
 	bottom: 0px;
 	/* 	left: 0px; */
 	right: 350px;
+}
+.aboutme {
+  border-style: inset;
+  border-width: 3px;
+  border-color: coral;
 }
 </style>
 </head>
@@ -181,7 +187,8 @@ h6 {
 										</div>
 									</div>
 								</div>
-								<span style="float: right"> <c:choose>
+								<span style="float:right"> 
+								<c:choose>
 										<c:when test="${have!=skills.publishNo}">
 											<button type="button" id="add${skills.publishNo}"
 												class="btn btn-success "
@@ -200,16 +207,18 @@ h6 {
 												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
 										</c:otherwise>
 
-									</c:choose>
-								</span> <br> <br>
-
-
+								</c:choose>
+								</span>
+								<br><br>
+								<span style="float: right" class="text">上次更新時間:${time1}</span>
 							</div>
+							<br>
 							<hr>
-							<span style="float: right" class="text">上次更新時間:${time1}</span>
+							
 							<h2 class="text">${skills.publishTitle}</h2>
-							<img style="margin-left: 40px" width="400px" height="300px"
+							<img style="margin-left:40px ;width:500px;height:300px"
 								src="${jspPath}/${skills.publishPic}">
+							
 							<!--刊登圖片-->
 							<div class="text">
 								<p class="whitespace">${skills.publishDetail}<br />
@@ -239,7 +248,7 @@ h6 {
 		</div>
 
 		<div id="right">
-			<div style="background-color: pink; width: auto; margin: 10px auto">
+			<div style="background-color: white;border-style: double;; width: auto; margin: 10px auto">
 				<c:choose>
 					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 						<table>
@@ -247,14 +256,14 @@ h6 {
 
 								<c:forEach var='data' varStatus='var' items='${reqchat}'>
 									<tr>
-										<td>${data.reqid}</td>
-										<td id="requestid${var.index}">${data.sendNo}</td>
-										<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
+										<td>您有來自</td>
+										<td id="requestid${var.index}"></td>
+										<td id="requestNic${var.index}"></td>
 										<td><img id="requestPic${var.index}"
 											class="rounded-circle user_img" height="250px" width="350px"
-											src='${data.sendNomember.memberPic}' /></td>
+											src='${data.sendNomember.memberPic}' />${data.sendNomember.memberNic} 的訊息</td>
 										<td style="width: 180px"><button class="btn btn-primary"
-												onclick="connect_skillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
+												onclick="connectskillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -263,18 +272,17 @@ h6 {
 					</c:when>
 					<c:otherwise>
 						<div class="card-body">
-							<h4 class="card-title" id='sendto'>關於我:</h4>
-							<br>
-							<h5>擁有的技能:${memberski}</h5>
-							<h5>居住區域:${sessionScope.memberBean.memberCountry}
+							<h4 class="card-title" id='sendto'>關於${sendTo}:</h4>							
+							<h5 class="aboutme">其他擁有的技能:${memberski}</h5>
+							<h5 class="aboutme">居住區域:${sessionScope.memberBean.memberCountry}
 								${sessionScope.memberBean.memberAddr}</h5>
-							<h5>Email:${sessionScope.memberBean.memberMail}</h5>
+							<h5 class="aboutme">電子信箱:${sessionScope.memberBean.memberMail}</h5>
 							<div class="card-text"></div>
 							<c:if test="${status==1}">
 							<c:set var="chatstatus" value="${status}" />
 							</c:if>
 							<button id="disabled" class="btn btn-primary"
-								onclick="connect_skill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
+								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
 							</button>
 						</div>
 
@@ -291,8 +299,7 @@ h6 {
 									<c:choose>
 										<c:when
 											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-											<img src="" id="user_img1" class="rounded-circle user_img"
-												height="250px" width="350px">
+											<img src="" id="user_img1" class="rounded-circle user_img">
 										</c:when>
 										<c:otherwise>
 											<img src="${pic1}" class="rounded-circle user_img">
@@ -320,17 +327,12 @@ h6 {
 									<span><i class="fas fa-video"></i></span> <span><i
 										class="fas fa-phone"></i></span>
 								</div>
+							</div>
+								<span id="action_menu_btn" >								
 								<a type="button" href="InsertCommentForm" class="btn text-white">結束交換</a>
-							</div>
-							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
-							<div class="action_menu">
-								<ul>
-									<li><i class="fas fa-user-circle"></i> View profile</li>
-									<li><i class="fas fa-users"></i> Add to close friends</li>
-									<li><i class="fas fa-plus"></i> Add to group</li>
-									<li><i class="fas fa-ban"></i> Block</li>
-								</ul>
-							</div>
+								<i class="fa fa-times" aria-hidden="true" onclick=colsewindow() ></i>
+								</span>
+						
 
 						</div>
 						<div id="cardbody" class="card-body msg_card_body"></div>
@@ -370,7 +372,19 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
+	function connectskillowner(receive,send,index){
+		cardbody.innerHTML ="";
+		connect_skillowner(receive,send,index)
+	}
+	function connectskill(User,To){
+		cardbody.innerHTML ="";
+		connect_skill(User,To)
+	}
 	
+	function colsewindow(){
+		cardbody.innerHTML ="";
+	document.getElementById("catalog").style.display = 'none';
+	}
 	$(function(){
 		console.log('${chatstatus}');
 		 if('${chatstatus}' == 1 ) {
@@ -509,7 +523,7 @@ h6 {
     function connect_skillowner(sendUser, sendTo, index) {
     	
     	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint + "/"
-    			+ sendUser;
+		+ sendUser+ "/"+sendTo;
     	document.getElementById("catalog").style.display = 'block';
     	output = document.getElementById("output");
     	arrindex = index;
