@@ -72,7 +72,12 @@ public class CronExpParser {
 		if (tmpCorns.length == 6) {
 			// 解析月
 			if (!tmpCorns[4].equals("*")) {
-				sBuffer.append(tmpCorns[4]).append("月");
+				if(tmpCorns[4].contains("/")) {
+					String[] month = tmpCorns[4].split("/");
+					sBuffer.append("每").append(month[1]).append("個月");
+				}else {
+					sBuffer.append(tmpCorns[4]).append("月");
+				}
 			} else {
 				sBuffer.append("每月");
 			}
@@ -115,7 +120,12 @@ public class CronExpParser {
 			// 解析日
 			if (!tmpCorns[3].equals("?")) {
 				if (!tmpCorns[3].equals("*")) {
-					sBuffer.append(tmpCorns[3]).append("日");
+					if(tmpCorns[4].contains("/")) {
+						String[] day = tmpCorns[3].split("/");
+						sBuffer.append("每").append(day[1]).append("日");
+					}else {
+						sBuffer.append(tmpCorns[3]).append("日");
+					}
 				} else {
 					sBuffer.append("每日");
 				}
@@ -123,21 +133,36 @@ public class CronExpParser {
 
 			// 解析時
 			if (!tmpCorns[2].equals("*")) {
-				sBuffer.append(tmpCorns[2]).append("時");
+				if(tmpCorns[2].contains("/")) {
+					String[] hour = tmpCorns[2].split("/");
+					sBuffer.append("每").append(hour[2]).append("小時");
+				}else {
+					sBuffer.append(tmpCorns[2]).append("時");
+				}
 			} else {
 				sBuffer.append("每時");
 			}
 
 			// 解析分
 			if (!tmpCorns[1].equals("*")) {
-				sBuffer.append(tmpCorns[1]).append("分");
+				if(tmpCorns[1].contains("/")) {
+					String[] min = tmpCorns[1].split("/");
+					sBuffer.append("每").append(min[1]).append("分");
+				}else {
+					sBuffer.append(tmpCorns[1]).append("分");
+				}
 			} else {
 				sBuffer.append("每分");
 			}
 
 			// 解析秒
 			if (!tmpCorns[0].equals("*")) {
-				sBuffer.append(tmpCorns[0]).append("秒");
+				if(tmpCorns[0].contains("/")) {
+					String[] sec = tmpCorns[0].split("/");
+					sBuffer.append("每").append(sec[1]).append("秒");
+				}else {
+					sBuffer.append(tmpCorns[0]).append("秒");
+				}
 			} else {
 				sBuffer.append("每秒");
 			}

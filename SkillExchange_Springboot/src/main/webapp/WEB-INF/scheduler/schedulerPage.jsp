@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zt-TW">
 
@@ -15,6 +15,7 @@
 <meta name="author" content="" />
 <title>排程管理-Skill Exchange</title>
 <link href="css/styles.css" rel="stylesheet" />
+<link href="css/wickedpicker.min.css" rel="stylesheet" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -39,14 +40,16 @@
 	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
 	crossorigin="anonymous"></script>
 
+<script src="js/wickedpicker.min.js" type="text/javascript"></script>
 <style>
 font {
 	color: red;
 	margin-left: 20px;
 }
-.currentPage{
-	background-color:	#0080FF;
-	color:white;
+
+.currentPage {
+	background-color: #0080FF;
+	color: white;
 }
 </style>
 
@@ -81,7 +84,8 @@ font {
 									<td>${jobList.cronExpression}</td>
 									<td>${jobList.status}</td>
 									<td>${jobList.updateTimeStr}</td>
-									<td><a class="btn btn-success" id="updJob${jobList.jobNo}" href="#">編輯</a>
+									<td><a class="btn btn-success" id="updJob${jobList.jobNo}"
+										href="#" data-toggle="modal" data-target="#editScheduleModal">編輯</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -123,34 +127,44 @@ font {
 	<script type="text/javascript">
 		// basic usage
 		$('.tablemanager').tablemanager({
-			
-			appendFilterby: false,
-			debug: true,
-			vocabulary: {
-    voc_filter_by: 'Filter By',
-    voc_type_here_filter: 'Filter...',
-    voc_show_rows: 'Rows Per Page'
-  },
-			pagination: true,
+
+			appendFilterby : false,
+			debug : true,
+			vocabulary : {
+				voc_filter_by : 'Filter By',
+				voc_type_here_filter : 'Filter...',
+				voc_show_rows : 'Rows Per Page'
+			},
+			pagination : true,
 		});
 		$(".pagesControllers").addClass("pagination");
 		$(".pagecontroller").addClass("page-link");
 	</script>
 
 	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-36251023-1' ]);
+		_gaq.push([ '_setDomainName', 'jqueryscript.net' ]);
+		_gaq.push([ '_trackPageview' ]);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+	<script type="text/javascript">
+		$('#timepicker').wickedpicker({
+			now : '15:30',
+			twentyFour : true,
+			showSeconds : true
+		});
+	</script>
 
 	<%
 		session.removeAttribute("MsgOK");

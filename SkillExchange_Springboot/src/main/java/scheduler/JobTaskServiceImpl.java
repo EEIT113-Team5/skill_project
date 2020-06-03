@@ -54,6 +54,13 @@ public class JobTaskServiceImpl implements JobTaskService {
 			String cronStr = job.getCronExpression();
 			String transCron = CronExpParser.translateToChinese(cronStr);
 			job.setCronExpression(transCron);
+			
+			String status = job.getStatus();
+			if(Integer.parseInt(status)==1) {
+				job.setStatus("啟動");
+			}else if(Integer.parseInt(status) ==0) {
+				job.setStatus("關閉");
+			}
 		}
 		return jobParamList;
 	}
