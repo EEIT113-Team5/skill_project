@@ -10,6 +10,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import myPublish.Model.MyPublishBean;
+import publishCheckPage.Model.PublishBean;
+
 @Repository
 public class PublishPageDao implements iPublishPageDao {
 
@@ -56,5 +59,14 @@ public class PublishPageDao implements iPublishPageDao {
 		Query query = getSession().createQuery("from publishCityBean order by NO");
 		List<publishCityBean> cityBeans = query.list();
 		return cityBeans;
+	}
+	
+	@Override
+	public List<PublishBean> allPublish(){
+		@SuppressWarnings("unchecked")
+		Query<PublishBean> query = getSession().createQuery("select p from PublishBean p");
+		List<PublishBean> PublishBeans = query.list();
+		
+		return PublishBeans;
 	}
 }

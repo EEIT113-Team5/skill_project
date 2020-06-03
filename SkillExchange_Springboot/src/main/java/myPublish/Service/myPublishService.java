@@ -34,6 +34,12 @@ public class myPublishService implements imyPublishService {
 		List<MyPublishBean> publishList = myDao.myPublish(memberRegNo);
 		return publishList;
 	}
+	
+	@Override
+	public List<MyPublishBean> myPublishHistory(int memberRegNo){
+		List<MyPublishBean> myPublishHistory = myDao.myPublishHistory(memberRegNo);
+		return myPublishHistory;
+	}
 
 	@Override
 	public boolean myPubDele(int myPubNo) {
@@ -61,6 +67,15 @@ public class myPublishService implements imyPublishService {
 		return publishRecomm;
 	}
 	
+	@Override
+	public MyPublishBean myPubStatus(MyPublishBean bean) {
+		return myDao.myPubStatus(bean);
+	}
+	
+	@Override
+	public MyPublishBean myPublishAgain(MyPublishBean bean) {
+		return myDao.myPublishAgain(bean);
+	}
 //		public upPubBean datePublish(upPubBean bean) {
 //			return mlDao.datePublish(bean);
 //		}

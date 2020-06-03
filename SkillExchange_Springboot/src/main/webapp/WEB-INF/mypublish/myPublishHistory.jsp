@@ -45,7 +45,7 @@
 <!-- Main Stylesheet -->
 <link rel="stylesheet" href="csstemp/style.css">
 <!-- ---------------------要加的部份-------------------- -->
-<title>我的刊登-Skill Exchange</title>
+<title>歷史刊登-Skill Exchange</title>
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/mypublishcard.css" rel="stylesheet" />
 <link
@@ -123,53 +123,37 @@ tr, td {
 
 	<div class="container">
 
-		<h3>我的刊登</h3>
+		<h3>歷史刊登</h3>
 
-		<div class="row">
-			<!-- 						<th>刊登編號</th><th>刊登標題</th><th>刊登內容</th><th>刊登地區</th><th></th><th></th>			 -->
-			<c:forEach var="my" items="${mypublish}" varStatus="mylist">
-				<c:set var="myindex" scope="session" value="${mylist.index}" />
-				<c:forEach var="dl" items="${dayList}" varStatus="dlist">
-					<c:set var="dlindex" scope="session" value="${dlist.index}" />
+		<table class="table">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">刊登編號</th>
+					<th scope="col">刊登標題</th>
+					<th scope="col">想要技能</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${not empty myhistorylist}">
+					<c:forEach items="${myhistorylist}" var="myhislist"
+						varStatus="myhl">
 
-					<c:if test="${dlindex == myindex}">
-
-						<div class="col-sm-3"
-							style="background-color: white; height: 580px; margin-top: 20px">
-							<div class="card" style="height: 585px; border: 1px solid black;">
-
-								<img src="${my.publishPic}" class="card-img-top" alt="..."
-									style="height: 180px">
-								<div class="" style="height: 140px">
-									<h5 class="card-title">編號:${my.publishNo},${my.myTitle}</h5>
-									<p class="card-text">${my.myDetail}.</p>
-								</div>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item"><a
-										href='myPublishImfor?publishNo=${my.publishNo}'>刊登資料</a></li>
-									<li class="list-group-item"><a
-										href='myPublishUpdate?publishNo=${my.publishNo}'>修改</a></li>
-									<li class="list-group-item"><a
-										href='myPublishStatus?publishNo=${my.publishNo}'>下架</a></li>
-									<c:choose>
-										<c:when test="${dl < 0}">
-											<li class="list-group-item" id="" style="height: 110px">刊登時間:${my.updateTime}<br>刊登時間已過期!!</li>
-										</c:when>
-										<c:otherwise>
-											<li class="list-group-item" style="height: 110px">刊登時間:${my.updateTime}<br>剩餘天數:<h5 id="pad${myindex}"></h5></li>
-										</c:otherwise>
-									</c:choose>
-									<span style="DISPLAY:none"><input type="button" value="按下" id="but${myindex}" onclick="timeDate(${myindex})" /></span>
-								</ul>
-							</div>
-						</div>
-
-					</c:if>
-
-				</c:forEach>
-
-			</c:forEach>
-		</div>
+						<tr>
+							<th scope="row">${myh1.index}</th>
+							<td>${myhislist.publishNo}</td>
+							<td>${myhislist.myTitle}</td>
+							<td>${myhislist.myWantSkill}</td>
+							<td><button type="button" class="btn btn-primary">
+									<a style="color: white;"
+										href="myPublishAgain?publishNo=${myhislist.publishNo}">重新刊登</a>
+								</button></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
 	</div>
 	<!-- 					<form action="/skillExchange/PublishPage.jsp" method="POST"> -->
 	<!-- 						<input type='submit' value='上一步' >  -->
@@ -235,29 +219,26 @@ tr, td {
 
 	<!-- ---------------------要加的部份-------------------- -->
 	<script type="text/javascript">
+		$(document).ready(function() {
 
-	
-	$(document).ready(function () {
+			var mypubString = JSON.parse('${mypubString}');
+			var count = 0;
 
-		var mypubString = JSON.parse('${mypubString}');
-		var count = 0;
+			for ( var js in mypubString) {
+				count++
+			}
 
-		for(var js in mypubString){
-			count++
-		}
-				
-		for (var i = 0; i < count; i++) {
-			$('#but'+i).get(0).click();			
-		}
-	});
-		
-	function timeDate(num) {			
+			for (var i = 0; i < count; i++) {
+				$('#but' + i).get(0).click();
+			}
+		});
 
-		
-		setTimeout("pad+num.click()", 2000);
-		
+		function timeDate(num) {
+
+			setTimeout("pad+num.click()", 2000);
+
 			console.log(num);
-			
+
 			var mypubString = JSON.parse('${mypubString}');
 			console.log(mypubString[num].updateTime);
 
@@ -268,31 +249,29 @@ tr, td {
 			var timeArray2 = timeArray[1].split(",");
 			console.log(timeArray2);
 
-
 			var year = parseInt(timeArray2[1]);
 			var month = parseInt(timeArray[0]);
 			var date = parseInt(timeArray2[0]);
 
 			var startDate = new Date();
-			var endDate = new Date(year,month,date,0,0);
-			var spantime = (endDate - startDate)/1000;
+			var endDate = new Date(year, month, date, 0, 0);
+			var spantime = (endDate - startDate) / 1000;
 
 			spantime--;
 			var d = Math.floor(spantime / (24 * 3600));
-		    var h = Math.floor((spantime % (24*3600))/3600);
-		    var m = Math.floor((spantime % 3600)/(60));
-		    var s = Math.floor(spantime%60);
-		    str = d + "天 " + h + "時 " + m + "分 " + s + "秒 ";
+			var h = Math.floor((spantime % (24 * 3600)) / 3600);
+			var m = Math.floor((spantime % 3600) / (60));
+			var s = Math.floor(spantime % 60);
+			str = d + "天 " + h + "時 " + m + "分 " + s + "秒 ";
 
 			console.log(str);
-		    
-		    document.getElementById("pad"+num).innerHTML = str;
 
-		    setTimeout(function () {
-		    	timeDate(num);
-		    }, 1000)
+			document.getElementById("pad" + num).innerHTML = str;
+
+			setTimeout(function() {
+				timeDate(num);
+			}, 1000)
 		}
-	
 	</script>
 </body>
 

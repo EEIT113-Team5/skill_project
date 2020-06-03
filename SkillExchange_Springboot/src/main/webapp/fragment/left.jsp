@@ -101,6 +101,9 @@
 							<a class="nav-link" href="getAllJob"> <span><i
 									class="fa fa-list-alt"></i> 排程管理</span>
 							</a>
+							<a class="nav-link" href="PublishMgmt"> <span><i
+									class="fa fa-list-alt"></i> 刊登管理</span>
+							</a>
 						</c:if>
 					</div>
 

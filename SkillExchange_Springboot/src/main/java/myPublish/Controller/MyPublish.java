@@ -70,6 +70,16 @@ public class MyPublish  {
 		return "mypublish/myPublish";
 	}
 	
+	//顯示歷史紀錄
+	@GetMapping(value = "/myPublishHistory")
+	public String myPublishHistory(@SessionAttribute("memberBean") MemberBean member, Model model) {
+		List<MyPublishBean> myhistorylist = imps.myPublishHistory(member.getMemberRegNo());
+		
+		model.addAttribute("myhistorylist",myhistorylist);
+		
+		return "mypublish/myPublishHistory";
+	}
+	
 	@GetMapping(value = "/myPublishImfor")
 	public String myPublishImfor(@RequestParam("publishNo") String publishNo,
 			@SessionAttribute("memberBean") MemberBean member,
@@ -91,7 +101,9 @@ public class MyPublish  {
 		
 		//判斷剩餘天數
 		if(days < 0 || days == 0) {
-			imps.myPubDele(pubNo);
+			MyPublishBean bean = imps.selUpdatePublish(pubNo);
+//			imps.myPubDele(pubNo);
+			imps.myPubStatus(bean);
 			return "mypublish/publishRemove";
 		}else {
 			model.addAttribute("publishImfor",publishImfor);
@@ -131,7 +143,8 @@ public class MyPublish  {
 		dayList.add(days);
 		
 		if (days < 0 ||days == 0) {
-			imps.myPubDele(pubNo);
+			imps.myPubStatus(sBean);
+//			imps.myPubDele(pubNo);
 			return "mypublish/publishRemove";
 		}else {		
 			model.addAttribute("myTitle",sBean.getMyTitle());
@@ -146,6 +159,7 @@ public class MyPublish  {
 			model.addAttribute("myMark",sBean.getMyMark());
 			model.addAttribute("publishPic",sBean.getPublishPic());
 			model.addAttribute("skillType",sBean.getSkillType());
+			model.addAttribute("skillType2",sBean.getSkillType2());
 			
 			model.addAttribute("publishNo",pubNo);
 			
@@ -177,6 +191,7 @@ public class MyPublish  {
 			@RequestParam("myWantSkill") String myWantSkill,
 			@RequestParam("myMark") String myMark,
 			@RequestParam("skillType") String skillType,
+			@RequestParam("skillType2") String skillType2,
 			Model model
 			) throws IllegalStateException, IOException {
 		
@@ -205,18 +220,40 @@ public class MyPublish  {
 		System.out.println("1111:"+updatePublishPic);
 		
 		MyPublishBean upd = new MyPublishBean(pubNo,myTitle,myDetail,myArea,myCity,myDistrict,
-				myRoad,myPlace,updatePublishPic,myOwnSkill,myWantSkill,myMark,skillType);
+				myRoad,myPlace,updatePublishPic,myOwnSkill,myWantSkill,myMark,skillType,skillType2);
 		imps.datePublish(upd);
 		
 		return "mypublish/UpdateFinish";
 	}
-	
+	//管理員刪除用
 	@GetMapping(value = "/myPublishDel")
 	public String myPublishDel(@RequestParam("publishNo") String publishNo,Model model) {
 		int pubNo = Integer.parseInt(publishNo);
 		imps.myPubDele(pubNo);
 		return "mypublish/PublishDelSuccess";
 	}
+	//使用者刪除用(改變狀態)
+	@GetMapping(value = "/myPublishStatus")
+	public String myPublishStatus(@RequestParam("publishNo") String publishNo,Model model) {
+		int pubNo = Integer.parseInt(publishNo);
+		
+		MyPublishBean bean = imps.selUpdatePublish(pubNo);
+		
+		imps.myPubStatus(bean);
+		return "mypublish/PublishDelSuccess";
+	}
+	
+	//重新刊登
+	@GetMapping(value = "/myPublishAgain")
+	public String myPublishAgain(@RequestParam("publishNo") String publishNo,Model model) {
+		int pubNo = Integer.parseInt(publishNo);
+		
+		MyPublishBean bean = imps.selUpdatePublish(pubNo);
+		
+		imps.myPublishAgain(bean);
+		return "mypublish/myPublish";
+	}
+	
 	@PostMapping(value = "/myPublishReturnHome")
 	public String myPublishReturnHome() {
 		return "index";
