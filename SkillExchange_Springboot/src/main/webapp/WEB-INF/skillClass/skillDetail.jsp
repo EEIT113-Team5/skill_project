@@ -76,19 +76,18 @@
 
 h6 {
 	border: 1px solid #000;
-	margin-left: 40px
+	
 }
-
-.text {
-	margin-left: 40px
-}
-
 .main1 {
 	display: flex;
 }
+#leftspace {
+	flex: 4;
+
+}
 
 #left {
-	flex: 70;
+	flex: 60;
 	padding: 10px;
 	margn-right:20px;
 }
@@ -104,16 +103,16 @@ h6 {
 	flex: 6;
 }
 #left_1_center {
-	flex: 4;
+	flex: 3;
 }
 
 #left_1_right {
-	flex: 5;
+	flex: 6;
 }
 
 #left_2 {
 	flex: 8;
-	padding: 10px;
+	margin-left:50px;
 
 }
 #center1 {
@@ -126,7 +125,7 @@ h6 {
 #right {
 	position: relative;
 	/* 	float: right; */
-	flex: 40;
+	flex: 33;
 	padding: 10px;
 	/* 	width: 40% */
 }
@@ -164,6 +163,7 @@ h6 {
 		</div>
 	</section>
 	<div id="main" class="main1">
+	<div id="leftspace"></div>
 		<div id="left">
 				<c:choose>
 					<c:when test="${empty allSkills}">
@@ -228,28 +228,24 @@ h6 {
 							</div>
 							<hr>
 							<div id="left_2">
-							<h2 class="text">${skills.publishTitle}</h2>
-							<img style="margin-left:40px ;width:800px;height:380px"
+							<h1 class="text">${skills.publishTitle}</h1>
+							<img style="width:800px"
 								src="${jspPath}/${skills.publishPic}">
 							
 							<!--刊登圖片-->
 							<div class="text">
-								<p  style="font-size: 22px;" class="whitespace">${skills.publishDetail}</p>
+								<h2 style="margin-bottom:25;margin-top:30px" class="whitespace">${skills.publishDetail}</h2>
 							</div>
 							<!--文章內容-->
 							<div class="more_content">
-
-								<h6 style="width: 145px">提供交流/交換項目:</h6>
-								<div class="text">${skills.ownSkill}</div>
-
-								<br>
-								<h6 style="width: 160px">希望交流/交換的內容:</h6>
-								<div class="text">${skills.wantSkill}</div>
-
-								<br>
-								<h6 style="width: 75px">希望地點:</h6>
-								<div class="text">${skills.publishPlace}</div>
-
+								<h3><span class="badge badge-secondary">提供交換項目:</span></h3>
+								<h3><span>${skills.ownSkill}</span></h3>
+								
+								<h3><span class="badge badge-secondary">希望交換的內容:</span></h3>
+								<h3><span>${skills.wantSkill}</span></h3>
+								
+								<h3><span class="badge badge-secondary">希望地點:</span></h3>
+								<h3><span>${skills.publishPlace}</span></h3>
 
 
 							</div>
@@ -287,18 +283,21 @@ h6 {
 					</c:when>
 					<c:otherwise>
 						<div class="card-body">
-							<h4 class="card-title" id='sendto'>關於${sendTo}:</h4>							
-							<h5 class="aboutme">其他擁有的技能:${memberski}</h5>
-							<h5 class="aboutme">居住區域:${sessionScope.memberBean.memberCountry}
-								${sessionScope.memberBean.memberAddr}</h5>
-							<h5 class="aboutme">電子信箱:${sessionScope.memberBean.memberMail}</h5>
-							<div class="card-text"></div>
-							<c:if test="${status==1}">
-							<c:set var="chatstatus" value="${status}" />
-							</c:if>
-							<button id="disabled" class="btn btn-primary"
-								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
-							</button>
+						<h3><span class="badge badge-danger">關於${sendTo}</span></h3>
+						<h4><span class="badge badge-secondary">擁有的技能:</span></h4>
+						<h4>${memberski}</h4>
+						<h4><span class="badge badge-secondary">居住區域:</span></h4>
+						<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
+						<h4><span class="badge badge-secondary">電子信箱:</span></h4>
+						<h4 style="margin-bottom:20px">${sessionScope.memberBean.memberMail}</h4>
+							
+						<div class="card-text"></div>
+						<c:if test="${status==1}">
+						<c:set var="chatstatus" value="${status}" />
+						</c:if>
+						<button id="disabled" class="btn btn-primary"
+							onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
+						</button>
 						</div>
 
 
