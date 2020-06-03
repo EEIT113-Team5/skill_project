@@ -24,10 +24,10 @@
 .nav-link {
 	font-size: 18px !important;
 }
-
 .navigation .navbar-light .navbar-nav .nav-item .nav-link {
-	padding: 20px 13px !important;
+    padding: 20px 10px !important;
 }
+
 
 #popupmsg {
 	position: fixed;
