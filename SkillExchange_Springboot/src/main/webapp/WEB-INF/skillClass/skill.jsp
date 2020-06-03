@@ -111,12 +111,12 @@
 								</c:forEach>
 							</c:if>
 							
-							<div class="col-sm-4 mt-3">
-							<div class="card" style="width: 100%; height: 600px;margin-top:20px">
+							<div class="col-sm-3">
+							<div class="card" style="width:100%; height: 520px;margin-top:20px">
 											
 								<div>
 									<span>
-									<img src="${skills.member.memberPic}" style="width: 70px; height: 70px;margin-left:12px; margin-top: 5px" class="collectImg"/>
+									<img src="${skills.member.memberPic}" style="width: 60px; height: 60px;margin-left:7px; margin-top: 5px" class="collectImg"/>
 									${skills.member.memberNic}
 									</span>
 									<span class="time321" style="float: right;margin-top:22px; margin-right:10px;font-size:18px;">${skills.updateTime}</span>
@@ -124,13 +124,13 @@
 															
 							<div class="card"  style="height:360px;margin:5px">
 								
-								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:72%"src="${skills.publishPic}" alt="Card image cap"/>
-								<div class="card-body">
+								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:55%"src="${skills.publishPic}" alt="Card image cap"/>
+								<div class="card-body" style="padding:0px;margin-top:10px;height:10%">
 									<div style="margin-bottom: 7px;">
-										<h3 class="JQellipsis2">${skills.publishTitle}</h3>
+										<h3 class="JQellipsis2" style="margin-top:10px;margin-left: 12px">${skills.publishTitle}</h3>
 									</div>
 									<div class="detail">
-										<h6 style="margin-bottom: 7px;margin-left: 5px" class="JQellipsis">${skills.publishDetail}</h6>
+										<h5 style="margin-top: 15px;margin-left: 12px" class="JQellipsis">${skills.publishDetail}</h5>
 									</div>
 								
 								</div>
@@ -138,16 +138,12 @@
 								
 								
 								
-								<div class="bot" style="margin-left: 15px">
+								<div class="bot" style="margin-left: 15px;margin-top: 10px" >
 									<div class="sb-nav-link-icon" style="margin-bottom: 15px" >
 										<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
 									</div>
-									<div class="sb-nav-link-icon" style="margin-bottom: 15px">
-										<i class="fa fa-clock-o" aria-hidden="true"></i>&emsp;周一至周五
-										晚上7時至10時
-									</div>
 								
-									<span style="margin-left: 120px"> 
+									<span style="margin-left: 22px"> 
 									<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
@@ -309,7 +305,7 @@
 	    });
 	});
 	$(function(){
-	    var len = 49; // Pubulish Detail超過40個字以"..."取代
+	    var len = 46; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());
@@ -321,7 +317,7 @@
 	
 	
 	$(function(){
-	    var len = 14; // Publish Title超過10個字以"..."取代
+	    var len = 10; // Publish Title超過10個字以"..."取代
 	    $(".JQellipsis2").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());

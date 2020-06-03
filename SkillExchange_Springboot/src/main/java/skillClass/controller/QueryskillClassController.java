@@ -102,8 +102,6 @@ public class QueryskillClassController {
 		}
 		service.CTRUpdate(PublishNo);
 		model.addAttribute("allSkills", service.detailQuery(PublishNo));
-		System.out.println(" getCustomers...01-15");
-		System.out.println(PublishNo);
 		return "skillClass/skillDetail";
 	}
 	

@@ -83,28 +83,38 @@ h6 {
 	margin-left: 40px
 }
 
-/* #left { */
-/* 	float: left; */
-/* 	padding: 10px; */
-/* 	width: 60% */
-/* } */
-
-/* #right { */
-/* 	position: relative; */
-/* 	float: right; */
-/* 	padding: 10px; */
-/* 	width: 40% */
-/* } */
 .main1 {
 	display: flex;
 }
 
 #left {
-	flex: 7;
-	/* 	float: left; */
+	flex: 70;
 	padding: 10px;
-	/* 	width: 60% */
 	margn-right:20px;
+}
+
+#left_1 {
+	flex: 2;
+	margn-top:5px;
+}
+#left_1_main {
+	display: flex;
+}
+#left_1_left {
+	flex: 6;
+}
+#left_1_center {
+	flex: 4;
+}
+
+#left_1_right {
+	flex: 5;
+}
+
+#left_2 {
+	flex: 8;
+	padding: 10px;
+
 }
 #center1 {
 	position: relative;
@@ -116,7 +126,7 @@ h6 {
 #right {
 	position: relative;
 	/* 	float: right; */
-	flex: 4;
+	flex: 40;
 	padding: 10px;
 	/* 	width: 40% */
 }
@@ -155,7 +165,6 @@ h6 {
 	</section>
 	<div id="main" class="main1">
 		<div id="left">
-			<table class="table table-hover">
 				<c:choose>
 					<c:when test="${empty allSkills}">
 						<tr height='36'>
@@ -164,7 +173,7 @@ h6 {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var='skills' items='${allSkills}'>
-
+							<!--比對使用者是否收藏此刊登貼文-->
 							<c:forEach var='collects' items='${collectionsMap}'>
 								<c:forEach var='collect' items='${collects.value}'>
 									<c:if test="${collect.collectPNo == skills.publishNo}">
@@ -172,56 +181,53 @@ h6 {
 									</c:if>
 								</c:forEach>
 							</c:forEach>
-
+							<!-- 變數設定 -->
 							<c:set var="pic1" value="${skills.member.memberPic}" />
 							<c:set var="pic2" value="${sessionScope.memberBean.memberPic}" />
 							<c:set var="sendTo" value="${skills.member.memberNic}" />
-							<c:set var="sendUser"
-								value="${sessionScope.memberBean.memberNic}" />
+							<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}" />
 							<c:set var="sendTo2" value="${skills.member.memberRegNo}" />
-							<c:set var="sendUser2"
-								value="${sessionScope.memberBean.memberRegNo}" />
+							<c:set var="sendUser2" value="${sessionScope.memberBean.memberRegNo}" />
 							<c:set var="memberski" value="${skills.member.memberInSkill}" />
-							<!-- 以下主要為排版 -->
-							<div class="text">
-								
-									<div class="wrap">
-										<img src="${skills.member.memberPic}"
-											style="float: left; width: 100px; height: 100px;"
-											class="rounded-circle user_img" />
-										<div class="txt">
-											<h2>${skills.member.memberNic}</h2>
-										</div>
-									</div>
 							
-								<span style="float:right"> 
-								<c:choose>
-										<c:when test="${have!=skills.publishNo}">
-											<button type="button" id="add${skills.publishNo}"
-												class="btn btn-success "
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
-											<button type="button" id="cancel${skills.publishNo}"
-												class="btn btn-danger " style="display: none"
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
-										</c:when>
-
-										<c:otherwise>
-											<button type="button" id="add${skills.publishNo}"
-												class="btn btn-success " style="display: none"
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
-											<button type="button" id="cancel${skills.publishNo}"
-												class="btn btn-danger "
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
-										</c:otherwise>
-
-								</c:choose>
-								</span>
-								<br><br>
-								<span style="float: right" class="text">上次更新時間:${time1}</span>
+							<!-- 左側排版 -->
+							<div id="left_1">
+							<div id="left_1_main">
+							<div id="left_1_left">
+							<img src="${skills.member.memberPic}" style="float: left; width: 100px; height: 100px;"
+							class="rounded-circle user_img" />
+							<h2 style="line-height:100px;width:50%">${skills.member.memberNic}</h2>
 							</div>
-							<br>
-							<hr>
+							<div id="left_1_center">
+							</div>
+							<div id="left_1_right">
 							
+							<c:choose>
+								<c:when test="${have!=skills.publishNo}">
+									<button type="button" id="add${skills.publishNo}" style="float:right;margin-top:15px"
+											class="btn btn-success"
+											onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+									<button type="button" id="cancel${skills.publishNo}" 
+											class="btn btn-danger " style="display: none;float:right;margin-top:15px"
+											onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" id="add${skills.publishNo}" 
+											class="btn btn-success " style="display: none;float:right;margin-top:15px"
+											onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+									<button type="button" id="cancel${skills.publishNo}"
+											class="btn btn-danger" style="float:right;margin-top:15px"
+											onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+								</c:otherwise>
+							</c:choose>	
+							<br><br><br>															
+							<p style="float: right ;margin:0px">上次更新時間:${time1}</p>						
+													
+							</div>						
+							</div>
+							</div>
+							<hr>
+							<div id="left_2">
 							<h2 class="text">${skills.publishTitle}</h2>
 							<img style="margin-left:40px ;width:800px;height:380px"
 								src="${jspPath}/${skills.publishPic}">
@@ -247,10 +253,10 @@ h6 {
 
 
 							</div>
+							</div>
 						</c:forEach>
 					</c:otherwise>
-				</c:choose>
-			</table>
+				</c:choose>	
 		</div>
 		<div id="center1">
 		</div>
