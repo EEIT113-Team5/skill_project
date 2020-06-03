@@ -85,15 +85,15 @@ public class KeywordDao {
 			if (type2 != "") {
 				if (type3 != "") {
 					if (type4 != "") {
-						hql3 = " and (S.wantType = :t1 or :t2 or :t3 or :t4) or (S.ownType = :t1 or :t2 or :t3 or :t4)";
+						hql3 = " and ((S.wantType = :t1 or :t2 or :t3 or :t4) or (S.ownType = :t1 or :t2 or :t3 or :t4))";
 					} else {
-						hql3 = " and (S.wantType = :t1 or :t2 :t3) or (S.ownType = :t1 or :t2 or :t3)";
+						hql3 = " and ((S.wantType = :t1 or :t2 :t3) or (S.ownType = :t1 or :t2 or :t3))";
 					}
 				} else {
-					hql3 = " and (S.wantType = :t1 or :t2) or (S.ownType = :t1 or :t2)";
+					hql3 = " and ((S.wantType = :t1 or :t2) or (S.ownType = :t1 or :t2))";
 				}
 			} else {
-				hql3 = " and S.wantType = :t1 or S.ownType = :t1";
+				hql3 = " and ((S.wantType = :t1) or (S.ownType = :t1))";
 			}
 		} else {
 			hql3 = "";
@@ -106,18 +106,18 @@ public class KeywordDao {
 				if (skill3 != "") {
 					if (skill4 != "") {
 						if (skill5 != "") {
-							hql4 = " and (S.wantSkill = :s1 or :s2 or :s3 or :s4 or :s5) or (S.ownSkill = :s1 or :s2 or :s3 or :s4 or :s5)";
+							hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3 or :s4 or :s5) or (S.ownSkill = :s1 or :s2 or :s3 or :s4 or :s5))";
 						} else {
-							hql4 = " and (S.wantSkill = :s1 or :s2 or :s3 or :s4) or (S.ownSkill = :s1 or :s2 or :s3 or :s4)";
+							hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3 or :s4) or (S.ownSkill = :s1 or :s2 or :s3 or :s4))";
 						}
 					} else {
-						hql4 = " and (S.wantSkill = :s1 or :s2 or :s3) or (S.ownSkill = :s1 or :s2 or :s3)";
+						hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3) or (S.ownSkill = :s1 or :s2 or :s3))";
 					}
 				} else {
-					hql4 = " and (S.wantSkill = :s1 or :s2) or (S.ownSkill = :s1 or :s2)";
+					hql4 = " and ((S.wantSkill = :s1 or :s2) or (S.ownSkill = :s1 or :s2))";
 				}
 			} else {
-				hql4 = "and (S.wantSkill = :s1) or (S.ownSkill = :s1)";
+				hql4 = "and ((S.wantSkill = :s1) or (S.ownSkill = :s1))";
 			}
 		} else {
 			hql4 = "";
