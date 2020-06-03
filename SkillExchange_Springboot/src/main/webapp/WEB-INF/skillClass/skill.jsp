@@ -207,7 +207,8 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-	
+			<div style="flex: 1"></div>
+			<div id="calendar" style="flex: 10"></div>
 			
 		<!-- ---------------------要加的部份-------------------- -->
 		
@@ -316,7 +317,7 @@
 	            $(this).text(text);
 	        }
 	    });
-	});
+	})
 	
 	
 	$(function(){
@@ -331,7 +332,8 @@
 	})
 	
 	</script>
-
+	
+	
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		crossorigin="anonymous"></script>
 	<script

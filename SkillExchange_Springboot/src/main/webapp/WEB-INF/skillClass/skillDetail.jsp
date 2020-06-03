@@ -100,16 +100,23 @@ h6 {
 }
 
 #left {
-	flex: 3;
+	flex: 7;
 	/* 	float: left; */
 	padding: 10px;
 	/* 	width: 60% */
+	margn-right:20px;
 }
-
+#center1 {
+	position: relative;
+	/* 	float: right; */
+	flex: 1;
+	padding: 10px;
+	/* 	width: 40% */
+}
 #right {
 	position: relative;
 	/* 	float: right; */
-	flex: 2;
+	flex: 4;
 	padding: 10px;
 	/* 	width: 40% */
 }
@@ -119,7 +126,7 @@ h6 {
 	position: fixed;
 	bottom: 0px;
 	/* 	left: 0px; */
-	right: 350px;
+	right: 250px;
 }
 .aboutme {
   border-style: inset;
@@ -177,7 +184,7 @@ h6 {
 							<c:set var="memberski" value="${skills.member.memberInSkill}" />
 							<!-- 以下主要為排版 -->
 							<div class="text">
-								<div class="top1">
+								
 									<div class="wrap">
 										<img src="${skills.member.memberPic}"
 											style="float: left; width: 100px; height: 100px;"
@@ -186,7 +193,7 @@ h6 {
 											<h2>${skills.member.memberNic}</h2>
 										</div>
 									</div>
-								</div>
+							
 								<span style="float:right"> 
 								<c:choose>
 										<c:when test="${have!=skills.publishNo}">
@@ -216,13 +223,12 @@ h6 {
 							<hr>
 							
 							<h2 class="text">${skills.publishTitle}</h2>
-							<img style="margin-left:40px ;width:500px;height:300px"
+							<img style="margin-left:40px ;width:800px;height:380px"
 								src="${jspPath}/${skills.publishPic}">
 							
 							<!--刊登圖片-->
 							<div class="text">
-								<p class="whitespace">${skills.publishDetail}<br />
-								</p>
+								<p  style="font-size: 22px;" class="whitespace">${skills.publishDetail}</p>
 							</div>
 							<!--文章內容-->
 							<div class="more_content">
@@ -246,7 +252,8 @@ h6 {
 				</c:choose>
 			</table>
 		</div>
-
+		<div id="center1">
+		</div>
 		<div id="right">
 			<div style="background-color: white;border-style: double;; width: auto; margin: 10px auto">
 				<c:choose>
@@ -325,10 +332,7 @@ h6 {
 									</c:choose>
 
 								</div>
-								<div class="video_cam">
-									<span><i class="fas fa-video"></i></span> <span><i
-										class="fas fa-phone"></i></span>
-								</div>
+								
 							</div>
 								<span id="action_menu_btn" >								
 								<a type="button" href="InsertCommentForm" class="btn text-white">結束交換</a>
@@ -341,8 +345,7 @@ h6 {
 						<div class="card-footer">
 							<div class="input-group">
 								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><i
-										class="fas fa-paperclip"></i></span>
+									
 								</div>
 								<textarea name="" class="form-control type_msg" id="textmssg"
 									placeholder="Type your message..."></textarea>
