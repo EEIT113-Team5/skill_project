@@ -945,14 +945,14 @@ content = content.substring(0, content.length - 32);
 					A.value = list[i].value;
 					m++;
 					str1 += list[i].value + "、";
-					console.log("str1=" + str1);
+// 					console.log("str1=" + str1);
 				} else {
 					var id2 = "skill" + n;
 					var B = document.getElementById(id2);
 					B.value = list[i].value;
 					n++;
 					str2 += list[i].value + "、";
-					console.log("str2=" + str2);
+// 					console.log("str2=" + str2);
 				}
 			}
 // 			把選取值寫回頁面上

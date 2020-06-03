@@ -33,20 +33,14 @@ public class KeywordDao {
 			String type4, String skill1, String skill2, String skill3, String skill4, String skill5) {
 		String hql1, hql2, hql3, hql4, hql5;
 
-//		System.out.println("area1=" + area1);
-//		System.out.println("city1=" + city1);
-//		System.out.println("type1=" + type1);
-//		System.out.println("skill1=" + skill1);
-//		System.out.println("keyword=" + keyword);
-
 		if (area1 == null) {
 			hql1 = "";
 		} else if (area1 != "") {
 			if (area2 != "") {
 				if (area3 != "") {
-					hql1 = " and (S.publishArea = :a1 or :a2 or :a3)";
+					hql1 = " and (S.publishArea = :a1 or S.publishArea = :a2 or S.publishArea = :a3)";
 				} else {
-					hql1 = " and (S.publishArea = :a1 or :a2)";
+					hql1 = " and (S.publishArea = :a1 or S.publishArea = :a2)";
 				}
 			} else {
 				hql1 = " and S.publishArea = :a1";
@@ -62,15 +56,15 @@ public class KeywordDao {
 				if (city3 != "") {
 					if (city4 != "") {
 						if (city5 != "") {
-							hql2 = " and (S.city = :c1 or :c2 or :c3 or :c4 or :c5)";
+							hql2 = " and (S.city = :c1 or S.city = :c2 or S.city = :c3 or S.city = :c4 or S.city = s:c5)";
 						} else {
-							hql2 = " and (S.city = :c1 or :c2 or :c3 or :c4)";
+							hql2 = " and (S.city = :c1 or S.city = :c2 or S.city = :c3 or S.city = :c4)";
 						}
 					} else {
-						hql2 = " and (S.city = :c1 or :c2 or :c3)";
+						hql2 = " and (S.city = :c1 or S.city = :c2 or S.city = :c3)";
 					}
 				} else {
-					hql2 = " and (S.city = :c1 or :c2)";
+					hql2 = " and (S.city = :c1 or S.city = :c2)";
 				}
 			} else {
 				hql2 = " and S.city = :c1";
@@ -85,12 +79,12 @@ public class KeywordDao {
 			if (type2 != "") {
 				if (type3 != "") {
 					if (type4 != "") {
-						hql3 = " and ((S.wantType = :t1 or :t2 or :t3 or :t4) or (S.ownType = :t1 or :t2 or :t3 or :t4))";
+						hql3 = " and ((S.wantType = :t1 or S.wantType = :t2 or S.wantType = :t3 or S.wantType = :t4) or (S.ownType = :t1 or S.ownType = :t2 or S.ownType = :t3 or S.ownType = :t4))";
 					} else {
-						hql3 = " and ((S.wantType = :t1 or :t2 :t3) or (S.ownType = :t1 or :t2 or :t3))";
+						hql3 = " and ((S.wantType = :t1 or S.wantType = :t2 or S.wantType = :t3) or (S.ownType = :t1 or S.ownType = :t2 or S.ownType = :t3))";
 					}
 				} else {
-					hql3 = " and ((S.wantType = :t1 or :t2) or (S.ownType = :t1 or :t2))";
+					hql3 = " and ((S.wantType = :t1 or S.wantType = :t2) or (S.ownType = :t1 or S.ownType = :t2))";
 				}
 			} else {
 				hql3 = " and ((S.wantType = :t1) or (S.ownType = :t1))";
@@ -106,15 +100,15 @@ public class KeywordDao {
 				if (skill3 != "") {
 					if (skill4 != "") {
 						if (skill5 != "") {
-							hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3 or :s4 or :s5) or (S.ownSkill = :s1 or :s2 or :s3 or :s4 or :s5))";
+							hql4 = " and ((S.wantSkill = :s1 or S.wantSkill = :s2 or S.wantSkill = :s3 or S.wantSkill = :s4 or S.wantSkill = :s5) or (S.ownSkill = :s1 or S.ownSkill = :s2 or S.ownSkill = :s3 or S.ownSkill = :s4 or S.ownSkill = :s5))";
 						} else {
-							hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3 or :s4) or (S.ownSkill = :s1 or :s2 or :s3 or :s4))";
+							hql4 = " and ((S.wantSkill = :s1 or S.wantSkill = :s2 or S.wantSkill = :s3 or S.wantSkill = :s4) or (S.ownSkill = :s1 or S.ownSkill = :s2 or S.ownSkill = :s3 or S.ownSkill = :s4))";
 						}
 					} else {
-						hql4 = " and ((S.wantSkill = :s1 or :s2 or :s3) or (S.ownSkill = :s1 or :s2 or :s3))";
+						hql4 = " and ((S.wantSkill = :s1 or S.wantSkill = :s2 or S.wantSkill = :s3) or (S.ownSkill = :s1 or S.ownSkill = :s2 or S.ownSkill = :s3))";
 					}
 				} else {
-					hql4 = " and ((S.wantSkill = :s1 or :s2) or (S.ownSkill = :s1 or :s2))";
+					hql4 = " and ((S.wantSkill = :s1 or S.wantSkill = :s2) or (S.ownSkill = :s1 or S.ownSkill = :s2))";
 				}
 			} else {
 				hql4 = "and ((S.wantSkill = :s1) or (S.ownSkill = :s1))";
@@ -132,7 +126,7 @@ public class KeywordDao {
 		String hql = "select new SearchBean(M.memberNic, S.publishNo, S.memberRegNo, S.publishTitle, S.publishDetail, S.publishArea, S.city, S.district, S.road, S.publishPlace, S.publishPic, S.ownSkill, S.wantSkill, S.updateTime, S.publishCTR, S.publishMark, S.status, S.ownType, S.wantType) from SearchBean S, MemberBean M where S.memberRegNo = M.memberRegNo and S.status='1'"
 				+ hql1 + hql2 + hql3 + hql4 + hql5;
 
-//		System.out.println("hql=" + hql);
+		System.out.println("hql=" + hql);
 
 		@SuppressWarnings("unchecked")
 		Query<SearchBean> query = getSession().createQuery(hql);
@@ -210,45 +204,6 @@ public class KeywordDao {
 
 		List<SearchBean> allSearch = query.list();
 		return allSearch;
-//		return null;
-
-//		>>old expression<<
-//		String s1 = area;
-//		String s2 = skill;
-//		String s3 = keyword;
-//		if (s1 != null) {
-//			hql1 = " and S.publishArea = :publishArea";
-//		} else {
-//			hql1 = "";
-//		}
-//
-//		if (s2 != null) {
-//			hql2 = " and S.ownSkill = :ownSkill";
-//		} else {
-//			hql2 = "";
-//		}
-//
-//		if (s3 != "") {
-//			hql3 = " and S.publishTitle like :publishTitle";
-//		} else {
-//			hql3 = "";
-//		}
-//		String hql = "select new SearchBean(M.memberNic, S.publishNo, S.memberRegNo, S.publishTitle, S.publishDetail, S.publishArea, S.city, S.district, S.road, S.publishPlace, S.publishPic, S.ownSkill, S.wantSkill, S.updateTime, S.publishCTR, S.publishMark, S.status) from SearchBean S, MemberBean M where S.memberRegNo = M.memberRegNo and S.status='1'"
-//				+ hql1 + hql2 + hql3;
-
-//		System.out.println("s1=" + s1 + ", s2=" + s2 + ", s3=" + s3);
-//		System.out.println(hql);
-//		if (s1 != null) {
-//			query.setParameter("publishArea", s1);
-//		}
-//
-//		if (s2 != null) {
-//			query.setParameter("ownSkill", s2);
-//		}
-//
-//		if (s3 != "") {
-//			query.setParameter("publishTitle", "%" + s3 + "%");
-//		}
 	}
 
 	public List<KeywordBean> queryTopKeyword() {
