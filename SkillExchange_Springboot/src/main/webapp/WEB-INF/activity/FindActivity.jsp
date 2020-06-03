@@ -83,7 +83,11 @@
 	font-size: 0.8em;
 	color: #9D9D9D;
 }
-
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.00rem;
+}
 .btn {
 	color: black !important;
 }
@@ -114,7 +118,7 @@
 				type="button" href="MyOwnActivity?memberid=5">v由我主辦</a>
 		</div>
 	</div>
-	<div class="container-fluid m-2">
+	<div class="container-fluid">
 		<div style="display: flex">
 			<div style="flex: 30">
 				<c:choose>
@@ -122,11 +126,11 @@
 						<div>查無符合資料</div>
 					</c:when>
 					<c:otherwise>
-						<div class="row">
+						<div class="row no-gutters">
 							<c:forEach var='search' varStatus="var" items='${searchList}'>
 								<c:if test="${search.memberid!=memberBean.memberRegNo}">
 									<div class="col-sm-4 mt-3">
-										<div class="card" style="width: 100%; height: 550px">
+										<div class="card m-1 pb-1" style="width: 100%; height: 550px;">
 											<c:choose>
 												<c:when test="${search.imgB64==null}">
 													<!-- 												class="stretched-link" -->
@@ -148,12 +152,12 @@
 															<h4>${search.beginDay}</h4>
 														</div>
 														<div style="flex: 3">
-															<h4>${fn:substring(search.title,0,8)}</h4>
+															<h4><b>${fn:substring(search.title,0,8)}</b></h4>
 														</div>
 													</div>
 												</h4>
 												<p class="card-text">
-													<i class="fa fa-map-marker" aria-hidden="true"></i>${fn:substring(search.position, 0, 24)}</p>
+													<i class="fa fa-map-marker" aria-hidden="true"></i>${fn:substring(search.position, 0, 17)}...</p>
 												<p class="card-text" id="interest${search.activityid}">${search.interest}人有興趣</p>
 												<span class="card-text" id="attendency${search.activityid}">${search.attendency}人要參加</span>
 												<c:choose>
@@ -220,12 +224,12 @@
 																		id="cancel${search.activityid}">取消參加</a>
 																</c:otherwise>
 															</c:choose>
-															<span class="updatetime">最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
-														</p>
+															<p class="updatetime">最後更新時間:${fn:substring(search.insertime, 0, 10)}</p>
+														
 													</c:when>
 													<c:otherwise>
 														<h3>活動已報名額滿!</h3>
-														<span class="updatetime">&nbsp;最後更新時間:${fn:substring(search.insertime, 0, 10)}</span>
+														<p class="updatetime">&nbsp;最後更新時間:${fn:substring(search.insertime, 0, 10)}</p>
 													</c:otherwise>
 												</c:choose>
 
@@ -238,7 +242,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div style="flex: 1"></div>
+			<div style="flex: 0.5"></div>
 			<div id="calendar" style="flex: 10"></div>
 		</div>
 	</div>
@@ -363,6 +367,7 @@
 					  			right: "month,basicWeek,basicDay" // 右邊放置月、周、天
 					  		},
 					  		defaultDate: "2020-06-12", // 起始日期
+					  		eventColor: '#378006',
 //					  		weekends: false, // 顯示星期六跟星期日
 					  		editable: true,  // 啟動拖曳調整日期
 					  		events: eventlist
