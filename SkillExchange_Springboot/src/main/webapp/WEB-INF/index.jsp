@@ -436,31 +436,6 @@ form {
 						<div class="k1">熱門關鍵字：</div>
 						<div id='insert-keyword' class="k1"></div>
 					</div>
-					<!-- 					<form action="InsertKeyword1.do" method="GET"> -->
-					<!-- 						<div class="input-group wrap"> -->
-					<!-- 							<div class="input-group-prepend"> -->
-					<!-- 								<input type="text" class="form-control searchbar-text" -->
-					<!-- 									name="keyword" placeholder="關鍵字..."> -->
-					<!-- 							</div> -->
-					<!-- 							<div id="getarea" class="input-group-append"> -->
-					<!-- 								<select name="area1" id="area" class="btn btn-light searchbar" -->
-					<!-- 									style="text-align: center; text-align-last: center;"> -->
-					<!-- 									<option value="地區" selected disabled>地區</option> -->
-					<!-- 								</select> -->
-					<!-- 							</div> -->
-					<!-- 							<div id="getskill" class="input-group-append"> -->
-					<!-- 								<select name="skill1" id="skill" class="btn btn-light searchbar" -->
-					<!-- 									style="text-align: center; text-align-last: center;"> -->
-					<!-- 									<option value="技能類別" selected disabled>技能類別</option> -->
-					<!-- 								</select> -->
-					<!-- 							</div> -->
-					<!-- 							<div class="input-group-append"> -->
-					<!-- 								<button type="submit" class="btn btn-secondary btn-sm searchbar"> -->
-					<!-- 									<i class="fa fa-search"></i>搜尋 -->
-					<!-- 								</button> -->
-					<!-- 							</div> -->
-					<!-- 						</div> -->
-					<!-- 					</form> -->
 				</div>
 			</div>
 		</div>
@@ -542,13 +517,13 @@ form {
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4) {
 				if (xhr.status == 200) {
-					// 					console.log(JSON.parse(xhr.responseText));
+//  				console.log(JSON.parse(xhr.responseText));
 					var arr = JSON.parse(xhr.responseText);
-					// 					console.log(arr[0][0][0]);
-					// 					console.log(arr[0][1][0]);
+//  				console.log(arr[0][0][0]);
+//  				console.log(arr[0][1][0]);
 					var content = "";
 					for (var x = 0; x < 5; x++) {
-						// 						console.log(arr[0][x][0]);
+//  					console.log(arr[0][x][0]);
 						var str = "<c:url value='InsertKeyword1.do?keyword="
 								+ arr[0][x][0] + "' />";
 						content += "<li class='k1 k2'><a href='" + str + "'>"
@@ -569,10 +544,10 @@ form {
 		xhr1.onreadystatechange = function() {
 			if (xhr1.readyState == 4) {
 				if (xhr1.status == 200) {
-					// 						console.log(JSON.parse(xhr1.responseText));
+//  				console.log(JSON.parse(xhr1.responseText));
 					var arr = JSON.parse(xhr1.responseText);
-					// 						console.log(arr[0][0].publishAreaCN);
-					// 						-> for showing area A<-
+// 					console.log(arr[0][0].publishAreaCN);
+// 					-> for showing area A<-
 					var contentA = "<div class='div-list1'>";
 					contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
 							+ arr[0][0].publishAreaCN
@@ -585,7 +560,7 @@ form {
 					}
 					contentA += "</div>";
 					document.getElementById("areaList").innerHTML = contentA;
-					// 						-> for showing area-city B<-
+// 					-> for showing area-city B<-
 					var contentB = "";
 					for (var i = 0; i < arr[0].length; i++) {
 						contentB += "<div class='ctl-area"
@@ -602,7 +577,7 @@ form {
 						contentB += "</div></div>";
 					}
 					document.getElementById("cityList").innerHTML = contentB;
-					// 						-> for showing skillType C <-
+// 					> for showing skillType C <-
 					var contentC = "<div class='div-list1'>";
 					contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
 							+ arr[2][0]
@@ -615,7 +590,7 @@ form {
 					}
 					contentC += "</div>";
 					document.getElementById("skillL1List").innerHTML = contentC;
-					// 						-> for showing skills D<-
+// 					-> for showing skills D<-
 					var contentD = "";
 					for (var m = 0; m < arr[2].length; m++) {
 						contentD += "<div class='ctl-type"
@@ -651,7 +626,7 @@ form {
 						$(this).addClass('active').siblings().removeClass(
 								'active li-bg0');
 						i = $(this).index();
-						// 						console.log(i);
+// 						console.log(i);
 						$("#cityList").children().eq(i).slideDown({
 							duration : 10,
 						}).siblings().slideUp({
@@ -674,7 +649,7 @@ form {
 						$(this).addClass('active').siblings().removeClass(
 								'active li-bg0');
 						i = $(this).index();
-						// 						console.log(i);
+// 						console.log(i);
 						$("#skillL2List").children().eq(i).slideDown({
 							duration : 10,
 						}).siblings().slideUp({
@@ -881,11 +856,10 @@ form {
 	<script>
 		var btn3 = document.getElementById("areaClick");
 		btn3.onclick = function() {
-			// 			console.log($("#cityList"));
-			console
-					.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
+// 			console.log($("#cityList"));
+// 			console.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
 			var list = $("#cityList >div div:first-child input:checkbox:checked:not(:disabled)");
-			//console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
+// 			console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
 			var str1 = "";
@@ -925,11 +899,10 @@ content = content.substring(0, content.length - 32);
 	<script>
 		var btn4 = document.getElementById("skillClick");
 		btn4.onclick = function() {
-			// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked"));
-			console
-					.log($("#skillL2List >div div:first-child input:checkbox:checked")[0].value);
+// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked"));
+// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked")[0].value);
 			var list = $("#skillL2List >div div:first-child input:checkbox:checked:not(:disabled)");
-			//console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
+// 			console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
 			var str1 = "";
@@ -971,7 +944,7 @@ content = content.substring(0, content.length - 32);
 		$(function() {
 			$("#typing-keyword").keyup(function() {
 				var input = $(this).val();
-				console.log(input);
+// 				console.log(input);
 				var A = document.getElementById("keyword");
 				A.value = input;
 			})

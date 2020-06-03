@@ -15,7 +15,7 @@ import search.model.SearchBean;
 import search.service.KeywordService;
 
 @Controller
-@SessionAttributes(names = { "searchList", "keyword2", "area2", "skill2" })
+@SessionAttributes(names = { "searchList" })
 public class KeywordController2 {
 	@Autowired
 	KeywordService kService;
