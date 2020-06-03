@@ -1,5 +1,6 @@
 package scheduler;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -44,7 +45,16 @@ public class JobTaskServiceImpl implements JobTaskService {
 	}
 
 	@Override
-	public List<JobParam> getJobParam() {
-		return jobDao.getJobParam();
+	public List<JobParam> getJobParam() throws ParseException {
+		List<JobParam> jobParamList = jobDao.getJobParam();
+		for(JobParam job : jobParamList) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			job.setUpdateTimeStr(sdf.format(job.getUpdateTime()));
+			
+			String cronStr = job.getCronExpression();
+			String transCron = CronExpParser.translateToChinese(cronStr);
+			job.setCronExpression(transCron);
+		}
+		return jobParamList;
 	}
 }

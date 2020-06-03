@@ -26,6 +26,7 @@ public class JobParam {
 	private Boolean isSync = false;
 	private String description;
 	private Date updateTime = new Date();
+	private String updateTimeStr;
 
 	@Column(name="jobName")
 	public String getJobName() {
@@ -108,5 +109,14 @@ public class JobParam {
 
 	public void setJobNo(Integer jobNo) {
 		this.jobNo = jobNo;
+	}
+
+	@Transient
+	public String getUpdateTimeStr() {
+		return updateTimeStr;
+	}
+
+	public void setUpdateTimeStr(String updateTimeStr) {
+		this.updateTimeStr = updateTimeStr;
 	}
 }

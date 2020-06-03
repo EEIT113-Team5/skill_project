@@ -80,7 +80,7 @@ font {
 									<td>${jobList.jobName}</td>
 									<td>${jobList.cronExpression}</td>
 									<td>${jobList.status}</td>
-									<td>${jobList.updateTime}</td>
+									<td>${jobList.updateTimeStr}</td>
 									<td><a class="btn btn-success" id="updJob${jobList.jobNo}" href="#">編輯</a>
 									</td>
 								</tr>
