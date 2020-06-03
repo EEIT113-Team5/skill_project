@@ -122,6 +122,18 @@ textarea {
 										<td><font color='red' size='-3'>${error.publishDetail}</font></td>
 									</tr>
 									<tr>
+										<td><label for="">自己的類型:</label></td>
+										<td><select id="selSkill2" name='skillType2'>
+												<option value="">請選擇</option>
+												<option value="才藝">才藝</option>
+												<option value="運動">運動</option>
+												<option value="語言">語言</option>
+												<option value="寵物">寵物</option>
+												<option value="生活">生活</option>
+										</select></td>
+										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
+									</tr>
+									<tr>
 										<td><label for="">自己的技能:</label></td>
 										<td><select id="myownskill" name='ownSkill'>
 												<option value="">請選擇</option>

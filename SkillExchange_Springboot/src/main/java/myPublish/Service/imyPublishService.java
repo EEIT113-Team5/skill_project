@@ -17,5 +17,11 @@ public interface imyPublishService {
 	List<MyPublishBean> myPublishImformation(int publishNo);
 	
 	List<MyPublishBean> publishRecomm(int publishNo,int memberRegNo);
+	
+	MyPublishBean myPubStatus(MyPublishBean bean);
+	
+	List<MyPublishBean> myPublishHistory(int memberRegNo);
+	
+	MyPublishBean myPublishAgain(MyPublishBean bean);
 
 }

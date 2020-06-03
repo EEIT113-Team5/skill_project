@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import publishCheckPage.Model.PublishBean;
 import publishPage.Model.iPublishPageDao;
 import publishPage.Model.publishAreaBean;
 import publishPage.Model.publishCityBean;
@@ -42,5 +43,10 @@ public class PublishPageService implements iPublishPageService {
 	@Override
 	public List<publishCityBean> City() {
 		return ppDao.City();
+	}
+	
+	@Override
+	public List<PublishBean> allPublish(){
+		return ppDao.allPublish();
 	}
 }

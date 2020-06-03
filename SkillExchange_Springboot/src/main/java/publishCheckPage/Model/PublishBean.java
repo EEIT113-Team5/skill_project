@@ -37,6 +37,7 @@ public class PublishBean implements Serializable{
     private String publishMark;
     private int status;
     private String skillType;
+    private String skillType2;
     
     public PublishBean() {
     	
@@ -44,7 +45,7 @@ public class PublishBean implements Serializable{
     
     public PublishBean(String publishTitle,int memberRegNo,String publishDetail,String publishArea,String city
     		,String district,String road,String publishPlace,String publishPic
-    		,String ownSkill,String wantSkill,Timestamp updateTime, String publishMark,String skillType) {
+    		,String ownSkill,String wantSkill,Timestamp updateTime, String publishMark,String skillType,String skillType2) {
     	
     	super();
     	this.publishTitle = publishTitle;
@@ -61,6 +62,7 @@ public class PublishBean implements Serializable{
     	this.updateTime = updateTime;
     	this.publishMark = publishMark;
     	this.skillType = skillType;
+    	this.skillType2 = skillType2;
     }
     
     public String toString() {
@@ -98,6 +100,15 @@ public class PublishBean implements Serializable{
 		this.skillType = skillType;
 	}
 	
+	@Column(name = "skilltype2")
+	public String getSkillType2() {
+		return skillType2;
+	}
+
+	public void setSkillType2(String skillType2) {
+		this.skillType2 = skillType2;
+	}
+
 	@Column(name = "publishtitle")
 	public String getPublishTitle() {
 		return publishTitle;

@@ -144,7 +144,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
 							<a class="dropdown-item" href="myPublish">我的刊登</a>
-							<a class="dropdown-item" href="myPublish">歷史刊登</a>
+							<a class="dropdown-item" href="myPublishHistory">歷史刊登</a>
 						</div>
 					</li>
 

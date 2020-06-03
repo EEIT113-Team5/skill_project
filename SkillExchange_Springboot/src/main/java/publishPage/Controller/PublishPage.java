@@ -13,6 +13,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import members.Model.MemberBean;
 import publishCheckPage.Model.PublishBean;
@@ -51,6 +54,7 @@ public class PublishPage {
 			@RequestParam("publishPlace") String publishPlace,
 			@RequestParam("publishMark") String publishMark,
 			@RequestParam("skillType") String skillType,
+			@RequestParam("skillType2") String skillType2,
 			@SessionAttribute("memberBean") MemberBean mBean,
 			Model model
 			) throws IllegalStateException, IOException{
@@ -82,7 +86,7 @@ public class PublishPage {
 			System.out.println(string);
 			
 			pBean = new PublishBean(publishTitle,memberRegNo,publishDetail,publishArea,City,
-					district,road,publishPlace,string,ownSkill,wantSkill,updateTime,publishMark,skillType);
+					district,road,publishPlace,string,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2);
 			model.addAttribute("picNameString",string);
 			
 		}else {
@@ -104,7 +108,7 @@ public class PublishPage {
 			model.addAttribute("prePicName",picNameString);
 			
 			pBean = new PublishBean(publishTitle,memberRegNo,publishDetail,publishArea,City,
-					district,road,publishPlace,picNameString,ownSkill,wantSkill,updateTime,publishMark,skillType);			
+					district,road,publishPlace,picNameString,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2);			
 			model.addAttribute("picNameString",picNameString);
 		}
 		model.addAttribute("publishbean",pBean);
@@ -120,6 +124,7 @@ public class PublishPage {
 		model.addAttribute("publishPlace", publishPlace);
 		model.addAttribute("publishMark", publishMark);
 		model.addAttribute("skillType", skillType);
+		model.addAttribute("skillType2",skillType2);
 		
 //		model.addAttribute("picNameString",picNameString);
 //		System.out.println(picNameString);
@@ -144,6 +149,7 @@ public class PublishPage {
 		model.addAttribute("publishPlace", pBean.getPublishPlace());
 		model.addAttribute("publishMark", pBean.getPublishMark());
 		model.addAttribute("skillType", pBean.getSkillType());
+		model.addAttribute("skillType2",pBean.getSkillType2());
 		model.addAttribute("publishPic",pBean.getPublishPic());
 		
 
@@ -158,5 +164,19 @@ public class PublishPage {
 		
 		
 		return "publish/PublishRrev";
+	}
+	
+	@GetMapping(value = "/PublishMgmt")
+	public String allPublish(Model model) {
+		
+		List<PublishBean> allList = ipps.allPublish();
+		
+		Gson gson = new Gson();
+		String allString = gson.toJson(allList);
+		model.addAttribute("allString",allString);
+		
+		model.addAttribute("allList",allList);
+		
+		return "publish/PublishMgmt";
 	}
 }

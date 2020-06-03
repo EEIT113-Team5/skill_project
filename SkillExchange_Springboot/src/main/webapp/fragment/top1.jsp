@@ -138,8 +138,8 @@
 						aria-expanded="false"> 技能刊登</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="${jspPath}/publishSkill">刊登頁面</a>
-							<a class="dropdown-item" href="myPublish">我的刊登</a> <a
-								class="dropdown-item" href="myPublish">歷史刊登</a>
+							<a class="dropdown-item" href="myPublish">我的刊登</a> 
+							<a class="dropdown-item" href="myPublishHistory">歷史刊登</a>
 						</div></li>
 					<li class="nav-item "><a class="nav-link"
 						href="${jspPath}/QueryCollections.do">我的收藏</a></li>

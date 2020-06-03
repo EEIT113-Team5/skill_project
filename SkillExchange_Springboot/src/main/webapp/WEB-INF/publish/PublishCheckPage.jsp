@@ -142,23 +142,6 @@
 				</h3>
 			</div>
 		</div>
-
-		<!-- 					<table>						 -->
-		<%-- 							<tr><td id='d1'>刊登標題:</td><td>${publishTitle}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>照片:</td><td>${publishPic}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>刊登內容:</td><td>${publishDetail}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>自己的技能:</td><td>${ownSkill}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>想學的技能:</td><td>${wantSkill}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>刊登地區:</td><td>${publishArea}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>刊登城市:</td><td>${City}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>鄉鎮:</td><td>${district}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>路名:</td><td>${road}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>希望地點:</td><td>${publishPlace}</td></tr> --%>
-		<%-- 							<tr><td id='d1'>備註:</td><td>${publishMark}</td></tr> --%>
-		<%-- 							<tr><img width="100px" src="images/${picNameString}"><br></tr> --%>
-		<!-- 					</table> -->
-		<!-- 					<a href="publishPrev">上一步</a> -->
-
 		<form action="publishPrev" method="POST">
 			<input type='submit' value='上一步'>
 		</form>
