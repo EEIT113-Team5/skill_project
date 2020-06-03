@@ -350,7 +350,7 @@ form {
 						<button id="iarea"
 							class="input-group-append wrap-level3 searchbar-bgcolor"
 							data-toggle="modal" data-target="#areaModal">
-							<div class="wrap-level5 search-btn">地區</div>
+							<div id="inputArea" class="wrap-level5 search-btn">地區</div>
 						</button>
 						<!-- Area Modal -->
 						<div class="modal fade" id="areaModal" tabindex="-1" role="dialog"
@@ -380,7 +380,7 @@ form {
 						<button id="iskill"
 							class="input-group-append wrap-level3 searchbar-bgcolor"
 							data-toggle="modal" data-target="#skillModal">
-							<div class="wrap-level5 search-btn">技能類別</div>
+							<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div>
 						</button>
 						<!-- Skil Modal -->
 						<div class="modal fade" id="skillModal" tabindex="-1"
@@ -555,7 +555,7 @@ form {
 								+ arr[0][x][0] + "</a></li>"
 								+ "<div class='div-bar2 k1'></div>";
 					}
-					content = content.substring(0, content.length - 32);
+					content = content.substring(0, content.length - 31);
 					document.getElementById("insert-keyword").innerHTML = content;
 				}
 			}
@@ -888,22 +888,40 @@ form {
 			//console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
+			var str1 = "";
+			var str2 = "";
 			for (var i = 0; i < list.length; i++) {
 				if (list[i].value.includes("部")) {
 					var id1 = "area" + m;
 					var A = document.getElementById(id1);
 					A.value = list[i].value;
 					m++;
+					str1 += list[i].value + "、";
+// 					console.log("str1=" + str1);
+					
 				} else {
 					var id2 = "city" + n;
 					var B = document.getElementById(id2);
 					B.value = list[i].value;
 					n++;
+					str2 += list[i].value + "、";
+// 					console.log("str2=" + str2);
 				}
+			}
+// 			把選取值寫回頁面上
+// 			console.log("Tstr1=" + str1);
+// 			console.log("Tstr2=" + str2);
+			var txt = document.getElementById("inputArea");
+			if(str2 == ""){
+				str1 = str1.substring(0, str1.length - 1);
+				txt.innerHTML = str1;
+			} else {
+				str2 = str2.substring(0, str2.length - 1);
+				txt.innerHTML = str1 + str2;
 			}
 		}
 	</script>
-
+content = content.substring(0, content.length - 32);
 	<script>
 		var btn4 = document.getElementById("skillClick");
 		btn4.onclick = function() {
@@ -914,6 +932,8 @@ form {
 			//console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
+			var str1 = "";
+			var str2 = "";
 			for (var i = 0; i < list.length; i++) {
 				if (list[i].value.includes("才藝")
 						|| list[i].value.includes("生活")
@@ -924,12 +944,25 @@ form {
 					var A = document.getElementById(id1);
 					A.value = list[i].value;
 					m++;
+					str1 += list[i].value + "、";
+					console.log("str1=" + str1);
 				} else {
 					var id2 = "skill" + n;
 					var B = document.getElementById(id2);
 					B.value = list[i].value;
 					n++;
+					str2 += list[i].value + "、";
+					console.log("str2=" + str2);
 				}
+			}
+// 			把選取值寫回頁面上
+			var txt = document.getElementById("inputSkill");
+			if(str2 == ""){
+				str1 = str1.substring(0, str1.length - 1);
+				txt.innerHTML = str1;
+			} else {
+				str2 = str2.substring(0, str2.length - 1);
+				txt.innerHTML = str1 + str2;
 			}
 		}
 	</script>

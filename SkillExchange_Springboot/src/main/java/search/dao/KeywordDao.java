@@ -33,11 +33,11 @@ public class KeywordDao {
 			String type4, String skill1, String skill2, String skill3, String skill4, String skill5) {
 		String hql1, hql2, hql3, hql4, hql5;
 
-		System.out.println("area1=" + area1);
-		System.out.println("city1=" + city1);
-		System.out.println("type1=" + type1);
-		System.out.println("skill1=" + skill1);
-		System.out.println("keyword=" + keyword);
+//		System.out.println("area1=" + area1);
+//		System.out.println("city1=" + city1);
+//		System.out.println("type1=" + type1);
+//		System.out.println("skill1=" + skill1);
+//		System.out.println("keyword=" + keyword);
 
 		if (area1 == null) {
 			hql1 = "";
@@ -132,7 +132,7 @@ public class KeywordDao {
 		String hql = "select new SearchBean(M.memberNic, S.publishNo, S.memberRegNo, S.publishTitle, S.publishDetail, S.publishArea, S.city, S.district, S.road, S.publishPlace, S.publishPic, S.ownSkill, S.wantSkill, S.updateTime, S.publishCTR, S.publishMark, S.status, S.ownType, S.wantType) from SearchBean S, MemberBean M where S.memberRegNo = M.memberRegNo and S.status='1'"
 				+ hql1 + hql2 + hql3 + hql4 + hql5;
 
-		System.out.println("hql=" + hql);
+//		System.out.println("hql=" + hql);
 
 		@SuppressWarnings("unchecked")
 		Query<SearchBean> query = getSession().createQuery(hql);
