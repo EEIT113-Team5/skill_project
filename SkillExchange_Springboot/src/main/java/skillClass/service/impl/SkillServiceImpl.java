@@ -1,8 +1,6 @@
 package skillClass.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +35,10 @@ public class SkillServiceImpl implements SkillService {
 	public boolean CTRUpdate(Integer PublishNo) {
 		return skillDao.CTRUpdate(PublishNo);
 	}
-
+	@Override
+	public boolean ClassCTRUpdate(String skillType) {
+		return skillDao.ClassCTRUpdate(skillType);
+	}
 	
 	//對話框
 	@Override

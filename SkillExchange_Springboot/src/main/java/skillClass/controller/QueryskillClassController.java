@@ -55,7 +55,9 @@ public class QueryskillClassController {
 		if (skillType.equals("all")) {		
 			model.addAttribute("allSkills",service.allskill());
 		}
-		else {			
+		else {	
+			String TypeCN=("技能"+skillType);
+			service.ClassCTRUpdate(TypeCN);
 		model.addAttribute("allSkills",service.QuerySkills(skillType));				
 		}
 	
@@ -75,6 +77,8 @@ public class QueryskillClassController {
 			model.addAttribute("allSkills",service.allskill());
 		}
 		else {
+			String TypeCN=("技能"+skillType);
+			service.ClassCTRUpdate(TypeCN);
 			model.addAttribute("allSkills",service.QuerySkills(skillType));				
 		}
 		return "skillClass/skill";

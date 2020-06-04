@@ -1,10 +1,7 @@
 package skillClass.dao.impl;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,14 +9,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
-
-import members.Model.MemberBean;
 import skillClass.dao.SkillDao;
 import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
+
 
 @Transactional
 @Repository
@@ -97,7 +91,16 @@ public class SkillDaoImpl implements SkillDao {
 		query.executeUpdate();
 		return true;
 	}
-
+	@Override
+	public boolean ClassCTRUpdate(String skillType) {
+		System.out.println(skillType);
+		String hql = " update Skill2 s set s.typeCTR=typeCTR+1 where s.typeCN=:TypeCN";
+		Session session = getSession();
+		@SuppressWarnings("rawtypes")
+		Query query = session.createQuery(hql).setParameter("TypeCN",skillType);
+		query.executeUpdate();
+		return true;
+	}
 	@Override
 	public boolean LogUpdate(Integer sendNo, Integer receiveNo, String sendUser, String toUser, String ChatLog,
 			LocalDateTime LogTime) {
@@ -131,12 +134,14 @@ public class SkillDaoImpl implements SkillDao {
 	// 對話框
 	@Override
 	public ChatRequest InsertChatReq(ChatRequest cr) {
+		@SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(
 				"select m from ChatRequest m where m.sendNo = :sendNo and m.receiveNo = :receiveNo and m.publishNo = :publishNo");
 		query.setParameter("sendNo", cr.getSendNo());
 		query.setParameter("receiveNo", cr.getReceiveNo());
 		query.setParameter("publishNo", cr.getPublishNo());
 		System.out.println(cr.getSendNo() + "@@@@" + cr.getReceiveNo() + "@@@@" + cr.getPublishNo());
+		@SuppressWarnings("unchecked")
 		List<ChatRequest> ChatRequestList = query.list();
 		if (ChatRequestList.isEmpty()) {
 			getSession().save(cr);
@@ -148,10 +153,12 @@ public class SkillDaoImpl implements SkillDao {
 
 	@Override
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo) {
+		@SuppressWarnings("rawtypes")
 		Query query = getSession()
 				.createQuery("select m from ChatRequest m where m.receiveNo = :receiveNo and m.publishNo = :publishNo");
 		query.setParameter("receiveNo", receiveNo);
 		query.setParameter("publishNo", publishNo);
+		@SuppressWarnings("unchecked")
 		List<ChatRequest> ChatRequestList = query.list();
 		return ChatRequestList;
 	}
