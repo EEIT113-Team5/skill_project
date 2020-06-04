@@ -2,9 +2,13 @@ package skillClass.dao;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
 import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
+import skillClass.model.Skill2;
 
 public interface SkillDao {
 
@@ -17,4 +21,5 @@ public interface SkillDao {
 	public ChatRequest InsertChatReq(ChatRequest cr);	
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo);
 	public boolean ClassCTRUpdate(String skillType);
+	public List<Skill2> GetBackendCTR();
 }

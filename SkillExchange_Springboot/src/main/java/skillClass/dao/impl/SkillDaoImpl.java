@@ -7,12 +7,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 import skillClass.dao.SkillDao;
 import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
+import skillClass.model.Skill2;
 
 
 @Transactional
@@ -93,7 +98,6 @@ public class SkillDaoImpl implements SkillDao {
 	}
 	@Override
 	public boolean ClassCTRUpdate(String skillType) {
-		System.out.println(skillType);
 		String hql = " update Skill2 s set s.typeCTR=typeCTR+1 where s.typeCN=:TypeCN";
 		Session session = getSession();
 		@SuppressWarnings("rawtypes")
@@ -150,7 +154,7 @@ public class SkillDaoImpl implements SkillDao {
 
 		return cr;
 	}
-
+	
 	@Override
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo) {
 		@SuppressWarnings("rawtypes")
@@ -162,10 +166,17 @@ public class SkillDaoImpl implements SkillDao {
 		List<ChatRequest> ChatRequestList = query.list();
 		return ChatRequestList;
 	}
-
-//		return cr;
-//	}
-
+	@Override
+	public List<Skill2> GetBackendCTR(){
+		String hql = "from Skill2";
+		Session session = getSession();
+		@SuppressWarnings("rawtypes")
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Skill2> CTRList = query.list();
+		return CTRList ;
+	}
+	
 	public Session getSession() {
 		return factory.getCurrentSession();
 	}
