@@ -72,7 +72,6 @@
 	crossorigin="anonymous"></script>
 
 <style>
-
 .confirmBtns {
 	text-align: right;
 	float: right;
@@ -95,7 +94,6 @@
 h1 {
 	width: 180px;
 }
-
 
 .titleBlock {
 	align-items: center;
@@ -216,23 +214,6 @@ function delDetail(collectNo,groupName){
 	
 }
 </script>
-<c:choose>
-		<c:when test="${not empty MsgOK}">
-			<script>
-        let message = "${MsgOK.updateOK}${MsgOK.delOK}${MsgOK.insertOK}";
-		$("#alertText").text(message);
-		$("#alertModal").modal('show');
-        
-    </script>
-		</c:when>
-		<c:when test="${not empty MsgMap}">
-			<script>
-        let message = "${MsgMap.updateError}${MsgMap.delError}";
-        $("#alertText").text(message);
-        $("#alertModal").modal('show');
-    </script>
-		</c:when>
-	</c:choose>
 </head>
 <body id="body">
 	<jsp:include page="/fragment/top1.jsp" />
@@ -270,11 +251,13 @@ function delDetail(collectNo,groupName){
 								<c:set var='collectionGroupsKey'
 									value='${collectionGroup.key+0}'></c:set>
 								<div class="card">
-									<div class="card-header" style="background-color:rgb(95, 165, 180);color:white;">
+									<div class="card-header"
+										style="background-color: rgb(95, 165, 180); color: white;">
 										<div class="tabletext" id="collectGroup${vs.index}">
 											<a class="card-link" data-toggle="collapse"
-												id="collectGName${vs.index}" style="font-weight:bold;font-size: 25px">${collectionGroupsMap[collectionGroupsKey]}
-											</a> <input type="hidden" id="collectG${vs.index}" 
+												id="collectGName${vs.index}"
+												style="font-weight: bold; font-size: 25px">${collectionGroupsMap[collectionGroupsKey]}
+											</a> <input type="hidden" id="collectG${vs.index}"
 												value="${collectionGroup.key}">
 										</div>
 										<div class="titleTableBtns" id="titleTableBtns">
@@ -296,8 +279,8 @@ function delDetail(collectNo,groupName){
 											<tbody>
 												<c:forEach var='collection' items='${collectionGroup.value}'>
 													<tr>
-														<td style="width:200px"><img src="${collection.collectMPic}"
-															class="collectImg">${collection.collectMName}</td>
+														<td style="width: 200px"><img
+															src="${collection.collectMPic}" class="collectImg">${collection.collectMName}</td>
 														<td>
 															<div style="text-align: left">
 																<a id="collectDetail${collection.collectNo}"
@@ -341,30 +324,29 @@ function delDetail(collectNo,groupName){
 	<form>
 		<input type="hidden" name="a" />
 	</form>
-	
+
 	<%
 		session.removeAttribute("MsgOK");
 	%>
 	<!-- ---------------------要加的部份-------------------- -->
 	<!-- 
     Essential Scripts
-    =====================================-->
-	<!-- Main jQuery -->
-	<script src="pluginstemp/jquery/jquery.min.js"></script>
-	<!-- Google Map -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
-	<script src="pluginstemp/google-map/gmap.js"></script>
+    ===================================== 
 
-	<!-- 	<!-- Form Validation -->
-	<script src="pluginstemp/form-validation/jquery.form.js"></script>
-	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>
+<!-- 	<!-- Google Map  -->
+<!-- 	<!-- 	<script  -->
+<!-- 	<!-- 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>  -->
+<!-- 	<!-- 	<script src="pluginstemp/google-map/gmap.js"></script>  -->
 
-	<!-- Bootstrap4 -->
-	<script src="pluginstemp/bootstrap/js/bootstrap.min.js"></script>
-	<!-- Parallax -->
-	<script src="pluginstemp/parallax/jquery.parallax-1.1.3.js"></script>
-	<!-- lightbox -->
+<!-- 	<!-- 	<!-- Form Validation  -->
+<!-- 	<script src="pluginstemp/form-validation/jquery.form.js"></script>   -->
+<!-- 	<script src="pluginstemp/form-validation/jquery.validate.min.js"></script>   -->
+
+<!-- 	<!-- Bootstrap4  -->
+<!-- 	<!-- 	<script src="pluginstemp/bootstrap/js/bootstrap.min.js"></script>  -->
+<!-- 	<!-- Parallax  -->
+	<script src="pluginstemp/parallax/jquery.parallax-1.1.3.js"></script> 
+	<!-- lightbox --> 
 	<script src="pluginstemp/lightbox2/dist/js/lightbox.min.js"></script>
 	<!-- Owl Carousel -->
 	<script src="pluginstemp/slick/slick.min.js"></script>
@@ -375,6 +357,29 @@ function delDetail(collectNo,groupName){
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
+	<script src="pluginstemp/bootstrap/js/bootstrap.min.js"></script>
+	<c:choose>
+
+	<c:when test="${not empty MsgOK}">
+		<script>
+	$(document).ready(function(){
+        let message = "${MsgOK.updateOK}${MsgOK.delOK}${MsgOK.insertOK}";
+		$("#alertText").text(message);
+		$("#alertModal").modal('show');
+		
+			});
+    </script>
+	</c:when>
+	<c:when test="${not empty MsgMap}">
+		<script>
+	$(document).ready(function(){
+        let message = "${MsgMap.updateError}${MsgMap.delError}";
+        $("#alertText").text(message);
+        $("#alertModal").modal('show');
+	});
+    </script>
+	</c:when>
+</c:choose>
 
 	<!-- ---------------------要加的部份-------------------- -->
 

@@ -170,7 +170,7 @@
 	<script src="assets/demo/datatables-demo.js"></script>
 	<script>
 		$(document).ready(function() {
-			window.onload = function() {
+// 			window.onload = function() {
 				$.ajax({
 					url : "GetBackendStatis", //請求的url地址
 					dataType : "json", //返回格式為json
@@ -191,7 +191,7 @@
 					}
 				});
 
-			}
+// 			}
 		})
 		var myChart = echarts.init(document.getElementById('myBarChart'));
 		//		 		var myChart1 = echarts.init(document.getElementById('myBarChart1'));

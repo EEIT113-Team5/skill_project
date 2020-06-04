@@ -12,7 +12,7 @@
 	width: 100%;
 }
 </style>
-<script src="pluginstemp/jquery/jquery.min.js"></script>
+<!-- <script src="pluginstemp/jquery/jquery.min.js"></script> -->
 
 
 <footer id="footer" class="bg-one">
