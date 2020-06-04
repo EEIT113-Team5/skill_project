@@ -135,13 +135,13 @@ tr, td {
 					<c:if test="${dlindex == myindex}">
 
 						<div class="col-sm-3"
-							style="background-color: white; height: 580px; margin-top: 20px">
+							style="background-color: white; height: 580px; margin-top: 20px;margin-bottom: 20px">
 							<div class="card" style="height: 585px; border: 1px solid black;">
 
 								<img src="${my.publishPic}" class="card-img-top" alt="..."
 									style="height: 180px">
 								<div class="" style="height: 140px">
-									<h5 class="card-title">編號:${my.publishNo},${my.myTitle}</h5>
+									<h5 class="card-title" style="margin-top: 10px">編號:${my.publishNo},${my.myTitle}</h5>
 									<p class="card-text">${my.myDetail}.</p>
 								</div>
 								<ul class="list-group list-group-flush">

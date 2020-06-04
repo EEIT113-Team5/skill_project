@@ -86,7 +86,7 @@ public class PublishPage {
 			System.out.println(string);
 			
 			pBean = new PublishBean(publishTitle,memberRegNo,publishDetail,publishArea,City,
-					district,road,publishPlace,string,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2);
+					district,road,publishPlace,string,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2,1);
 			model.addAttribute("picNameString",string);
 			
 		}else {
@@ -108,7 +108,7 @@ public class PublishPage {
 			model.addAttribute("prePicName",picNameString);
 			
 			pBean = new PublishBean(publishTitle,memberRegNo,publishDetail,publishArea,City,
-					district,road,publishPlace,picNameString,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2);			
+					district,road,publishPlace,picNameString,ownSkill,wantSkill,updateTime,publishMark,skillType,skillType2,1);			
 			model.addAttribute("picNameString",picNameString);
 		}
 		model.addAttribute("publishbean",pBean);
@@ -170,6 +170,10 @@ public class PublishPage {
 	public String allPublish(Model model) {
 		
 		List<PublishBean> allList = ipps.allPublish();
+		
+		for (PublishBean publishBean : allList) {
+			System.out.println(publishBean.getStatus());
+		}
 		
 		Gson gson = new Gson();
 		String allString = gson.toJson(allList);
