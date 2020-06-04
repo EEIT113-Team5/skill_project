@@ -141,7 +141,7 @@ function collectionGNameEdit(idx,text){
     buttonHide();
 	
 	let groupHeader = group.parent();
-    groupHeader.append("<div class='confirmBtns'><a class='btn btn-outline-primary' href='#' id='confrimBtn' onclick='gNameEditComfrim("+collectGNo+")'>確認</a><a class='btn btn-outline-secondary' href='#' id='cancelBtn' onclick='gNameEditCancel()'>取消</a></div>");
+    groupHeader.append("<div class='confirmBtns'><a class='btn btn-light' href='#' id='confrimBtn' onclick='gNameEditComfrim("+collectGNo+")'>確認</a><a class='btn btn-secondary' href='#' id='cancelBtn' onclick='gNameEditCancel()'>取消</a></div>");
 }
 function collectionGroupDel(idx,text){
 	collectGNo = $("#collectG"+idx).val();
