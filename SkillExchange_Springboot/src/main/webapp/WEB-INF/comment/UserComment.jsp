@@ -319,7 +319,7 @@
 
        				            label: {
        				                position: 'inner',
-       				                fontSize: 18
+       				                fontSize: 14
        				            },
        				            labelLine: {
        				                show: false
@@ -327,7 +327,7 @@
        				            data: [
        				                {value: req[0]+req[1]+req[2], name: '差(1~3)'},
        				                {value: req[3]+req[4]+req[5], name: '尚可(4~6)'},
-       				                {value: req[6]+req[7]+req[8]+req[9], name: '良好(7~10)'}
+       				                {value: req[6]+req[7]+req[8]+req[9], name: '好(7~10)'}
        				            ]
        				        },
        				        {
