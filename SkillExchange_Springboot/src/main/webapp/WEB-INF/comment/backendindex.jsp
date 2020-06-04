@@ -146,7 +146,7 @@
 								<div class="card-header">
 									<i class="fas fa-chart-bar mr-1"></i>
 									<h4 style="text-align: center">
-										<b>技能類趨勢</b>
+										<b>技能趨勢</b>
 									</h4>
 								</div>
 								<div class="card-body">
@@ -159,7 +159,7 @@
 								<div class="card-header">
 									<i class="fas fa-chart-bar mr-1"></i>
 									<h4 style="text-align: center">
-										<b>活動類趨勢</b>
+										<b>活動趨勢</b>
 									</h4>
 								</div>
 								<div class="card-body">
@@ -196,7 +196,8 @@
 	<script src="assets/demo/datatables-demo.js"></script>
 	<script>
 		$(document).ready(function() {
-// 			window.onload = function() {
+		//	window.onload = function() {
+				
 				$.ajax({
 					url : "GetBackendStatis", //請求的url地址
 					dataType : "json", //返回格式為json
@@ -216,9 +217,104 @@
 						console.log("出錯了!")
 					}
 				});
-
-// 			}
+				
+				$.ajax({
+					url : "GetBackendCTR", //請求的url地址
+					dataType : "json", //返回格式為json
+					async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+					type : "GET", //請求方式
+					success : function(CTR) {										
+					
+					var myChart2 = echarts.init(document.getElementById('myBarChart2'));
+					option2 = {
+						    title: {
+						        text: '比例圖資料來源:技能類別點擊數',			    
+						        left: 'center'
+						    },
+						    tooltip: {
+						        trigger: 'item',
+						        formatter: '{a} <br/>{b} : {c} ({d}%)'
+						    },
+						    legend: {
+						        orient: 'vertical',
+						        left: 'left',
+						        data: ['才藝', '運動', '語言', '寵物', '生活']
+						    },
+						    series: [
+						        {
+						            name: '來源',
+						            type: 'pie',
+						            radius: '55%',
+						            center: ['50%', '60%'],
+						            data: [
+						                {value: CTR[0]["typeCTR"], name: '才藝'},
+						                {value: CTR[1]["typeCTR"], name: '運動'},
+						                {value: CTR[2]["typeCTR"], name: '語言'},
+						                {value: CTR[3]["typeCTR"], name: '寵物'},
+						                {value: CTR[4]["typeCTR"], name: '生活'}
+						            ],
+						            emphasis: {
+						                itemStyle: {
+						                    shadowBlur: 10,
+						                    shadowOffsetX: 0,
+						                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+						                }
+						            }
+						        }
+						    ]
+						};
+					myChart2.setOption(option2);
+					
+					var myChart3 = echarts.init(document.getElementById('myBarChart3'));
+					option3 = {
+						    title: {
+						        text: '比例圖資料來源:活動類別點擊數',			      
+						        left: 'center'
+						    },
+						    tooltip: {
+						        trigger: 'item',
+						        formatter: '{a} <br/>{b} : {c} ({d}%)'
+						    },
+						    legend: {
+						        orient: 'vertical',
+						        left: 'left',
+						        data: ['音樂', '語言', '運動', '電腦', '其他']
+						    },
+						    series: [
+						        {
+						            name: '来源',
+						            type: 'pie',
+						            radius: '55%',
+						            center: ['50%', '60%'],
+						            data: [
+						                {value: CTR[5]["typeCTR"], name: '音樂'},
+						                {value: CTR[6]["typeCTR"], name: '語言'},
+						                {value: CTR[7]["typeCTR"], name: '運動'},
+						                {value: CTR[8]["typeCTR"], name: '電腦'},
+						                {value: CTR[9]["typeCTR"], name: '其他'}
+						            ],
+						            emphasis: {
+						                itemStyle: {
+						                    shadowBlur: 10,
+						                    shadowOffsetX: 0,
+						                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+						                }
+						            }
+						        }
+						    ]
+						};
+					myChart3.setOption(option3);
+					},
+					complete : function() {
+						//請求完成的處理
+					},
+					error : function() {
+						console.log("出錯了!")
+					}
+				});
+			//}
 		})
+							
 		var myChart = echarts.init(document.getElementById('myBarChart'));
 		//		 		var myChart1 = echarts.init(document.getElementById('myBarChart1'));
 		var option = {
@@ -325,6 +421,8 @@
 			} ]
 		};
 		myChart1.setOption(option1);
+		
+		
 	</script>
 </body>
 </html>

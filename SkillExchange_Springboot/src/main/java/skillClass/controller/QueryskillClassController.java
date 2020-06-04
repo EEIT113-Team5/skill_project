@@ -22,6 +22,7 @@ import myCollection.model.CollectionBean;
 import myCollection.service.MyCollectionService;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
+import skillClass.model.Skill2;
 import skillClass.service.SkillService;
 
 
@@ -120,8 +121,14 @@ public class QueryskillClassController {
 		ResponseEntity<ChatRequest> re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
 	}
-	
-
+	// 後來點擊數比例圖用
+	@GetMapping(value = "GetBackendCTR", produces = { "application/json" })
+	public ResponseEntity<List<Skill2>> GetBackendCTR(Model model) {
+		List<Skill2> list = service.GetBackendCTR();
+		ResponseEntity<List<Skill2>> re = new ResponseEntity<>(list, HttpStatus.OK);
+		System.out.println(re);
+		return re;
+	}
 //	@RequestMapping("/index")
 //	public String home() {
 //		return "/index";

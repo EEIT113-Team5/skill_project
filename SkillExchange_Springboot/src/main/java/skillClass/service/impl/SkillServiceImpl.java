@@ -2,11 +2,13 @@ package skillClass.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skillClass.dao.SkillDao;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
+import skillClass.model.Skill2;
 import skillClass.service.SkillService;
 
 @Transactional
@@ -52,7 +54,10 @@ public class SkillServiceImpl implements SkillService {
 		// TODO Auto-generated method stub
 		return skillDao.selectChatReq(receiveNo, publishNo);
 	}
-	
+	@Override
+	public List<Skill2> GetBackendCTR(){		
+		return skillDao.GetBackendCTR();
+	}
 //	@Override
 //	public boolean LogUpdate(Integer sendNo,Integer receiveNo,String sendUser,String toUser) {
 //		

@@ -19,4 +19,5 @@ public interface SkillService {
 	public ChatRequest InsertChatReq(ChatRequest cr);
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo);
 	public boolean ClassCTRUpdate(String skillType);
+	public List<Skill2>  GetBackendCTR();
 }
