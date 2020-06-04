@@ -25,7 +25,7 @@
 	font-size: 18px !important;
 }
 .navigation .navbar-light .navbar-nav .nav-item .nav-link {
-    padding: 20px 10px !important;
+    padding: 20px 8px !important;
 }
 
 .navigation {
