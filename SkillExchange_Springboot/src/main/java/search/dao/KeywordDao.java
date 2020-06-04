@@ -123,9 +123,9 @@ public class KeywordDao {
 			hql5 = "";
 		}
 
-		String hql = "select new SearchBean(M.memberNic, S.publishNo, S.memberRegNo, S.publishTitle, S.publishDetail, S.publishArea, S.city, S.district, S.road, S.publishPlace, S.publishPic, S.ownSkill, S.wantSkill, S.updateTime, S.publishCTR, S.publishMark, S.status, S.ownType, S.wantType) from SearchBean S, MemberBean M where S.memberRegNo = M.memberRegNo and S.status='1'"
+		String hql = "select new SearchBean(M.memberNic, M.memberPic, S.publishNo, S.memberRegNo, S.publishTitle, S.publishDetail, S.publishArea, S.city, S.district, S.road, S.publishPlace, S.publishPic, S.ownSkill, S.wantSkill, S.updateTime, S.publishCTR, S.publishMark, S.status, S.ownType, S.wantType) from SearchBean S, MemberBean M where S.memberRegNo = M.memberRegNo and S.status='1'"
 				+ hql1 + hql2 + hql3 + hql4 + hql5;
-
+		
 		System.out.println("hql=" + hql);
 
 		@SuppressWarnings("unchecked")

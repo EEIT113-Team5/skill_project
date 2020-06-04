@@ -96,13 +96,6 @@
 	border-bottom: 1.5px solid #F0F0F0;
 }
 
-.container2 {
-	width: 75%;
-	margin: 30px;
-	padding: 0;
-	/* 	border: 1px solid black; */
-}
-
 .post {
 	display: inline-block;
 	background-color: #F0F0F0;
@@ -123,27 +116,9 @@ a {
 	color: #000000;
 }
 
-.img {
-	text-align: center;
-	height: 13em;
-}
-
-img {
-	width: auto;
-	height: auto;
-	max-width: 100%;
-	max-height: 100%;
-}
-
 .poster {
 	font-size: 1.2em;
 	margin-top: 1em;
-}
-
-.detail {
-	font-size: 0.8em;
-	height: 5em;
-	vertical-align: top;
 }
 
 .area {
@@ -158,8 +133,17 @@ img {
 /* old css */
 
 /* new css */
-h2 {
+body {
+	font-family: 微軟正黑體 !important;
+}
+
+h2, h6 {
 	font-family: 微軟正黑體;
+}
+
+h4 {
+	font-family: 微軟正黑體;
+	height: 2.4em;
 }
 
 .wrap-level1 {
@@ -237,12 +221,6 @@ h2 {
 .searchbar-text {
 	width: 350px;
 	height: 40px;
-}
-
-.text-truncate {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .search-btn {
@@ -402,6 +380,61 @@ form {
 	width: 9.5%;
 }
 
+.container2 {
+	width: 90%;
+	margin: 30px auto;
+	padding: 0;
+	/* 	border: 1px solid black; */
+}
+
+.result {
+	width: 25%;
+	height: 40em;
+}
+
+.img {
+	text-align: center;
+	height: 13em;
+}
+
+.detail {
+	font-size: 1em;
+	height: 5em;
+	vertical-align: top;
+	margin-bottom: 0.75rem;
+}
+
+.text-truncate {
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.line-clamp2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+}
+
+.line-clamp3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	white-space: normal;
+}
+
+.last-part {
+	display: inline-block;
+/* 	width: 50%; */
+	text-align: center;
+}
+
+.btn-o {
+	margin-left: 10x;
+	margin-right: 10px;
+}
+
 /* new css */
 </style>
 </head>
@@ -425,8 +458,8 @@ form {
 				<c:choose>
 					<c:when test="${not empty keyword1}">
 						<input type="text" id="typing-keyword"
-						class="form-control wrap-level4 searchbar-bgcolor searchbar-text text-truncate"
-						name="typing-keyword" value="${keyword1}">
+							class="form-control wrap-level4 searchbar-bgcolor searchbar-text text-truncate"
+							name="typing-keyword" value="${keyword1}">
 					</c:when>
 					<c:otherwise>
 						<input type="text" id="typing-keyword"
@@ -440,11 +473,11 @@ form {
 			<button id="iarea"
 				class="input-group-append wrap-level3 searchbar-bgcolor"
 				data-toggle="modal" data-target="#areaModal">
-<%-- 				<c:choose> --%>
-<%-- 					<c:when test="${not empty area1 || not empty area2}"> --%>
-					
-<%-- 					</c:when> --%>
-<%-- 				</c:choose> --%>
+				<%-- 				<c:choose> --%>
+				<%-- 					<c:when test="${not empty area1 || not empty area2}"> --%>
+
+				<%-- 					</c:when> --%>
+				<%-- 				</c:choose> --%>
 				<div id="inputArea" class="wrap-level5 search-btn">地區</div>
 			</button>
 			<!-- Area Modal -->
@@ -503,23 +536,23 @@ form {
 			<form method="GET" action="<c:url value='InsertKeyword1.do' />">
 				<div id="container">
 					<input type="hidden" id="keyword" name="keyword" value="">
-					<input type="hidden" id="area1" name="area1" value="">
-					<input type="hidden" id="area2" name="area2" value="">
-					<input type="hidden" id="area3" name="area3" value="">
-					<input type="hidden" id="city1" name="city1" value="">
-					<input type="hidden" id="city2" name="city2" value="">
-					<input type="hidden" id="city3" name="city3" value=""> 
-					<input type="hidden" id="city4" name="city4" value=""> 
-					<input type="hidden" id="city5" name="city5" value=""> 
-					<input type="hidden" id="type1" name="type1" value=""> 
-					<input type="hidden" id="type2" name="type2" value=""> 
-					<input type="hidden" id="type3" name="type3" value=""> 
-					<input type="hidden" id="type4" name="type4" value=""> 
-					<input type="hidden" id="skill1" name="skill1" value=""> 
-					<input type="hidden" id="skill2" name="skill2" value=""> 
-					<input type="hidden" id="skill3" name="skill3" value=""> 
-					<input type="hidden" id="skill4" name="skill4" value=""> 
-					<input type="hidden" id="skill5" name="skill5" value="">
+					<input type="hidden" id="area1" name="area1" value=""> <input
+						type="hidden" id="area2" name="area2" value=""> <input
+						type="hidden" id="area3" name="area3" value=""> <input
+						type="hidden" id="city1" name="city1" value=""> <input
+						type="hidden" id="city2" name="city2" value=""> <input
+						type="hidden" id="city3" name="city3" value=""> <input
+						type="hidden" id="city4" name="city4" value=""> <input
+						type="hidden" id="city5" name="city5" value=""> <input
+						type="hidden" id="type1" name="type1" value=""> <input
+						type="hidden" id="type2" name="type2" value=""> <input
+						type="hidden" id="type3" name="type3" value=""> <input
+						type="hidden" id="type4" name="type4" value=""> <input
+						type="hidden" id="skill1" name="skill1" value=""> <input
+						type="hidden" id="skill2" name="skill2" value=""> <input
+						type="hidden" id="skill3" name="skill3" value=""> <input
+						type="hidden" id="skill4" name="skill4" value=""> <input
+						type="hidden" id="skill5" name="skill5" value="">
 					<button type="submit" class="btn btn-secondary btn-sm last-btn">
 						<i class="fa fa-search"></i>搜尋
 					</button>
@@ -614,72 +647,56 @@ form {
 	<!-- 		</form> -->
 	<!-- 	</div> -->
 
-	<!-- 搜尋bar-end -->
+
 	<div class="container2">
 		<c:choose>
 			<c:when test="${empty searchList}">
 				<div>查無符合資料</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var='search' items='${searchList}'>
-					<div class="post">
-						<table>
-							<tr>
-								<th class="title"><h4>
-										<a href="<c:url value='publish?num=${search.publishNo}' />"
-											title="${search.publishTitle}">${search.publishTitle}</a>
-									</h4></th>
-							</tr>
-							<tr>
-								<td class="img"><img src="${search.publishPic}"
-									title="${search.publishTitle}"></td>
-							</tr>
-							<tr>
-								<td class="poster"><c:choose>
-										<c:when test="${empty search.memberNic}">
-											<span>某某某</span>
+				<div class="card-deck">
+					<c:forEach var='search' items='${searchList}'>
+						<div class="result">
+							<div class="card">
+								<div class="card-header bg-transparent">
+									<c:choose>
+										<c:when test="${empty search.memberNic} }">
+											<img class="collectImg" alt="" src="${search.memberPic}">
+											<span>我是某某某</span>
 										</c:when>
-										<c:otherwise>${search.memberNic}</c:otherwise>
-									</c:choose></td>
-							</tr>
-							<tr>
-								<td class="detail"><c:choose>
-										<c:when test="${empty search.publishDetail}">
-											<span>無</span>
-										</c:when>
-										<c:otherwise>${search.publishDetail}</c:otherwise>
-									</c:choose></td>
-							</tr>
-							<tr>
-								<td class="area"><i class="fas fa-map-marker-alt"></i>
-									${search.publishArea} - ${search.city}</td>
-							</tr>
-							<tr>
-								<td class="updatetime">最後更新日期: <fmt:formatDate
-										value="${search.updateTime}" pattern="yyyy/MM/dd HH:mm" /></td>
-							</tr>
-						</table>
-					</div>
-				</c:forEach>
+										<c:otherwise>
+											<img class="collectImg" alt="" src="${search.memberPic}">
+											<span>${search.memberNic}</span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="">
+									<img class="card-img img" src="${search.publishPic}"
+										alt="${search.publishPic}">
+								</div>
+								<div class="card-body">
+									<h4 class="card-title text-truncate line-clamp2">${search.publishTitle}</h4>
+									<div class="card-text text-truncate line-clamp3 detail">${search.publishDetail}</div>
+									<h6><i class='far fa-handshake' style='font-size:12px'></i> 提供交換技能: ${search.ownType} - ${search.ownSkill}</h6>
+									<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i> ${search.publishArea} -
+										${search.city}</h6>
+									<div style="text-align: right">
+										<small class="text-muted">最後更新日期: <fmt:formatDate
+												value="${search.updateTime}" pattern="yyyy/MM/dd HH:mm" /></small>
+									</div>
+								</div>
+								<div class="card-footer last-part">
+									<button type="button" class="btn btn-success btn-o">加入收藏 <i class='far fa-heart'></i></i></button>
+									<button type="button" class="btn btn-primary btn-o">發送訊息 <i class='far fa-comment-dots'></i></button>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</c:otherwise>
 		</c:choose>
-	</div>
 
-	<!-- 	使用bootstrap-card套件製作項目 -->
-	<!-- 	<div> -->
-	<!-- 		<div class="card"> -->
-	<!-- 			<img class="card-img-top" src="..." alt="Card image cap"> -->
-	<!-- 			<div class="card-body"> -->
-	<!-- 				<h5 class="card-title">Card title</h5> -->
-	<!-- 				<p class="card-text">This is a wider card with supporting text -->
-	<!-- 					below as a natural lead-in to additional content. This content is a -->
-	<!-- 					little bit longer.</p> -->
-	<!-- 			</div> -->
-	<!-- 			<div class="card-footer"> -->
-	<!-- 				<small class="text-muted">Last updated 3 mins ago</small> -->
-	<!-- 			</div> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
+	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->
 	<jsp:include page="/fragment/bottom.jsp" />
@@ -753,90 +770,87 @@ form {
 	</script>
 
 	<script>
-			var xhr1 = new XMLHttpRequest();
-			xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
-			xhr1.send();
-			xhr1.onreadystatechange = function() {
-				if (xhr1.readyState == 4) {
-					if (xhr1.status == 200) {
-// 						console.log(JSON.parse(xhr1.responseText));
-						var arr = JSON.parse(xhr1.responseText);
-// 						console.log(arr[0][0].publishAreaCN);
-// 						-> for showing area A<-
-						var contentA = "<div class='div-list1'>";
-						contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
-								+ arr[0][0].publishAreaCN
-								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+		var xhr1 = new XMLHttpRequest();
+		xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
+		xhr1.send();
+		xhr1.onreadystatechange = function() {
+			if (xhr1.readyState == 4) {
+				if (xhr1.status == 200) {
+					// 						console.log(JSON.parse(xhr1.responseText));
+					var arr = JSON.parse(xhr1.responseText);
+					// 						console.log(arr[0][0].publishAreaCN);
+					// 						-> for showing area A<-
+					var contentA = "<div class='div-list1'>";
+					contentA += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
+							+ arr[0][0].publishAreaCN
+							+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
 
-						for (var i = 1; i < arr[0].length; i++) {
-							contentA += "<li class='li-bg1'><div class='li-div li-div1'>"
-									+ arr[0][i].publishAreaCN
-									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						}
-						contentA += "</div>";
-						document.getElementById("areaList").innerHTML = contentA;
-// 						-> for showing area-city B<-
-						var contentB = "";
-						for (var i = 0; i < arr[0].length; i++) {
-							contentB += "<div class='ctl-area"
-									+ (i + 1)
-									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>"
-									+ arr[0][i].publishAreaCN
-									+ "</div></li></div>";
-							contentB += "<div class='div-list2'>";
-							for (var j = 0; j < arr[1].length; j++) {
-								if (arr[0][i].publishAreaCN == arr[1][j].publishAreaCN) {
-									contentB += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
-											+ arr[1][j].cityCN + "</div></li>";
-								}
-							}
-							contentB += "</div></div>";
-						}
-						document.getElementById("cityList").innerHTML = contentB;
-// 						-> for showing skillType C <-
-						var contentC = "<div class='div-list1'>";
-						contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
-								+ arr[2][0]
+					for (var i = 1; i < arr[0].length; i++) {
+						contentA += "<li class='li-bg1'><div class='li-div li-div1'>"
+								+ arr[0][i].publishAreaCN
 								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-
-						for (var m = 1; m < arr[2].length; m++) {
-							contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
-									+ arr[2][m]
-									+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
-						}
-						contentC += "</div>";
-						document.getElementById("skillL1List").innerHTML = contentC;
-// 						-> for showing skills D<-
-						var contentD = "";
-						for (var m = 0; m < arr[2].length; m++) {
-							contentD += "<div class='ctl-type"
-									+ (m + 1)
-									+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"
-									+ arr[2][m] + "</div></li></div>";
-							contentD += "<div class='div-list2'>";
-							for (var n = 0; n < arr[3].length; n++) {
-								if (arr[2][m] == arr[3][n].typeCN) {
-									contentD += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
-											+ arr[3][n].skillNameCN
-											+ "</div></li>";
-								}
-							}
-							contentD += "</div></div>";
-						}
-						document.getElementById("skillL2List").innerHTML = contentD;
 					}
+					contentA += "</div>";
+					document.getElementById("areaList").innerHTML = contentA;
+					// 						-> for showing area-city B<-
+					var contentB = "";
+					for (var i = 0; i < arr[0].length; i++) {
+						contentB += "<div class='ctl-area"
+								+ (i + 1)
+								+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='" + arr[0][i].publishAreaCN + "'></div><div class='li-div li-div1'>"
+								+ arr[0][i].publishAreaCN + "</div></li></div>";
+						contentB += "<div class='div-list2'>";
+						for (var j = 0; j < arr[1].length; j++) {
+							if (arr[0][i].publishAreaCN == arr[1][j].publishAreaCN) {
+								contentB += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[1][j].cityCN + "'></div><div class='li-div li-div4'>"
+										+ arr[1][j].cityCN + "</div></li>";
+							}
+						}
+						contentB += "</div></div>";
+					}
+					document.getElementById("cityList").innerHTML = contentB;
+					// 						-> for showing skillType C <-
+					var contentC = "<div class='div-list1'>";
+					contentC += "<li class='li-bg1 li-bg0'><div class='li-div li-div1'>"
+							+ arr[2][0]
+							+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+
+					for (var m = 1; m < arr[2].length; m++) {
+						contentC += "<li class='li-bg1'><div class='li-div li-div1'>"
+								+ arr[2][m]
+								+ "</div><div class='li-div li-div2'><i class='fa fa-caret-right'></i></div></li>";
+					}
+					contentC += "</div>";
+					document.getElementById("skillL1List").innerHTML = contentC;
+					// 						-> for showing skills D<-
+					var contentD = "";
+					for (var m = 0; m < arr[2].length; m++) {
+						contentD += "<div class='ctl-type"
+								+ (m + 1)
+								+ "'><div><li class='li-bg2'><div class='li-div li-div2'><input type='checkbox' class='checkbox-input' value='"+ arr[2][m] + "'></div><div class='li-div li-div1'>"
+								+ arr[2][m] + "</div></li></div>";
+						contentD += "<div class='div-list2'>";
+						for (var n = 0; n < arr[3].length; n++) {
+							if (arr[2][m] == arr[3][n].typeCN) {
+								contentD += "<li class='li-bg3'><div class='li-div li-div3'><input type='checkbox' class='checkbox-input' value='" + arr[3][n].skillNameCN + "'></div><div class='li-div li-div4'>"
+										+ arr[3][n].skillNameCN + "</div></li>";
+							}
+						}
+						contentD += "</div></div>";
+					}
+					document.getElementById("skillL2List").innerHTML = contentD;
 				}
 			}
+		}
 	</script>
-	
+
 	<script>
-// 	window.onload = function(){
+		// 	window.onload = function(){
 		var origin = document.getElementById("#typing-keyword");
 		origin.placeholder = "";
 		origin.value = "<c:out value='${keyword1}' />";
-		
-// 	}
-	
+
+		// 	}
 	</script>
 
 	<script>
@@ -852,7 +866,7 @@ form {
 						$(this).addClass('active').siblings().removeClass(
 								'active li-bg0');
 						i = $(this).index();
-// 						console.log(i);
+						// 						console.log(i);
 						$("#cityList").children().eq(i).slideDown({
 							duration : 10,
 						}).siblings().slideUp({
@@ -875,7 +889,7 @@ form {
 						$(this).addClass('active').siblings().removeClass(
 								'active li-bg0');
 						i = $(this).index();
-// 						console.log(i);
+						// 						console.log(i);
 						$("#skillL2List").children().eq(i).slideDown({
 							duration : 10,
 						}).siblings().slideUp({
@@ -1068,10 +1082,10 @@ form {
 	<script>
 		var btn3 = document.getElementById("areaClick");
 		btn3.onclick = function() {
-// 			console.log($("#cityList"));
-// 			console.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
+			// 			console.log($("#cityList"));
+			// 			console.log($("#cityList >div div:first-child input:checkbox:checked")[0].value); //抓area+city
 			var list = $("#cityList >div div:first-child input:checkbox:checked:not(:disabled)");
-//			console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
+			//			console.log($("#cityList >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
 			var str1 = "";
@@ -1083,7 +1097,7 @@ form {
 					A.value = list[i].value;
 					m++;
 					str1 += list[i].value + "、";
-// 					console.log("str1=" + str1);
+					// 					console.log("str1=" + str1);
 
 				} else {
 					var id2 = "city" + n;
@@ -1091,12 +1105,12 @@ form {
 					B.value = list[i].value;
 					n++;
 					str2 += list[i].value + "、";
-// 					console.log("str2=" + str2);
+					// 					console.log("str2=" + str2);
 				}
 			}
-// 			把選取值寫回頁面上
-// 			console.log("Tstr1=" + str1);
-// 			console.log("Tstr2=" + str2);
+			// 			把選取值寫回頁面上
+			// 			console.log("Tstr1=" + str1);
+			// 			console.log("Tstr2=" + str2);
 			var txt = document.getElementById("inputArea");
 			if (str2 == "") {
 				str1 = str1.substring(0, str1.length - 1);
@@ -1111,10 +1125,10 @@ form {
 	<script>
 		var btn4 = document.getElementById("skillClick");
 		btn4.onclick = function() {
-// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked"));
-// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked")[0].value);
+			// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked"));
+			// 			console.log($("#skillL2List >div div:first-child input:checkbox:checked")[0].value);
 			var list = $("#skillL2List >div div:first-child input:checkbox:checked:not(:disabled)");
-//			console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
+			//			console.log($("#skillL2List >div div:last-child input:checkbox:checked")); //抓city
 			var m = 1;
 			var n = 1;
 			var str1 = "";
@@ -1130,17 +1144,17 @@ form {
 					A.value = list[i].value;
 					m++;
 					str1 += list[i].value + "、";
-// 					console.log("str1=" + str1);
+					// 					console.log("str1=" + str1);
 				} else {
 					var id2 = "skill" + n;
 					var B = document.getElementById(id2);
 					B.value = list[i].value;
 					n++;
 					str2 += list[i].value + "、";
-// 					console.log("str2=" + str2);
+					// 					console.log("str2=" + str2);
 				}
 			}
-// 			把選取值寫回頁面上
+			// 			把選取值寫回頁面上
 			var txt = document.getElementById("inputSkill");
 			if (str2 == "") {
 				str1 = str1.substring(0, str1.length - 1);
@@ -1156,7 +1170,7 @@ form {
 		$(function() {
 			$("#typing-keyword").keyup(function() {
 				var input = $(this).val();
-// 				console.log(input);
+				// 				console.log(input);
 				var A = document.getElementById("keyword");
 				A.value = input;
 			})

@@ -150,11 +150,11 @@
 	height: 40px;
 }
 
-.text-truncate {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
+/* .text-truncate { */
+/* 	white-space: nowrap; */
+/* 	overflow: hidden; */
+/* 	text-overflow: ellipsis; */
+/* } */
 
 .search-btn {
 	display: block;

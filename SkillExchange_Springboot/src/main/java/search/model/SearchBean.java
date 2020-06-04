@@ -17,6 +17,7 @@ public class SearchBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String memberNic;
+	private String memberPic;
 	private String keyword;
 	private int publishNo;
 	private int memberRegNo;
@@ -56,10 +57,11 @@ public class SearchBean implements Serializable {
 	private String skill4;
 	private String skill5;
 
-	public SearchBean(String memberNic, int publishNo, int memberRegNo, String publishTitle, String publishDetail,
+	public SearchBean(String memberNic, String memberPic, int publishNo, int memberRegNo, String publishTitle, String publishDetail,
 			String publishArea, String city, String district, String road, String publishPlace, String publishPic,
 			String ownSkill, String wantSkill, Date updateTime, int publishCTR, String publishMark, String status, String ownType, String wantType) {
 		this.memberNic = memberNic;
+		this.memberPic = memberPic;
 		this.publishNo = publishNo;
 		this.memberRegNo = memberRegNo;
 		this.publishTitle = publishTitle;
@@ -121,6 +123,15 @@ public class SearchBean implements Serializable {
 
 	public void setMemberNic(String memberNic) {
 		this.memberNic = memberNic;
+	}
+	
+	@Transient
+	public String getMemberPic() {
+		return memberPic;
+	}
+
+	public void setMemberPic(String memberPic) {
+		this.memberPic = memberPic;
 	}
 
 	@Transient
@@ -278,7 +289,7 @@ public class SearchBean implements Serializable {
 		this.publishMark = publishMark;
 	}
 	
-	@Column(name = "skillType")
+	@Column(name = "skillType2")
 	public String getOwnType() {
 		return ownType;
 	}
@@ -287,7 +298,7 @@ public class SearchBean implements Serializable {
 		this.ownType = ownType;
 	}
 
-	@Column(name = "skillType2")
+	@Column(name = "skillType")
 	public String getWantType() {
 		return wantType;
 	}
