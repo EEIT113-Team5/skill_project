@@ -143,38 +143,22 @@
 							
 							<div
 								class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+								<div>
+									<button type="submit" class="btn btn-info">登入</button>								
+								</div>
 								<div class="btn-group">
 									<input type='button' class="btn btn-primary"
 										onclick='fbLogin()' value="FaceBook" /> 
 									<input type='button' class="btn btn-danger" 
 									    onclick='googleSignIn()' value="Google" />
 								</div>
-								<div>
-									<button type="submit" class="btn btn-info">登入</button>								
-								</div>
-							</div>
-							
-							
-							
-							<div class="btn-group form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-									<input type='button' class="btn btn-primary"
-										onclick='fbLogin()' value="FaceBook" /> 
-									<input type='button' class="btn btn-danger" 
-									    onclick='googleSignIn()' value="Google" />
-									<button type="submit" class="btn btn-info">登入</button>								
-							</div>
-							
-							
-							<div
-								class="btn-group-vertical form-group d-flex align-items-center 
-										justify-content-between mt-4 mb-0">
-									<input type='button' class="btn btn-primary"
-										onclick='fbLogin()' value="FaceBook" /> 
-									<input type='button' class="btn btn-danger" 
-									    onclick='googleSignIn()' value="Google" />
-									<button type="submit" class="btn btn-info">登入</button>								
 
 							</div>
+							
+							
+	
+							
+
 					
 							
 						</form>
