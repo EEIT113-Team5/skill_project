@@ -28,6 +28,9 @@
     padding: 20px 10px !important;
 }
 
+.navigation {
+	transition: 0s !important;
+}
 
 #popupmsg {
 	position: fixed;

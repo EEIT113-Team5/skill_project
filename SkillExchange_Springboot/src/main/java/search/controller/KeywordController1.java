@@ -2,6 +2,7 @@ package search.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ import search.model.SearchBean;
 import search.service.KeywordService;
 
 @Controller
-@SessionAttributes(names = { "searchList", "keyword1", "area1", "skill1" })
+@SessionAttributes(names = { "searchList", "input", "keyword1", "area1", "area2", "area3", "city1", "city2", "city3", "city4",
+		"city5", "type1", "type2", "type3", "type4", "skill1", "skill2", "skill3", "skill4", "skill5" })
 public class KeywordController1 {
 	@Autowired
 	KeywordService kService;
@@ -69,14 +71,29 @@ public class KeywordController1 {
 				city3, city4, city5, type1, type2, type3, type4, skill1, skill2, skill3, skill4, skill5);
 
 		m.addAttribute("searchList", list);
-
-//		System.out.println("keyword=" + keyword);
-//		System.out.println("area=" + area);
-//		System.out.println("skill=" + skill);
-
-//		m.addAttribute("keyword1", keyword);
-//		m.addAttribute("area1", area);
-//		m.addAttribute("skill1", skill);
+		
+		List<String> list2 = Arrays.asList(keyword, area1, area2, area3, city1, city2,
+				city3, city4, city5, type1, type2, type3, type4, skill1, skill2, skill3, skill4, skill5);
+		m.addAttribute("input", list2);
+		
+		m.addAttribute("keyword1", keyword);
+		m.addAttribute("area1", area1);
+		m.addAttribute("area2", area2);
+		m.addAttribute("area3", area3);
+		m.addAttribute("city1", city1);
+		m.addAttribute("city2", city2);
+		m.addAttribute("city3", city3);
+		m.addAttribute("city4", city4);
+		m.addAttribute("city5", city5);
+		m.addAttribute("type1", type1);
+		m.addAttribute("type2", type2);
+		m.addAttribute("type3", type3);
+		m.addAttribute("type4", type4);
+		m.addAttribute("skill1", skill1);
+		m.addAttribute("skill2", skill2);
+		m.addAttribute("skill3", skill3);
+		m.addAttribute("skill4", skill4);
+		m.addAttribute("skill5", skill5);
 
 		return "redirect:/searchadvanced";
 	}
