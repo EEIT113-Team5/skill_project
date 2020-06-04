@@ -11,16 +11,16 @@
 <script>
 	function typeChange() {
 		if ($("#type").val() == "frequency") {
-			$("#freqBlock").attr("style", "display:block")
-			$("#fixedBlock").attr("style", "display:none")
+			$("#frequency").attr("style", "visibility:visible")
+			$("#fixed").attr("style", "display:none")
 		} else {
-			$("#freqBlock").attr("style", "display:none")
-			$("#fixedBlock").attr("style", "display:block")
+			$("#frequency").attr("style", "display:none")
+			$("#fixed").attr("style", "visibility:visible")
 		}
 	}
 	function freqChange() {
-		if ($("#frequency").val() == "month") {
-			$("#dayInput").attr("style", "display:block")
+		if ($("#freqSel").val() == "month") {
+			$("#dayInput").attr("style", "visibility:visible")
 		} else {
 			$("#dayInput").attr("style", "display:none")
 		}
@@ -240,7 +240,7 @@
 					<table>
 						<tbody>
 							<tr>
-								<td>類型</td>
+								<td style="width:50px">類型</td>
 								<td><select class="btn btn-light searchbar" id="type"
 									onchange="typeChange()">
 										<option value="frequency">時間</option>
@@ -248,18 +248,23 @@
 								</select></td>
 								<td>
 							</tr>
-							<tr>
+							<tr id="frequency">
 								<td>週期</td>
-								<td><select class="btn btn-light searchbar">
+								<td><select class="btn btn-light searchbar" id="freqSel" onchange="freqChange()">
 										<option value="day">每日</option>
 										<option value="month">每月</option>
 								</select></td>
-								<td><input type="text" id="timepicker" name="timepicker"
+								<td class="form-inline">
+								<div id="dayInput" style="display: none">
+								<input type="text" class="form-control" style="width: 40px" >
+								&ensp;日&ensp;
+								</div>
+								<input type="text" id="timepicker" name="timepicker"
 							class="form-control timepicker" style="width: 130px"></td>
 							</tr>
-							<tr>
+							<tr id = "fixed" style="display: none">
 								<td>週期</td>
-								<td colspan = "2" class="form-inline">&ensp;每&ensp;<input type="text" class="form-control" style="width:30px">&ensp;分&ensp;
+								<td class="form-inline">&ensp;每&ensp;<input type="text" class="form-control" style="width:30px">&ensp;分&ensp;
 								<input type="text" class="form-control" style="width:30px">&ensp;秒</td>
 								<td></td>
 							</tr>
