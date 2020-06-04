@@ -70,18 +70,18 @@
 			</div>
 		</div>
 	</section>
-	<div class="container" style="margin-top: 70px;">
+	<div class="container" style="margin-top: 70px;margin-bottom:70px;" >
 		<div
 			class="container border border-info mt-3 p-3 rounded-lg w-75 bg-light shadow-sm">
 			<h3>意見回饋表</h3>
 			<p>為了提升網站的服務品質，麻煩填寫下列表單 謝謝!</p>
 			<p>(1:非常不好, 10:非常好)</p>
 			<form:form action="InsertComment" modelAttribute="feedbackform"
-				method="POST">
+				method="POST" >
 				<!-- radio button-->
 				<form:hidden path="commentorNo" value="${memberBean.memberRegNo}" />
 				<form:hidden path="memberName" value="${memberBean.memberName}" />
-<%-- 				<form:hidden path="memCommented" value="${feedbackform.memCommented}" /> --%>
+				<%-- 				<form:hidden path="memCommented" value="${feedbackform.memCommented}" /> --%>
 				<div>
 					<div>網站使用流暢度</div>
 					<c:forEach var="n" begin="1" end="10" step="1">
@@ -145,12 +145,12 @@
 					</c:forEach>
 					<div>
 						<div>交換心得分享(100字以內)</div>
-						<form:textarea cols="40" path="msgDetail" rows="5" id="susg"
+						<form:textarea cols="40" path="msgDetail" rows="5" id="susg1"
 							style="resize: none" />
 
 					</div>
 				</div>
-				<input type="submit" name="submit" id="submit" value="submit" />
+				<input type="submit" name="submit" class="btn btn-outline-success" id="submit" value="submit" />
 			</form:form>
 		</div>
 
@@ -204,5 +204,17 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+	<script>
+		document.addEventListener('keypress', autofill);
+		function autofill() {
+			   $("input[id*='speed10']").prop("checked", true);
+			   $("input[id*='rec10']").prop("checked", true);
+			   $("input[id*='ex10']").prop("checked", true);
+			   $("input[id*='rating10']").prop("checked", true);
+			   $("#susg").val("我覺得可以");
+			   $("input[id*='rat10']").prop("checked", true);
+			   $("#susg1").val("和對方相談甚歡，感謝這個技能交換平台讓我能夠有一個管道進行技能交換，以後還會再繼續用他!");
+		}
+	</script>
 </body>
 </html>

@@ -76,32 +76,35 @@
 
 h6 {
 	border: 1px solid #000;
-	
 }
+
 .main1 {
 	display: flex;
 }
+
 #leftspace {
 	flex: 4;
-
 }
 
 #left {
 	flex: 60;
 	padding: 10px;
-	margn-right:20px;
+	margn-right: 20px;
 }
 
 #left_1 {
 	flex: 2;
-	margn-top:5px;
+	margn-top: 5px;
 }
+
 #left_1_main {
 	display: flex;
 }
+
 #left_1_left {
 	flex: 6;
 }
+
 #left_1_center {
 	flex: 3;
 }
@@ -112,9 +115,9 @@ h6 {
 
 #left_2 {
 	flex: 8;
-	margin-left:50px;
-
+	margin-left: 50px;
 }
+
 #center1 {
 	position: relative;
 	/* 	float: right; */
@@ -122,6 +125,7 @@ h6 {
 	padding: 10px;
 	/* 	width: 40% */
 }
+
 #right {
 	position: relative;
 	/* 	float: right; */
@@ -131,16 +135,16 @@ h6 {
 }
 
 #catalog {
-	
 	position: fixed;
 	bottom: 0px;
 	/* 	left: 0px; */
 	right: 250px;
 }
+
 .aboutme {
-  border-style: inset;
-  border-width: 3px;
-  border-color: coral;
+	border-style: inset;
+	border-width: 3px;
+	border-color: coral;
 }
 </style>
 </head>
@@ -163,101 +167,118 @@ h6 {
 		</div>
 	</section>
 	<div id="main" class="main1">
-	<div id="leftspace"></div>
+		<div id="leftspace"></div>
 		<div id="left">
-				<c:choose>
-					<c:when test="${empty allSkills}">
-						<tr height='36'>
-							<td colspan='7' align='center'><font color='red'>查無技能資料</font></td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var='skills' items='${allSkills}'>
-							<!--比對使用者是否收藏此刊登貼文-->
-							<c:forEach var='collects' items='${collectionsMap}'>
-								<c:forEach var='collect' items='${collects.value}'>
-									<c:if test="${collect.collectPNo == skills.publishNo}">
-										<c:set var="have" value="${collect.collectPNo}" />
-									</c:if>
-								</c:forEach>
+			<c:choose>
+				<c:when test="${empty allSkills}">
+					<tr height='36'>
+						<td colspan='7' align='center'><font color='red'>查無技能資料</font></td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var='skills' items='${allSkills}'>
+						<!--比對使用者是否收藏此刊登貼文-->
+						<c:forEach var='collects' items='${collectionsMap}'>
+							<c:forEach var='collect' items='${collects.value}'>
+								<c:if test="${collect.collectPNo == skills.publishNo}">
+									<c:set var="have" value="${collect.collectPNo}" />
+								</c:if>
 							</c:forEach>
-							<!-- 變數設定 -->
-							<c:set var="pic1" value="${skills.member.memberPic}" />
-							<c:set var="pic2" value="${sessionScope.memberBean.memberPic}" />
-							<c:set var="sendTo" value="${skills.member.memberNic}" />
-							<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}" />
-							<c:set var="sendTo2" value="${skills.member.memberRegNo}" />
-							<c:set var="sendUser2" value="${sessionScope.memberBean.memberRegNo}" />
-							<c:set var="memberski" value="${skills.member.memberInSkill}" />
-							
-							<!-- 左側排版 -->
-							<div id="left_1">
+						</c:forEach>
+						<!-- 變數設定 -->
+						<c:set var="pic1" value="${skills.member.memberPic}" />
+						<c:set var="pic2" value="${sessionScope.memberBean.memberPic}" />
+						<c:set var="sendTo" value="${skills.member.memberNic}" />
+						<c:set var="sendUser" value="${sessionScope.memberBean.memberNic}" />
+						<c:set var="sendTo2" value="${skills.member.memberRegNo}" />
+						<c:set var="sendUser2"
+							value="${sessionScope.memberBean.memberRegNo}" />
+						<c:set var="memberski" value="${skills.member.memberInSkill}" />
+
+						<!-- 左側排版 -->
+						<div id="left_1">
 							<div id="left_1_main">
-							<div id="left_1_left">
-							<img src="${skills.member.memberPic}" style="float: left; width: 100px; height: 100px;"
-							class="rounded-circle user_img" />
-							<h2 style="line-height:100px;width:50%">${skills.member.memberNic}</h2>
+								<div id="left_1_left">
+									<img src="${skills.member.memberPic}"
+										style="float: left; width: 100px; height: 100px;"
+										class="rounded-circle user_img" />
+									<h2 style="line-height: 100px; width: 50%">${skills.member.memberNic}</h2>
+								</div>
+								<div id="left_1_center"></div>
+								<div id="left_1_right">
+
+									<c:choose>
+										<c:when test="${have!=skills.publishNo}">
+											<button type="button" id="add${skills.publishNo}"
+												style="float: right; margin-top: 15px"
+												class="btn btn-success"
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+											<button type="button" id="cancel${skills.publishNo}"
+												class="btn btn-danger "
+												style="display: none; float: right; margin-top: 15px"
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" id="add${skills.publishNo}"
+												class="btn btn-success "
+												style="display: none; float: right; margin-top: 15px"
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+											<button type="button" id="cancel${skills.publishNo}"
+												class="btn btn-danger"
+												style="float: right; margin-top: 15px"
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+										</c:otherwise>
+									</c:choose>
+									<br> <br> <br>
+									<p style="float: right; margin: 0px">上次更新時間:${time1}</p>
+
+								</div>
 							</div>
-							<div id="left_1_center">
-							</div>
-							<div id="left_1_right">
-							
-							<c:choose>
-								<c:when test="${have!=skills.publishNo}">
-									<button type="button" id="add${skills.publishNo}" style="float:right;margin-top:15px"
-											class="btn btn-success"
-											onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
-									<button type="button" id="cancel${skills.publishNo}" 
-											class="btn btn-danger " style="display: none;float:right;margin-top:15px"
-											onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
-								</c:when>
-								<c:otherwise>
-									<button type="button" id="add${skills.publishNo}" 
-											class="btn btn-success " style="display: none;float:right;margin-top:15px"
-											onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
-									<button type="button" id="cancel${skills.publishNo}"
-											class="btn btn-danger" style="float:right;margin-top:15px"
-											onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
-								</c:otherwise>
-							</c:choose>	
-							<br><br><br>															
-							<p style="float: right ;margin:0px">上次更新時間:${time1}</p>						
-													
-							</div>						
-							</div>
-							</div>
-							<hr>
-							<div id="left_2">
+						</div>
+						<hr>
+						<div id="left_2">
 							<h1 class="text">${skills.publishTitle}</h1>
-							<img style="width:800px"
-								src="${jspPath}/${skills.publishPic}">
-							
+							<img style="width: 800px" src="${jspPath}/${skills.publishPic}">
+
 							<!--刊登圖片-->
 							<div class="text">
-								<h2 style="margin-bottom:25;margin-top:30px" class="whitespace">${skills.publishDetail}</h2>
+								<h2 style="margin-bottom: 25; margin-top: 30px"
+									class="whitespace">${skills.publishDetail}</h2>
 							</div>
 							<!--文章內容-->
 							<div class="more_content">
-								<h3><span class="badge badge-secondary">提供交換項目:</span></h3>
-								<h3><span>${skills.ownSkill}</span></h3>
-								
-								<h3><span class="badge badge-secondary">希望交換的內容:</span></h3>
-								<h3><span>${skills.wantSkill}</span></h3>
-								
-								<h3><span class="badge badge-secondary">希望地點:</span></h3>
-								<h3><span>${skills.publishPlace}</span></h3>
+								<h3>
+									<span class="badge badge-secondary">提供交換項目:</span>
+								</h3>
+								<h3>
+									<span>${skills.ownSkill}</span>
+								</h3>
+
+								<h3>
+									<span class="badge badge-secondary">希望交換的內容:</span>
+								</h3>
+								<h3>
+									<span>${skills.wantSkill}</span>
+								</h3>
+
+								<h3>
+									<span class="badge badge-secondary">希望地點:</span>
+								</h3>
+								<h3>
+									<span>${skills.publishPlace}</span>
+								</h3>
 
 
 							</div>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>	
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		<div id="center1">
-		</div>
+		<div id="center1"></div>
 		<div id="right">
-			<div style="background-color: white;border-style: double;; width: auto; margin: 10px auto">
+			<div
+				style="background-color: white; border-style: double;; width: auto; margin: 10px auto">
 				<c:choose>
 					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 						<table>
@@ -266,13 +287,13 @@ h6 {
 								<c:forEach var='data' varStatus='var' items='${reqchat}'>
 									<tr>
 										<td>您有來自</td>
-										<td id="requestid${var.index}" style="display:none">${data.sendNo}</td>
-										
+										<td id="requestid${var.index}" style="display: none">${data.sendNo}</td>
+
 										<td><img id="requestPic${var.index}"
 											class="rounded-circle user_img" height="250px" width="350px"
 											src='${data.sendNomember.memberPic}' /></td>
-											<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
-											<td>的訊息</td>
+										<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
+										<td>的訊息</td>
 										<td style="width: 180px"><button class="btn btn-primary"
 												onclick="connectskillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
 									</tr>
@@ -283,21 +304,29 @@ h6 {
 					</c:when>
 					<c:otherwise>
 						<div class="card-body">
-						<h3><span class="badge badge-danger">關於${sendTo}</span></h3>
-						<h4><span class="badge badge-secondary">擁有的技能:</span></h4>
-						<h4>${memberski}</h4>
-						<h4><span class="badge badge-secondary">居住區域:</span></h4>
-						<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
-						<h4><span class="badge badge-secondary">電子信箱:</span></h4>
-						<h4 style="margin-bottom:20px">${sessionScope.memberBean.memberMail}</h4>
-							
-						<div class="card-text"></div>
-						<c:if test="${status==1}">
-						<c:set var="chatstatus" value="${status}" />
-						</c:if>
-						<button id="disabled" class="btn btn-primary"
-							onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
-						</button>
+							<h3>
+								<span class="badge badge-danger">關於${sendTo}</span>
+							</h3>
+							<h4>
+								<span class="badge badge-secondary">擁有的技能:</span>
+							</h4>
+							<h4>${memberski}</h4>
+							<h4>
+								<span class="badge badge-secondary">居住區域:</span>
+							</h4>
+							<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
+							<h4>
+								<span class="badge badge-secondary">電子信箱:</span>
+							</h4>
+							<h4 style="margin-bottom: 20px">${sessionScope.memberBean.memberMail}</h4>
+
+							<div class="card-text"></div>
+							<c:if test="${status==1}">
+								<c:set var="chatstatus" value="${status}" />
+							</c:if>
+							<button id="disabled" class="btn btn-primary"
+								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
+							</button>
 						</div>
 
 
@@ -337,21 +366,28 @@ h6 {
 									</c:choose>
 
 								</div>
-								
+
 							</div>
-								<span id="action_menu_btn" >								
-								<a type="button" href="InsertCommentForm" class="btn text-white">結束交換</a>
-								<i class="fa fa-times" aria-hidden="true" onclick=closewindow() ></i>
-								</span>
-						
+							<span id="action_menu_btn"> <c:choose>
+									<c:when
+										test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+										<a type="button" href="" id="endexchange"
+											class="btn text-white">結束交換</a>
+									</c:when>
+									<c:otherwise>
+										<a type="button"
+											href="InsertCommentForm?memcommented=${allSkills[0].memberRegNo}"
+											class="btn text-white">結束交換</a>
+									</c:otherwise>
+								</c:choose> <i class="fa fa-times" aria-hidden="true" onclick=closewindow()></i>
+							</span>
+
 
 						</div>
 						<div id="cardbody" class="card-body msg_card_body"></div>
 						<div class="card-footer">
 							<div class="input-group">
-								<div class="input-group-append">
-									
-								</div>
+								<div class="input-group-append"></div>
 								<textarea name="" class="form-control type_msg" id="textmssg"
 									placeholder="Type your message..."></textarea>
 								<div class="input-group-append">
@@ -360,7 +396,8 @@ h6 {
 											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 											<span id="sendmss" class="input-group-text send_btn"
 												onclick="sendMessage_skillowner('${sendUser}','${sendUser2}','${pic2}')">
-												<i class="fas fa-location-arrow"></i></span>
+												<i class="fas fa-location-arrow"></i>
+											</span>
 										</c:when>
 										<c:otherwise>
 											<span id="sendmss" class="input-group-text send_btn"
@@ -539,7 +576,7 @@ h6 {
     	arrindex = index;
     	$("#user_img1").attr("src",$("#requestPic"+index).attr("src"));
     	$("#user_name1").text($("#requestNic"+index).text());
-    	
+    	$("#endexchange").attr("href", "InsertCommentForm?memcommented="+$("#requestid"+index).text());
     	// create a websocket
     	console.log(sendUser);
     	console.log(endPointURL);

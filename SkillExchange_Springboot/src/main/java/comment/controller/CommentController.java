@@ -3,6 +3,8 @@ package comment.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -109,19 +111,22 @@ public class CommentController {
 
 	// 送回新增Member資料的空白表單
 	@GetMapping("/InsertCommentForm")
-	public String InsertCommentForm(Model model) {
+	public String InsertCommentForm(Model model, @RequestParam(value="memcommented", required=false) Integer memcommented, HttpServletRequest req) {
 		CommentBean commentBean = new CommentBean();
 //		commentBean.setMemCommented(memcommented);
+		req.getSession().setAttribute("memcommented", memcommented);
 		model.addAttribute("feedbackform", commentBean);
 		return "comment/Form";
 	}
 
 	@PostMapping(value = "/InsertComment", consumes = "application/x-www-form-urlencoded")
 	public String InsertComment(@ModelAttribute("feedbackform") CommentBean cb,
-			@SessionAttribute("memberBean") MemberBean member, BindingResult bindingResult) {
+			@SessionAttribute("memberBean") MemberBean member, BindingResult bindingResult,HttpServletRequest req) {
 		java.sql.Timestamp dateTime = new Timestamp(System.currentTimeMillis());
 		cb.setMsgTime(dateTime);
-		cb.setMemCommented(4);// 之後要從前端取得
+		Integer memcommented = (Integer)req.getSession().getAttribute("memcommented");
+		cb.setMemCommented(memcommented);
+		req.getSession().removeAttribute("memcommented");
 		cb.setStat(0);
 //		cb.setCommentorNo(member.getMemberRegNo());
 		System.out.println(cb);
