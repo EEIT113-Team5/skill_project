@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerKey;
@@ -27,7 +28,7 @@ public class JobTaskServiceImpl implements JobTaskService {
 	JobParam jobParam;
 
 	@Override
-	public void updateJobCron(Integer jobNo, String cronExpression) throws SchedulerException {
+	public void updateJobCron(Integer jobNo, String cronExpression,String status,String jobGroup,String jobName) throws SchedulerException {
 		try {
 			Scheduler scheduler = (Scheduler) context.getBean("scheduler");
 			jobParam = jobDao.getJobParamByNo(jobNo);
@@ -35,9 +36,14 @@ public class JobTaskServiceImpl implements JobTaskService {
 			CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 			trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+			if(status=="0") {
+				JobKey jobKey = JobKey.jobKey(jobParam.getJobName(), jobParam.getJobGroup()); 
+				scheduler.deleteJob(jobKey);
+			}else {
 			scheduler.rescheduleJob(triggerKey, trigger);
 			System.out.println("===rescheduleJob success====");
-			jobDao.updateJobParam(cronExpression, jobNo);
+			}
+			jobDao.updateJobParam(cronExpression, jobNo,status,jobGroup,jobName);
 			System.out.println("===update jobParam success====");
 		} catch (Exception e) {
 			e.printStackTrace();

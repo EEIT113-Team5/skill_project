@@ -85,7 +85,7 @@ font {
 									<td>${jobList.status}</td>
 									<td>${jobList.updateTimeStr}</td>
 									<td><a class="btn btn-success" id="updJob${jobList.jobNo}"
-										href="#" data-toggle="modal" data-target="#editScheduleModal">編輯</a>
+										href="#" onclick="editSchedule(${jobList.jobNo},'${jobList.jobGroup}','${jobList.jobName}','${jobList.cronExpression}','${jobList.status}')">編輯</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -110,9 +110,9 @@ font {
 	<form>
 		<input type="hidden" name="a" />
 	</form>
-	<c:if test="${not empty MsgOK}">
+	<c:if test="${not empty MsgMap}">
 		<script>
-			let message = "${MsgOK.insertOK}";
+			let message = "${MsgMap.updateFail}";
 			$("#alertText").text(message);
 			$("#alertModal").modal('show');
 		</script>
@@ -160,10 +160,23 @@ font {
 	</script>
 	<script type="text/javascript">
 		$('#timepicker').wickedpicker({
-			now : '15:30',
+			now : '00:00',
 			twentyFour : true,
 			showSeconds : true
 		});
+	</script>
+	<script>
+	function editSchedule(no,group,name,cronExp,status){
+		$("#cronGroup").val(group);
+		$("#cronName").val(name);
+		$("#jobNo").val(no);
+		if(status=='啟動'){
+		$("#status").val(1);
+			}else{
+		$("#status").val(0);
+				}
+		$("#editScheduleModal").modal('show');
+		}
 	</script>
 
 	<%
