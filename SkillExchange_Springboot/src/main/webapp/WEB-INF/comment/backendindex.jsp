@@ -141,6 +141,32 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-chart-bar mr-1"></i>
+									<h4 style="text-align: center">
+										<b>技能類趨勢</b>
+									</h4>
+								</div>
+								<div class="card-body">
+									<div id="myBarChart2" style="width: 100%; height: 500px;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-chart-bar mr-1"></i>
+									<h4 style="text-align: center">
+										<b>活動類趨勢</b>
+									</h4>
+								</div>
+								<div class="card-body">
+									<div id="myBarChart3" style="width: 100%; height: 500px;"></div>
+								</div>
+							</div>
+						</div>
 					</div>
 
 				</div>

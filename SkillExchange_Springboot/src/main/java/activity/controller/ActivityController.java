@@ -44,6 +44,7 @@ import activity.bean.CombinedBean;
 import activity.service.ActivityService;
 import activity.validator.ActivityValidator;
 import members.Model.MemberBean;
+import skillClass.service.SkillService;
 
 @Controller
 @MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
@@ -53,7 +54,8 @@ public class ActivityController {
 
 	@Autowired
 	ActivityService as;
-
+	@Autowired
+	SkillService skill;
 	public static final String url = "https://www.google.com/recaptcha/api/siteverify";
 	public static final String secret = "6LcVo_sUAAAAAKGXZlJjqcnn6PhDo0N-2tAXJmLw";
 //	private final static String USER_AGENT = "Mozilla/5.0";
@@ -71,7 +73,8 @@ public class ActivityController {
 			model.addAttribute("searchList", combinedResult);
 
 		} else {
-
+			String TypeCN=("活動"+name);
+			skill.ClassCTRUpdate(TypeCN);
 			List<CombinedBean> activity = as.getCombinedActivityClass(name, "50");
 			System.out.println();
 			model.addAttribute("searchList", activity);
@@ -149,7 +152,8 @@ public class ActivityController {
 			model.addAttribute("searchList", combinedResult);
 
 		} else {
-
+			String TypeCN=("活動"+name);
+			skill.ClassCTRUpdate(TypeCN);
 			List<CombinedBean> activity = as.getCombinedActivityClass(name, String.valueOf(member.getMemberRegNo()));
 			System.out.println();
 			model.addAttribute("searchList", activity);
