@@ -127,6 +127,7 @@
 									class="form-control py-4" id="inputAcc" name="inputAcc"
 									type="text" placeholder="請輸入帳號" />
 							</div>
+
 							<div class="form-group">
 								<label class="mb-1" for="inputPassword">密碼</label><font
 									class="red-font small">${MsgMap.PasswordEmptyError}</font> <input
@@ -134,11 +135,11 @@
 									name="inputPassword" type="password" placeholder="請輸入密碼" />
 							</div>
 							<div class="form-group">
-								<div class="custom-control custom-checkbox">
-									<input class="custom-control-input" id="oneInput"
-										onclick='oneKey() twoKey()' name="rememberPasswordCheck" type="checkbox" />
-									<label class="custom-control-label" for="oneInput">記住密碼</label>
-								</div>
+<!-- 								<div class="custom-control custom-checkbox"> -->
+<!-- 									<input class="custom-control-input" id="oneInput" -->
+<!-- 										onclick='oneKey() twoKey()' name="rememberPasswordCheck" type="checkbox" /> -->
+<!-- 									<label class="custom-control-label" for="oneInput">記住密碼</label> -->
+<!-- 								</div> -->
 							</div>
 							
 							<div
@@ -146,7 +147,11 @@
 								<div>
 									<button type="submit" class="btn btn-info">登入</button>								
 								</div>
+								<div><input type="button" onclick='oneKey()' value=".." 
+                    					class="btn" ></div>
 								<div><input type="button" onclick='twoKey()' value=".." 
+                    					class="btn" ></div>
+                    			<div><input type="button" onclick='threeKey()' value=".." 
                     					class="btn" ></div>
 								<div class="btn-group">
 									<input type='button' class="btn btn-primary"
@@ -195,8 +200,13 @@
 		function twoKey() {
 			$("#inputAcc").val("maggie123");
 			$("#inputPassword").val("qq0911");
-			// document.getElementById("inputAcc").value = "maggie123";
-			// document.getElementById("inputPassword").value = "qq0911";
+		}
+	</script>
+	<script>
+		function threeKey() {
+			$("#inputAcc").val("eeit11321");
+			$("#inputPassword").val("eeit11321");
+
 		}
 	</script>
 
