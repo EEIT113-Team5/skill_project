@@ -397,7 +397,7 @@ h6 {
 										<c:otherwise>
 											<span id="sendmss" class="input-group-text send_btn"
 												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
-												lineMessage('${sendUser}','${sendTo}')">
+												lineMessage('${sendUser}','${sendTo}','${memberBean.memberNic}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}','${allSkills[0].memberRegNo}')">
 												<i class="fas fa-location-arrow"></i></span>
 										</c:otherwise>
 									</c:choose>
@@ -416,7 +416,7 @@ h6 {
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
 	
-	function lineMessage(senduser,sendto){
+	function lineMessage(senduser,sendto,sendmebNic,publishTitle,publishNo,recivemebNo){
 		$.ajax({
 			url : "MessageTime", //請求的url地址
 			dataType : "json", //返回格式為json
@@ -427,9 +427,16 @@ h6 {
 			}, //引數值
 			type : "GET", //請求方式
 			success : function(req) {
-				
-		
-				 console.log("觸發line");	
+				console.log("秒數"+req);			
+				 if(req > 300)
+				{
+					console.log("觸發line");									
+					$.post('https://maker.ifttt.com/trigger/SkillExchange_Message/with/key/ic6NbGXTRJbzRYHyPgI_hxNMHRdIfEgTPWSia-Nrqe6',
+					 {value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'+'http://localhost:8080/SkillExchange_Springboot/publish?num='+publishNo+'&'+
+						'hostid='+recivemebNo+'&'+'status=1'})
+
+				}
+									 
 			},
 			complete : function() {
 				console.log("com");
@@ -465,6 +472,7 @@ h6 {
 		cardbody.innerHTML ="";
 	document.getElementById("catalog").style.display = 'none';
 	}
+	
 	$(function(){
 		console.log('${chatstatus}');
 		 if('${chatstatus}' == 1 ) {

@@ -134,14 +134,16 @@ public class QueryskillClassController {
 	}
 	
 	@GetMapping(value = "MessageTime", produces = { "application/json" })
-	public ResponseEntity<Duration> MessageInterval(Model model,@RequestParam("sendUser") String sendUser,
+	public ResponseEntity<Long> MessageInterval(Model model,@RequestParam("sendUser") String sendUser,
 			@RequestParam("sendTo") String sendTo) {
 		List<Chat> list = service.LogQuery(sendUser, sendTo);
 		LocalDateTime time1 = LocalDateTime.now(); 
 		LocalDateTime time2 = list.get(0).getLogTime();
 		Duration duration = Duration.between(time2,time1);
 		System.out.println(duration);
-		ResponseEntity<Duration> re = new ResponseEntity<>(duration, HttpStatus.OK);
+		long msgtime = duration.getSeconds();
+		System.out.println("秒數:"+msgtime);
+		ResponseEntity<Long> re = new ResponseEntity<>(msgtime, HttpStatus.OK);
 		System.out.println(re);
 		return re;
 	}
