@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,7 +115,7 @@
 												<td><c:out value="${data.commentNo}" default="無" /></td>
 												<td><c:out value="${data.commentorNo}" default="無" /></td>
 												<td><c:out value="${data.memberName}" default="無" /></td>
-												<td><c:out value="${data.msgTime}" default="無" /></td>
+												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}" default="無" /></td>
 												<td><c:out value="${data.webGrading}" default="無" /></td>
 												<td><c:out value="${data.webFluency}" default="無" /></td>
 												<td><c:out value="${data.webSatis}" default="無" /></td>

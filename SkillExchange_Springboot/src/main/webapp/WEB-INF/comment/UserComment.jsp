@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,18 +70,18 @@
 																			<c:when test='${watch.member.accStatus == 1}'>
 																				<a href="#" id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger'>冷凍</a>
+																					class='btn btn-danger'>會員停權</a>
 																				<a href="#" id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary' style="display: none">解凍</a>
+																					class='btn btn-primary' style="display: none">解除停權</a>
 																			</c:when>
 																			<c:otherwise>
 																				<a href='#' id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger' style="display: none">冷凍</a>
+																					class='btn btn-danger' style="display: none">會員停權</a>
 																				<a href='#' id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary'>解凍</a>
+																					class='btn btn-primary'>解除停權</a>
 																			</c:otherwise>
 																		</c:choose>
 																	</c:when>
@@ -96,18 +98,18 @@
 																			<c:when test='${watch.member.accStatus == 1}'>
 																				<a href="#" id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger'>冷凍</a>
+																					class='btn btn-danger'>會員停權</a>
 																				<a href="#" id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary' style="display: none">解凍</a>
+																					class='btn btn-primary' style="display: none">解除停權</a>
 																			</c:when>
 																			<c:otherwise>
 																				<a href="#" id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger' style="display: none">冷凍</a>
+																					class='btn btn-danger' style="display: none">會員停權</a>
 																				<a href="#" id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary'>解凍</a>
+																					class='btn btn-primary'>解除停權</a>
 																			</c:otherwise>
 																		</c:choose>
 																	</c:when>
@@ -124,18 +126,18 @@
 																			<c:when test='${watch.member.accStatus == 1}'>
 																				<a href="#" id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger'>冷凍</a>
+																					class='btn btn-danger'>會員停權</a>
 																				<a href="#" id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary' style="display: none">解凍</a>
+																					class='btn btn-primary' style="display: none">解除停權</a>
 																			</c:when>
 																			<c:otherwise>
 																				<a href="#" id="frozen${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},1)
-																					class='btn btn-danger' style="display: none">冷凍</a>
+																					class='btn btn-danger' style="display: none">會員停權</a>
 																				<a href="#" id="deFro${watch.memCommented}"
 																					onclick=FrozenMember(${watch.memCommented},2)
-																					class='btn btn-primary'>解凍</a>
+																					class='btn btn-primary'>解除停權</a>
 																			</c:otherwise>
 																		</c:choose>
 																	</c:when>
@@ -186,7 +188,7 @@
 												<td><c:out value="${data.commentNo}" default="無" /></td>
 												<td><c:out value="${data.commentorNo}" default="無" /></td>
 												<td><c:out value="${data.memberName}" default="無" /></td>
-												<td><c:out value="${data.msgTime}" default="無" /></td>
+												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}" default="無" /></td>
 												<td><c:out value="${data.exGrading}" default="無" /></td>
 												<td><c:out value="${data.memCommented}" default="無" /></td>
 												<td><c:out value="${data.msgDetail}" default="無" /></td>
@@ -194,11 +196,11 @@
 													href='DeleteUserCommont/${data.commentNo}'>刪除</a> <c:choose>
 														<c:when test="${data.stat==1}">
 															<a class='btn btn-light'
-																href='UpdateStatus?key=${data.commentNo}&stat=${data.stat}'><span>已發布</span></a>
+																href='UpdateStatus?key=${data.commentNo}&stat=${data.stat}'><span>已發佈</span></a>
 														</c:when>
 														<c:otherwise>
 															<a class='btn btn-primary'
-																href='UpdateStatus?key=${data.commentNo}&stat=${data.stat}'><span>未發布</span></a>
+																href='UpdateStatus?key=${data.commentNo}&stat=${data.stat}'><span>發佈</span></a>
 
 														</c:otherwise>
 
