@@ -63,7 +63,13 @@ font {
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
+					<div class="form-inline">
 					<h2 class="mt-4">排程清單</h2>
+					<a class="btn btn-primary" href="#" id="groupNewBtn"
+						data-toggle="modal" data-target="#insertScheduleModal"
+						style="margin: 20px 5px 5px 5px"> <i class='fa fa-plus'></i>新增排程
+					</a>
+					</div>
 					<table class="table table-hover tablemanager">
 						<thead style="background-color: #F0F0F0">
 							<tr>
@@ -72,7 +78,7 @@ font {
 								<th>啟動時間</th>
 								<th>狀態</th>
 								<th>更新時間</th>
-								<th>管理</th>
+								<th>變更設定</th>
 							</tr>
 						</thead>
 
@@ -86,6 +92,8 @@ font {
 									<td>${jobList.updateTimeStr}</td>
 									<td><a class="btn btn-success" id="updJob${jobList.jobNo}"
 										href="#" onclick="editSchedule(${jobList.jobNo},'${jobList.jobGroup}','${jobList.jobName}','${jobList.cronExpression}','${jobList.status}')">編輯</a>
+										<a class="btn btn-danger" id="delJob${jobList.jobNo}"
+										href="#" data-toggle="modal" data-target="#delScheduleModal">刪除</a>
 									</td>
 								</tr>
 							</c:forEach>
