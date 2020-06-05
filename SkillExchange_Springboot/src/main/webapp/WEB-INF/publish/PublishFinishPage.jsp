@@ -118,8 +118,10 @@ textarea {
 		<form action="myPublishReturnHome" method="POST"
 			enctype="application/x-www-form-urlencoded">
 
-			<h1>完成刊登!!</h1>
-
+			<h1>完成刊登!!</h1><br>
+			<h1>歡迎加入群組接收網站最新資訊:</h1>
+			<img 
+			src='images/QR.jpg' />
 			<input type='submit' value='回首頁'>
 		</form>
 	</div>
