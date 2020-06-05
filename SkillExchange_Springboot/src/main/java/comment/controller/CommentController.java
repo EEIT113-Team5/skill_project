@@ -151,5 +151,12 @@ public class CommentController {
 		ResponseEntity<List<Long>> re = new ResponseEntity<>(list, HttpStatus.OK);
 		return re;
 	}
+	//getBadUser
+	@GetMapping(value = "/getBadUser", produces = { "application/json" })
+	public ResponseEntity<List<CommentBean>>getBadUser(Model model, @RequestParam("memCommented") Integer memCommented, @RequestParam("grade") Integer grade ) {
+		List<CommentBean> badUser = commentServiceIMPL.getBadUser(memCommented, grade);
+		ResponseEntity<List<CommentBean>> re = new ResponseEntity<>(badUser, HttpStatus.OK);
+		return re;
+	}
 
 }

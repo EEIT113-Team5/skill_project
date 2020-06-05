@@ -31,7 +31,8 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1 class="mt-4" style="text-shadow: 1px 1px gray; text-align:center">使用者互評分析</h1>
+					<h1 class="mt-4"
+						style="text-shadow: 1px 1px gray; text-align: center">使用者互評分析</h1>
 					<div class="rounded-lg ">
 						<div class="card-body">
 							<form action="WatchingList" method="get">
@@ -60,10 +61,11 @@
 											<c:forEach var='watch' items='${watching}'>
 												<tr>
 
-													<td><c:out value="${watch.memCommented}" default="無" /></td>
-													<td><c:out value="${watch.exGrading}" default="無" /></td>
+													<td><a href="#"
+														onclick="getcomment(${watch.memCommented},${param.grade})">${watch.memCommented}</a></td>
+													<td>${watch.exGrading}</td>
 													<td><c:choose>
-															<c:when test="${param.grade-1<2}">
+															<c:when test="${param.grade-1<3}">
 																<c:choose>
 																	<c:when test="${watch.exGrading>=4}">
 																		<c:choose>
@@ -91,7 +93,7 @@
 																	</c:otherwise>
 																</c:choose>
 															</c:when>
-															<c:when test="${param.grade-1<3}">
+															<c:when test="${param.grade-1<4}">
 																<c:choose>
 																	<c:when test="${watch.exGrading>=6}">
 																		<c:choose>
@@ -119,7 +121,7 @@
 																	</c:otherwise>
 																</c:choose>
 															</c:when>
-															<c:when test="${param.grade-1<4}">
+															<c:when test="${param.grade-1<5}">
 																<c:choose>
 																	<c:when test="${watch.exGrading>=7}">
 																		<c:choose>
@@ -154,7 +156,8 @@
 									</table>
 								</div>
 
-								<div id="main" style="flex: 4; width: 500px; height: 400px; margin-left:40px"></div>
+								<div id="main"
+									style="flex: 4; width: 500px; height: 400px; margin-left: 40px"></div>
 							</div>
 						</div>
 
@@ -188,7 +191,8 @@
 												<td><c:out value="${data.commentNo}" default="無" /></td>
 												<td><c:out value="${data.commentorNo}" default="無" /></td>
 												<td><c:out value="${data.memberName}" default="無" /></td>
-												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}" default="無" /></td>
+												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}"
+														default="無" /></td>
 												<td><c:out value="${data.exGrading}" default="無" /></td>
 												<td><c:out value="${data.memCommented}" default="無" /></td>
 												<td><c:out value="${data.msgDetail}" default="無" /></td>
@@ -284,6 +288,25 @@
 			}
 		
 	</script>
+	<div class="modal fade" id="showcalendar" tabindex="-1" role="dialog"
+		aria-labelledby="editDetailModalLabel" >
+		<div class="modal-dialog modal-lg" role="document"  >
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="editDetailModalLabel"><b><span id="badguy"></span></b></h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="calendar" >					
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		// 基于准备好的dom，初始化echarts实例
 		var myChart = echarts.init(document.getElementById('main'));
@@ -403,8 +426,43 @@
  			});	
 	
 // 	     };
+     function getcomment(memCommented,grade){
+        	$.ajax({
+				url : "getBadUser", //請求的url地址
+				dataType : "json", //返回格式為json
+				async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+				data : {
+					"memCommented":memCommented,
+					"grade":grade
+				}, //引數值
+				type : "GET", //請求方式
+				success : function(req) {
+					console.log(req);
+// 					calendar
+                    var content="<table class='table table-bordered' width='100%' cellspacing='0'><thead><tr>";
+                        content+="<th style='width:100px'>評價者編號</th><th style='width:100px'>評價者姓名</th><th style='width:100px'>給對方評分</th><th style='width:110px'>被評價者編號</th><th style='width:120px'>評價內容</th></tr></thead><tbody>";
+                        for(var i=0;i<req.length;i++){
+                            console.log(req);
+                        	content+="<tr><td>"+req[i].commentorNo+"</td><td>"+req[i].memberName+"</td>";
+                        	content+="<td>"+req[i].exGrading+"</td><td>"+req[i].memCommented+"</td><td>"+req[i].msgDetail+"</td></tr>";
+                        }
+                        content+="</tbody></table>";
+                  $("#calendar").html(content);
+                  $("#badguy").text("會員編號"+req[0].memCommented+"的不良紀錄")
+				},
+				complete : function() {
+					//請求完成的處理
+				},
+				error : function() {
+					console.log("出錯了!")
+				}
+			});
 
-	
+
+
+        	$("#showcalendar").modal('show');
+         }
+      
 		//载入图表
 	</script>
 </body>

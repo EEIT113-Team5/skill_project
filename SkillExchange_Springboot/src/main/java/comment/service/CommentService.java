@@ -29,4 +29,5 @@ public interface CommentService {
 	
 	//
 	public List<Long>  getBackstatistic();
+	public List<CommentBean> getBadUser(Integer memCommented, Integer exgrading);
 }

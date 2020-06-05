@@ -131,4 +131,8 @@ public class CommentServiceIMPL implements CommentService {
 		return arrayList;
 		
 	}
+	
+	public List<CommentBean> getBadUser(Integer memCommented, Integer exgrading) {
+		return uDao.getBadUser(memCommented, exgrading);		
+	}
 }

@@ -84,6 +84,18 @@ public class CommentjdbcDAOIMPL implements CommentDAO {
 		List<CommentBean> list = query.list();
 		return list;
 	}
+	
+
+	@Override
+	public List<CommentBean> getBadUser(Integer memCommented, Integer exgrading) {
+		String hql="select p  from CommentBean p where p.memCommented=:memCommented and p.exGrading <:exGrading";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("exGrading", exgrading);
+		query.setParameter("memCommented", memCommented);
+		List<CommentBean> list = query.list();
+		return list;
+	}
+	
 
 	@Override
 	public void insertComm(CommentBean mb) {

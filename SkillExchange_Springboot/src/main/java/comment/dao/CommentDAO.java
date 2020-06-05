@@ -33,4 +33,5 @@ public interface CommentDAO {
     public Long getTotalExchangenum();
     public Long getTotalActivitynum();
     public Long getMessagenum();
+    public List<CommentBean> getBadUser(Integer memCommented, Integer exgrading);
 }
