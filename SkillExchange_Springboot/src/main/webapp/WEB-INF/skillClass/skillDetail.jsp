@@ -283,7 +283,7 @@ h6 {
 					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 						<table>
 							<tbody>
-
+							
 								<c:forEach var='data' varStatus='var' items='${reqchat}'>
 									<tr>
 										<td>您有來自</td>
@@ -325,7 +325,8 @@ h6 {
 								<c:set var="chatstatus" value="${status}" />
 							</c:if>
 							<button id="disabled" class="btn btn-primary"
-								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}')">發送訊息
+								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');
+								lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}');">發送訊息
 							</button>
 						</div>
 
@@ -419,6 +420,14 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
+	function lineMessage(sendmebNic,recivemebNo,publishTitle){
+		console.log("觸發line");
+        $.post('https://maker.ifttt.com/trigger/SkillExchange_Message/with/key/ic6NbGXTRJbzRYHyPgI_hxNMHRdIfEgTPWSia-Nrqe6',
+        		{value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'});
+    };
+	
+	
+
 	$(function(){
 		console.log("觸發enter");
 	 $('#textmssg').keydown(function(event){
