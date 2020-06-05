@@ -121,7 +121,7 @@
                                 <input type="text" class="form-control" id="nicname" name="memberNic" required>
 <!--                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                             </div>
-
+<br>
                         <br>
                         <tr>
                             <td><label for="">性別</label><lable class="red-font">*</lable></td>
@@ -138,7 +138,7 @@
                                 value="3"> 
                                     <label for="gender_no">不提供</label> &nbsp; &nbsp; &nbsp;
                   		  	</td>
-             			</tr>
+             			</tr><br>	
                             </div>
 
                         
@@ -167,6 +167,7 @@
 <!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                         </div>
 
+                        <br>
                         <br>
                         <tr>
                             <td><label for="checkpwd">再次確認密碼</label><lable class="red-font">*</lable></td>
@@ -268,7 +269,7 @@
                             
                             <div class="input-group">
                             <input type="text" class="form-control" id="addr" name="memberAddr" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> 
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>  -->
                         </div>
     <!----------------------------break-------------------------------------------------------------> <br> 
                         </div>
