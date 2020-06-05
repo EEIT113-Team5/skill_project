@@ -36,11 +36,14 @@ public class JobParamDaoImpl implements JobParamDao {
 	}
 
 	@Override
-	public void updateJobParam(String cronExpression,Integer jobNo) {
-		String hql="update JobParam set cronExpression = :cronExpression,updateTime = GETDATE() where jobNo = :jobNo";
+	public void updateJobParam(String cronExpression,Integer jobNo,String status,String jobGroup,String jobName) {
+		String hql="update JobParam set status=:status,jobGroup = :jobGroup,jobName = :jobName,cronExpression = :cronExpression,updateTime = GETDATE() where jobNo = :jobNo";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("cronExpression", cronExpression);
 		query.setParameter("jobNo", jobNo);
+		query.setParameter("status", status);
+		query.setParameter("jobGroup", jobGroup);
+		query.setParameter("jobName", jobName);
 		query.executeUpdate();
 	}
 

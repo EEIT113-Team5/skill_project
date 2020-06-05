@@ -11,18 +11,23 @@
 <script>
 	function typeChange() {
 		if ($("#type").val() == "frequency") {
-			$("#frequency").attr("style", "visibility:visible")
-			$("#fixed").attr("style", "display:none")
+			$("#frequency").attr("style",
+					"visibility:visible;background-color: #D2E9FF")
+			$("#fixed").attr("style", "display:none;background-color: #D2E9FF")
 		} else {
-			$("#frequency").attr("style", "display:none")
-			$("#fixed").attr("style", "visibility:visible")
+			$("#frequency").attr("style",
+					"display:none;background-color: #D2E9FF")
+			$("#fixed").attr("style",
+					"visibility:visible;background-color: #D2E9FF")
 		}
 	}
 	function freqChange() {
 		if ($("#freqSel").val() == "month") {
-			$("#dayInput").attr("style", "visibility:visible")
+			$("#dayInput").attr("style",
+					"visibility:visible;background-color: #D2E9FF")
 		} else {
-			$("#dayInput").attr("style", "display:none")
+			$("#dayInput").attr("style",
+					"display:none;background-color: #D2E9FF")
 		}
 	}
 
@@ -71,6 +76,16 @@
 			document.forms[0].method = "POST";
 			document.forms[0].submit();
 		}
+	}
+	function editJobConfirm() {
+		let jobNo = $("#jobNo").val();
+		let cronGroup = $("#cronGroup").val();
+		let cronName = $("#cronName").val();
+		let status = $("#status").val();
+		
+		document.forms[0].action = "<c:url value='updateJob?jobNo="+ jobNo + "&cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression=' />";
+		document.forms[0].method = "POST";
+		document.forms[0].submit();
 	}
 </script>
 </head>
@@ -229,18 +244,37 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="editScheduleLabel">修改啟動時間</h4>
+				<h4 class="modal-title" id="editScheduleLabel">編輯排程設定</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<div>
+				<form>
+					<input type="hidden" id="jobNo" name="jobNo">
 					<table>
 						<tbody>
 							<tr>
-								<td style="width:50px">類型</td>
+								<th style="width: 100px"></th>
+								<th style="width: 300px"></th>
+							</tr>
+							<tr>
+								<td>排程群組：</td>
+								<td><input type="text" class="form-control" id="cronGroup"
+									name="cronGroup"></td>
+							</tr>
+							<tr>
+								<td>排程名稱：</td>
+								<td><input type="text" class="form-control" id="cronName"
+									name="cronName"></td>
+							</tr>
+							<tr>
+								<td>啟動時間：</td>
+								<td></td>
+							</tr>
+							<tr style="background-color: #D2E9FF">
+								<td>類型</td>
 								<td><select class="btn btn-light searchbar" id="type"
 									onchange="typeChange()">
 										<option value="frequency">時間</option>
@@ -248,38 +282,48 @@
 								</select></td>
 								<td>
 							</tr>
-							<tr id="frequency">
+							<tr id="frequency" style="background-color: #D2E9FF">
 								<td>週期</td>
-								<td><select class="btn btn-light searchbar" id="freqSel" onchange="freqChange()">
+								<td class="form-inline"><select
+									class="btn btn-light searchbar" id="freqSel"
+									onchange="freqChange()">
 										<option value="day">每日</option>
 										<option value="month">每月</option>
-								</select></td>
-								<td class="form-inline">
-								<div id="dayInput" style="display: none">
-								<input type="text" class="form-control" style="width: 40px" >
-								&ensp;日&ensp;
-								</div>
-								<input type="text" id="timepicker" name="timepicker"
-							class="form-control timepicker" style="width: 130px"></td>
+								</select>
+									<div id="dayInput" style="display: none">
+										<input type="text" class="form-control" style="width: 40px">
+										&ensp;日&ensp;
+									</div> <input type="text" id="timepicker" name="timepicker"
+									class="form-control timepicker" style="width: 130px"></td>
 							</tr>
-							<tr id = "fixed" style="display: none">
+							<tr id="fixed" style="display: none; background-color: #D2E9FF">
 								<td>週期</td>
-								<td class="form-inline">&ensp;每&ensp;<input type="text" class="form-control" style="width:30px">&ensp;分&ensp;
-								<input type="text" class="form-control" style="width:30px">&ensp;秒</td>
+								<td class="form-inline">&ensp;每&ensp; <input type="text"
+									id="fixed-hour" class="form-control" style="width: 30px">&ensp;時&ensp;
+									<input type="text" id="fixed-min" class="form-control"
+									style="width: 30px">&ensp;分&ensp; <input type="text"
+									id="fixed-sec" class="form-control" style="width: 30px">&ensp;秒
+								</td>
 								<td></td>
+							</tr>
+							<tr>
+								<td>狀態：</td>
+								<td><select id="status" class="btn btn-light searchbar">
+										<option value="1">啟動</option>
+										<option value="0">關閉</option>
+								</select></td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-					onclick="closeModal('U')">取消</button>
-				<button type="button" class="btn btn-primary"
-					onclick="editDetailConfirm()">確認</button>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							onclick="closeModal('U')">取消</button>
+						<button type="button" class="btn btn-primary"
+							onclick="editJobConfirm()">確認</button>
+					</div>
+				</form>
 			</div>
 		</div>
+
 	</div>
 </div>

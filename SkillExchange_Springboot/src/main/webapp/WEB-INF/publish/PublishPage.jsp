@@ -69,7 +69,6 @@ textarea {
 * {
 	font-family: 微軟正黑體;
 }
-
 </style>
 
 </head>
@@ -99,13 +98,22 @@ textarea {
 							enctype="multipart/form-data">
 
 							<fieldset class="fieldest">
-								<legend class="legend">刊登資訊</legend>
+								<legend class="legend">
+									刊登資訊
+									<div>
+										<input type="button" onclick='oneKey()'
+											value=".&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp."
+											class="btn">
+									</div>
+								</legend>
 								<br>
 								<table>
 									<tr>
 										<td><label for="">刊登標題:</label></td>
 										<td><input type='text' name='publishTitle'
-											value="${publishTitle}"></td>
+											value="${publishTitle}" id="publishTitle"></td>
 										<td><font color='red' size='-3'>${error.publishTitle}</font></td>
 									</tr>
 									<tr>
@@ -118,7 +126,7 @@ textarea {
 									<tr>
 										<td><label for="">刊登內容:</label></td>
 										<td><textarea cols="40" row="5" name='publishDetail'
-												value='${publishDetail}'></textarea></td>
+												value='${publishDetail}' id="publishDetail"></textarea></td>
 										<td><font color='red' size='-3'>${error.publishDetail}</font></td>
 									</tr>
 									<tr>
@@ -145,7 +153,8 @@ textarea {
 									</tr>
 									<tr>
 										<td><label for="">想學的類型:</label></td>
-										<td><select id="selSkill" name='skillType' onchange="showSkill()">
+										<td><select id="selSkill" name='skillType'
+											onchange="showSkill()">
 												<option value="">請選擇</option>
 												<option value="才藝">才藝</option>
 												<option value="運動">運動</option>
@@ -159,9 +168,9 @@ textarea {
 										<td><label for="">想學的技能:</label></td>
 										<td><select id="selWantSkill" name='wantSkill'>
 												<option value="">請選擇</option>
-<%-- 												<c:forEach varStatus="vs" var="a" items="${skill}"> --%>
-<%-- 													<option value="${a.skillNameCN}">${a.skillNameCN}</option> --%>
-<%-- 												</c:forEach> --%>
+												<%-- 												<c:forEach varStatus="vs" var="a" items="${skill}"> --%>
+												<%-- 													<option value="${a.skillNameCN}">${a.skillNameCN}</option> --%>
+												<%-- 												</c:forEach> --%>
 										</select></td>
 										<td><font color='red' size='-3'>${error.wantSkill}</font></td>
 									</tr>
@@ -209,15 +218,16 @@ textarea {
 									<tr>
 										<td><label for="">鄉鎮:</label></td>
 										<td><input type='text' name='district'
-											value='${district}'></td>
+											value='${district}' id="district"></td>
 										<hr>
 										<td><label for="">路名:</label></td>
-										<td><input type='text' name='road' value='${param.road}'></td>
+										<td><input type='text' name='road' value='${param.road}'
+											id="road"></td>
 									</tr>
 									<tr>
 										<td><label for="">希望地點:</label></td>
 										<td><input type='text' name='publishPlace'
-											value='${publishPlace}'></td>
+											value='${publishPlace}' id="publishPlace"></td>
 										<hr>
 										<td><font color='red' size='-3'>${error.publishPlace}</font></td>
 									</tr>
@@ -230,7 +240,7 @@ textarea {
 									<tr>
 										<td><label for="">備註:</label></td>
 										<td><textarea cols="40" row="5" name='publishMark'
-												value='${param.publishMark}'></textarea></td>
+												value='${param.publishMark}' id="publishMark"></textarea></td>
 									</tr>
 								</table>
 							</fieldset>
@@ -281,58 +291,59 @@ textarea {
 		function showSkill() {
 			var skill = document.getElementById('selSkill').value;
 			document.getElementById("selWantSkill").length = 0;
-			document.getElementById("selWantSkill").options.add(new Option("請選擇"));
+			document.getElementById("selWantSkill").options.add(new Option(
+					"請選擇"));
 			if (skill == '才藝') {
-				document.getElementById("selWantSkill").options
-						.add(new Option("歌唱"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("跳舞"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("繪畫"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("演戲"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"歌唱"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"跳舞"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"繪畫"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"演戲"));
 			}
 			if (skill == '運動') {
-				document.getElementById("selWantSkill").options
-						.add(new Option("足球"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("羽毛球"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("網球"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("排球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"足球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"羽毛球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"網球"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"排球"));
 			}
 			if (skill == '語言') {
-				document.getElementById("selWantSkill").options
-						.add(new Option("法文"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("日文"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("韓文"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("西班牙文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"法文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"日文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"韓文"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"西班牙文"));
 			}
 			if (skill == '寵物') {
-				document.getElementById("selWantSkill").options
-						.add(new Option("養鸚鵡"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("養狗"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("養貓"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("養魚"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養鸚鵡"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養狗"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養貓"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"養魚"));
 			}
 			if (skill == '生活') {
-				document.getElementById("selWantSkill").options
-						.add(new Option("化妝"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("煮飯"));
-				document.getElementById("selWantSkill").options
-						.add(new Option("居家清潔"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"化妝"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"煮飯"));
+				document.getElementById("selWantSkill").options.add(new Option(
+						"居家清潔"));
 			}
-			
+
 		}
-	
+
 		function showCity() {
 			var area = document.getElementById('selPubArea1').value;
 			// 			  var x = document.getElementById("selPubArea1").selectedIndex;
@@ -419,6 +430,22 @@ textarea {
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
+
+	<!-- 一鍵刊登 -->
+	<script>
+		function oneKey() {
+			$("#publishTitle").val("學習唱歌");
+			$("#publishDetail").val("我唱歌常常五音不全，因此想找一個擅長唱歌的人教我如何發聲及音準方面的技巧。");
+			$("#selSkill2").val("語言");
+			$("#myownskill").val("日文");
+			$("#district").val("萬華區");
+			$("#road").val("成都路");
+			$("#publishPlace").val("西門町星聚點");
+			$("#publishMark").val("我有日文N2證照。");
+		}
+	</script>
+
+	<!-- 一鍵刊登 -->
 
 	<!-- ---------------------要加的部份-------------------- -->
 </body>

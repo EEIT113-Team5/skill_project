@@ -113,9 +113,9 @@
 					<div style="border: 1px dashed black;margin: 20px;padding: 10px">
 					<c:forEach varStatus="comm" var="commList" items="${commList}">
 						<div>
-							<div onclick="location.href='publish?num=${commList.publishNo}'" style="font-size: 30px">推薦序:${comm.index+1}</div>
-            				<div onclick="location.href='publish?num=${commList.publishNo}'"><img src="${commList.publishPic}" height="50px" /></div>
-            				<div onclick="location.href='publish?num=${commList.publishNo}'">標題:${commList.myTitle}</div>
+							<div onclick="location.href='publish?num=${commList.publishNo}&hostid=${skills.memberRegNo}&status=0'" style="font-size: 30px">推薦序:${comm.index+1}</div>
+            				<div onclick="location.href='publish?num=${commList.publishNo}&hostid=${skills.memberRegNo}&status=0'"><img src="${commList.publishPic}" height="50px" /></div>
+            				<div onclick="location.href='publish?num=${commList.publishNo}&hostid=${skills.memberRegNo}&status=0'">標題:${commList.myTitle}</div>
             				<div>-----------------------------------</div>		
             			</div>
             		</c:forEach>
