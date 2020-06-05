@@ -56,6 +56,8 @@ public class SearchBean implements Serializable {
 	private String skill3;
 	private String skill4;
 	private String skill5;
+	private String dateSort;
+	private String clickSort;
 
 	public SearchBean(String memberNic, String memberPic, int publishNo, int memberRegNo, String publishTitle, String publishDetail,
 			String publishArea, String city, String district, String road, String publishPlace, String publishPic,
@@ -114,6 +116,33 @@ public class SearchBean implements Serializable {
 		this.skill3 = skill3;
 		this.skill4 = skill4;
 		this.skill5 = skill5;
+	}
+	
+	public SearchBean(String keyword, String area1, String area2, String area3, String city1, String city2,
+			String city3, String city4, String city5, String type1, String type2, String type3, String type4,
+			String skill1, String skill2, String skill3, String skill4, String skill5, String dateSort,
+			String clickSort) {
+		super();
+		this.keyword = keyword;
+		this.area1 = area1;
+		this.area2 = area2;
+		this.area3 = area3;
+		this.city1 = city1;
+		this.city2 = city2;
+		this.city3 = city3;
+		this.city4 = city4;
+		this.city5 = city5;
+		this.type1 = type1;
+		this.type2 = type2;
+		this.type3 = type3;
+		this.type4 = type4;
+		this.skill1 = skill1;
+		this.skill2 = skill2;
+		this.skill3 = skill3;
+		this.skill4 = skill4;
+		this.skill5 = skill5;
+		this.dateSort = dateSort;
+		this.clickSort = clickSort;
 	}
 
 	@Transient
@@ -458,5 +487,23 @@ public class SearchBean implements Serializable {
 
 	public void setSkill5(String skill5) {
 		this.skill5 = skill5;
+	}
+
+	@Transient
+	public String getDateSort() {
+		return dateSort;
+	}
+
+	public void setDateSort(String dateSort) {
+		this.dateSort = dateSort;
+	}
+
+	@Transient
+	public String getClickSort() {
+		return clickSort;
+	}
+
+	public void setClickSort(String clickSort) {
+		this.clickSort = clickSort;
 	}
 }
