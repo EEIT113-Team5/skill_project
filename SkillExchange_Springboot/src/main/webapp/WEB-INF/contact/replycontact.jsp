@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zt-TW">
 
@@ -65,6 +67,8 @@ font {
 								<th>留言者姓名</th>
 								<th>留言者Email</th>
 								<th>留言主旨</th>
+								<th>新增時間</th>
+								<th>更新時間</th>
 								<th>回覆留言</th>
 							</tr>
 						</thead>
@@ -73,8 +77,10 @@ font {
 							<c:forEach var="cntUs" items="${cntUsList}">
 								<tr>
 									<td width="15%">${cntUs.contactUser}</td>
-									<td width="30%">${cntUs.email}</td>
-									<td width="40%">${cntUs.title}</td>
+									<td width="20%">${cntUs.email}</td>
+									<td width="25%">${cntUs.title}</td>
+									<td width="15%"><fmt:formatDate value="${cntUs.createTime}" pattern="yyyy/MM/dd HH:mm:ss"/></td>
+									<td width="15%"><fmt:formatDate value="${cntUs.updateTime}" pattern="yyyy/MM/dd HH:mm:ss"/></td>
 									<td><a class="btn btn-success"
 										id="replyBtn${cntUs.contactNo}"
 										${(cntUs.isReply==1) ? 'style="display:none"' : ''}

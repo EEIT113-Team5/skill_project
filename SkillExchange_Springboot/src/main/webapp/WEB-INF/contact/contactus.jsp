@@ -59,6 +59,7 @@ font {
 	color: red;
 	margin-left: 20px;
 }
+
 * {
 	font-family: 微軟正黑體;
 }
@@ -150,6 +151,13 @@ font {
 			$("#alertModal").modal('show');
 		</script>
 	</c:if>
+	<script>
+		document.addEventListener('keypress', autofill);
+		function autofill() {
+			$("#title").val("很喜歡這個平台~");
+			$("#content").text("謝謝這個平台讓我可以跟新朋友交流並且學習新的技能，會推薦給朋友！");
+		}
+	</script>
 	<%
 		session.removeAttribute("MsgOK");
 	%>

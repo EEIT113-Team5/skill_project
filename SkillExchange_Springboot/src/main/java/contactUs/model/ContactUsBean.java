@@ -1,5 +1,8 @@
 package contactUs.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +24,8 @@ public class ContactUsBean {
 	private String content;
 	private int isReply;
 	private String replyContent;
+	private Timestamp createTime;
+	private Timestamp updateTime;
 	
 
 
@@ -127,6 +132,24 @@ public class ContactUsBean {
 
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
+	}
+
+	@Column(name = "createTime")
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	@Column(name = "updateTime")
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
 	}
 
 }
