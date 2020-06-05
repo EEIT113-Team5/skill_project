@@ -33,7 +33,8 @@ public class ContactUsDaoImpl implements ContactUsDao {
 	@Override
 	public List<ContactUsBean> queryContactUs() {
 		try {
-			Query<ContactUsBean> query = getSession().createQuery("from ContactUsBean CU order by CU.createTime desc", ContactUsBean.class);
+			Query<ContactUsBean> query = getSession().createQuery("from ContactUsBean CU order by CU.createTime desc",
+					ContactUsBean.class);
 			List<ContactUsBean> ContactUsBeanList = query.list();
 			return ContactUsBeanList;
 		} catch (Exception e) {
@@ -54,7 +55,7 @@ public class ContactUsDaoImpl implements ContactUsDao {
 	}
 
 	@Override
-	public ContactUsBean updateReplyContent(Integer contactNo,String replyContent) throws UpdateCollectionsException {
+	public ContactUsBean updateReplyContent(Integer contactNo, String replyContent) throws UpdateCollectionsException {
 		String hql = "UPDATE ContactUsBean CU SET CU.isReply = 1,CU.replyContent = :replyContent  WHERE CU.contactNo = :contactNo";
 		int n = 0;
 		try {
@@ -64,21 +65,32 @@ public class ContactUsDaoImpl implements ContactUsDao {
 			query.setParameter("contactNo", contactNo);
 			n = query.executeUpdate();
 			ContactUsBean cntBean = queryContactUsDetail(contactNo);
-			
+
 			if (n < 1) {
 				throw new UpdateCollectionsException("更新失敗");
 			} else {
 				return cntBean;
 			}
-			
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("發生SQL例外: " + e.getMessage());
 		}
 
-		
+	}
+
+	@Override
+	public Integer queryUnReplyContactUs() {
+		try {
+			Query<ContactUsBean> query = getSession().createQuery("from ContactUsBean where isReply = 0",
+					ContactUsBean.class);
+			List<ContactUsBean> ContactUsBeanList = query.list();
+			Integer unReplyCount = ContactUsBeanList.size();
+			return unReplyCount;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("發生SQL例外: " + e.getMessage());
+		}
 	}
 
 }

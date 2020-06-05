@@ -10,6 +10,7 @@ import myCollection.model.UpdateCollectionsException;
 public interface ContactUsService {
 	boolean insertContactUs(ContactUsBean cntUs);
 	List<ContactUsBean> queryContactUs();
+	public Integer queryUnReplyContactUs();
 	ContactUsBean queryContactUsDetail(Integer contactNo);
 	public void sendContactEmail(ContactUsBean cntUs) throws MessagingException;
 	ContactUsBean updateReplyContent(Integer contactNo,String replyContent) throws UpdateCollectionsException;

@@ -19,8 +19,24 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+	crossorigin="anonymous"></script>
 <style>
-label{
+label {
 	font-size: 18px;
 }
 </style>
@@ -32,22 +48,22 @@ label{
 		<jsp:include page="/fragment/modal.jsp" />
 		<div id="layoutSidenav_content">
 			<main>
-				<div class="container-fluid" >
-				<h2 class="mt-4">回覆留言</h2>
+				<div class="container-fluid">
+					<h2 class="mt-4">回覆留言</h2>
 					<form action="ReplyContactUs" method="POST" id="detailPart">
-					<input type="hidden" name="contactNo" value="${cntBean.contactNo}">
+						<input type="hidden" name="contactNo" value="${cntBean.contactNo}">
 						<div class="form-group">
-							<label>留言者姓名</label>
-							<input type="text" readonly class="form-control" value="${cntBean.contactUser}">
+							<label>留言者姓名</label> <input type="text" readonly
+								class="form-control" value="${cntBean.contactUser}">
 						</div>
 						<div class="form-group">
-							<label>留言者信箱</label>
-							<input type="text" readonly class="form-control" value="${cntBean.email}">
+							<label>留言者信箱</label> <input type="text" readonly
+								class="form-control" value="${cntBean.email}">
 
 						</div>
 						<div class="form-group">
-							<label>主旨</label>
-							<input type="text" readonly class="form-control" value="${cntBean.title}">
+							<label>主旨</label> <input type="text" readonly
+								class="form-control" value="${cntBean.title}">
 						</div>
 						<div class="form-group">
 							<label>內容</label>
@@ -55,12 +71,16 @@ label{
 						</div>
 						<div class="form-group">
 							<label for="replyText">回覆內容</label>
-							<textarea readonly class="form-control" ${(param.type=="R") ? 'style="display:none"' : ''}>${cntBean.replyContent}</textarea>
-							<textarea class="form-control" id="replyContent" name="replyContent"
+							<textarea readonly class="form-control"
+								${(param.type=="R") ? 'style="display:none"' : ''}>${cntBean.replyContent}</textarea>
+							<textarea class="form-control" id="replyContent"
+								name="replyContent"
 								${(param.type=="V") ? 'style="display:none"' : ''}>${param.replyContent}</textarea>
 						</div>
-						<button type="submit" class="btn btn-primary" ${(param.type=="V") ? 'style="display:none"' : ''}>送出</button>
-						<a type="button" class="btn btn-outline-dark" href="queryContactUs">回上一頁</a>
+						<button type="submit" class="btn btn-primary"
+							${(param.type=="V") ? 'style="display:none"' : ''}>送出</button>
+						<a type="button" class="btn btn-outline-dark"
+							href="queryContactUs">回上一頁</a>
 					</form>
 				</div>
 			</main>
@@ -78,21 +98,7 @@ label{
 			</footer>
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script src="js/scripts.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
+
 	<c:if test="${not empty MsgOK}">
 		<script>
 			let message = "${MsgUpOK.updateOK}";
@@ -107,7 +113,7 @@ label{
 			$("#alertModal").modal('show');
 		</script>
 	</c:if>
-		<script>
+	<script>
 		document.addEventListener('keypress', autofill);
 		function autofill() {
 			$("#replyContent").text("謝謝您喜歡這個平台，希望未來可以提供更多的服務給您，讓您有更好的體驗！");

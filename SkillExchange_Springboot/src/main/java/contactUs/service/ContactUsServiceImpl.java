@@ -76,4 +76,9 @@ public class ContactUsServiceImpl implements ContactUsService {
 
 	}
 
+	@Override
+	public Integer queryUnReplyContactUs() {
+		return cntUsDao.queryUnReplyContactUs();
+	}
+
 }

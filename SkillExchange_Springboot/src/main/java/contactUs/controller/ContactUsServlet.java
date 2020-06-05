@@ -1,11 +1,14 @@
 package contactUs.controller;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,7 @@ import contactUs.service.ContactUsService;
 import members.Model.MemberBean;
 
 @Controller
-@SessionAttributes({ "MsgOK", "cntUs","MsgUpOK" })
+@SessionAttributes({ "MsgOK", "cntUs", "MsgUpOK" })
 public class ContactUsServlet {
 
 	@Autowired
@@ -52,7 +55,7 @@ public class ContactUsServlet {
 		model.addAttribute("MsgOK", msgOK);
 		String title = titleStr.trim();
 		String content = contentStr.trim();
-		
+
 		System.out.println(name);
 		System.out.println(email);
 		System.out.println(title);
@@ -161,8 +164,8 @@ public class ContactUsServlet {
 		Integer contactNo = Integer.parseInt(contactNoStr);
 		String replyContent = replyContentStr.trim();
 		try {
-			ContactUsBean cntBean= service.updateReplyContent(contactNo, replyContent);
-			if (cntBean !=null) {
+			ContactUsBean cntBean = service.updateReplyContent(contactNo, replyContent);
+			if (cntBean != null) {
 				try {
 					service.sendContactEmail(cntBean);
 					System.out.println("send mail success!");
@@ -182,5 +185,12 @@ public class ContactUsServlet {
 		}
 		return "redirect:/queryContactUs";
 
+	}
+
+	@GetMapping(value = "/getUnReply", produces = { "application/json" })
+	public ResponseEntity<Integer> verify() throws IOException {
+		Integer count = service.queryUnReplyContactUs();
+		ResponseEntity<Integer> re = new ResponseEntity<>(count, HttpStatus.OK);
+		return re;
 	}
 }

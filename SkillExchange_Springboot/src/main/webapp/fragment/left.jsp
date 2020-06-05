@@ -15,6 +15,15 @@
 .w {
 	font-color: white;
 }
+.msg {
+	background-image: url(images/msg.png);
+	width:25px;
+	background-size: 25px;
+	background-repeat: no-repeat;
+	background-position: center;
+	color:white;
+	text-align:center;
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap"
 	rel="stylesheet">
@@ -96,7 +105,7 @@
 							<!-- 									class="fa fa-table"></i>推播功能</span> -->
 							<!-- 							</a> -->
 							<a class="nav-link" href="queryContactUs"> <span><i
-									class="fa fa-commenting-o"></i> 回覆留言</span>
+									class="fa fa-commenting-o"></i> 回覆留言</span>&ensp;<span class="msg" id="cntus"></span>
 							</a>
 							<a class="nav-link" href="getAllJob"> <span><i
 									class="fa fa-list-alt"></i> 排程管理</span>
@@ -115,3 +124,25 @@
 		</div>
 	</div>
 </body>
+<script>
+getUnReplyContact();
+function getUnReplyContact() {
+	$
+			.ajax({
+				url : "getUnReply", // 請求的url地址
+				dataType : "json", // 返回格式為json
+				async : true, // 請求是否非同步，預設為非同步，這也是ajax重要特
+				type : "GET", // 請求方式
+				success : function(req) {
+					console.log(req);
+					$("#cntus").text(req)
+				},
+				complete : function() {
+					// 請求完成的處理
+				},
+				error : function() {
+					console.log("出錯了!")
+				}
+			});
+}
+</script>
