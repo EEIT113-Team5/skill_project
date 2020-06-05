@@ -160,7 +160,7 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false">${memberBean.memberName}</a>
+							aria-expanded="false">${memberBean.memberNic}</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<c:if test="${empty memberBean}">
 									<a class="dropdown-item" href="${jspPath}/registerInit">加入會員</a>
