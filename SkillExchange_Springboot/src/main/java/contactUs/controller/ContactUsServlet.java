@@ -1,5 +1,6 @@
 package contactUs.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +85,8 @@ public class ContactUsServlet {
 			cntUs.setEmail(email);
 			cntUs.setTitle(title);
 			cntUs.setContent(content);
+			cntUs.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			cntUs.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 
 			model.addAttribute("cntUs", cntUs);
 			boolean result = service.insertContactUs(cntUs);

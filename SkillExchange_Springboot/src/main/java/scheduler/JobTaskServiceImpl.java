@@ -36,9 +36,10 @@ public class JobTaskServiceImpl implements JobTaskService {
 			CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 			trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
-			if(status=="0") {
+			if(Integer.valueOf(status)==0) {
 				JobKey jobKey = JobKey.jobKey(jobParam.getJobName(), jobParam.getJobGroup()); 
 				scheduler.deleteJob(jobKey);
+				System.out.println("====deleteJob success====");
 			}else {
 			scheduler.rescheduleJob(triggerKey, trigger);
 			System.out.println("===rescheduleJob success====");

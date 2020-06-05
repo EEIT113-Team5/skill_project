@@ -33,7 +33,7 @@ public class ContactUsDaoImpl implements ContactUsDao {
 	@Override
 	public List<ContactUsBean> queryContactUs() {
 		try {
-			Query<ContactUsBean> query = getSession().createQuery("from ContactUsBean CU order by CU.createTime", ContactUsBean.class);
+			Query<ContactUsBean> query = getSession().createQuery("from ContactUsBean CU order by CU.createTime desc", ContactUsBean.class);
 			List<ContactUsBean> ContactUsBeanList = query.list();
 			return ContactUsBeanList;
 		} catch (Exception e) {

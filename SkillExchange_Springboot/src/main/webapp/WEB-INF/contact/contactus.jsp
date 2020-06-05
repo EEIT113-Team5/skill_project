@@ -83,7 +83,7 @@ font {
 		<h2 class="mt-4" style="font-family: 微軟正黑體;">聯絡我們</h2>
 		<form action="InsertContactUs" method="POST">
 			<div class="form-group">
-				<label for="name">姓名(必填)</label> <font>${MsgMap.errorNameEmpty}</font>
+				<label for="name">姓名</label><span style="color: red">*</span> <font>${MsgMap.errorNameEmpty}</font>
 				<c:choose>
 					<c:when test='${param.name != null}'>
 						<c:set var='inputName' value='${param.name}' />
@@ -97,7 +97,7 @@ font {
 
 			</div>
 			<div class="form-group">
-				<label for="email">信箱(必填)</label> <font>${MsgMap.errorEmailEmpty}</font>
+				<label for="email">信箱</label><span style="color: red">*</span> <font>${MsgMap.errorEmailEmpty}</font>
 				<c:choose>
 					<c:when test='${param.email != null}'>
 						<c:set var='inputMail' value='${param.email}' />
@@ -110,13 +110,13 @@ font {
 					placeholder="請輸入Email" name="email" value="${inputMail}">
 			</div>
 			<div class="form-group">
-				<label for="title">主旨(必填)</label> <font>${MsgMap.errorTitleEmpty}</font>
+				<label for="title">主旨</label><span style="color: red">*</span> <font>${MsgMap.errorTitleEmpty}</font>
 				<input type="text" class="form-control" id="title"
 					placeholder="請輸入主旨" name="title" value="${param.title}">
 
 			</div>
 			<div class="form-group">
-				<label for="content">內容(必填)</label><font>${MsgMap.errorContecntEmpty}</font>
+				<label for="content">內容</label><span style="color: red">*</span><font>${MsgMap.errorContecntEmpty}</font>
 				<textarea class="form-control" id="content" name="content">${param.content}</textarea>
 
 			</div>
