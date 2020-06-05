@@ -202,7 +202,7 @@ h6 {
 									<img src="${skills.member.memberPic}"
 										style="float: left; width: 100px; height: 100px;"
 										class="rounded-circle user_img" />
-									<h2 style="line-height: 100px; width: 50%">${skills.member.memberNic}</h2>
+									<h2 style="line-height: 100px; width: 60%">${skills.member.memberNic}</h2>
 								</div>
 								<div id="left_1_center"></div>
 								<div id="left_1_right">
@@ -324,9 +324,11 @@ h6 {
 							<c:if test="${status==1}">
 								<c:set var="chatstatus" value="${status}" />
 							</c:if>
+							<button id="disabled" class="btn btn-dark"
+								onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">發送郵件
+							</button>
 							<button id="disabled" class="btn btn-primary"
-								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');
-								lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}');">發送訊息
+								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');">發送訊息
 							</button>
 						</div>
 
@@ -402,7 +404,8 @@ h6 {
 										</c:when>
 										<c:otherwise>
 											<span id="sendmss" class="input-group-text send_btn"
-												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}')"><i
+												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
+												lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}')"><i
 												class="fas fa-location-arrow"></i></span>
 										</c:otherwise>
 									</c:choose>
@@ -422,11 +425,14 @@ h6 {
 	<script>
 	function lineMessage(sendmebNic,recivemebNo,publishTitle,publishNo){
 		console.log("觸發line");
+		
+		if(status1==1){
         $.post('https://maker.ifttt.com/trigger/SkillExchange_Message/with/key/ic6NbGXTRJbzRYHyPgI_hxNMHRdIfEgTPWSia-Nrqe6',
         		{value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'+'http://localhost:8080/SkillExchange_Springboot/publish?num='+publishNo+'&'+
 			'hostid='+recivemebNo+'&'+'status=0'}
         		
         	  );
+	}
     };
 	
 	
