@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skillClass.dao.SkillDao;
+import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
 import skillClass.model.Skill2;
@@ -58,6 +59,10 @@ public class SkillServiceImpl implements SkillService {
 	public List<Skill2> GetBackendCTR(){		
 		return skillDao.GetBackendCTR();
 	}
+	@Override
+	public List<Chat> LogQuery(String sendUser,String sendTo){
+		return skillDao.LogQuery2(sendUser, sendTo);
+	};
 //	@Override
 //	public boolean LogUpdate(Integer sendNo,Integer receiveNo,String sendUser,String toUser) {
 //		

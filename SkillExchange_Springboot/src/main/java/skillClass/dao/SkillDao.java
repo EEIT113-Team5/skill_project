@@ -22,4 +22,5 @@ public interface SkillDao {
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo);
 	public boolean ClassCTRUpdate(String skillType);
 	public List<Skill2> GetBackendCTR();
+	List<Chat> LogQuery2(String sendUser, String sendTo);
 }

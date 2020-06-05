@@ -194,7 +194,6 @@ h6 {
 						<c:set var="sendUser2"
 							value="${sessionScope.memberBean.memberRegNo}" />
 						<c:set var="memberski" value="${skills.member.memberInSkill}" />
-
 						<!-- 左側排版 -->
 						<div id="left_1">
 							<div id="left_1_main">
@@ -324,7 +323,7 @@ h6 {
 							<c:if test="${status==1}">
 								<c:set var="chatstatus" value="${status}" />
 							</c:if>
-							<button id="disabled" class="btn btn-dark"
+							<button id="disabled2" class="btn btn-dark"
 								onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">發送郵件
 							</button>
 							<button id="disabled" class="btn btn-primary"
@@ -351,9 +350,6 @@ h6 {
 											<img src="${pic1}" class="rounded-circle user_img">
 										</c:otherwise>
 									</c:choose>
-
-									<span id="on" class="online_icon"></span> <span id="off"
-										class="offline" style="display: none"></span>
 								</div>
 								<div class="user_info">
 									<c:choose>
@@ -363,13 +359,9 @@ h6 {
 										</c:when>
 										<c:otherwise>
 											<span>${sendTo}</span>
-
-
 										</c:otherwise>
 									</c:choose>
-
 								</div>
-
 							</div>
 							<span id="action_menu_btn"> <c:choose>
 									<c:when
@@ -405,8 +397,8 @@ h6 {
 										<c:otherwise>
 											<span id="sendmss" class="input-group-text send_btn"
 												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
-												lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}')"><i
-												class="fas fa-location-arrow"></i></span>
+												lineMessage('${sendUser}','${sendTo}')">
+												<i class="fas fa-location-arrow"></i></span>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -423,22 +415,36 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
-	function lineMessage(sendmebNic,recivemebNo,publishTitle,publishNo){
-		console.log("觸發line");
+	
+	function lineMessage(senduser,sendto){
+		$.ajax({
+			url : "MessageTime", //請求的url地址
+			dataType : "json", //返回格式為json
+			async : true, //請求是否非同步，預設為非同步，這也是ajax重要特性
+			data : {
+				"sendUser" : senduser,					
+					"sendTo":sendto
+			}, //引數值
+			type : "GET", //請求方式
+			success : function(req) {
+				
 		
-		if(status1==1){
-        $.post('https://maker.ifttt.com/trigger/SkillExchange_Message/with/key/ic6NbGXTRJbzRYHyPgI_hxNMHRdIfEgTPWSia-Nrqe6',
-        		{value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'+'http://localhost:8080/SkillExchange_Springboot/publish?num='+publishNo+'&'+
-			'hostid='+recivemebNo+'&'+'status=0'}
-        		
-        	  );
-	}
+				 console.log("觸發line");	
+			},
+			complete : function() {
+				console.log("com");
+				//請求完成的處理
+			},
+			error : function() {
+				console.log("出錯了!")
+			}
+		});
+								 
+	
+				
     };
 	
-	
-
 	$(function(){
-		console.log("觸發enter");
 	 $('#textmssg').keydown(function(event){
 	  
 	    if( event.which == 13 ) {

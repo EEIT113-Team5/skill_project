@@ -86,6 +86,28 @@ public class SkillDaoImpl implements SkillDao {
 
 		}
 	}
+	@Override
+	public List<Chat> LogQuery2(String sendUser,String sendTo) {
+		System.out.println("觸發logquery");
+
+		String hql = "from Chat C WHERE C.toUser = :toUser and C.sendUser = :sendUser order by LogTime DESC";
+		Session session = getSession();
+		@SuppressWarnings("unchecked")
+		Query<Chat> query = session.createQuery(hql).setParameter("toUser", sendUser).setParameter("sendUser", sendTo);
+
+		System.out.println(query.list());
+
+		if (CollectionUtils.isEmpty(query.list())) {
+
+			System.out.println("no data");
+
+			return null;
+		} else {
+			System.out.println("had data");
+			return query.list();
+
+		}
+	}
 
 	@Override
 	public boolean CTRUpdate(Integer PublishNo) {

@@ -2,6 +2,8 @@ package skillClass.controller;
 
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import members.Model.MemberBean;
 import myCollection.model.CollectionBean;
 import myCollection.service.MyCollectionService;
+import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
 import skillClass.model.Skill2;
@@ -126,6 +129,19 @@ public class QueryskillClassController {
 	public ResponseEntity<List<Skill2>> GetBackendCTR(Model model) {
 		List<Skill2> list = service.GetBackendCTR();
 		ResponseEntity<List<Skill2>> re = new ResponseEntity<>(list, HttpStatus.OK);
+		System.out.println(re);
+		return re;
+	}
+	
+	@GetMapping(value = "MessageTime", produces = { "application/json" })
+	public ResponseEntity<Duration> MessageInterval(Model model,@RequestParam("sendUser") String sendUser,
+			@RequestParam("sendTo") String sendTo) {
+		List<Chat> list = service.LogQuery(sendUser, sendTo);
+		LocalDateTime time1 = LocalDateTime.now(); 
+		LocalDateTime time2 = list.get(0).getLogTime();
+		Duration duration = Duration.between(time2,time1);
+		System.out.println(duration);
+		ResponseEntity<Duration> re = new ResponseEntity<>(duration, HttpStatus.OK);
 		System.out.println(re);
 		return re;
 	}

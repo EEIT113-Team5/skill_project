@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import skillClass.model.Chat;
 import skillClass.model.ChatRequest;
 import skillClass.model.Publish;
 import skillClass.model.Skill2;
@@ -20,4 +21,5 @@ public interface SkillService {
 	public List<ChatRequest> selectChatReq(Integer receiveNo, Integer publishNo);
 	public boolean ClassCTRUpdate(String skillType);
 	public List<Skill2>  GetBackendCTR();
+	List<Chat> LogQuery(String sendUser,String sendTo);
 }
