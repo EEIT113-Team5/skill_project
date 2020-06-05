@@ -326,7 +326,7 @@ h6 {
 							</c:if>
 							<button id="disabled" class="btn btn-primary"
 								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');
-								lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}');">發送訊息
+								lineMessage('${memberBean.memberNic}','${allSkills[0].memberRegNo}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}');">發送訊息
 							</button>
 						</div>
 
@@ -420,10 +420,13 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
-	function lineMessage(sendmebNic,recivemebNo,publishTitle){
+	function lineMessage(sendmebNic,recivemebNo,publishTitle,publishNo){
 		console.log("觸發line");
         $.post('https://maker.ifttt.com/trigger/SkillExchange_Message/with/key/ic6NbGXTRJbzRYHyPgI_hxNMHRdIfEgTPWSia-Nrqe6',
-        		{value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'});
+        		{value1:'會員: '+sendmebNic+' 於技能刊登: '+publishTitle+' 發送了訊息'+'http://localhost:8080/SkillExchange_Springboot/publish?num='+publishNo+'&'+
+			'hostid='+recivemebNo+'&'+'status=0'}
+        		
+        	  );
     };
 	
 	
