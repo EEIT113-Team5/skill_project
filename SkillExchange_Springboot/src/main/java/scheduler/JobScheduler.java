@@ -7,9 +7,11 @@ import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -32,6 +34,7 @@ public class JobScheduler {
 		JobParamDao dao = ApplicationContextHelper.getBean(JobParamDao.class);
 		JobParam jobParam = ApplicationContextHelper.getBean(JobParam.class);
 		List<JobParam> paramList = dao.getJobParam();
+		List<JobParam> pauseList = dao.getInActiveJobParam();
 		
 		try {
 			Scheduler scheduler = (Scheduler) context.getBean("scheduler");
@@ -47,8 +50,13 @@ public class JobScheduler {
 						.withSchedule(scheduleBuilder).build();
 				// 放入引數，執行時的方法可以獲取
 				jobDetail.getJobDataMap().put("jobParam", param);
+				
 				scheduler.start();
 				scheduler.scheduleJob(jobDetail, trigger);
+				for(JobParam pause : pauseList) {
+					JobKey jobKey = JobKey.jobKey(pause.getJobName(), pause.getJobGroup());
+					scheduler.pauseJob(jobKey);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

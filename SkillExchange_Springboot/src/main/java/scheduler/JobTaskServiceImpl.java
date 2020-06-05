@@ -71,4 +71,9 @@ public class JobTaskServiceImpl implements JobTaskService {
 		}
 		return jobParamList;
 	}
+
+	@Override
+	public List<JobParam> getInActiveJobParam() {
+		return jobDao.getInActiveJobParam();
+	}
 }

@@ -23,7 +23,15 @@ public class JobParamDaoImpl implements JobParamDao {
 
 	@Override
 	public List<JobParam> getJobParam() {
-		String hql = "from JobParam where jobStatus = 1";
+		String hql = "from JobParam";
+		Query<JobParam> query = getSession().createQuery(hql);
+		List<JobParam> list = query.list();
+		return list;
+	}
+	
+	@Override
+	public List<JobParam> getInActiveJobParam() {
+		String hql = "from JobParam where status = 0";
 		Query<JobParam> query = getSession().createQuery(hql);
 		List<JobParam> list = query.list();
 		return list;
@@ -46,5 +54,7 @@ public class JobParamDaoImpl implements JobParamDao {
 		query.setParameter("jobName", jobName);
 		query.executeUpdate();
 	}
+
+
 
 }
