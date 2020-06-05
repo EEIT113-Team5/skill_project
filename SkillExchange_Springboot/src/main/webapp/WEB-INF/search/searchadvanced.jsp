@@ -560,7 +560,7 @@ form {
 			</form>
 		</div>
 	</div>
-	<div class="wrap-level1-2">TEST TEST</div>
+<!-- 	<div class="wrap-level1-2">TEST TEST</div> -->
 	<!-- 搜尋bar-start -->
 	<!-- 	<div id="searchbar"> -->
 	<!-- 		<form action="InsertKeyword2.do" method="GET"> -->
