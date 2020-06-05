@@ -71,7 +71,7 @@
 <style>
 .red-font {
 	color: red;
-	margin-left: 20px;
+ 	margin-left: 5px; 
 }
 </style>
 </head>
@@ -84,7 +84,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Register</h2>
+					<h2>加入會員</h2>
 				</div>
 			</div>
 		</div>
@@ -96,8 +96,8 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h4 class="modal-title" id="myModalLabel">
+              <h5>*為必填欄位</h5>
                 </div>
-              
                 <div class="modal-body">
                   
                 
@@ -105,30 +105,29 @@
     <!---form--->           <div class="form-group">
     <!---input width--->    <div class="col-xs-6">
                             <tr>
-                                <td><label for="name">姓名</label></td>
+                                <td><label for="name">姓名</label><lable class="red-font">*</lable></td>
                                 <td><font class="red-font small">${errorMsg.memberName}</font></td>
                             </tr>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="name" name="memberName" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                             </div>
                             <br>
                             <tr>
-                                <label for="nicname">暱稱</label>
+                                <label for="nicname">暱稱</label><lable class="red-font">*</lable>
                                 <td><font class="red-font small">${errorMsg.memberNic}</font></td>
                             </tr>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="nicname" name="memberNic" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                             </div>
 
                         <br>
                         <tr>
-                            <td><label for="">性別</label></td>
+                            <td><label for="">性別</label><lable class="red-font">*</lable></td>
                             <td><font class="red-font small">${errorMsg.memberSex}</font></td>
-                      
-                            <div class="input-group">
-            <td>
+                          	  <div class="input-group">
+            				<td>
                                 <input type="radio" name="memberSex" id="gender_m"
                                 value="1"> 
                                     <label for="gender_m">男</label> &nbsp; &nbsp; &nbsp;
@@ -138,8 +137,8 @@
                                 <input type="radio" name="memberSex" id="gender_no" 
                                 value="3"> 
                                     <label for="gender_no">不提供</label> &nbsp; &nbsp; &nbsp;
-                    </td>
-             </tr>
+                  		  	</td>
+             			</tr>
                             </div>
 
                         
@@ -149,34 +148,34 @@
                         <div class="form-group">
                         <div class="col-xs-6">
                             <tr>
-                                <td><label for="acc">帳號</label></td>
+                                <td><label for="acc">帳號</label><lable class="red-font">*</lable></td>
                                 <td><font class="red-font small">${errorMsg.memberAcc}</font></td>
                             </tr>
                             
                             <div class="input-group">
                             <input type="text" id="acc" name="memberAcc" class="form-control" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                             </div>
                         
                             <br>
                             <tr>
-                                <td><label for="pwd">密碼</label></td>
+                                <td><label for="pwd">密碼</label><lable class="red-font">*</lable></td>
                                 <td><font class="red-font small">${errorMsg.memberPwd}</font></td>
                             </tr>
                             <div class="input-group">
                             <input type="password" id="pwd" name="memberPwd" class="form-control" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                         </div>
 
                         <br>
                         <tr>
-                            <td><label for="checkpwd">再次確認密碼</label></td>
+                            <td><label for="checkpwd">再次確認密碼</label><lable class="red-font">*</lable></td>
                             <td><font class="red-font small">${errorMsg.checkpwd}</font></td>
                         </tr>
 
                             <div class="input-group">
                             <input type="password" class="form-control" id="checkpwd" name="checkpwd" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                         </div>
     <!--------------------------------------separator---------------------------------------------------------------> <hr>
     
@@ -186,13 +185,13 @@
                         <div class="form-group"> 
                             <div class="col-xs-12">
                                 <tr>
-                                    <td><label for="birthday">生日</label></td>
+                                    <td><label for="birthday">生日</label><lable class="red-font">*</lable></td>
                                     <td><font class="red-font small">${errorMsg.memberBirth}</font></td>
                                 </tr>
                             
                             <div class="input-group">
                             <input type="date" class="form-control"id="birthday" name="memberBirth" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                         </div>
     <!----------------------------break-------------------------------------------------------------> <br>
                          </div>
@@ -201,13 +200,13 @@
                             <div class="form-group">
                             <div class="col-xs-12">
                                 <tr>
-                                    <td><label for="phone">電話</label></td>
+                                    <td><label for="phone">電話</label><lable class="red-font">*</lable></td>
                                     <td><font class="red-font small">${errorMsg.memberPhone}</font></td>
                                 </tr>
                           
                             <div class="input-group">
                                 <input type="text" class="form-control" id="phone" name="memberPhone" required>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                             </div>
     <!----------------------------break-------------------------------------------------------------> <br> 
                         </div>                     
@@ -216,13 +215,13 @@
                             <div class="form-group">
                             <div class="col-xs-12">
                             <tr>
-                                <td><label for="mail">信箱</label></td>
+                                <td><label for="mail">信箱</label><lable class="red-font">*</lable></td>
                                 <td><font class="red-font small">${errorMsg.memberMail}</font></td>
                             </tr>
                             
                             <div class="input-group">
                             <input type="text" class="form-control" id="mail" name="memberMail" required>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+<!--                             <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span> -->
                         </div>
     <!----------------------------break-------------------------------------------------------------> <br> 
                         </div>
@@ -263,7 +262,7 @@
                             <div class="form-group">
                             <div class="col-xs-12">
                                 <tr>
-                                    <td><label for="addr">地址</label></td>
+                                    <td><label for="addr">地址</label><lable class="red-font">*</lable></td>
                                     <td><font class="red-font small">${errorMsg.memberAddr}</font></td>
                                 </tr>
                             
@@ -277,7 +276,7 @@
 
                         <div class="form-group">
                             <div class="col-xs-12">
-                            <label for="">照片</label>
+                            <label for="">照片</label><lable class="red-font">*</lable>
                             <div class="input-group"></div>
                             <input type="file" onchange="readURL(this)"
                             name="memberPic" targetID="prePic" required>
@@ -409,14 +408,16 @@
 <!--一鍵加入會員 這裡 -->
 	<script>
 		function oneKey() {
-			$("#name").val("楊一元");
-			$("#nicname").val("幾摳");
+			$("#name").val("米老鼠");
+			$("#nicname").val("小米");
 			$("#acc").val("happy");
+			$("#birthday").val("1993/07/27");
 // 			$("#pwd").val("1qazxsw2");
 // 			$("#checkpwd").val("1qazxsw2");
 			$("#phone").val("0912345678");
 			$("#mail").val("eeit11321@gmail.com");
 			$("#addr").val("杉樹區北森花路6巷5號");
+
 		}
 	</script>
 <!--一鍵加入會員 這裡 -->
