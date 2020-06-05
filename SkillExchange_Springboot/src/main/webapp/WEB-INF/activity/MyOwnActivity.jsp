@@ -66,7 +66,7 @@
 	<%-- 		<jsp:include page="/fragment/left.jsp" /> --%>
 	<!-- 		<DIV ID="LAYOUTSIDENAV_CONTENT"> -->
 	<!-- 			<MAIN CLASS="A"> -->
-	<div class="container">
+	<div class="container-fluid" style="display:82%">
 		<c:if test="${empty searchList}">
 			<h2 class='rounded w-25 mx-auto p-5 text-center'>目前沒有你舉辦的活動</h2>
 		</c:if>
@@ -90,10 +90,10 @@
 					</c:choose>
 				</div>
 				<div class="col-7" Style="background-color: #FFCCCC">
-					<h1 class="m-4">
+					<h3 class="m-4">
 						<b>${search.title}</b>
-					</h1>
-					<h4 class="m-4">描述:${search.descript}</h4>
+					</h3>
+					<h5 class="m-4">描述:${search.descript}</h5>
 					<h5 class="m-4">
 						<i class="fa fa-clock-o" aria-hidden="true"></i>${search.beginDay}
 					</h5>
