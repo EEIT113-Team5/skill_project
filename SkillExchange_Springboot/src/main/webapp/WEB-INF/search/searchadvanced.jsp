@@ -535,24 +535,26 @@ form {
 			</div>
 			<form method="GET" action="<c:url value='InsertKeyword1.do' />">
 				<div id="container">
-					<input type="hidden" id="keyword" name="keyword" value="">
-					<input type="hidden" id="area1" name="area1" value=""> <input
-						type="hidden" id="area2" name="area2" value=""> <input
-						type="hidden" id="area3" name="area3" value=""> <input
-						type="hidden" id="city1" name="city1" value=""> <input
-						type="hidden" id="city2" name="city2" value=""> <input
-						type="hidden" id="city3" name="city3" value=""> <input
-						type="hidden" id="city4" name="city4" value=""> <input
-						type="hidden" id="city5" name="city5" value=""> <input
-						type="hidden" id="type1" name="type1" value=""> <input
-						type="hidden" id="type2" name="type2" value=""> <input
-						type="hidden" id="type3" name="type3" value=""> <input
-						type="hidden" id="type4" name="type4" value=""> <input
-						type="hidden" id="skill1" name="skill1" value=""> <input
-						type="hidden" id="skill2" name="skill2" value=""> <input
-						type="hidden" id="skill3" name="skill3" value=""> <input
-						type="hidden" id="skill4" name="skill4" value=""> <input
-						type="hidden" id="skill5" name="skill5" value="">
+					<input type="hidden" id="keyword" name="keyword" value="${keyword1}">
+					<input type="hidden" id="area1" name="area1" value="${area1}"> <input
+						type="hidden" id="area2" name="area2" value="${area2}"> <input
+						type="hidden" id="area3" name="area3" value="${area3}"> <input
+						type="hidden" id="city1" name="city1" value="${city1}"> <input
+						type="hidden" id="city2" name="city2" value="${city2}"> <input
+						type="hidden" id="city3" name="city3" value="${city3}"> <input
+						type="hidden" id="city4" name="city4" value="${city4}"> <input
+						type="hidden" id="city5" name="city5" value="${city5}"> <input
+						type="hidden" id="type1" name="type1" value="${type1}"> <input
+						type="hidden" id="type2" name="type2" value="${type2}"> <input
+						type="hidden" id="type3" name="type3" value="${type3}"> <input
+						type="hidden" id="type4" name="type4" value="${type4}"> <input
+						type="hidden" id="skill1" name="skill1" value="${skill1}"> <input
+						type="hidden" id="skill2" name="skill2" value="${skill2}"> <input
+						type="hidden" id="skill3" name="skill3" value="${skill3}"> <input
+						type="hidden" id="skill4" name="skill4" value="${skill4}"> <input
+						type="hidden" id="skill5" name="skill5" value="${skill5}">
+						<input type="hidden" id="dateSort" name="dateSort" value=""> 
+						<input type="hidden" id="clickSort" name="clickSort" value="">
 					<button type="submit" class="btn btn-secondary btn-sm last-btn">
 						<i class="fa fa-search"></i>搜尋
 					</button>
@@ -560,7 +562,8 @@ form {
 			</form>
 		</div>
 	</div>
-<!-- 	<div class="wrap-level1-2">TEST TEST</div> -->
+	<div class="wrap-level1-2">TEST TEST</div>
+
 	<!-- 搜尋bar-start -->
 	<!-- 	<div id="searchbar"> -->
 	<!-- 		<form action="InsertKeyword2.do" method="GET"> -->
@@ -648,7 +651,7 @@ form {
 	<!-- 	</div> -->
 
 
-	<div class="container2">
+	<div id="container2" class="container2">
 		<c:choose>
 			<c:when test="${empty searchList}">
 				<div>查無符合資料</div>
@@ -677,7 +680,7 @@ form {
 								<div class="card-body">
 									<h4 class="card-title text-truncate line-clamp2">${search.publishTitle}</h4>
 									<div class="card-text text-truncate line-clamp3 detail">${search.publishDetail}</div>
-									<h6><i class='far fa-handshake' style='font-size:12px'></i> 提供交換技能: ${search.ownType} - ${search.ownSkill}</h6>
+									<h6><i class='far fa-handshake' style='font-size:14px'></i> 提供交換技能: ${search.ownType} - ${search.ownSkill}</h6>
 									<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i> ${search.publishArea} -
 										${search.city}</h6>
 									<div style="text-align: right">
@@ -758,6 +761,10 @@ form {
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+
+	<script>
+		$(document).on("click", "")
+	</script>
 
 	<script>
 		$('#areaModal').on('shown.bs.modal', function() {
@@ -844,14 +851,14 @@ form {
 		}
 	</script>
 
-	<script>
-		// 	window.onload = function(){
-		var origin = document.getElementById("#typing-keyword");
-		origin.placeholder = "";
-		origin.value = "<c:out value='${keyword1}' />";
+<!-- 	<script> -->
+<!-- 		// 	window.onload = function(){ -->
+<!-- 		var origin = document.getElementById("#typing-keyword"); -->
+<!-- 		origin.placeholder = ""; -->
+<%-- 		origin.value = "<c:out value='${keyword1}' />"; --%>
 
-		// 	}
-	</script>
+<!-- 		// 	} -->
+<!-- 	</script> -->
 
 	<script>
 		$(document).on(
