@@ -120,8 +120,10 @@ textarea {
 
 			<h1>完成刊登!!</h1><br>
 			<h1>歡迎加入群組接收網站最新資訊:</h1>
-			<img 
-			src='images/QR.jpg' />
+			<a href="http://line.me/ti/g/jL657Tltm">
+			SkillExchange</a>
+			<img style="width: 100px; height: 100px;"
+			src='images/QR.jpg' /><br>
 			<input type='submit' value='回首頁'>
 		</form>
 	</div>
