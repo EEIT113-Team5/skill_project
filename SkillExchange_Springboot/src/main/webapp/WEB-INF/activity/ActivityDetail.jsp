@@ -194,7 +194,7 @@
 										<a type="button" style="color: #46A3FF"
 											onclick=updateform(${search.activityid})><i
 											class="fa fa-map-o " aria-hidden="true"></i>&nbsp;<small
-											class="mapimg">查看圖例</small></a>
+											class="mapimg">查看地圖</small></a>
 									</h5>
 									<div class="ml-3">
 										<span id="interest${search.activityid}">${search.interest}人有興趣</span><br>
