@@ -136,7 +136,7 @@
 							<div class="form-group">
 								<div class="custom-control custom-checkbox">
 									<input class="custom-control-input" id="oneInput"
-										onclick='oneKey()' name="rememberPasswordCheck" type="checkbox" />
+										onclick='oneKey() twoKey()' name="rememberPasswordCheck" type="checkbox" />
 									<label class="custom-control-label" for="oneInput">記住密碼</label>
 								</div>
 							</div>
@@ -146,6 +146,8 @@
 								<div>
 									<button type="submit" class="btn btn-info">登入</button>								
 								</div>
+								<div><input type="button" onclick='twoKey()' value=".." 
+                    					class="btn" ></div>
 								<div class="btn-group">
 									<input type='button' class="btn btn-primary"
 										onclick='fbLogin()' value="FaceBook" /> 
@@ -184,6 +186,15 @@
 		function oneKey() {
 			$("#inputAcc").val("AngryCat");
 			$("#inputPassword").val("2wsxCDE#");
+			// document.getElementById("inputAcc").value = "maggie123";
+			// document.getElementById("inputPassword").value = "qq0911";
+		}
+	</script>
+	
+	<script>
+		function twoKey() {
+			$("#inputAcc").val("maggie123");
+			$("#inputPassword").val("qq0911");
 			// document.getElementById("inputAcc").value = "maggie123";
 			// document.getElementById("inputPassword").value = "qq0911";
 		}
