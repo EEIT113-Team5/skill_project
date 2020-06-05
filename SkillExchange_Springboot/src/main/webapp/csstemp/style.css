@@ -509,7 +509,7 @@ background
 .single-page-header {
 	background-image: url("../images/home2.jpg");
 	background-size: cover;
-	padding: 85px 0px 55px;
+	padding: 85px 0px 5px;
 	text-align: center;
 	color: #fff;
 	position: relative;

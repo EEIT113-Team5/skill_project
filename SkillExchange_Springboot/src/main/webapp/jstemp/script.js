@@ -38,7 +38,7 @@
   $(window).scroll(function () {
     var scroll = $(window).scrollTop();
     //console.log(scroll);
-    if (scroll > 125) {
+    if (scroll > 80) {
       //console.log('a');
       $('.navigation').addClass('sticky-header');
       $('.navigation').removeClass('original-header');
