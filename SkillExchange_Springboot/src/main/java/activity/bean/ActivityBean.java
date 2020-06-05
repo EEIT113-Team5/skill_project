@@ -66,7 +66,6 @@ public class ActivityBean implements Serializable {
 	@Column(name = "insertime")
 	private java.sql.Timestamp insertime;
 	@Transient
-	@JsonIgnore
 	private String imgB64;
 	@Transient
 	MultipartFile productImage;
@@ -299,7 +298,8 @@ public class ActivityBean implements Serializable {
 //release the blob and free up memory. (since JDBC 4.0)
 //		blob.free();
 	}
-
+   
+	
 
 
 }

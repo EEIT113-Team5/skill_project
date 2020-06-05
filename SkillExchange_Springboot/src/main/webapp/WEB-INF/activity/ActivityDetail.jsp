@@ -402,7 +402,7 @@
 // 	url='UpdateActivity?activityid='+activityid+"&memberid="+memberid+"&title="+title+"&category="+category+"&descript="+descript+"&beginDay="+beginDay+"&beginTime="+beginTime+"&endDay="+endDay+"&endTime="+endTime+"&position="+position+"&lat="+lat+"&long1="+long1+"&group1="+group1+"&group2="+group2+"&imgB64="+imgB64;
 	     window.open('OpenMap?activityid='+activityid,'地圖', config = 'height=670,width=936,left=' + x +',location=no,resizable=no,toolbar=no'); }
    window.setInterval(fetch,20000);
-   window.onload = fetch;
+   fetch();
    function fetch(){
        $.ajax({
 			url : "SelectMessage", //請求的url地址
@@ -420,7 +420,7 @@
                for(var i=0; i<req.length; i++){  
             	   var delOrUpdate="";
 					if(req[i].memberid==${memberBean.memberRegNo}) {
-						delOrUpdate+="<a href='#' class='btn btn-danger ml-5' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning' onclick='promp("+req[i].messageid+")'>修改</a><a href='#' class='btn btn-primary' style='display:none' id='modify"+req[i].messageid+"' onclick='upd("+req[i].messageid+")'>確認</a>";
+						delOrUpdate+="<a href='#' class='btn btn-danger ml-3 btn-sm' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning btn-sm' onclick='promp("+req[i].messageid+")'>修改</a><a href='#' class='btn btn-primary btn-sm' style='display:none' id='modify"+req[i].messageid+"' onclick='upd("+req[i].messageid+")'>確認</a>";
                     }                  
 					 content+="<div class='card mt-3 mr-5'><div class='card-header msgheader'><img src='"+req[i].member.memberPic+"' class='user_img' alt='會員圖片' />"+
  	       			"<h4 class='user_nick'><b>&nbsp;&nbsp;"+req[i].nickname+"</b></h4>"+delOrUpdate+"</div><div class='card-body'><blockquote class='blockquote mb-0'><p id='msgCont"+req[i].messageid+"'>"+req[i].msgContent+"</p><textarea class='form-control'  style='display:none;height:70px' aria-label='With textarea' id='message"+req[i].messageid+"'></textarea><footer class='blockquote-footer'>"+req[i].msgtime1.substr(0,19)+"</footer></blockquote></div>"
@@ -478,7 +478,7 @@
 				for(var i=0; i<req.length; i++){ 
 					var delOrUpdate="";
 					if(req[i].memberid==${memberBean.memberRegNo}) {
-						delOrUpdate+="<a href='#' class='btn btn-danger  ml-5' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning' onclick='upd("+req[i].messageid+")'>修改</a>";
+						delOrUpdate+="<a href='#' class='btn btn-danger  ml-3 btn-sm' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning btn-sm' onclick='upd("+req[i].messageid+")'>修改</a>";
                      }              
 					 content+="<div class='card mt-3 mr-5'><div class='card-header msgheader'><img src='"+req[i].member.memberPic+"' class='user_img' alt='會員圖片' />"+
  	       			"<h4 class='user_nick'><b>&nbsp;&nbsp;"+req[i].nickname+"</b></h4>"+delOrUpdate+"</div><div class='card-body'><blockquote class='blockquote mb-0'><p id='msgCont"+req[i].messageid+"'>"+req[i].msgContent+"</p><textarea class='form-control'  style='display:none;height:70px' aria-label='With textarea' id='message"+req[i].messageid+"'></textarea><footer class='blockquote-footer'>"+req[i].msgtime1.substr(0,19)+"</footer></blockquote></div>" 	
@@ -536,7 +536,7 @@
 				for(var i=0; i<req.length; i++){  
 					var delOrUpdate="";
 					if(req[i].memberid==${memberBean.memberRegNo}) {
-						delOrUpdate+="<a href='#' class='btn btn-danger  ml-5' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning' onclick='upd("+req[i].messageid+")'>修改</a>";
+						delOrUpdate+="<a href='#' class='btn btn-danger  ml-3 btn-sm' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning btn-sm' onclick='upd("+req[i].messageid+")'>修改</a>";
                      }                   
 					 content+="<div class='card mt-3 mr-5'><div class='card-header msgheader'><img src='"+req[i].member.memberPic+"' class='user_img' alt='會員圖片' />"+
  	       			"<h4 class='user_nick'><b>&nbsp;&nbsp;"+req[i].nickname+"</b></h4>"+delOrUpdate+"</div><div class='card-body'><blockquote class='blockquote mb-0'><p id='msgCont"+req[i].messageid+"'>"+req[i].msgContent+"</p><textarea class='form-control'  style='display:none;height:70px' aria-label='With textarea' id='message"+req[i].messageid+"'></textarea><footer class='blockquote-footer'>"+req[i].msgtime1.substr(0,19)+"</footer></blockquote></div>"
@@ -591,7 +591,7 @@
     					for(var i=0; i<req.length; i++){  
     						var delOrUpdate="";
     						if(req[i].memberid==${memberBean.memberRegNo}) {
-    							delOrUpdate+="<a href='#' class='btn btn-danger  ml-5' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning' onclick='upd("+req[i].messageid+")'>修改</a>";
+    							delOrUpdate+="<a href='#' class='btn btn-danger  ml-3 btn-sm' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning btn-sm' onclick='upd("+req[i].messageid+")'>修改</a>";
     	                     }                   
     						 content+="<div class='card mt-3 mr-5'><div class='card-header msgheader'><img src='"+req[i].member.memberPic+"' class='user_img' alt='會員圖片' />"+
     	    	       			"<h4 class='user_nick'><b>&nbsp;&nbsp;"+req[i].nickname+"</b></h4>"+delOrUpdate+"</div><div class='card-body'><blockquote class='blockquote mb-0'><p id='msgCont"+req[i].messageid+"'>"+req[i].msgContent+"</p><textarea class='form-control'  style='display:none;height:70px' aria-label='With textarea' id='message"+req[i].messageid+"'></textarea><footer class='blockquote-footer'>"+req[i].msgtime1.substr(0,19)+"</footer></blockquote></div>"
@@ -659,7 +659,7 @@
     	               for(var i=0; i<req.length; i++){  
     	            	   var delOrUpdate="";
     						if(req[i].memberid==${memberBean.memberRegNo}) {
-    							delOrUpdate+="<a href='#' class='btn btn-danger ml-5' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning' onclick='promp("+req[i].messageid+")'>修改</a><a href='#' class='btn btn-primary' style='display:none' id='modify"+req[i].messageid+"' onclick='upd("+req[i].messageid+")'>確認</a>";
+    							delOrUpdate+="<a href='#' class='btn btn-danger ml-3 btn-sm' onclick='del("+req[i].messageid+")'>刪除</a><a href='#' class='btn btn-warning btn-sm' onclick='promp("+req[i].messageid+")'>修改</a><a href='#' class='btn btn-primary btn-sm' style='display:none' id='modify"+req[i].messageid+"' onclick='upd("+req[i].messageid+")'>確認</a>";
     	                    }                  
     	                      content+="<div class='card mt-3 mr-5'><div class='card-header msgheader'><img src='"+req[i].member.memberPic+"' class='user_img' alt='會員圖片' />"+
     	       			"<h4 class='user_nick'><b>&nbsp;&nbsp;"+req[i].nickname+"</b></h4>"+delOrUpdate+"</div><div class='card-body'><blockquote class='blockquote mb-0'><p id='msgCont"+req[i].messageid+"'>"+req[i].msgContent+"</p><textarea class='form-control'  style='display:none;height:70px' aria-label='With textarea' id='message"+req[i].messageid+"'></textarea><footer class='blockquote-footer'>"+req[i].msgtime1.substr(0,19)+"</footer></blockquote></div>"   	
