@@ -66,6 +66,7 @@ public class ActivityBean implements Serializable {
 	@Column(name = "insertime")
 	private java.sql.Timestamp insertime;
 	@Transient
+	@JsonIgnore
 	private String imgB64;
 	@Transient
 	MultipartFile productImage;
