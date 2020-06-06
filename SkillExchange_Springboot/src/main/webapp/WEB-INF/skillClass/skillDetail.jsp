@@ -51,9 +51,6 @@
 
 <link href="css/calalog.css" rel="stylesheet" />
 <link href="css/styles.css" rel="stylesheet" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
-	crossorigin="anonymous"></script>
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
@@ -74,10 +71,13 @@
 	display: none;
 }
 
-h6 {
-	border: 1px solid #000;
-}
 
+h2 {font-family: 微軟正黑體;
+ }
+ h4 {font-family: 微軟正黑體;
+ }
+h1{font-family: 微軟正黑體;}
+span{font-family: 微軟正黑體;}
 .main1 {
 	display: flex;
 }
@@ -95,6 +95,7 @@ h6 {
 #left_1 {
 	flex: 2;
 	margn-top: 5px;
+	margin-left: 50px;
 }
 
 #left_1_main {
@@ -138,13 +139,27 @@ h6 {
 	position: fixed;
 	bottom: 0px;
 	/* 	left: 0px; */
-	right: 250px;
+	
 }
-
+ 
 .aboutme {
 	border-style: inset;
 	border-width: 3px;
 	border-color: coral;
+}
+.scroll-top {
+  width: 40px;
+  height: 40px;
+  background: #333;
+  color: #f1f1f1;
+  font-size: 1.5em;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  /* 永遠固定在頁面上 */
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
 }
 </style>
 </head>
@@ -166,6 +181,8 @@ h6 {
 			</div>
 		</div>
 	</section>
+	<jsp:include page="/fragment/modal.jsp" />
+	
 	<div id="main" class="main1">
 		<div id="leftspace"></div>
 		<div id="left">
@@ -211,21 +228,21 @@ h6 {
 											<button type="button" id="add${skills.publishNo}"
 												style="float: right; margin-top: 15px"
 												class="btn btn-success"
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 											<button type="button" id="cancel${skills.publishNo}"
 												class="btn btn-danger "
 												style="display: none; float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 										</c:when>
 										<c:otherwise>
 											<button type="button" id="add${skills.publishNo}"
 												class="btn btn-success "
 												style="display: none; float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 											<button type="button" id="cancel${skills.publishNo}"
 												class="btn btn-danger"
 												style="float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 										</c:otherwise>
 									</c:choose>
 									<br> <br> <br>
@@ -276,8 +293,7 @@ h6 {
 		</div>
 		<div id="center1"></div>
 		<div id="right">
-			<div
-				style="background-color: white; border-style: double;; width: auto; margin: 10px auto">
+		
 				<c:choose>
 					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 						<table>
@@ -324,20 +340,21 @@ h6 {
 								<c:set var="chatstatus" value="${status}" />
 							</c:if>
 							<button id="disabled2" class="btn btn-dark"
-								onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">發送郵件
+								onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">發送郵件 <i class="fa fa-envelope" aria-hidden="true"></i>
 							</button>
 							<button id="disabled" class="btn btn-primary"
 								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');">發送訊息
-							</button>
+							<i class="fa fa-commenting" aria-hidden="true"></i></button>
 						</div>
 
 
 					</c:otherwise>
 				</c:choose>
-
-
-				<div id="catalog">
-					<div class="card">
+				 <div class="scroll-top">
+   				<i class="fa fa-angle-up"></i>
+  				</div>
+				<div id="catalog" style="width: 10% ;height:54%;right:510px ">
+					<div class="card" >
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
@@ -379,7 +396,7 @@ h6 {
 
 
 						</div>
-						<div id="cardbody" class="card-body msg_card_body"></div>
+						<div id="cardbody" class="card-body msg_card_body" style="background-color: #FAFAFA;height:50%"></div>
 						<div class="card-footer">
 							<div class="input-group">
 								<div class="input-group-append"></div>
@@ -398,16 +415,17 @@ h6 {
 											<span id="sendmss" class="input-group-text send_btn"
 												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
 												lineMessage('${sendUser}','${sendTo}','${memberBean.memberNic}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}','${allSkills[0].memberRegNo}')">
-												<i class="fas fa-location-arrow"></i></span>
+												<i class="fa fa-paper-plane" aria-hidden="true"></i></span>
 										</c:otherwise>
 									</c:choose>
+								
 								</div>
 							</div>
 						</div>
 
 					</div>
 				</div>
-			</div>
+			
 		</div>
 		<!-- 		<div style="clear: both"></div> -->
 	</div>
@@ -415,7 +433,22 @@ h6 {
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- ---------------------要加的部份-------------------- -->
 	<script>
-	
+
+	$(document).ready(function() {
+		  $(".scroll-top").on('click', function(){
+		    console.log('click');
+//		     $('html,body').scrollTop(0);
+		    $("html,body").animate({scrollTop: 0}, 1000);
+		  });
+		  $(window).on('scroll',function() {
+		    console.log($(this).scrollTop());
+		    if ( $(this).scrollTop() > 200){
+		      $('.scroll-top').fadeIn("fast");
+		    } else {
+		      $('.scroll-top').stop().fadeOut("fast");
+		    }
+		  });
+		});
 	function lineMessage(senduser,sendto,sendmebNic,publishTitle,publishNo,recivemebNo){
 		$.ajax({
 			url : "MessageTime", //請求的url地址
@@ -595,8 +628,7 @@ h6 {
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
-	<script src="jstemp/script.js"></script>
-
+	
 	<script>
 	var arrindex;
     function connect_skillowner(sendUser, sendTo, index) {

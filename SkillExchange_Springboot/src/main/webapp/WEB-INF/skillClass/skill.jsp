@@ -70,7 +70,8 @@
 }
 
 .bot {
-	position: absolute;
+	background-color: #f0f5f5;
+	position: relative;
 	bottom: 0px;
 }
 .card-img-top{ cursor: pointer; }
@@ -78,8 +79,8 @@
 </head>
 
 <body id="body">
-	<jsp:include page="/fragment/top1.jsp" />
-	<jsp:include page="/fragment/modal.jsp" />
+	<jsp:include page="/fragment/modal.jsp"/>
+	<jsp:include page="/fragment/top1.jsp"/>
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -89,7 +90,10 @@
 			</div>
 		</div>
 	</section>
-	<div style="width:90%; margin:auto">
+	
+	
+		
+	<div style="width:75%; margin:auto">
 			<c:choose>
 				<c:when test="${empty allSkills}">
 					<tr height='36'>
@@ -112,7 +116,7 @@
 							</c:if>
 							
 							<div class="col-sm-3">
-							<div class="card" style="width:100%; height: 520px;margin-top:20px">
+							<div class="card" style="width:100%; height: 540px;margin-top:20px">
 											
 								<div>
 									<span>
@@ -124,31 +128,31 @@
 															
 							<div class="card"  style="height:360px;margin:5px">
 								
-								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:55%"src="${skills.publishPic}" alt="Card image cap"/>
-								<div class="card-body" style="padding:0px;margin-top:10px;height:10%">
+								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:70%"src="${skills.publishPic}" alt="Card image cap"/>
+								<div class="card-body" style="padding:0px;margin-top:10px;height:50px">
 									<div style="margin-bottom: 7px;">
 										<h3 class="JQellipsis2" style="margin-top:10px;margin-left: 12px">${skills.publishTitle}</h3>
 									</div>
 									<div class="detail">
-										<h5 style="margin-top: 15px;margin-left: 12px" class="JQellipsis">${skills.publishDetail}</h5>
+										<h5 style="margin:13px;font-size:15px" class="JQellipsis">${skills.publishDetail}</h5>
 									</div>
 								
 								</div>
 							</div>
 								
-								
-								
-								<div class="bot" style="margin-left: 15px;margin-top: 10px" >
-									<div class="sb-nav-link-icon" style="margin-bottom: 15px" >
+									<div class="sb-nav-link-icon" style="margin-bottom: 10px;margin-left: 15px" >
 										<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
 									</div>
 								
-									<span style="margin-left: 22px"> 
+								<div class="bot" style="height:100px">
+								
+								
+									<span style="text-align: center; display:block;line-height: 70px;">
 									<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success btn-lg"
-													onclick=collection(${skills.publishNo},0)>加入收藏</button>
+													onclick=collection(${skills.publishNo},0)>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger btn-lg" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
@@ -157,19 +161,19 @@
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success btn-lg"
-													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger btn-lg " style="display: none"
-													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 											</c:when>
 
 											<c:otherwise>
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success-lg " style="display: none"
-													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏</button>
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger btn-lg "
-													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏</button>
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 											</c:otherwise>
 
 										</c:choose>										
@@ -177,7 +181,7 @@
 											<c:when test="${empty memberBean}">
 											<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary btn-lg"
-													onclick=checkmember(${skills.publishNo},1)>發送訊息
+													onclick=checkmember(${skills.publishNo},1)>發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
 										    </button>
 												<button type="button" id="cancelchat${skills.publishNo}"
 													class="btn btn-danger btn-lg" style="display: none"
@@ -187,7 +191,7 @@
 											<c:otherwise>
 												<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary btn-lg"
-													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">發送訊息
+													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
 										    </button>
 											</c:otherwise>
 											</c:choose>	
@@ -212,6 +216,7 @@
 	<!-- ---------------------要加的部份-------------------- -->
 
 <jsp:include page="/fragment/bottom.jsp" />
+
 
 	<script>
 	function checkmember(publishNo,status) {		
@@ -243,13 +248,12 @@
 					$("#add"+publishNo).css("display","none");
 					 $("#cancel"+publishNo).css("display","inline");
 				//	 alert ( "已加入收藏" );
+			
+				},
+				complete : function() {
 					  let message = "已加入收藏";
 						$("#alertText").text(message);
 						$("#alertModal").modal('show');
-				},
-				complete : function() {
-					console.log("com");
-					//請求完成的處理
 				},
 				error : function() {
 					console.log("出錯了!")
@@ -272,14 +276,12 @@
 						console.log("suc");
 						$("#add"+publishNo).css("display","inline");
 						 $("#cancel"+publishNo).css("display","none");
+			
+					},
+					complete : function() {
 						  let message = "已取消收藏";
 							$("#alertText").text(message);
 							$("#alertModal").modal('show');
-
-					},
-					complete : function() {
-						console.log("com");
-						//請求完成的處理
 					},
 					error : function() {
 						console.log("出錯了!")
@@ -294,6 +296,7 @@
 	   
 	    
 	}
+	
 	$(function(){
 	    var len = 11; // Pubulish Detail超過40個字以"..."取代
 	    $(".time321").each(function(i){
@@ -305,7 +308,7 @@
 	    });
 	});
 	$(function(){
-	    var len = 46; // Pubulish Detail超過40個字以"..."取代
+	    var len = 42; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());
@@ -374,7 +377,7 @@
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
-
+	
 
 	<!-- ---------------------要加的部份-------------------- -->
 
