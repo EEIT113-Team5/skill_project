@@ -154,6 +154,11 @@ tr, td {
 				</c:if>
 			</tbody>
 		</table>
+		<form action="myPublish" method="GET"
+			enctype="application/x-www-form-urlencoded">
+
+			<input type='submit' value='我的刊登'>
+		</form>
 	</div>
 	<!-- 					<form action="/skillExchange/PublishPage.jsp" method="POST"> -->
 	<!-- 						<input type='submit' value='上一步' >  -->

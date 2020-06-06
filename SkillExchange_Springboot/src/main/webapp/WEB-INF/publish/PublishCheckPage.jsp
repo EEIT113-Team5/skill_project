@@ -57,10 +57,15 @@
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 <style>
-
-
 * {
 	font-family: 微軟正黑體;
+}
+#DIV1 {
+	flex: 1;
+	text-align: right;
+}
+#DIV2 {
+	flex: 1;
 }
 </style>
 
@@ -86,9 +91,10 @@
 		</caption>
 
 		<div class="resume" style="height: 900px;">
-			<div class="publishleft" style="display: inline-block;height: 900px;"">
+			<div class="publishleft"
+				style="display: inline-block; height: 900px;"">
 				<img src="${picNameString}" width=250px
-					 style="display: block; margin: auto; margin-top: 25px; box-shadow: 2px 2px 5px #5D9DC7">
+					style="display: block; margin: auto; margin-top: 25px; box-shadow: 2px 2px 5px #5D9DC7">
 
 				<h2 class="pubtitle">${publishTitle}</h2>
 				<hr style="border: 0; background-color: #009bdd; height: 1px">
@@ -99,8 +105,9 @@
 				</p>
 				<div class="icon"></div>
 			</div>
-			<div class="publishright" style="display: inline-block;height: 900px;">
-				<h3 class="about" style="padding-top: 20px;padding-bottom: 20px;">
+			<div class="publishright"
+				style="display: inline-block; height: 900px;">
+				<h3 class="about" style="padding-top: 20px; padding-bottom: 20px;">
 					刊登內容
 					<hr>
 					<p>
@@ -108,7 +115,7 @@
 						<b>▸內容</b>
 					</h5>
 					<br>
-					<h6 style="font-family: 微軟正黑體;font-size: 16px;">&nbsp;&nbsp;&nbsp;${publishDetail}.</h6>
+					<h6 style="font-family: 微軟正黑體; font-size: 16px;">&nbsp;&nbsp;&nbsp;${publishDetail}.</h6>
 					</p>
 				</h3>
 				<h3 class="education">
@@ -119,14 +126,14 @@
 						<b>▸自己的技能</b>
 					</h5>
 					<br>
-					<h6 style="font-family: 微軟正黑體;font-size: 16px;">&nbsp;&nbsp;&nbsp;${ownSkill}</h6>
+					<h6 style="font-family: 微軟正黑體; font-size: 16px;">&nbsp;&nbsp;&nbsp;${ownSkill}</h6>
 					</p>
 					<p>
 					<h5>
 						<b>▸想學的技能</b>
 					</h5>
 					<br>
-					<h6 style="font-family: 微軟正黑體;font-size: 16px;">&nbsp;&nbsp;&nbsp;${wantSkill}</h6>
+					<h6 style="font-family: 微軟正黑體; font-size: 16px;">&nbsp;&nbsp;&nbsp;${wantSkill}</h6>
 					</p>
 				</h3>
 				<h3 class="esperience">
@@ -137,18 +144,24 @@
 						<b>▸備註</b>
 					</h5>
 					<br>
-					<h6 style="font-family: 微軟正黑體;font-size: 16px;">&nbsp;&nbsp;&nbsp;${publishMark}</h6>
+					<h6 style="font-family: 微軟正黑體; font-size: 16px;">&nbsp;&nbsp;&nbsp;${publishMark}</h6>
 					</p>
 				</h3>
 			</div>
 		</div>
-		<form action="publishPrev" method="POST">
-			<input type='submit' value='上一步'>
-		</form>
-
-		<form action="publishCheckPage" method="POST">
-			<input type='submit' value='完成'>
-		</form>
+		<div class="container" style="display: flex; margin-top: 50px; margin-bottom: 50px;">
+			<div id="DIV1" class="123">
+				<form action="publishPrev" method="POST">
+					<input type='submit' value='上一步' style="width: 100px">
+				</form>
+			</div>
+			|
+			<div id="DIV2">
+				<form action="publishCheckPage" method="POST">
+					<input type='submit' value='完成' style="width: 100px">
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->

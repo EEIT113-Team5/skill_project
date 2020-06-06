@@ -103,7 +103,7 @@ textarea {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>刪除刊登</h2>
+					<h2>刊登下架</h2>
 				</div>
 			</div>
 		</div>
@@ -112,7 +112,7 @@ textarea {
 		<form action="myPublish" method="GET"
 			enctype="application/x-www-form-urlencoded">
 
-			<h1>刪除成功!!</h1>
+			<h1>下架成功!!</h1>
 
 			<input type='submit' value='我的刊登'>
 		</form>

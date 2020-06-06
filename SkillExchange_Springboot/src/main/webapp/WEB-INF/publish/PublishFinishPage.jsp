@@ -71,8 +71,6 @@ legend {
 /* body { */
 /* 	margin: 100px; */
 /* } */
-
-
 .st1 {
 	width: 450px;
 	border-bottom: 1px solid cornflowerblue;
@@ -118,13 +116,15 @@ textarea {
 		<form action="myPublishReturnHome" method="POST"
 			enctype="application/x-www-form-urlencoded">
 
-			<h1>完成刊登!!</h1><br>
-			<h1>歡迎加入群組接收網站最新資訊:</h1>
-			<a href="http://line.me/ti/g/jL657Tltm">
-			SkillExchange</a>
-			<img style="width: 100px; height: 100px;"
-			src='images/QR.jpg' /><br>
+			<h1>完成刊登!!</h1>
+
 			<input type='submit' value='回首頁'>
+		</form>
+		<hr>
+		<form action="myPublish" method="GET"
+			enctype="application/x-www-form-urlencoded">
+
+			<input type='submit' value='我的刊登'>
 		</form>
 	</div>
 

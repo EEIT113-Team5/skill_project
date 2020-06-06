@@ -2,6 +2,7 @@ package myPublish.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -230,7 +231,7 @@ public class MyPublish  {
 	public String myPublishDel(@RequestParam("publishNo") String publishNo,Model model) {
 		int pubNo = Integer.parseInt(publishNo);
 		imps.myPubDele(pubNo);
-		return "mypublish/PublishDelSuccess";
+		return "redirect:PublishMgmt";
 	}
 	//使用者刪除用(改變狀態)
 	@GetMapping(value = "/myPublishStatus")
@@ -251,7 +252,10 @@ public class MyPublish  {
 		MyPublishBean bean = imps.selUpdatePublish(pubNo);
 		
 		imps.myPublishAgain(bean);
-		return "mypublish/myPublish";
+		
+		
+		
+		return "redirect:myPublish";
 	}
 	
 	@PostMapping(value = "/myPublishReturnHome")
