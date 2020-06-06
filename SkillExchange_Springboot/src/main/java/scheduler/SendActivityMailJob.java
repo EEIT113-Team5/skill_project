@@ -27,13 +27,15 @@ public class SendActivityMailJob implements Job {
 				MailContent content = ApplicationContextHelper.getBean(MailContent.class);
 				ActivityMailDao dao = ApplicationContextHelper.getBean(ActivityMailDao.class);
 				List<ActivityBean> aBean = dao.getAllActivityYesterday();
+				content.setActivityBeans(aBean);
 				if (aBean.size() > 0) {
 					for (ActivityBean bean : aBean) {
 						String mailString = dao.getAllMembersEmail();
+						String mailContent = content.getActivityMail();
 
 						mail.setHideEmail(mailString);
 						mail.setSubject("新活動通知~趕快來參加！");
-						mail.setMailContent("testmail");
+						mail.setMailContent(mailContent);
 						mail.sendMail();
 						System.out.println("====send email success====");
 

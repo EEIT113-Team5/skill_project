@@ -1,6 +1,10 @@
 package contactUs.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import activity.bean.ActivityBean;
 
 @Component
 public class MailContent {
@@ -10,6 +14,7 @@ public class MailContent {
 	private String contactUser;
 	private String content;
 	private String replyContent;
+	private List<ActivityBean> activityBeans;
 
 	public void setContactUser(String contactUser) {
 		this.contactUser = contactUser;
@@ -231,8 +236,332 @@ public class MailContent {
 	}
 
 	public String getActivityMail() {
-		String activityMail = "";
+		activityMail = "<style>" + 
+				"    /* Basics */" + 
+				"    body {" + 
+				"        margin: 0 !important;" + 
+				"        padding: 0;" + 
+				"        background-color: #ffffff;" +
+				"    }" +  
+				"    table {" + 
+				"        border-spacing: 0;" + 
+				"        font-family: 微軟正黑體;" + 
+				"        color: #333333;" + 
+				"    }" + 
+				"    td {" + 
+				"        padding: 0;" + 
+				"    }" + 
+				"    img {" + 
+				"        border: 0;" + 
+				"    }" +  
+				"    div[style*='margin: 16px 0'] {" + 
+				"        margin: 0 !important;" + 
+				"    }" +  
+				"    .wrapper {" + 
+				"        width: 100%;" + 
+				"        table-layout: fixed;" + 
+				"        -webkit-text-size-adjust: 100%;" + 
+				"        -ms-text-size-adjust: 100%;" + 
+				"    }" + 
+				"    .webkit {" + 
+				"        max-width: 600px;" + 
+				"        margin: 0 auto;" + 
+				"    }" + 
+				"    .outer {" + 
+				"        margin: 0 auto;" + 
+				"        width: 100%;" + 
+				"        max-width: 600px;" + 
+				"    }" + 
+				"    .full-width-image img {" + 
+				"        width: 100%;" + 
+				"        max-width: 600px;" + 
+				"        height: auto;" + 
+				"    }" + 
+				"    .inner {" + 
+				"        padding: 10px;" + 
+				"    }" + 
+				"    p {" + 
+				"        Margin: 0;" + 
+				"    }" + 
+				"    a {" + 
+				"        color: #ee6a56;" + 
+				"        text-decoration: underline;" + 
+				"    }" + 
+				"    .h1 {" + 
+				"        font-size: 21px;" + 
+				"        font-weight: bold;" + 
+				"        Margin-bottom: 18px;" + 
+				"    }" + 
+				"    .h2 {" + 
+				"        font-size: 18px;" + 
+				"        font-weight: bold;" + 
+				"        Margin-bottom: 12px;" + 
+				"    }" + 
+				"    /* One column layout */" + 
+				"    .one-column .contents {" + 
+				"        text-align: left;" + 
+				"    }" + 
+				"    .one-column p {" + 
+				"        font-size: 14px;" + 
+				"        Margin-bottom: 10px;" + 
+				"    }" + 
+				"    .two-column {" + 
+				"        text-align: center;" + 
+				"        font-size: 0;" + 
+				"    }" + 
+				"    .two-column .column {" + 
+				"        width: 100%;" + 
+				"        max-width: 300px;" + 
+				"        display: inline-block;" + 
+				"        vertical-align: top;" + 
+				"    }" +  
+				"    .contents {" + 
+				"        width: 100%;" + 
+				"    }" + 
+				"    .two-column .contents {" + 
+				"        font-size: 14px;" + 
+				"        text-align: left;" + 
+				"    }" + 
+				"    .two-column img {" + 
+				"        width: 100%;" + 
+				"        max-width: 280px;" + 
+				"    }" +  
+				"    .two-column .text {" + 
+				"        padding-top: 10px;" + 
+				" font-size: 20px;" + 
+				" color:mediumblue;" + 
+				"    }" + 
+				"    .three-column {" + 
+				"        text-align: center;" + 
+				"        font-size: 0;" + 
+				"        padding-top: 10px;" + 
+				"        padding-bottom: 10px;" + 
+				"    }" + 
+				"    .three-column .column {" + 
+				"        width: 100%;" + 
+				"        max-width: 200px;" + 
+				"        display: inline-block;" + 
+				"        vertical-align: top;" + 
+				"    }" + 
+				"    .three-column .contents {" + 
+				"        font-size: 14px;" + 
+				"        text-align: center;" + 
+				"    }" + 
+				"    .three-column img {" + 
+				"        width: 100%;" + 
+				"        max-width: 180px;" + 
+				"        height: auto;" + 
+				"    }" +  
+				"    .three-column .text {" + 
+				"        padding-top: 10px;" + 
+				" font-size: 16px;" + 
+				" color:mediumblue;" + 
+				"    }" + 
+				"    /* Left sidebar layout */" + 
+				"    .left-sidebar {" + 
+				"        text-align: center;" + 
+				"        font-size: 0;" + 
+				"    }" +  
+				"    .left-sidebar .column {" + 
+				"        width: 100%;" + 
+				"        display: inline-block;" + 
+				"        vertical-align: middle;" + 
+				"    }" + 
+				"    .left-sidebar .left {" + 
+				"        max-width: 100px;" + 
+				"    }" +  
+				"    .left-sidebar .right {" + 
+				"        max-width: 500px;" + 
+				"    }" + 
+				"    .left-sidebar .img {" + 
+				"        width: 100%;" + 
+				"        max-width: 80px;" + 
+				"        height: auto;" + 
+				"    }" +  
+				"    .left-sidebar .contents {" + 
+				"        font-size: 14px;" + 
+				"        text-align: center;" + 
+				"    }" + 
+				"    .left-sidebar a {" + 
+				"        color: #85ab70;" + 
+				"    }" + 
+				"    /*Media Queries*/" + 
+				"    @media screen and (max-width: 400px) {" + 
+				"        .two-column .column," + 
+				"        .three-column .column {" + 
+				"            max-width: 100% !important;" + 
+				"        }" + 
+				"        .two-column img {" + 
+				"            max-width: 100% !important;" + 
+				"        }" + 
+				"        .three-column img {" + 
+				"            max-width: 50% !important;" + 
+				"        }" + 
+				"    }" + 
+				"    @media screen and (min-width: 401px) and (max-width: 620px) {" + 
+				"        .three-column .column {" + 
+				"            max-width: 33% !important;" + 
+				"        }" + 
+				"        .two-column .column {" + 
+				"            max-width: 50% !important;" + 
+				"        }" + 
+				"    }" + 
+				"</style>" + 
+				"<div class='wrapper'>" + 
+				"    <div class='webkit'>" + 
+				"        <table class='outer' text-align='center'>" + 
+				"            <tr>" + 
+				"                <td class='full-width-image'>" + 
+				"                    <br>" + 
+				"                    <h2 style='font-family: 微軟正黑體;'>親愛的會員！以下是最新的活動訊息，趕快來參加吧~</h2>" + 
+				"                </td>" + 
+				"            </tr>" + 
+				"            <tr>" + 
+				"                <td class='two-column'>" + 
+				"                    <div class='column'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                    <table class='contents'>" + 
+				"                                        <tr>" + 
+				"                                            <td>" + 
+				"                                                <img src='https://cdn.tourradar.com/s3/serp/original/210322_TL6VlkyV.jpeg'" + 
+				"                                                    width='280'height='187'alt='' />" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                        <tr>" + 
+				"                                            <td class='text'>" + 
+				"                                                北海道方言同好交流會" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                    </table>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"" + 
+				"                    <div class='column'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                    <table class='contents'>" + 
+				"                                        <tr>" + 
+				"                                            <td>" + 
+				"                                                <img src='https://images.unsplash.com/photo-1575385151519-05e02c4f734f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1850&q=80'" + 
+				"                                                    width='280' height='187' alt='' />" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                        <tr>" + 
+				"                                            <td class='text'>" + 
+				"                                                德文同好交流會" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                    </table>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                </td>" + 
+				"            </tr>" + 
+				"            <tr>" + 
+				"                <td class='three-column'>" + 
+				"" + 
+				"                    <div class='column'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                    <table class='contents'>" + 
+				"                                        <tr>" + 
+				"                                            <td>" + 
+				"                                                <img src='https://www.knkx.org/sites/kplu/files/styles/medium/public/202004/geert-pieters-8QrPJ3Kfie4-unsplash.jpg'" + 
+				"                                                    width='180' alt='' />" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                        <tr>" + 
+				"                                            <td class='text'>" + 
+				"                                                爵士鋼琴基礎和弦講座" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                    </table>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                    <div class='column'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                    <table class='contents'>" + 
+				"                                        <tr>" + 
+				"                                            <td>" + 
+				"                                                <img src='https://i0.wp.com/queretanizate.com/wp-content/uploads/2019/06/jens-thekkeveettil-2538-unsplash.jpg?fit=800%2C533&ssl=1'" + 
+				"                                                    width='180' alt='' />" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                        <tr>" + 
+				"                                            <td class='text'>" + 
+				"                                                薩克斯風同好會" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                    </table>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                    <div class='column'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                    <table class='contents'>" + 
+				"                                        <tr>" + 
+				"                                            <td>" + 
+				"                                                <img src='https://miro.medium.com/max/1400/0*rUpzTIj8H8iZH-mH'" + 
+				"                                                    width='180' alt='' />" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                        <tr>" + 
+				"                                            <td class='text'>" + 
+				"                                                鋼弦吉他同好交流" + 
+				"                                            </td>" + 
+				"                                        </tr>" + 
+				"                                    </table>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                </td>" + 
+				"            </tr>" + 
+				"            <tr>" + 
+				"                <td class='left-sidebar'>" + 
+				"" + 
+				"                    <div class='column left'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner'>" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                    <div class='column right'>" + 
+				"                        <table width='100%'>" + 
+				"                            <tr>" + 
+				"                                <td class='inner contents'>" + 
+				"                                    COPYRIGHT 2020. ALL RIGHTS RESERVED.<br>" + 
+				"Design And Developed By SkillExchange Team" + 
+				"                                </td>" + 
+				"                            </tr>" + 
+				"                        </table>" + 
+				"                    </div>" + 
+				"                </td>" + 
+				"            </tr>" + 
+				"        </table>" + 
+				"    </div>" + 
+				"</div>";
 		return activityMail;
+	}
+
+	public void setActivityBeans(List<ActivityBean> activityBeans) {
+		this.activityBeans = activityBeans;
 	}
 
 
