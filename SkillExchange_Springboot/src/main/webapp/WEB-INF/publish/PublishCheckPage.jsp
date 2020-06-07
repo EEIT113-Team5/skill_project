@@ -86,10 +86,7 @@
 	</section>
 	<!--     <div class="container"> -->
 	<div class="container">
-		<caption>
-			<h3>確認刊登內容</h3>
-		</caption>
-
+		
 		<div class="resume" style="height: 900px;">
 			<div class="publishleft"
 				style="display: inline-block; height: 900px;"">

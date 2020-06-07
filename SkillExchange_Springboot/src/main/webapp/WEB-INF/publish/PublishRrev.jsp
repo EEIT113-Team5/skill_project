@@ -63,6 +63,10 @@ textarea {
 * {
 	font-family: 微軟正黑體;
 }
+.red-font {
+	color: red;
+ 	margin-left: 5px; 
+}
 </style>
 
 </head>
@@ -91,30 +95,30 @@ textarea {
 							enctype="multipart/form-data">
 
 							<fieldset class="fieldest">
-								<legend class="legend">刊登資訊</legend>
+								<legend class="legend"></legend>
 								<br>
 								<table>
 									<tr>
-										<td><label for="">刊登標題:</label></td>
+										<td><label for="">刊登標題:</label><lable class="red-font">*</lable></td>
 										<td><input type='text' name='publishTitle'
 											value="${publishTitle}"></td>
 										<td><font color='red' size='-3'>${error.publishTitle}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">照片:</label></td>
+										<td><label for="">照片:</label><lable class="red-font">*</lable></td>
 										<td><input type="file" onchange="readURL(this)"
 											name='publishPic' targetID="prePic"> <br> <img
 											id="prePic" src="${publishPic}" width="200px" name='prePic'
 											value="${publishPic}" /></td>
 									</tr>
 									<tr>
-										<td><label for="">刊登內容:</label></td>
+										<td><label for="">刊登內容:</label><lable class="red-font">*</lable></td>
 										<td><textarea cols="40" row="5" name='publishDetail'
 												value='${publishDetail}'>${publishDetail}</textarea></td>
 										<td><font color='red' size='-3'>${error.publishDetail}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">自己的類型:</label></td>
+										<td><label for="">自己的類型:</label><lable class="red-font">*</lable></td>
 										<td><select id="selSkill2" name='skillType2'>
 												<option value="${skillType2}">${skillType2}</option>
 												<option value="才藝">才藝</option>
@@ -126,7 +130,7 @@ textarea {
 										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">自己的技能:</label></td>
+										<td><label for="">自己的技能:</label><lable class="red-font">*</lable></td>
 										<td><select id="myownskill" name='ownSkill'>
 												<option value="${ownSkill}">${ownSkill}</option>
 												<c:forEach varStatus="vs" var="a" items="${skill}">
@@ -136,7 +140,7 @@ textarea {
 										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">想學的類型:</label></td>
+										<td><label for="">想學的類型:</label><lable class="red-font">*</lable></td>
 										<td><select id="selSkill" name='skillType'
 											onchange="showSkill()">
 												<option value="${skillType}">${skillType}</option>
@@ -149,7 +153,7 @@ textarea {
 										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">想學的技能:</label></td>
+										<td><label for="">想學的技能:</label><lable class="red-font">*</lable></td>
 										<td><select id="selWantSkill" name='wantSkill'>
 												<option value="${wantSkill}">${wantSkill}</option>
 <%-- 												<c:forEach varStatus="vs" var="a" items="${skill}"> --%>
@@ -166,7 +170,7 @@ textarea {
 								<br>
 								<table>
 									<tr>
-										<td><label for="">刊登地區:</label></td>
+										<td><label for="">刊登地區:</label><lable class="red-font">*</lable></td>
 										<td><select id="selPubArea1" name='publishArea'
 											onchange="showCity()">
 												<option value="${publishArea}">${publishArea}</option>
@@ -178,7 +182,7 @@ textarea {
 										<td><font color='red' size='-3'>${error.publishArea}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">刊登城市:</label></td>
+										<td><label for="">刊登城市:</label><lable class="red-font">*</lable></td>
 										<td><select id="selCity" name='City'>
 												<option value="${City}">${City}</option>
 												<c:forEach varStatus="vs" var="a" items="${city}">
@@ -208,7 +212,7 @@ textarea {
 										<td><input type='text' name='road' value='${road}'></td>
 									</tr>
 									<tr>
-										<td><label for="">希望地點:</label></td>
+										<td><label for="">希望地點:</label><lable class="red-font">*</lable></td>
 										<td><input type='text' name='publishPlace'
 											value='${publishPlace}'></td>
 										<hr>

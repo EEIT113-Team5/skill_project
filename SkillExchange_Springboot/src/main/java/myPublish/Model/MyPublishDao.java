@@ -1,6 +1,7 @@
 package myPublish.Model;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -128,8 +129,17 @@ public class MyPublishDao implements iMyPublishDao {
 			query.setParameter("myOwnSkill", bean.getMyOwnSkill());
 			query.setParameter("myWantSkill", bean.getMyWantSkill());
 			
-			Date date = new Date();
-			java.sql.Date updateTime = new java.sql.Date(date.getTime());
+			Calendar c = Calendar.getInstance();
+			c.setTime(new Date());
+			c.add(Calendar.MONTH, -1);
+			Date m = c.getTime();
+			
+			m.setTime(m.getTime()+15*1000);
+			java.sql.Date updateTime = new java.sql.Date(m.getTime());
+			
+			
+//			Date date = new Date();
+//			java.sql.Date updateTime = new java.sql.Date(date.getTime());
 			query.setParameter("updateTime",updateTime);
 			
 			query.setParameter("myMark", bean.getMyMark());

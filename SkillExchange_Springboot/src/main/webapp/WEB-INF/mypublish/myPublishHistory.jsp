@@ -115,15 +115,13 @@ tr, td {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>我的刊登</h2>
+					<h2>歷史刊登</h2>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<div class="container">
-
-		<h3>歷史刊登</h3>
 
 		<table class="table">
 			<thead class="thead-light">

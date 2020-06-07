@@ -69,4 +69,16 @@ public class PublishPageDao implements iPublishPageDao {
 		
 		return PublishBeans;
 	}
+	
+	@Override
+	public PublishBean timeout(int publishNo) {
+		
+		String hql = "Update PublishBean p set p.status = :status where p.publishNo = :publishNo";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("status", 0);
+		query.setParameter("publishNo", publishNo);
+		
+		query.executeUpdate();
+		return null;
+	}
 }

@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import members.Model.MemberBean;
 import myPublish.Model.MyPublishBean;
 import myPublish.Service.imyPublishService;
+import publishCheckPage.Service.iPublishService;
 import publishPage.Model.publishAreaBean;
 import publishPage.Model.publishCityBean;
 import publishPage.Model.publishSelectBean;
@@ -39,6 +40,9 @@ public class MyPublish  {
 	@Autowired
 	imyPublishService imps;
 	
+	@Autowired
+	iPublishService ips;
+	
 	Date date1 = new Date();
 	
 	@GetMapping(value = "/myPublish")
@@ -49,6 +53,9 @@ public class MyPublish  {
 		
 		long time1 = date1.getTime();
 		
+		//時間轉成字串
+		List<String> timeStrings = new ArrayList<String>();
+		
 		List<Integer> dayList = new ArrayList<Integer>();
 		
 		for(int i=0; i<mylist.size();i++) {
@@ -58,12 +65,21 @@ public class MyPublish  {
 			System.out.println(days);
 			
 			dayList.add(days);
+			
+			timeStrings.add(mylist.get(i).getUpdateTime().toString());
 		}
 		
 		model.addAttribute("dayList",dayList);
 		
 		model.addAttribute("mypublish",mylist);
 		
+		
+		Gson gson2 = new Gson();
+		String timeStringsGson = gson2.toJson(timeStrings);
+		
+		model.addAttribute("timeStringsGson",timeStringsGson);
+		
+				
 		Gson gson = new Gson();
 		String mypubString = gson.toJson(mylist);
 		model.addAttribute("mypubString",mypubString);
@@ -262,5 +278,16 @@ public class MyPublish  {
 	public String myPublishReturnHome() {
 		return "index";
 	}
-
+	//自動刪除後跳回頁面
+	@GetMapping(value = "/myPublishAutoDel")
+	public String myPublishAutoDel(@RequestParam("publishNo") String publishNo,Model model) {
+		int pubNo = Integer.parseInt(publishNo);
+		
+		MyPublishBean bean = imps.selUpdatePublish(pubNo);
+		
+		imps.myPubStatus(bean);
+		
+		
+		return "redirect:myPublish";
+	}
 }

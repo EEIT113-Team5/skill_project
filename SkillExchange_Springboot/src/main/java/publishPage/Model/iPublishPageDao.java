@@ -2,6 +2,7 @@ package publishPage.Model;
 
 import java.util.List;
 
+import myPublish.Model.MyPublishBean;
 import publishCheckPage.Model.PublishBean;
 
 public interface iPublishPageDao {
@@ -13,5 +14,7 @@ public interface iPublishPageDao {
 	List<publishCityBean> City();
 	
 	List<PublishBean> allPublish();
+	
+	PublishBean timeout(int publishNo);
 
 }

@@ -46,7 +46,7 @@
 					<h1 class="mt-4"
 						style="text-shadow: 1px 1px gray; text-align: center">刊登管理</h1>
 
-					<div id="mainPublish" style="width: 600px; height: 400px;"></div>
+					<div id="mainPublish" style="width: 600px; height: 400px;margin: auto;"></div>
 					<script type="text/javascript">
 						// 基于准备好的dom，初始化echarts实例
 						var myChart = echarts.init(document
@@ -99,6 +99,10 @@
 
 						// 指定图表的配置项和数据
 						var option = {
+							title : {
+								text : '刊登技能類型統計圖',
+								left : 'center'
+							},
 							tooltip : {
 								trigger : 'item',
 								formatter : '{a} <br/>{b}: {c} ({d}%)'

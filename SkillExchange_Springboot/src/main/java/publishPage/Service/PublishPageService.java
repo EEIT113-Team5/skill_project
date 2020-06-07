@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import myPublish.Model.MyPublishBean;
 import publishCheckPage.Model.PublishBean;
 import publishPage.Model.iPublishPageDao;
 import publishPage.Model.publishAreaBean;
@@ -48,5 +49,10 @@ public class PublishPageService implements iPublishPageService {
 	@Override
 	public List<PublishBean> allPublish(){
 		return ppDao.allPublish();
+	}
+	
+	@Override
+	public PublishBean timeout(int publishNo) {
+		return ppDao.timeout(publishNo);
 	}
 }

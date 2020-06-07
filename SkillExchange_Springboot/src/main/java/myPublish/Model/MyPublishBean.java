@@ -31,7 +31,7 @@ public class MyPublishBean implements Serializable {
 	String publishPic;
 	String myOwnSkill;
 	String myWantSkill;
-	Date updateTime;
+	Timestamp updateTime;
 	Integer publishctr;
 	String myMark;
 	String status;
@@ -214,11 +214,11 @@ public class MyPublishBean implements Serializable {
 
 	
 	@Column(name = "updatetime")
-	public Date getUpdateTime() {
+	public Timestamp getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
 	@Column(name = "publishCTR")

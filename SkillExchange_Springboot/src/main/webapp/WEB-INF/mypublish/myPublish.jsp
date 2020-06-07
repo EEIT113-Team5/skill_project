@@ -123,8 +123,6 @@ tr, td {
 
 	<div class="container">
 
-		<h3>我的刊登</h3>
-
 		<div class="row">
 			<!-- 						<th>刊登編號</th><th>刊登標題</th><th>刊登內容</th><th>刊登地區</th><th></th><th></th>			 -->
 			<c:forEach var="my" items="${mypublish}" varStatus="mylist">
@@ -135,7 +133,7 @@ tr, td {
 					<c:if test="${dlindex == myindex}">
 
 						<div class="col-sm-3"
-							style="background-color: white; height: 580px; margin-top: 20px;margin-bottom: 20px">
+							style="background-color: white; height: 580px; margin-top: 20px; margin-bottom: 20px">
 							<div class="card" style="height: 585px; border: 1px solid black;">
 
 								<img src="${my.publishPic}" class="card-img-top" alt="..."
@@ -153,13 +151,24 @@ tr, td {
 										href='myPublishStatus?publishNo=${my.publishNo}'>下架</a></li>
 									<c:choose>
 										<c:when test="${dl < 0}">
-											<li class="list-group-item" id="" style="height: 110px">刊登時間:${my.updateTime}<br>刊登時間已過期!!</li>
+											<li class="list-group-item" id="" style="height: 110px">刊登時間:${my.updateTime}<br>刊登時間已過期!!
+											</li>
 										</c:when>
 										<c:otherwise>
-											<li class="list-group-item" style="height: 110px">刊登時間:${my.updateTime}<br>剩餘天數:<h5 id="pad${myindex}"></h5></li>
+											<li class="list-group-item" style="height: 110px">刊登時間:${my.updateTime}<br>剩餘天數:
+												<h5 id="pad${myindex}"></h5></li>
 										</c:otherwise>
 									</c:choose>
-									<span style="DISPLAY:none"><input type="button" value="按下" id="but${myindex}" onclick="timeDate(${myindex})" /></span>
+									<span style="DISPLAY: none"><input type="button"
+										value="按下" id="but${myindex}" onclick="timeDate(${myindex})" /></span>
+									<input type="button" value=""
+										onclick="location.href='myPublishAutoDel?publishNo=${my.publishNo}'"
+										id="refresh${myindex}" style="VISIBILITY: hidden">
+									<!-- 									<form class="form" -->
+									<%-- 										action="myPublishStatus?publishNo=${my.publishNo}" --%>
+									<!-- 										method="GET" enctype="multipart/form-data"> -->
+									<!-- 										<input type="submit" value="" id=""> -->
+									<!-- 									</form> -->
 								</ul>
 							</div>
 						</div>
@@ -249,6 +258,8 @@ tr, td {
 		for (var i = 0; i < count; i++) {
 			$('#but'+i).get(0).click();			
 		}
+
+		
 	});
 		
 	function timeDate(num) {			
@@ -258,23 +269,30 @@ tr, td {
 		
 			console.log(num);
 			
-			var mypubString = JSON.parse('${mypubString}');
-			console.log(mypubString[num].updateTime);
+			var timeStrings = JSON.parse('${timeStringsGson}');
+			console.log(timeStrings[num]);
 
+			<!-- 分割成日期與時間 -->
 			var timeArray = new Array();
-			timeArray = mypubString[num].updateTime.split("月");
+			timeArray = timeStrings[num].split(" ");
 			console.log(timeArray);
 
-			var timeArray2 = timeArray[1].split(",");
+			<!-- 分割成年月日-->
+			var timeArray2 = timeArray[0].split("-");
 			console.log(timeArray2);
 
+			var timeArray3 = timeArray[1].split(":");
 
-			var year = parseInt(timeArray2[1]);
-			var month = parseInt(timeArray[0]);
-			var date = parseInt(timeArray2[0]);
+
+			var year = parseInt(timeArray2[0]);
+			var month = parseInt(timeArray2[1]);
+			var date = parseInt(timeArray2[2]);
+			var hour = parseInt(timeArray3[0]);
+			var min = parseInt(timeArray3[1]);
+			var sec = parseInt(timeArray3[2]);
 
 			var startDate = new Date();
-			var endDate = new Date(year,month,date,0,0);
+			var endDate = new Date(year,month,date,hour,min,sec);
 			var spantime = (endDate - startDate)/1000;
 
 			spantime--;
@@ -284,6 +302,11 @@ tr, td {
 		    var s = Math.floor(spantime%60);
 		    str = d + "天 " + h + "時 " + m + "分 " + s + "秒 ";
 
+			if (d == 0 && h == 0 && m == 0 && s == 0) {																			
+				$('#refresh'+num).click();	
+			}
+			
+			
 			console.log(str);
 		    
 		    document.getElementById("pad"+num).innerHTML = str;
