@@ -113,8 +113,8 @@ li a:hover {
        var btn=document.getElementById("place");
        btn.onclick=initial;
        window.onload=initial;
-//        .setView([24.976099, 121.585693], 10);	
-       var mymap = L.map('mapid')	
+     	
+       var mymap = L.map('mapid').setView([24.976099, 121.585693], 10);	
 		var tile = L.tileLayer(
 				'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 					minZoom : 8,

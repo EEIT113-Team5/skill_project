@@ -443,8 +443,8 @@
        	 
                document.getElementById("reply").innerHTML=content;
 			
-				$("#nickname").val("");
-				$("#message").val("");
+// 				$("#nickname").val("");
+// 				$("#message").val("");
 			 },
 			complete : function() {
 				//請求完成的處理
@@ -559,8 +559,8 @@
        	 
                document.getElementById("reply").innerHTML=content;
 			
-				$("#nickname").val("");
-				$("#message").val("");
+// 				$("#nickname").val("");
+// 				$("#message").val("");
 			 },
 			complete : function() {
 				//請求完成的處理
@@ -614,8 +614,8 @@
     	       	 
     	               document.getElementById("reply").innerHTML=content;
     				
-    					$("#nickname").val("");
-    					$("#message").val("");
+//     					$("#nickname").val("");
+//     					$("#message").val("");
     				 },
     				complete : function() {
     					//請求完成的處理
@@ -682,8 +682,8 @@
     	       	 
     	               document.getElementById("reply").innerHTML=content;
     				
-    					$("#nickname").val("");
-    					$("#message").val("");
+//     					$("#nickname").val("");
+//     					$("#message").val("");
     				 },
     				complete : function() {
     					//請求完成的處理
