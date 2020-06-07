@@ -100,7 +100,8 @@
               </div>
               
               <div class="modal-body">
-              <form:form method="POST" id="registerForm" action="reviseMember" modelAttribute="memberBean" enctype='multipart/form-data'>
+              <form:form method="POST" id="registerForm" action="modifyMember" modelAttribute="memberBean" enctype='multipart/form-data'>
+              <form:hidden path='memberRegNo'/>
               <div class="form-group">
               
               <div class="col-xs-6">

@@ -1,5 +1,7 @@
 package members.Service;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,12 +18,12 @@ public class UpdateService {
 	@Autowired
 	private MemberDao mbDao;
 	
-	public MemberBean getAcc(String memberAcc) {
-		
-		MemberBean mb = mbDao.selectAcc(memberAcc);
-		
+	public MemberBean getByRegNo(Integer memberRegNo) {
+		MemberBean mb = mbDao.selectByRegNo(memberRegNo);
 		return mb;
 	}
 	
-
+	public int updatePart(MemberBean mbean) throws Exception, ParseException {
+		return mbDao.updatePart(mbean);
+	}
 }
