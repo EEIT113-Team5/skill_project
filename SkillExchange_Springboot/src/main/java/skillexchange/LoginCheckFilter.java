@@ -42,9 +42,13 @@ public class LoginCheckFilter implements Filter {
 		
 		url.add("/GetIndexBtn.do");
 		url.add("/SetSkill.do");
-		url.add("/InsertKeyword1.do");
-		url.add("/InsertKeyword2.do");
+		url.add("/InsertKeyword.do");
 		url.add("/GetTopKeyword.do");
+		
+		url.add("/QuerySort1.do");
+		url.add("/QuerySort2.do");
+		url.add("/QuerySort3.do");
+		url.add("/QuerySort4.do");
 
 		url.add("/login");
 		url.add("/loginInit");

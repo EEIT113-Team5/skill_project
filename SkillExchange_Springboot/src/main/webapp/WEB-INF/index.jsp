@@ -110,7 +110,7 @@
 
 .wrap-level3:hover {
 	width: 30%;
-	border: 2px solid #D0D0D0;
+	border: 2px solid #9D9D9D;
 	/* 	border-left: 1px solid #E0E0E0; */
 	border-radius: 10px;
 	transition: 0.5s;
@@ -406,7 +406,7 @@ form {
 								</div>
 							</div>
 						</div>
-						<form method="GET" action="<c:url value='InsertKeyword1.do' />">
+						<form method="GET" action="<c:url value='InsertKeyword.do' />">
 							<div id="container">
 								<input type="hidden" id="keyword" name="keyword" value="">
 								<input type="hidden" id="area1" name="area1" value=""> 
@@ -426,6 +426,9 @@ form {
 								<input type="hidden" id="skill3" name="skill3" value="">
 								<input type="hidden" id="skill4" name="skill4" value=""> 
 								<input type="hidden" id="skill5" name="skill5" value="">
+								<input type="hidden" id="sort" name="sort" value="desc">
+								<input type="hidden" id="areablock" name="areablock" value="">
+								<input type="hidden" id="skillblock" name="skillblock" value="">
 								<button type="submit" class="btn btn-secondary btn-sm last-btn">
 									<i class="fa fa-search"></i>搜尋
 								</button>
@@ -886,16 +889,19 @@ form {
 // 			console.log("Tstr1=" + str1);
 // 			console.log("Tstr2=" + str2);
 			var txt = document.getElementById("inputArea");
+			var areablock = document.getElementById("areablock");
 			if(str2 == ""){
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
+				areablock.value = str1;
 			} else {
 				str2 = str2.substring(0, str2.length - 1);
 				txt.innerHTML = str1 + str2;
+				areablock.value = str1 + str2;
 			}
 		}
 	</script>
-content = content.substring(0, content.length - 32);
+	
 	<script>
 		var btn4 = document.getElementById("skillClick");
 		btn4.onclick = function() {
@@ -930,12 +936,15 @@ content = content.substring(0, content.length - 32);
 			}
 // 			把選取值寫回頁面上
 			var txt = document.getElementById("inputSkill");
+			var skillblock = document.getElementById("skillblock");
 			if(str2 == ""){
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
+				skillblock.value = str1;
 			} else {
 				str2 = str2.substring(0, str2.length - 1);
 				txt.innerHTML = str1 + str2;
+				skillblock.value = str1 + str2;
 			}
 		}
 	</script>

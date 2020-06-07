@@ -56,83 +56,6 @@
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 <style>
-/* old css */
-#searchbar {
-	margin: 0;
-	padding: 0;
-}
-
-.wrap {
-	width: 70%;
-	margin-left: 50px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-left: 30px;
-	padding-right: 25px;
-	border: 1.5px solid #5B5B5B;
-	border-radius: 10px;
-}
-
-.searchbar-text {
-	width: 350px;
-}
-
-.searchbar {
-	width: 150px;
-	text-align: center;
-}
-
-.otext {
-	text-align: center;
-}
-
-.fixed_div {
-	position: fixed;
-	top: 55px;
-	width: 85%;
-	background-color: #FFFFFF;
-	border-bottom: 1.5px solid #F0F0F0;
-}
-
-.post {
-	display: inline-block;
-	background-color: #F0F0F0;
-	vertical-align: top;
-	width: 30%;
-	height: 25em;
-	margin: 10px;
-	margin-bottom: 25px;
-}
-
-table {
-	width: 100%;
-	border: 10px solid #F0F0F0;
-	border-radius: 10px;
-}
-
-a {
-	color: #000000;
-}
-
-.poster {
-	font-size: 1.2em;
-	margin-top: 1em;
-}
-
-.area {
-	font-size: 0.8em
-}
-
-.updatetime {
-	text-align: right;
-	font-size: 0.8em;
-	color: #9D9D9D;
-}
-/* old css */
-
-/* new css */
 body {
 	font-family: 微軟正黑體 !important;
 }
@@ -148,18 +71,9 @@ h4 {
 
 .wrap-level1 {
 	background-color: #FFFFFF;
-	border-botton: 1px solid #BEBEBE;
 	position: relative;
 	width: 100%;
 	/* 	box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06); */
-}
-
-.wrap-level1-2 {
-	background-color: #FFFFFF;
-	border: 1px black solid;
-	position: relative;
-	width: 100%;
-	box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
 }
 
 .title {
@@ -190,7 +104,7 @@ h4 {
 
 .wrap-level3:hover {
 	width: 30%;
-	border: 2px solid #ADADAD;
+	border: 2px solid #9D9D9D;
 	/* 	border-left: 1px solid #E0E0E0; */
 	border-radius: 10px;
 	transition: 0.5s;
@@ -426,7 +340,6 @@ form {
 
 .last-part {
 	display: inline-block;
-/* 	width: 50%; */
 	text-align: center;
 }
 
@@ -435,7 +348,44 @@ form {
 	margin-right: 10px;
 }
 
-/* new css */
+.wrap-level1-2 {
+	background-color: #FFFFFF;
+	border-top: 1px solid #BEBEBE;
+/*  	border: 1px black solid;  */
+	margin-top: 5px;
+	margin-bottom: 5px;
+	position: relative;
+	width: 100%;
+	height: 40px;
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.06);
+}
+
+.ul-sort {
+	width: 80%;
+	margin: 8px auto;
+	text-align: center;
+	
+}
+
+.li-sort {
+	list-style: none;
+	display: inline-block;
+	margin: 0 50px;
+/* 	padding-left: 100px; */
+/* 	padding-right: 100px; */
+	cursor: pointer;
+}
+
+.div-sort {
+	margin-left: 25px;
+	margin-right: 25px;
+	padding-left: 50px;
+	padding-right: 50px;
+	background-color: #E0E0E0;
+	border: 1px solid #E0E0E0;
+	border-radius: 5%;
+	font-size: small;
+}
 </style>
 </head>
 
@@ -473,12 +423,14 @@ form {
 			<button id="iarea"
 				class="input-group-append wrap-level3 searchbar-bgcolor"
 				data-toggle="modal" data-target="#areaModal">
-				<%-- 				<c:choose> --%>
-				<%-- 					<c:when test="${not empty area1 || not empty area2}"> --%>
-
-				<%-- 					</c:when> --%>
-				<%-- 				</c:choose> --%>
-				<div id="inputArea" class="wrap-level5 search-btn">地區</div>
+				<c:choose>
+					<c:when test="${not empty areablock}">
+						<div id="inputArea" class="wrap-level5 search-btn">${areablock}</div>
+					</c:when>
+					<c:otherwise>
+						<div id="inputArea" class="wrap-level5 search-btn">地區</div>
+					</c:otherwise>
+				</c:choose>
 			</button>
 			<!-- Area Modal -->
 			<div class="modal fade" id="areaModal" tabindex="-1" role="dialog"
@@ -508,7 +460,14 @@ form {
 			<button id="iskill"
 				class="input-group-append wrap-level3 searchbar-bgcolor"
 				data-toggle="modal" data-target="#skillModal">
-				<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div>
+				<c:choose>
+					<c:when test="${not empty skillblock}">
+						<div id="inputSkill" class="wrap-level5 search-btn">${skillblock}</div>
+					</c:when>
+					<c:otherwise>
+						<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div>
+					</c:otherwise>
+				</c:choose>
 			</button>
 			<!-- Skil Modal -->
 			<div class="modal fade" id="skillModal" tabindex="-1" role="dialog"
@@ -533,28 +492,26 @@ form {
 					</div>
 				</div>
 			</div>
-			<form method="GET" action="<c:url value='InsertKeyword1.do' />">
+			<form method="GET" action="<c:url value='InsertKeyword.do' />">
 				<div id="container">
 					<input type="hidden" id="keyword" name="keyword" value="${keyword1}">
-					<input type="hidden" id="area1" name="area1" value="${area1}"> <input
-						type="hidden" id="area2" name="area2" value="${area2}"> <input
-						type="hidden" id="area3" name="area3" value="${area3}"> <input
-						type="hidden" id="city1" name="city1" value="${city1}"> <input
-						type="hidden" id="city2" name="city2" value="${city2}"> <input
-						type="hidden" id="city3" name="city3" value="${city3}"> <input
-						type="hidden" id="city4" name="city4" value="${city4}"> <input
-						type="hidden" id="city5" name="city5" value="${city5}"> <input
-						type="hidden" id="type1" name="type1" value="${type1}"> <input
-						type="hidden" id="type2" name="type2" value="${type2}"> <input
-						type="hidden" id="type3" name="type3" value="${type3}"> <input
-						type="hidden" id="type4" name="type4" value="${type4}"> <input
-						type="hidden" id="skill1" name="skill1" value="${skill1}"> <input
-						type="hidden" id="skill2" name="skill2" value="${skill2}"> <input
-						type="hidden" id="skill3" name="skill3" value="${skill3}"> <input
-						type="hidden" id="skill4" name="skill4" value="${skill4}"> <input
-						type="hidden" id="skill5" name="skill5" value="${skill5}">
-						<input type="hidden" id="dateSort" name="dateSort" value=""> 
-						<input type="hidden" id="clickSort" name="clickSort" value="">
+					<input type="hidden" id="area1" name="area1" value="${area1}">
+					<input type="hidden" id="area2" name="area2" value="${area2}">
+					<input type="hidden" id="area3" name="area3" value="${area3}">
+					<input type="hidden" id="city1" name="city1" value="${city1}">
+					<input type="hidden" id="city2" name="city2" value="${city2}">
+					<input type="hidden" id="city3" name="city3" value="${city3}">
+					<input type="hidden" id="city4" name="city4" value="${city4}">
+					<input type="hidden" id="city5" name="city5" value="${city5}">
+					<input type="hidden" id="type1" name="type1" value="${type1}">
+					<input type="hidden" id="type2" name="type2" value="${type2}">
+					<input type="hidden" id="type3" name="type3" value="${type3}">
+					<input type="hidden" id="type4" name="type4" value="${type4}">
+					<input type="hidden" id="skill1" name="skill1" value="${skill1}">
+					<input type="hidden" id="skill2" name="skill2" value="${skill2}">
+					<input type="hidden" id="skill3" name="skill3" value="${skill3}">
+					<input type="hidden" id="skill4" name="skill4" value="${skill4}">
+					<input type="hidden" id="skill5" name="skill5" value="${skill5}">
 					<button type="submit" class="btn btn-secondary btn-sm last-btn">
 						<i class="fa fa-search"></i>搜尋
 					</button>
@@ -562,94 +519,14 @@ form {
 			</form>
 		</div>
 	</div>
-	<div class="wrap-level1-2">TEST TEST</div>
-
-	<!-- 搜尋bar-start -->
-	<!-- 	<div id="searchbar"> -->
-	<!-- 		<form action="InsertKeyword2.do" method="GET"> -->
-	<!-- 			<div class="input-group wrap"> -->
-	<!-- 				<div class="input-group-prepend"> -->
-	<%-- 					<c:choose> --%>
-	<%-- 						<c:when test="${((empty keyword1) && (empty keyword2))}"> --%>
-	<!-- 							<input type="text" class="form-control searchbar-text" -->
-	<!-- 								name="keyword2" placeholder="關鍵字..."> -->
-	<%-- 						</c:when> --%>
-	<%-- 						<c:when test="${(not empty keyword1) && (empty keyword2)}"> --%>
-	<!-- 							<input type="text" class="form-control searchbar-text" -->
-	<%-- 								name="keyword2" value="${keyword1}"> --%>
-	<%-- 						</c:when> --%>
-	<%-- 						<c:otherwise> --%>
-	<!-- 							<input type="text" class="form-control searchbar-text" -->
-	<%-- 								name="keyword2" value="${keyword2}"> --%>
-	<%-- 						</c:otherwise> --%>
-	<%-- 					</c:choose> --%>
-	<!-- 				</div> -->
-	<!-- 				<div class="input-group-append"> -->
-	<!-- 					<select name="area2" id="area" class="btn btn-light searchbar" -->
-	<!-- 						style="text-align: center; text-align-last: center;"> -->
-	<%-- 						<c:choose> --%>
-	<%-- 							<c:when test="${empty area2}"> --%>
-	<%-- 								<c:choose> --%>
-	<%-- 									<c:when test="${area1 eq 地區}"> --%>
-	<!-- 										<option selected disabled>地區</option> -->
-	<%-- 										<c:forEach var='area' items='${areaList}'> --%>
-	<%-- 											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
-	<%-- 										</c:forEach> --%>
-	<%-- 									</c:when> --%>
-	<%-- 									<c:otherwise> --%>
-	<!-- 										<option disabled>地區</option> -->
-	<%-- 										<c:forEach var='area' items='${areaList}' begin='0' end='4'> --%>
-	<!-- 											<option -->
-	<%-- 												<c:if test="${area1 eq area.publishAreaCN}">selected="selected"</c:if> --%>
-	<%-- 												value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
-	<%-- 										</c:forEach> --%>
-	<%-- 									</c:otherwise> --%>
-	<%-- 								</c:choose> --%>
-	<%-- 							</c:when> --%>
-	<%-- 							<c:otherwise> --%>
-	<%-- 								<c:choose> --%>
-	<%-- 									<c:when test="${area2 eq 地區}"> --%>
-	<!-- 										<option selected disabled>地區</option> -->
-	<%-- 										<c:forEach var='area' items='${areaList}'> --%>
-	<%-- 											<option value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
-	<%-- 										</c:forEach> --%>
-	<%-- 									</c:when> --%>
-	<%-- 									<c:otherwise> --%>
-	<!-- 										<option disabled>地區</option> -->
-	<%-- 										<c:forEach var='area' items='${areaList}' begin='0' end='4'> --%>
-	<!-- 											<option -->
-	<%-- 												<c:if test="${area2 eq area.publishAreaCN}">selected="selected"</c:if> --%>
-	<%-- 												value="${area.publishAreaCN}">${area.publishAreaCN}</option> --%>
-	<%-- 										</c:forEach> --%>
-	<%-- 									</c:otherwise> --%>
-	<%-- 								</c:choose> --%>
-	<%-- 							</c:otherwise> --%>
-	<%-- 						</c:choose> --%>
-	<!-- 					</select> -->
-	<!-- 				</div> -->
-	<!-- 				<select name="skill2" id="skill" class="btn btn-light searchbar" -->
-	<!-- 					style="text-align: center; text-align-last: center;"> -->
-	<%-- 					<c:choose> --%>
-	<%-- 						<c:when test="${skill1 eq 技能類別}"> --%>
-	<!-- 							<option selected disabled>技能類別</option> -->
-	<%-- 							<c:forEach var='skill' items='${skillList}'> --%>
-	<%-- 								<option value="${skill.skillNameCN}">${skill.skillNameCN}</option> --%>
-	<%-- 							</c:forEach> --%>
-	<%-- 						</c:when> --%>
-	<%-- 						<c:otherwise> --%>
-	<!-- 							<option disabled>技能類別</option> -->
-	<%-- 							<c:forEach var='skill' items='${skillList}' begin='0' end='5'> --%>
-	<!-- 								<option -->
-	<%-- 									<c:if test="${skill1 eq skill.skillNameCN}">selected="selected"</c:if> --%>
-	<%-- 									value="${skill.skillNameCN}">${skill.skillNameCN}</option> --%>
-	<%-- 							</c:forEach> --%>
-	<%-- 						</c:otherwise> --%>
-	<%-- 					</c:choose> --%>
-	<!-- 				</select> -->
-	<!-- 			</div> -->
-	<!-- 		</form> -->
-	<!-- 	</div> -->
-
+	<div class="wrap-level1-2">
+	<ul class="ul-sort">
+	<li class="li-sort"><div id="fnto" class="div-sort">由新到舊</div></li>
+	<li class="li-sort"><div id="fotn" class="div-sort">由舊到新</div></li>
+	<li class="li-sort"><div id="fmtl" class="div-sort">由多到少</div></li>
+	<li class="li-sort"><div id="fltm" class="div-sort">由少到多</div></li>
+	</ul>
+	</div>
 
 	<div id="container2" class="container2">
 		<c:choose>
@@ -763,7 +640,97 @@ form {
 	<!-- ---------------------要加的部份-------------------- -->
 
 	<script>
-		$(document).on("click", "")
+		$(document).one("mouseenter", "#iarea", function(){
+			var area1 = $("#area1").val();
+			var area2 = $("#area2").val();
+			var area3 = $("#area3").val();
+			var city1 = $("#city1").val();
+			var city2 = $("#city2").val();
+			var city3 = $("#city3").val();
+			var city4 = $("#city4").val();
+			var city5 = $("#city5").val();
+			var area = [area1, area2, area3];
+			var city = [city1, city2, city3, city4, city5];
+			
+			var north = [ "基隆", "台北", "新北", "桃園", "新竹" ];
+			var center = [ "苗栗", "台中", "彰化", "南投", "雲林" ];
+			var south = [ "嘉義", "台南", "高雄", "屏東" ];
+			var east = [ "台東", "花蓮", "宜蘭" ];
+
+			for(var i = 0; i < area.length; i++){
+				$(".checkbox-input[value*='"+ area[i] +"']").prop("checked", true);
+				if (area[i] == "北部"){
+					str = north;
+				} else if(area[i] == "中部"){
+					str = center;
+				} else if(area[i] == "南部") {
+					str = south;	
+				} else if(area[i] == "東部") {
+					str = east;	
+				} else {
+					str = "";
+				}
+// 				console.log("str=" + str)
+				for (var j = 0; j < str.length; j++){
+					if(str[j] != "") {
+						$(".checkbox-input[value*='"+ str[j] +"']").prop("checked", true).attr("disabled", true)
+					}
+				}
+			}
+			
+			for(var c = 0; c < city.length; c++){
+				$(".checkbox-input[value*='"+ city[c] +"']").prop("checked", true);
+			}
+			
+		})
+	</script>
+	
+	<script>
+	$(document).one("mouseenter", "#iskill", function(){
+		var type1 = $("#type1").val();
+		var type2 = $("#type2").val();
+		var type3 = $("#type3").val();
+		var type4 = $("#type4").val();
+		var skill1 = $("#skill1").val();
+		var skill2 = $("#skill2").val();
+		var skill3 = $("#skill3").val();
+		var skill4 = $("#skill4").val();
+		var skill5 = $("#skill5").val();
+		var type = [type1, type2, type3, type4];
+		var skill = [skill1, skill2, skill3, skill4, skill5];
+		
+		var art = [ "歌唱", "跳舞", "繪畫", "演戲" ];
+		var life = [ "化妝", "煮飯", "居家清潔" ];
+		var sport = [ "足球", "羽毛球", "網球", "排球" ];
+		var language = [ "法文", "日文", "韓文", "西班牙文" ];
+		var pet = [ "養鸚鵡", "養狗", "養貓", "養魚" ]
+		
+		for(var i = 0; i < type.length; i++){
+			$(".checkbox-input[value*='"+ type[i] +"']").prop("checked", true);
+			if (type[i] == "才藝"){
+				str = art;
+			} else if(type[i] == "生活"){
+				str = life;
+			} else if(type[i] == "運動") {
+				str = sport;	
+			} else if(type[i] == "語言") {
+				str = language;	
+			} else if(type[i] == "寵物"){
+				str = pet;
+			} else {
+				str = "";
+			}
+			for (var j = 0; j < str.length; j++){
+				if(str[j] != "") {
+					$(".checkbox-input[value*='"+ str[j] +"']").prop("checked", true).attr("disabled", true)
+				}
+			}
+		}
+		for(var c = 0; c < skill.length; c++){
+			$(".checkbox-input[value*='"+ skill[c] +"']").prop("checked", true);
+		}
+		
+	})
 	</script>
 
 	<script>
@@ -775,7 +742,7 @@ form {
 			$('#skillModal').modal('show');
 		})
 	</script>
-
+		
 	<script>
 		var xhr1 = new XMLHttpRequest();
 		xhr1.open("GET", "<c:url value='GetIndexBtn.do' />", true);
@@ -1182,6 +1149,173 @@ form {
 				A.value = input;
 			})
 		})
+	</script>
+	
+	<script>
+		$(document).on("click", "#fotn", function(){
+			var input = document.getElementById("container2");
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "<c:url value='QuerySort1.do' />", true);
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status == 200){
+// 						console.log(JSON.parse(xhr.responseText));
+						var arr = JSON.parse(xhr.responseText);
+						var content1 = "<div class='card-deck'>";
+						var content2 = "";
+						for(var i = 0; i < arr[0].length; i++){
+							content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>";
+							if(arr[0][i].memberNic == null){
+								content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>";
+							} else {
+								content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>";
+							}
+							content2 += "</div><div class=''>";
+							content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>";
+							content2 += "<div class='card-body'>";
+							content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>";
+							content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>";
+							content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
+							content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
+							content2 += "<div style='text-align: right'>";
+							content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+							content2 += "<div class='card-footer last-part'>";
+							content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
+							content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
+							content2 += "</div></div></div>"
+						}
+						var content = content1 + content2 + "</div>";
+						input.innerHTML = content;
+				}
+			}
+		}})
+	</script>
+	
+	<script>
+	$(document).on("click", "#fnto", function(){
+		var input = document.getElementById("container2");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='QuerySort2.do' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+// 					console.log(JSON.parse(xhr.responseText));
+					var arr = JSON.parse(xhr.responseText);
+					var content1 = "<div class='card-deck'>";
+					var content2 = "";
+					for(var i = 0; i < arr[0].length; i++){
+						content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>";
+						if(arr[0][i].memberNic == null){
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>";
+						} else {
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>";
+						}
+						content2 += "</div><div class=''>";
+						content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>";
+						content2 += "<div class='card-body'>";
+						content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>";
+						content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>";
+						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
+						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
+						content2 += "<div style='text-align: right'>";
+						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						content2 += "<div class='card-footer last-part'>";
+						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
+						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
+						content2 += "</div></div></div>"
+					}
+					var content = content1 + content2 + "</div>";
+					input.innerHTML = content;
+				}
+			}
+		}
+	})
+	</script>
+	
+	<script>
+	$(document).on("click", "#fmtl", function(){
+		var input = document.getElementById("container2");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='QuerySort3.do' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+// 					console.log(JSON.parse(xhr.responseText));
+					var arr = JSON.parse(xhr.responseText);
+					var content1 = "<div class='card-deck'>";
+					var content2 = "";
+					for(var i = 0; i < arr[0].length; i++){
+						content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>";
+						if(arr[0][i].memberNic == null){
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>";
+						} else {
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>";
+						}
+						content2 += "</div><div class=''>";
+						content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>";
+						content2 += "<div class='card-body'>";
+						content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>";
+						content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>";
+						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
+						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
+						content2 += "<div style='text-align: right'>";
+						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						content2 += "<div class='card-footer last-part'>";
+						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
+						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
+						content2 += "</div></div></div>"
+					}
+					var content = content1 + content2 + "</div>";
+					input.innerHTML = content;
+				}
+			}
+		}
+	})
+	</script>
+	
+	<script>
+	$(document).on("click", "#fltm", function(){
+		var input = document.getElementById("container2");
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "<c:url value='QuerySort4.do' />", true);
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+// 					console.log(JSON.parse(xhr.responseText));
+					var arr = JSON.parse(xhr.responseText);
+					var content1 = "<div class='card-deck'>";
+					var content2 = "";
+					for(var i = 0; i < arr[0].length; i++){
+						content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>";
+						if(arr[0][i].memberNic == null){
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>";
+						} else {
+							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>";
+						}
+						content2 += "</div><div class=''>";
+						content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>";
+						content2 += "<div class='card-body'>";
+						content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>";
+						content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>";
+						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
+						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
+						content2 += "<div style='text-align: right'>";
+						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						content2 += "<div class='card-footer last-part'>";
+						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
+						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
+						content2 += "</div></div></div>"
+					}
+					var content = content1 + content2 + "</div>";
+					input.innerHTML = content;
+				}
+			}
+		}
+	})
 	</script>
 
 </body>

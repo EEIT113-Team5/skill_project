@@ -19,7 +19,7 @@ import search.model.SearchBean;
 import search.service.KeywordService;
 
 @Controller
-@SessionAttributes(names = { "searchList", "input", "keyword1", "area1", "area2", "area3", "city1", "city2", "city3", "city4",
+@SessionAttributes(names = { "searchList", "areablock", "skillblock", "keyword1", "area1", "area2", "area3", "city1", "city2", "city3", "city4",
 		"city5", "type1", "type2", "type3", "type4", "skill1", "skill2", "skill3", "skill4", "skill5" })
 public class KeywordController1 {
 	@Autowired
@@ -33,7 +33,7 @@ public class KeywordController1 {
 		return "search/searchadvanced";
 	}
 
-	@GetMapping("/InsertKeyword1.do")
+	@GetMapping("/InsertKeyword.do")
 	public String insertKeyword(Model m, @RequestParam("keyword") String keyword,
 			@RequestParam(value = "area1", required = false) String area1,
 			@RequestParam(value = "area2", required = false) String area2,
@@ -51,7 +51,10 @@ public class KeywordController1 {
 			@RequestParam(value = "skill2", required = false) String skill2,
 			@RequestParam(value = "skill3", required = false) String skill3,
 			@RequestParam(value = "skill4", required = false) String skill4,
-			@RequestParam(value = "skill5", required = false) String skill5) {
+			@RequestParam(value = "skill5", required = false) String skill5,
+			@RequestParam(value = "sort", required = false) String sort,
+			@RequestParam(value = "areablock", required = false) String areablock,
+			@RequestParam(value = "skillblock", required = false) String skillblock) {
 
 		Timestamp ts = new java.sql.Timestamp(System.currentTimeMillis());
 		if (keyword != "") {
@@ -69,13 +72,8 @@ public class KeywordController1 {
 
 		List<SearchBean> list = (List<SearchBean>) kService.queryResult(keyword, area1, area2, area3, city1, city2,
 				city3, city4, city5, type1, type2, type3, type4, skill1, skill2, skill3, skill4, skill5);
-
 		m.addAttribute("searchList", list);
-		
-		List<String> list2 = Arrays.asList(keyword, area1, area2, area3, city1, city2,
-				city3, city4, city5, type1, type2, type3, type4, skill1, skill2, skill3, skill4, skill5);
-		m.addAttribute("input", list2);
-		
+
 		m.addAttribute("keyword1", keyword);
 		m.addAttribute("area1", area1);
 		m.addAttribute("area2", area2);
@@ -94,6 +92,8 @@ public class KeywordController1 {
 		m.addAttribute("skill3", skill3);
 		m.addAttribute("skill4", skill4);
 		m.addAttribute("skill5", skill5);
+		m.addAttribute("areablock", areablock);
+		m.addAttribute("skillblock", skillblock);
 
 		return "redirect:/searchadvanced";
 	}
