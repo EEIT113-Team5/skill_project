@@ -413,8 +413,8 @@
 			$("#nicname").val("小米");
 			$("#acc").val("happy");
 			$("#birthday").val("1993/07/27");
-// 			$("#pwd").val("1qazxsw2");
-// 			$("#checkpwd").val("1qazxsw2");
+			$("#pwd").val("123456789");
+			$("#checkpwd").val("123456789");
 			$("#phone").val("0912345678");
 			$("#mail").val("eeit11321@gmail.com");
 			$("#addr").val("杉樹區北森花路6巷5號");

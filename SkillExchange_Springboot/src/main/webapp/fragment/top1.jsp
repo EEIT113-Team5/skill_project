@@ -169,7 +169,7 @@
 									<a class="dropdown-item" href="${jspPath}/loginInit">我要登入</a>
 								</c:if>
 								<c:if test="${ ! empty memberBean}">
-									<a class="dropdown-item" href="<c:url value='Logout' />">修改會員</a>
+									<a class="dropdown-item" href="<c:url value='reviseMember' />">修改會員</a>
 								</c:if>
 								<c:if test="${ ! empty memberBean}">
 									<a class="dropdown-item" href="<c:url value='Logout' />">登出</a>
