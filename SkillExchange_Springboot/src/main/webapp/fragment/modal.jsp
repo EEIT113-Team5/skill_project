@@ -61,6 +61,7 @@
 		}
 		if (type === 'U') {
 			$("#editErr").text("");
+			$("#groupErr").text("");
 		}
 	}
 	function collectionGroupDelConfirm() {
@@ -119,9 +120,13 @@
 		let status = $("#instatus").val();
 		let time = $("#intimepicker").val();
 		
-		document.forms[0].action = "<c:url value='insertJob?cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression="+time+"' />";
-		document.forms[0].method = "POST";
-		document.forms[0].submit();
+		if(cronGroup.length==0|cronGroup==null){
+			$("#groupErr").text("群組名稱不可為空！");
+		}else{
+			document.forms[0].action = "<c:url value='insertJob?cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression="+time+"' />";
+			document.forms[0].method = "POST";
+			document.forms[0].submit();
+		}
 	}
 	
 	function delScheduleConfirm(){
@@ -393,7 +398,10 @@
 							<tr>
 								<td>排程群組<span class="required">*</span>：</td>
 								<td><input type="text" class="form-control" id="incronGroup"
-									name="cronGroup"></td>
+									name="cronGroup">
+									<span class="required" id="groupErr"></span>
+									</td>
+									
 							</tr>
 							<tr>
 								<td>排程名稱<span class="required">*</span>：</td>
@@ -451,7 +459,7 @@
 						</tbody>
 					</table>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal('U')">取消</button>
 						<button type="button" class="btn btn-primary"
 							onclick="insertJobConfirm()">確認</button>
 					</div>
