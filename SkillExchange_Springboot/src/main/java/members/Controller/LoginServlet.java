@@ -149,7 +149,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (mb != null) {
 				if (!"1".equals(mb.getAccStatus())) {
-					errorMsg.put("LoginError", "該帳號不存在或還未驗證");
+					errorMsg.put("LoginError", "該帳號不存在或還未驗證或是已遭停權");
 				} else {
 					httpSession.setAttribute("memberBean", mb);
 				}
