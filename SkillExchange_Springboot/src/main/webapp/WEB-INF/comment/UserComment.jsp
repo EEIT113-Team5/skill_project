@@ -157,7 +157,7 @@
 								</div>
 
 								<div id="main"
-									style="flex: 4; width: 500px; height: 400px; margin-left: 40px"></div>
+									style="flex: 4; width: 500px; height: 600px; margin-left: 40px"></div>
 							</div>
 						</div>
 
