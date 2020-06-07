@@ -7,6 +7,9 @@
 .timepicker {
 	z-index: 1151 !important;
 }
+.required{
+	color:red;
+}
 </style>
 <script>
 	function typeChange() {
@@ -103,8 +106,27 @@
 		let cronGroup = $("#cronGroup").val();
 		let cronName = $("#cronName").val();
 		let status = $("#status").val();
+		let time = $("#timepicker").val();
 		
-		document.forms[0].action = "<c:url value='updateJob?jobNo="+ jobNo + "&cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression=' />";
+		document.forms[0].action = "<c:url value='updateJob?jobNo="+ jobNo + "&cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression="+time+"' />";
+		document.forms[0].method = "POST";
+		document.forms[0].submit();
+	}
+	
+	function insertJobConfirm() {
+		let cronGroup = $("#incronGroup").val();
+		let cronName = $("#incronName").val();
+		let status = $("#instatus").val();
+		let time = $("#intimepicker").val();
+		
+		document.forms[0].action = "<c:url value='insertJob?cronGroup=" + cronGroup + "&cronName=" + cronName +"&status=" + status + "&cronExpression="+time+"' />";
+		document.forms[0].method = "POST";
+		document.forms[0].submit();
+	}
+	
+	function delScheduleConfirm(){
+		jobNo = $("#deljobNo").val();
+		document.forms[0].action = "<c:url value='delJob?jobNo="+ jobNo + "' />";
 		document.forms[0].method = "POST";
 		document.forms[0].submit();
 	}
@@ -281,17 +303,17 @@
 								<th style="width: 300px"></th>
 							</tr>
 							<tr>
-								<td>排程群組：</td>
+								<td>排程群組<span class="required">*</span>：</td>
 								<td><input type="text" class="form-control" id="cronGroup"
 									name="cronGroup"></td>
 							</tr>
 							<tr>
-								<td>排程名稱：</td>
+								<td>排程名稱<span class="required">*</span>：</td>
 								<td><input type="text" class="form-control" id="cronName"
 									name="cronName" readonly></td>
 							</tr>
 							<tr>
-								<td>啟動時間：</td>
+								<td>啟動時間<span class="required">*</span>：</td>
 								<td></td>
 							</tr>
 							<tr style="background-color: #D2E9FF">
@@ -328,7 +350,7 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>狀態：</td>
+								<td>狀態<span class="required">*</span>：</td>
 								<td><select id="status" class="btn btn-light searchbar">
 										<option value="1">啟動</option>
 										<option value="0">關閉</option>
@@ -369,12 +391,12 @@
 								<th style="width: 300px"></th>
 							</tr>
 							<tr>
-								<td>排程群組：</td>
+								<td>排程群組<span class="required">*</span>：</td>
 								<td><input type="text" class="form-control" id="incronGroup"
 									name="cronGroup"></td>
 							</tr>
 							<tr>
-								<td>排程名稱：</td>
+								<td>排程名稱<span class="required">*</span>：</td>
 								<td>
 								<select name="incronName" id="incronName" class="btn btn-light searchbar">
 									<option>活動通知信</option>
@@ -383,7 +405,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>啟動時間：</td>
+								<td>啟動時間<span class="required">*</span>：</td>
 								<td></td>
 							</tr>
 							<tr style="background-color: #D2E9FF">
@@ -406,7 +428,7 @@
 									<div id="indayInput" style="display: none">
 										<input type="text" class="form-control" style="width: 40px">
 										&ensp;日&ensp;
-									</div> <input type="text" id="intimepicker" name="timepicker"
+									</div> <input type="text" id="intimepicker" name="intimepicker"
 									class="form-control timepicker" style="width: 130px"></td>
 							</tr>
 							<tr id="infixed" style="display: none; background-color: #D2E9FF">
@@ -420,8 +442,8 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>狀態：</td>
-								<td><select id="status" class="btn btn-light searchbar">
+								<td>狀態<span class="required">*</span>：</td>
+								<td><select id="instatus" class="btn btn-light searchbar">
 										<option value="1">啟動</option>
 										<option value="0">關閉</option>
 								</select></td>
@@ -429,10 +451,9 @@
 						</tbody>
 					</table>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							onclick="closeModal('U')">取消</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary"
-							onclick="editJobConfirm()">確認</button>
+							onclick="insertJobConfirm()">確認</button>
 					</div>
 				</form>
 			</div>
@@ -452,11 +473,12 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<input type="hidden" id="deljobNo" name="deljobNo">
 				<p id="delScheduleText">確認刪除？</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-primary">確認</button>
+				<button type="button" class="btn btn-primary" onclick="delScheduleConfirm()">確認</button>
 			</div>
 		</div>
 	</div>

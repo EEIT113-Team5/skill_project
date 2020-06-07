@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -75,5 +78,41 @@ public class JobTaskServiceImpl implements JobTaskService {
 	@Override
 	public List<JobParam> getInActiveJobParam() {
 		return jobDao.getInActiveJobParam();
+	}
+
+	@Override
+	public boolean insertJobParam(JobParam jobParam) {
+		boolean result = false;
+		try {
+			Scheduler scheduler = (Scheduler) context.getBean("scheduler");
+			JobDetail jobDetail = JobBuilder.newJob(SendActivityMailJob.class)
+					.withIdentity(jobParam.getJobName(), jobParam.getJobGroup()).build();
+			CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(jobParam.getCronExpression());
+			CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobParam.getJobName(), jobParam.getJobGroup()).withSchedule(scheduleBuilder).build();
+			jobDetail.getJobDataMap().put("jobParam", jobParam);
+			scheduler.scheduleJob(jobDetail, trigger);
+			System.out.println("===create scheduleJob success====");
+			
+			result =jobDao.insertJobParam(jobParam);
+			System.out.println("===insert jobParam success====");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public void deleteJobParam(Integer jobNo) {
+		try {
+			Scheduler scheduler = (Scheduler) context.getBean("scheduler");
+			jobParam = jobDao.getJobParamByNo(jobNo);
+			JobKey jobKey = JobKey.jobKey(jobParam.getJobName(), jobParam.getJobGroup()); 
+			scheduler.deleteJob(jobKey);
+			System.out.println("====deleteJob success====");
+			jobDao.deleteJobParam(jobNo);
+			System.out.println("===delete jobParam success====");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

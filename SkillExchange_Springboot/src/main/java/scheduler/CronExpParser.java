@@ -2,11 +2,14 @@ package scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.quartz.CronExpression;
+
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
 public class CronExpParser {
 	public static boolean parser(String cronExpression, String cronDate, List<String> result) {
@@ -72,10 +75,10 @@ public class CronExpParser {
 		if (tmpCorns.length == 6) {
 			// 解析月
 			if (!tmpCorns[4].equals("*")) {
-				if(tmpCorns[4].contains("/")) {
+				if (tmpCorns[4].contains("/")) {
 					String[] month = tmpCorns[4].split("/");
 					sBuffer.append("每").append(month[1]).append("個月");
-				}else {
+				} else {
 					sBuffer.append(tmpCorns[4]).append("月");
 				}
 			} else {
@@ -120,10 +123,10 @@ public class CronExpParser {
 			// 解析日
 			if (!tmpCorns[3].equals("?")) {
 				if (!tmpCorns[3].equals("*")) {
-					if(tmpCorns[4].contains("/")) {
+					if (tmpCorns[4].contains("/")) {
 						String[] day = tmpCorns[3].split("/");
 						sBuffer.append("每").append(day[1]).append("日");
-					}else {
+					} else {
 						sBuffer.append(tmpCorns[3]).append("日");
 					}
 				} else {
@@ -133,10 +136,10 @@ public class CronExpParser {
 
 			// 解析時
 			if (!tmpCorns[2].equals("*")) {
-				if(tmpCorns[2].contains("/")) {
+				if (tmpCorns[2].contains("/")) {
 					String[] hour = tmpCorns[2].split("/");
 					sBuffer.append("每").append(hour[2]).append("小時");
-				}else {
+				} else {
 					sBuffer.append(tmpCorns[2]).append("時");
 				}
 			} else {
@@ -145,10 +148,10 @@ public class CronExpParser {
 
 			// 解析分
 			if (!tmpCorns[1].equals("*")) {
-				if(tmpCorns[1].contains("/")) {
+				if (tmpCorns[1].contains("/")) {
 					String[] min = tmpCorns[1].split("/");
 					sBuffer.append("每").append(min[1]).append("分");
-				}else {
+				} else {
 					sBuffer.append(tmpCorns[1]).append("分");
 				}
 			} else {
@@ -157,10 +160,10 @@ public class CronExpParser {
 
 			// 解析秒
 			if (!tmpCorns[0].equals("*")) {
-				if(tmpCorns[0].contains("/")) {
+				if (tmpCorns[0].contains("/")) {
 					String[] sec = tmpCorns[0].split("/");
 					sBuffer.append("每").append(sec[1]).append("秒");
-				}else {
+				} else {
 					sBuffer.append(tmpCorns[0]).append("秒");
 				}
 			} else {
@@ -170,5 +173,26 @@ public class CronExpParser {
 
 		return sBuffer.toString();
 
+	}
+
+	public static String translateToCronExp(String cronExpressionStr) {
+//		01 : 00 : 00
+//		0 15 10 * * ?
+		String[] times = cronExpressionStr.split(" : ");
+		List<String> timeList = new ArrayList<String>();
+		for(String time:times) {
+			if(time.trim().charAt(0)=='0') {
+				time = time.substring(1);
+				timeList.add(time);
+			}else {
+				time = time.trim();
+				timeList.add(time);
+			}
+		}
+		StringBuffer cronExpression = new StringBuffer();
+		cronExpression.append(timeList.get(2)+" ").append(timeList.get(1)+" ").append(timeList.get(0)+" ");
+		cronExpression.append("* * ?");
+		System.out.println(cronExpression);
+		return cronExpression.toString();
 	}
 }

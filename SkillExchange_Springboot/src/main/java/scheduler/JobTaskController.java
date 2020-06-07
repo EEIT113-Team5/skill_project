@@ -59,13 +59,65 @@ public class JobTaskController {
 		model.addAttribute("MsgUpOK", msgOK);
 
 		try {
-			String cronExpression = "0/5 * * * * ?";
+			String cronExpression = CronExpParser.translateToCronExp(cronExpressionStr);
 			JobTaskService jobService = ApplicationContextHelper.getBean(JobTaskService.class);
 			jobService.updateJobCron(jobNo, cronExpression, status, jobGroup.trim(), jobName.trim());
 			msgOK.put("updateOK", "設定成功！");
 		} catch (SchedulerException e) {
 			e.printStackTrace();
-			errorMsg.put("updateFail", "回覆失敗請再操作一次");
+			errorMsg.put("updateFail", "設定失敗請再操作一次");
+		}
+		if (!errorMsg.isEmpty()) {
+			return "scheduler/schedulerPage";
+		}
+		return "redirect:/getAllJob";
+	}
+	
+	@PostMapping(value = "/insertJob")
+	public String insertJobCron(@RequestParam("cronExpression") String cronExpressionStr, @RequestParam("status") String status,
+			@RequestParam("cronGroup") String jobGroup, @RequestParam("cronName") String jobName, Model model) {
+		JobParam jobParam = ApplicationContextHelper.getBean(JobParam.class);
+		Map<String, String> errorMsg = new HashMap<String, String>();
+		Map<String, String> msgOK = new HashMap<String, String>();
+		model.addAttribute("MsgMap", errorMsg);
+		model.addAttribute("MsgUpOK", msgOK);
+
+		try {
+			String cronExpression = CronExpParser.translateToCronExp(cronExpressionStr);
+			
+			
+			jobParam.setJobGroup(jobGroup.trim());
+			jobParam.setJobName(jobName.trim());
+			jobParam.setStatus(status);
+			jobParam.setCronExpression(cronExpression);
+			JobTaskService jobService = ApplicationContextHelper.getBean(JobTaskService.class);
+			jobService.insertJobParam(jobParam);
+			msgOK.put("insertOK", "設定成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.put("insertFail", "設定失敗請再操作一次");
+		}
+		if (!errorMsg.isEmpty()) {
+			return "scheduler/schedulerPage";
+		}
+		return "redirect:/getAllJob";
+	}
+	
+	@PostMapping(value = "/delJob")
+	public String deleteJobCron(@RequestParam("jobNo") Integer jobNo, Model model) {
+		
+		Map<String, String> errorMsg = new HashMap<String, String>();
+		Map<String, String> msgOK = new HashMap<String, String>();
+		model.addAttribute("MsgMap", errorMsg);
+		model.addAttribute("MsgUpOK", msgOK);
+
+		try {
+			JobTaskService jobService = ApplicationContextHelper.getBean(JobTaskService.class);
+			jobService.deleteJobParam(jobNo);
+			msgOK.put("delOK", "刪除成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.put("delFail", "刪除失敗請再操作一次");
 		}
 		if (!errorMsg.isEmpty()) {
 			return "scheduler/schedulerPage";

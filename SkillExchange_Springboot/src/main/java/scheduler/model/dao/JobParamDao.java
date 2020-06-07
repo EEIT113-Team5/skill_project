@@ -12,4 +12,6 @@ public interface JobParamDao {
 	List<JobParam> getInActiveJobParam();
 	JobParam getJobParamByNo(Integer jobNo);
 	void updateJobParam(String cronExpression,Integer jobNo,String status,String jobGroup,String jobName);
+	boolean insertJobParam(JobParam jobParam);
+	void deleteJobParam(Integer jobNo);
 }

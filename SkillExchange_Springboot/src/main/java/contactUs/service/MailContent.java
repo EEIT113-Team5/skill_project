@@ -45,7 +45,7 @@ public class MailContent {
 				"<tbody>" + 
 				"<tr style='padding:0; vertical-align:top; text-align:center'>" + 
 				"<td style='word-break:break-word; padding:0px 0px 10px; vertical-align:top; text-align:center; color:#333333;  font-weight:normal; margin:0; line-height:20px; font-size:14px; border-collapse:collapse!important'>" + 
-				"<div class='x_mark' style='text-align:center'><a href='www.google.co.uk' target='_blank' style='text-align:center; color:#4183C4; text-decoration:none'>" + 
+				"<div class='x_mark' style='text-align:center'><a target='_blank' style='text-align:center; color:#4183C4; text-decoration:none'>" + 
 				"<div style='display: inline-block; max-width: 99.9%;'>" + 
 				"</a>" + 
 				"</div>" + 
@@ -148,7 +148,7 @@ public class MailContent {
 				"<tbody>" + 
 				"<tr style='padding:0; vertical-align:top; text-align:center'>" + 
 				"<td style='word-break:break-word; padding:0px 0px 10px; vertical-align:top; text-align:center; color:#333333;  font-weight:normal; margin:0; line-height:20px; font-size:14px; border-collapse:collapse!important'>" + 
-				"<div class='x_mark' style='text-align:center'><a href='www.google.co.uk' target='_blank' style='text-align:center; color:#4183C4; text-decoration:none'>" + 
+				"<div class='x_mark' style='text-align:center'><a target='_blank' style='text-align:center; color:#4183C4; text-decoration:none'>" + 
 				"<div style='display: inline-block; max-width: 99.9%;'>" + 
 				"</a>" + 
 				"</div>" + 

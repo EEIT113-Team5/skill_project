@@ -114,10 +114,11 @@ label {
 		</script>
 	</c:if>
 	<script>
-		document.addEventListener('keypress', autofill);
-		function autofill() {
-			$("#replyContent").text("謝謝您喜歡這個平台，希望未來可以提供更多的服務給您，讓您有更好的體驗！");
-		}
+		document.addEventListener('keypress', function(event){
+			if(event.keyCode == 92)
+				$("#replyContent").text("謝謝您喜歡這個平台，希望未來可以提供更多的服務給您，讓您有更好的體驗！");
+			
+		});
 	</script>
 	<%
 		session.removeAttribute("MsgOK");

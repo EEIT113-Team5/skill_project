@@ -93,7 +93,7 @@ font {
 									<td><a class="btn btn-success" id="updJob${jobList.jobNo}"
 										href="#" onclick="editSchedule(${jobList.jobNo},'${jobList.jobGroup}','${jobList.jobName}','${jobList.cronExpression}','${jobList.status}')">編輯</a>
 										<a class="btn btn-danger" id="delJob${jobList.jobNo}"
-										href="#" data-toggle="modal" data-target="#delScheduleModal">刪除</a>
+										href="#" onclick="delSchedule('${jobList.jobNo}')">刪除</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -120,14 +120,14 @@ font {
 	</form>
 	<c:if test="${not empty MsgMap}">
 		<script>
-			let message = "${MsgMap.updateFail}";
+			let message = "${MsgMap.updateFail}{MsgMap.insertFail}{MsgMap.delFail}";
 			$("#alertText").text(message);
 			$("#alertModal").modal('show');
 		</script>
 	</c:if>
 	<c:if test="${not empty MsgUpOK}">
 		<script>
-			let message = "${MsgUpOK.updateOK}";
+			let message = "${MsgUpOK.updateOK}${MsgUpOK.insertOK}${MsgUpOK.delOK}";
 			$("#alertText").text(message);
 			$("#alertModal").modal('show');
 		</script>
@@ -167,8 +167,15 @@ font {
 		})();
 	</script>
 	<script type="text/javascript">
+		
 		$('#timepicker').wickedpicker({
-			now : '00:00',
+			now : '10:15',
+			twentyFour : true,
+			showSeconds : true
+		});
+	</script>
+	<script type="text/javascript">
+		$('#intimepicker').wickedpicker({
 			twentyFour : true,
 			showSeconds : true
 		});
@@ -184,6 +191,11 @@ font {
 		$("#status").val(0);
 				}
 		$("#editScheduleModal").modal('show');
+		}
+	
+	function delSchedule(no){
+		$("#deljobNo").val(no);
+		$("#delScheduleModal").modal('show');
 		}
 	</script>
 

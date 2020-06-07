@@ -28,7 +28,7 @@ public class JobParamDaoImpl implements JobParamDao {
 		List<JobParam> list = query.list();
 		return list;
 	}
-	
+
 	@Override
 	public List<JobParam> getInActiveJobParam() {
 		String hql = "from JobParam where status = 0";
@@ -39,13 +39,13 @@ public class JobParamDaoImpl implements JobParamDao {
 
 	@Override
 	public JobParam getJobParamByNo(Integer jobNo) {
-		JobParam jobParam = getSession().get(JobParam.class,jobNo);
+		JobParam jobParam = getSession().get(JobParam.class, jobNo);
 		return jobParam;
 	}
 
 	@Override
-	public void updateJobParam(String cronExpression,Integer jobNo,String status,String jobGroup,String jobName) {
-		String hql="update JobParam set status=:status,jobGroup = :jobGroup,jobName = :jobName,cronExpression = :cronExpression,updateTime = GETDATE() where jobNo = :jobNo";
+	public void updateJobParam(String cronExpression, Integer jobNo, String status, String jobGroup, String jobName) {
+		String hql = "update JobParam set status=:status,jobGroup = :jobGroup,jobName = :jobName,cronExpression = :cronExpression,updateTime = GETDATE() where jobNo = :jobNo";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("cronExpression", cronExpression);
 		query.setParameter("jobNo", jobNo);
@@ -55,6 +55,18 @@ public class JobParamDaoImpl implements JobParamDao {
 		query.executeUpdate();
 	}
 
+	@Override
+	public boolean insertJobParam(JobParam jobParam) {
+		getSession().save(jobParam);
+		if (jobParam != null) {
+			return true;
+		}
+		return false;
+	}
 
-
+	@Override
+	public void deleteJobParam(Integer jobNo) {
+		JobParam job = getJobParamByNo(jobNo);
+		getSession().delete(job);
+	}
 }
