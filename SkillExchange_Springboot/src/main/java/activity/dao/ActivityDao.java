@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import activity.bean.ActivityBean;
+import activity.bean.ActivityBeantwo;
 import activity.bean.Activitylike;
 
 public interface ActivityDao {
@@ -23,7 +24,9 @@ public interface ActivityDao {
 	boolean insert(ActivityBean ab);
 
 	List<ActivityBean> getAllActivity();
-
+   
+	public List<ActivityBeantwo> getAllActivity1();
+	
 	List<ActivityBean> getActivityClass(String name);
 
 	List<ActivityBean> selectMyOwnActivity(String memberid);

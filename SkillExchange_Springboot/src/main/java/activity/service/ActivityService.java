@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import activity.bean.ActivityBean;
+import activity.bean.ActivityBeantwo;
 import activity.bean.Activitylike;
 import activity.bean.CombinedBean;
 
@@ -26,6 +27,8 @@ public interface ActivityService {
 	int updateMyOwnSpecificActivity(ActivityBean ab);
 
 	List<ActivityBean> getAllActivity();
+	
+	public List<ActivityBeantwo> getAllActivity1();
 
 	List<ActivityBean> getActivityClass(String name);
 

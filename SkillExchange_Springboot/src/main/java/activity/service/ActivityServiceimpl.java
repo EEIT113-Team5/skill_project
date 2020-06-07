@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
 import activity.bean.ActivityBean;
+import activity.bean.ActivityBeantwo;
 import activity.bean.Activitylike;
 import activity.bean.CombinedBean;
 import activity.dao.ActivityDao;
@@ -74,6 +75,13 @@ public class ActivityServiceimpl implements ActivityService {
 		return ac.getAllActivity();
 	}
 
+	@Override
+	public List<ActivityBeantwo> getAllActivity1() {
+		// TODO Auto-generated method stub
+		return ac.getAllActivity1();
+	}
+
+	
 	@Override
 	public List<ActivityBean> getActivityClass(String name) {
 		return ac.getActivityClass(name);

@@ -14,6 +14,7 @@ import org.springframework.core.io.buffer.LimitedDataBufferList;
 import org.springframework.stereotype.Repository;
 
 import activity.bean.ActivityBean;
+import activity.bean.ActivityBeantwo;
 import activity.bean.Activitylike;
 import comment.bean.CommentBean;
 
@@ -107,6 +108,14 @@ public class Activitydaoimpl implements ActivityDao {
 		String hql = "from ActivityBean";
 		Query query = getSession().createQuery(hql);
 		List<ActivityBean> list = query.list();
+		return list;
+	}
+	
+	@Override
+	public List<ActivityBeantwo> getAllActivity1() {
+		String hql = "from ActivityBeantwo";
+		Query query = getSession().createQuery(hql);
+		List<ActivityBeantwo> list = query.list();
 		return list;
 	}
 

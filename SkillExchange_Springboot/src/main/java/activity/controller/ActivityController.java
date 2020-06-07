@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.Timestamp;
@@ -34,11 +33,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
-
 import activity.bean.ActivityBean;
+import activity.bean.ActivityBeantwo;
 import activity.bean.Activitylike;
 import activity.bean.CombinedBean;
 import activity.service.ActivityService;
@@ -164,9 +160,9 @@ public class ActivityController {
 	
     //for calendar
 	@GetMapping(value = "/SelectActivityJson", produces = { "application/json" })
-	public ResponseEntity<List<ActivityBean>> SelectActivityJson(Model model) {
-		List<ActivityBean> activity = as.getAllActivity();
-		ResponseEntity<List<ActivityBean>> re = new ResponseEntity<>(activity, HttpStatus.OK);
+	public ResponseEntity<List<ActivityBeantwo>> SelectActivityJson(Model model) {
+		List<ActivityBeantwo> activity = as.getAllActivity1();
+		ResponseEntity<List<ActivityBeantwo>> re = new ResponseEntity<>(activity, HttpStatus.OK);
 		return re;
 	}
 	
