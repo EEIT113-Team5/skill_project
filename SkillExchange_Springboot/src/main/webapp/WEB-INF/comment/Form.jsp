@@ -150,7 +150,7 @@
 
 					</div>
 				</div>
-				<input type="submit" name="submit" class="btn btn-outline-success" id="submit" value="submit" />
+				<input type="submit" name="submit" class="btn btn-outline-success" id="submit" value="提交" />
 			</form:form>
 		</div>
 

@@ -71,13 +71,22 @@
 	display: none;
 }
 
+h2 {
+	font-family: 微軟正黑體;
+}
 
-h2 {font-family: 微軟正黑體;
- }
- h4 {font-family: 微軟正黑體;
- }
-h1{font-family: 微軟正黑體;}
-span{font-family: 微軟正黑體;}
+h4 {
+	font-family: 微軟正黑體;
+}
+
+h1 {
+	font-family: 微軟正黑體;
+}
+
+span {
+	font-family: 微軟正黑體;
+}
+
 .main1 {
 	display: flex;
 }
@@ -139,27 +148,27 @@ span{font-family: 微軟正黑體;}
 	position: fixed;
 	bottom: 0px;
 	/* 	left: 0px; */
-	
 }
- 
+
 .aboutme {
 	border-style: inset;
 	border-width: 3px;
 	border-color: coral;
 }
+
 .scroll-top {
-  width: 40px;
-  height: 40px;
-  background: #333;
-  color: #f1f1f1;
-  font-size: 1.5em;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 40px;
-  /* 永遠固定在頁面上 */
-  position: fixed;
-  right: 20px;
-  bottom: 80px;
+	width: 40px;
+	height: 40px;
+	background: #333;
+	color: #f1f1f1;
+	font-size: 1.5em;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 40px;
+	/* 永遠固定在頁面上 */
+	position: fixed;
+	right: 20px;
+	bottom: 80px;
 }
 </style>
 </head>
@@ -182,7 +191,7 @@ span{font-family: 微軟正黑體;}
 		</div>
 	</section>
 	<jsp:include page="/fragment/modal.jsp" />
-	
+
 	<div id="main" class="main1">
 		<div id="leftspace"></div>
 		<div id="left">
@@ -228,21 +237,29 @@ span{font-family: 微軟正黑體;}
 											<button type="button" id="add${skills.publishNo}"
 												style="float: right; margin-top: 15px"
 												class="btn btn-success"
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>
+												加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i>
+											</button>
 											<button type="button" id="cancel${skills.publishNo}"
 												class="btn btn-danger "
 												style="display: none; float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>
+												取消收藏 <i class="fa fa-heart" aria-hidden="true"></i>
+											</button>
 										</c:when>
 										<c:otherwise>
 											<button type="button" id="add${skills.publishNo}"
 												class="btn btn-success "
 												style="display: none; float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+												onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>
+												加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i>
+											</button>
 											<button type="button" id="cancel${skills.publishNo}"
 												class="btn btn-danger"
 												style="float: right; margin-top: 15px"
-												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
+												onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>
+												取消收藏 <i class="fa fa-heart" aria-hidden="true"></i>
+											</button>
 										</c:otherwise>
 									</c:choose>
 									<br> <br> <br>
@@ -293,139 +310,145 @@ span{font-family: 微軟正黑體;}
 		</div>
 		<div id="center1"></div>
 		<div id="right">
-		
-				<c:choose>
-					<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-						<table>
-							<tbody>
-							
-								<c:forEach var='data' varStatus='var' items='${reqchat}'>
-									<tr>
-										<td>您有來自</td>
-										<td id="requestid${var.index}" style="display: none">${data.sendNo}</td>
 
-										<td><img id="requestPic${var.index}"
-											class="rounded-circle user_img" height="250px" width="350px"
-											src='${data.sendNomember.memberPic}' /></td>
-										<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
-										<td>的訊息</td>
-										<td style="width: 180px"><button class="btn btn-primary"
-												onclick="connectskillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+			<c:choose>
+				<c:when test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+					<table>
+						<tbody>
 
-					</c:when>
-					<c:otherwise>
-						<div class="card-body">
-							<h3>
-								<span class="badge badge-danger">關於${sendTo}</span>
-							</h3>
-							<h4>
-								<span class="badge badge-secondary">擁有的技能:</span>
-							</h4>
-							<h4>${memberski}</h4>
-							<h4>
-								<span class="badge badge-secondary">居住區域:</span>
-							</h4>
-							<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
-							<h4>
-								<span class="badge badge-secondary">電子信箱:</span>
-							</h4>
-							<h4 style="margin-bottom: 20px">${sessionScope.memberBean.memberMail}</h4>
+							<c:forEach var='data' varStatus='var' items='${reqchat}'>
+								<tr>
+									<td>您有來自</td>
+									<td id="requestid${var.index}" style="display: none">${data.sendNo}</td>
 
-							<div class="card-text"></div>
-							<c:if test="${status==1}">
-								<c:set var="chatstatus" value="${status}" />
-							</c:if>
-							<button id="disabled2" class="btn btn-dark"
-								onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">發送郵件 <i class="fa fa-envelope" aria-hidden="true"></i>
-							</button>
-							<button id="disabled" class="btn btn-primary"
-								onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');">發送訊息
-							<i class="fa fa-commenting" aria-hidden="true"></i></button>
-						</div>
+									<td><img id="requestPic${var.index}"
+										class="rounded-circle user_img" height="250px" width="350px"
+										src='${data.sendNomember.memberPic}' /></td>
+									<td id="requestNic${var.index}">${data.sendNomember.memberNic}</td>
+									<td>的訊息</td>
+									<td style="width: 180px"><button class="btn btn-primary"
+											onclick="connectskillowner('${data.receiveNomember.memberNic}','${data.sendNomember.memberNic}','${var.index}')">開啟對話</button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+				</c:when>
+				<c:otherwise>
+					<div class="card-body">
+						<h3>
+							<span class="badge badge-danger">關於${sendTo}</span>
+						</h3>
+						<h4>
+							<span class="badge badge-secondary">擁有的技能:</span>
+						</h4>
+						<h4>${memberski}</h4>
+						<h4>
+							<span class="badge badge-secondary">居住區域:</span>
+						</h4>
+						<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
+						<h4>
+							<span class="badge badge-secondary">電子信箱:</span>
+						</h4>
+						<h4 style="margin-bottom: 20px">${sessionScope.memberBean.memberMail}</h4>
+
+						<div class="card-text"></div>
+						<c:if test="${status==1}">
+							<c:set var="chatstatus" value="${status}" />
+						</c:if>
+						<button id="disabled2" class="btn btn-dark"
+							onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">
+							發送郵件 <i class="fa fa-envelope" aria-hidden="true"></i>
+						</button>
+						<button id="disabled" class="btn btn-primary"
+							onclick="connectskill('${sendUser}','${sendTo}');insertRequest('${memberBean.memberRegNo}','${allSkills[0].memberRegNo}','${allSkills[0].publishNo}');">
+							發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
+						</button>
+					</div>
 
 
-					</c:otherwise>
-				</c:choose>
-				 <div class="scroll-top">
-   				<i class="fa fa-angle-up"></i>
-  				</div>
-				<div id="catalog" style="width: 10% ;height:54%;right:510px ">
-					<div class="card" >
-						<div class="card-header msg_head">
-							<div class="d-flex bd-highlight">
-								<div class="img_cont">
-									<c:choose>
-										<c:when
-											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-											<img src="" id="user_img1" class="rounded-circle user_img">
-										</c:when>
-										<c:otherwise>
-											<img src="${pic1}" class="rounded-circle user_img">
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div class="user_info">
-									<c:choose>
-										<c:when
-											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-											<span id="user_name1"></span>
-										</c:when>
-										<c:otherwise>
-											<span>${sendTo}</span>
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</div>
-							<span id="action_menu_btn"> <c:choose>
+				</c:otherwise>
+			</c:choose>
+			<div class="scroll-top">
+				<i class="fa fa-angle-up"></i>
+			</div>
+			<div id="catalog" style="width: 10%; height: 54%; right: 510px">
+				<div class="card">
+					<div class="card-header msg_head">
+						<div class="d-flex bd-highlight">
+							<div class="img_cont">
+								<c:choose>
 									<c:when
 										test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-										<a type="button" href="" id="endexchange"
-											class="btn text-white">結束交換</a>
+										<img src="" id="user_img1" class="rounded-circle user_img">
 									</c:when>
 									<c:otherwise>
-										<a type="button"
-											href="InsertCommentForm?memcommented=${allSkills[0].memberRegNo}"
-											class="btn text-white">結束交換</a>
+										<img src="${pic1}" class="rounded-circle user_img">
 									</c:otherwise>
-								</c:choose> <i class="fa fa-times" aria-hidden="true" onclick=closewindow()></i>
-							</span>
-
-
-						</div>
-						<div id="cardbody" class="card-body msg_card_body" style="background-color: #FAFAFA;height:50%"></div>
-						<div class="card-footer">
-							<div class="input-group">
-								<div class="input-group-append"></div>
-								<textarea name="" class="form-control type_msg" id="textmssg"
-									placeholder="Type your message..."></textarea>
-								<div class="input-group-append">
-									<c:choose>
-										<c:when
-											test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
-											<span id="sendmss" class="input-group-text send_btn"
-												onclick="sendMessage_skillowner('${sendUser}','${sendUser2}','${pic2}')">
-												<i class="fas fa-location-arrow"></i>
-											</span>
-										</c:when>
-										<c:otherwise>
-											<span id="sendmss" class="input-group-text send_btn"
-												onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
-												lineMessage('${sendUser}','${sendTo}','${memberBean.memberNic}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}','${allSkills[0].memberRegNo}')">
-												<i class="fa fa-paper-plane" aria-hidden="true"></i></span>
-										</c:otherwise>
-									</c:choose>
-								
-								</div>
+								</c:choose>
+							</div>
+							<div class="user_info">
+								<c:choose>
+									<c:when
+										test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+										<span id="user_name1"></span>
+									</c:when>
+									<c:otherwise>
+										<span>${sendTo}</span>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
+						<span id="action_menu_btn"> 
+<%-- 						<c:choose> --%>
+<%-- 								<c:when --%>
+<%-- 									test="${memberBean.memberRegNo==allSkills[0].memberRegNo}"> --%>
+<!-- 									<a type="button" href="" id="endexchange" -->
+<!-- 										class="btn text-white">結束交換</a> -->
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<!-- 									<a type="button" -->
+<%-- 										href="InsertCommentForm?memcommented=${allSkills[0].memberRegNo}" --%>
+<!-- 										class="btn text-white">結束交換</a> -->
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose>  --%>
+							<i class="fa fa-times" aria-hidden="true" onclick=closewindow()></i>
+						</span>
+
 
 					</div>
+					<div id="cardbody" class="card-body msg_card_body"
+						style="background-color: #FAFAFA; height: 50%"></div>
+					<div class="card-footer">
+						<div class="input-group">
+							<div class="input-group-append"></div>
+							<textarea name="" class="form-control type_msg" id="textmssg"
+								placeholder="Type your message..."></textarea>
+							<div class="input-group-append">
+								<c:choose>
+									<c:when
+										test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
+										<span id="sendmss" class="input-group-text send_btn"
+											onclick="sendMessage_skillowner('${sendUser}','${sendUser2}','${pic2}')">
+											<i class="fas fa-location-arrow"></i>
+										</span>
+									</c:when>
+									<c:otherwise>
+										<span id="sendmss" class="input-group-text send_btn"
+											onclick="sendMessage_skill('${sendUser}','${sendTo}','${sendUser2}','${sendTo2}','${pic2}');
+												lineMessage('${sendUser}','${sendTo}','${memberBean.memberNic}','${allSkills[0].publishTitle}','${allSkills[0].publishNo}','${allSkills[0].memberRegNo}')">
+											<i class="fa fa-paper-plane" aria-hidden="true"></i>
+										</span>
+									</c:otherwise>
+								</c:choose>
+
+							</div>
+						</div>
+					</div>
+
 				</div>
-			
+			</div>
+
 		</div>
 		<!-- 		<div style="clear: both"></div> -->
 	</div>
@@ -500,11 +523,7 @@ span{font-family: 微軟正黑體;}
 		cardbody.innerHTML ="";
 		connect_skill(User,To)
 	}
-	
-	function closewindow(){
-		cardbody.innerHTML ="";
-	document.getElementById("catalog").style.display = 'none';
-	}
+
 	
 	$(function(){
 		console.log('${chatstatus}');
@@ -628,7 +647,7 @@ span{font-family: 微軟正黑體;}
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
-	
+
 	<script>
 	var arrindex;
     function connect_skillowner(sendUser, sendTo, index) {
@@ -640,7 +659,7 @@ span{font-family: 微軟正黑體;}
     	arrindex = index;
     	$("#user_img1").attr("src",$("#requestPic"+index).attr("src"));
     	$("#user_name1").text($("#requestNic"+index).text());
-    	$("#endexchange").attr("href", "InsertCommentForm?memcommented="+$("#requestid"+index).text());
+//     	$("#endexchange").attr("href", "InsertCommentForm?memcommented="+$("#requestid"+index).text());
     	// create a websocket
     	console.log(sendUser);
     	console.log(endPointURL);
@@ -665,6 +684,17 @@ span{font-family: 微軟正黑體;}
     		webSocket.close();
     	}
     }
+	function closewindow(){
+		cardbody.innerHTML ="";
+	document.getElementById("catalog").style.display = 'none';
+	if(confirm("您是否願意填寫此次技能交換回饋表單?")){
+		if(${memberBean.memberRegNo==allSkills[0].memberRegNo}){
+		window.location.href="InsertCommentForm?memcommented="+$("#requestid"+arrindex).text();
+		}else{
+			window.location.href="InsertCommentForm?memcommented=${allSkills[0].memberRegNo}";
+		}
+		}
+	}
     <%-- 							${reqchat[0].receiveNomember.memberNic}','${reqchat[0].sendNomember.memberNic}','${reqchat[0].receiveNomember.memberRegNo}','${reqchat[0].sendNomember.memberRegNo}','${reqchat[0].receiveNomember.memberPic} --%>
     function sendMessage_skillowner(sendUser,sendUserNo,pic) {
     	var inputMessage = document.getElementById("textmssg");
