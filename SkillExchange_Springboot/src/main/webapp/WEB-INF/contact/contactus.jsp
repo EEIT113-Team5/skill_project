@@ -80,7 +80,7 @@ font {
 	</section>
 
 	<div class="container w-50">
-		<h2 class="mt-4" style="font-family: 微軟正黑體;">聯絡我們</h2>
+		<h2 class="mt-4" style="font-family: 微軟正黑體;"></h2>
 		<form action="InsertContactUs" method="POST">
 			<div class="form-group">
 				<label for="name">姓名</label><span style="color: red">*</span> <font>${MsgMap.errorNameEmpty}</font>
