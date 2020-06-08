@@ -179,9 +179,8 @@
     /* 定位 */
     position: absolute;
     z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -60px;
+    top: -5px;
+    left: 105%;
 }
 .timetip:hover .timetiptext {
     visibility: visible;

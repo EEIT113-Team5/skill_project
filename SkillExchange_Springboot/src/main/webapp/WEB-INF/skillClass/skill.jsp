@@ -55,14 +55,25 @@
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 <script src="font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 <style>
+* {
+	font-family: 微軟正黑體;
+}
+
 .skill {
 	width: 300px;
 	height: 500px;
 	border: 1px #FAFAFA dashed;
 }
 
+h3 {
+	font-family: 微軟正黑體;
+}
+
+h5 {
+	font-family: 微軟正黑體;
+}
 
 .detail {
 	margin-top: 5px;
@@ -74,13 +85,16 @@
 	position: relative;
 	bottom: 0px;
 }
-.card-img-top{ cursor: pointer; }
+
+.card-img-top {
+	cursor: pointer;
+}
 </style>
 </head>
 
 <body id="body">
-	<jsp:include page="/fragment/modal.jsp"/>
-	<jsp:include page="/fragment/top1.jsp"/>
+	<jsp:include page="/fragment/modal.jsp" />
+	<jsp:include page="/fragment/top1.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -90,69 +104,79 @@
 			</div>
 		</div>
 	</section>
-	
-	
-		
-	<div style="width:75%; margin:auto">
-			<c:choose>
-				<c:when test="${empty allSkills}">
-					<tr height='36'>
-						<td colspan='7' align='center'><font color='red'>查無技能資料</font></td>
-					</tr>
-				</c:when>
 
-				<c:otherwise>
-					<div class="row">
-						<c:forEach var='skills' items='${allSkills}'>
-							<c:if test="${not empty memberBean}">
 
-								<c:forEach var='collects' items='${collectionsMap}'>
-									<c:forEach var='collect' items='${collects.value}'>
-										<c:if test="${collect.collectPNo == skills.publishNo}">
-											<c:set var="have" value="${collect.collectPNo}" />
-										</c:if>
-									</c:forEach>
+
+	<div style="width: 75%; margin: auto">
+		<c:choose>
+			<c:when test="${empty allSkills}">
+				<tr height='36'>
+					<td colspan='7' align='center'><font color='red'>查無技能資料</font></td>
+				</tr>
+			</c:when>
+
+			<c:otherwise>
+				<div class="row">
+					<c:forEach var='skills' items='${allSkills}'>
+						<c:if test="${not empty memberBean}">
+
+							<c:forEach var='collects' items='${collectionsMap}'>
+								<c:forEach var='collect' items='${collects.value}'>
+									<c:if test="${collect.collectPNo == skills.publishNo}">
+										<c:set var="have" value="${collect.collectPNo}" />
+									</c:if>
 								</c:forEach>
-							</c:if>
-							
-							<div class="col-sm-3">
-							<div class="card" style="width:100%; height: 540px;margin-top:20px">
-											
+							</c:forEach>
+						</c:if>
+
+						<div class="col-sm-3">
+							<div class="card"
+								style="width: 100%; height: 540px; margin-top: 20px">
+
 								<div>
-									<span>
-									<img src="${skills.member.memberPic}" style="width: 60px; height: 60px;margin-left:7px; margin-top: 5px" class="collectImg"/>
-									${skills.member.memberNic}
-									</span>
-									<span class="time321" style="float: right;margin-top:22px; margin-right:10px;font-size:18px;">${skills.updateTime}</span>
+									<span> <img src="${skills.member.memberPic}"
+										style="width: 60px; height: 60px; margin-left: 7px; margin-top: 5px"
+										class="collectImg" /> ${skills.member.memberNic}
+									</span> <span class="time321"
+										style="float: right; margin-top: 22px; margin-right: 10px; font-size: 18px;">${skills.updateTime}</span>
 								</div>
-															
-							<div class="card"  style="height:360px;margin:5px">
-								
-								<img onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'" class="card-img-top" style="height:70%"src="${skills.publishPic}" alt="Card image cap"/>
-								<div class="card-body" style="padding:0px;margin-top:10px;height:50px">
-									<div style="margin-bottom: 7px;">
-										<h3 class="JQellipsis2" style="margin-top:10px;margin-left: 12px">${skills.publishTitle}</h3>
+
+								<div class="card" style="height: 360px; margin: 5px">
+
+									<img
+										onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=0'"
+										class="card-img-top" style="height: 70%"
+										src="${skills.publishPic}" alt="Card image cap" />
+									<div class="card-body"
+										style="padding: 0px; margin-top: 10px; height: 50px">
+										<div style="margin-bottom: 7px;">
+											<h3 class="JQellipsis2"
+												style="margin-top: 5px; margin-left: 10px">${skills.publishTitle}</h3>
+										</div>
+										<div class="detail">
+											<h5 style="margin: 12px; font-size: 15px" class="JQellipsis">${skills.publishDetail}</h5>
+										</div>
+
 									</div>
-									<div class="detail">
-										<h5 style="margin:13px;font-size:15px" class="JQellipsis">${skills.publishDetail}</h5>
-									</div>
-								
 								</div>
-							</div>
-								
-									<div class="sb-nav-link-icon" style="margin-bottom: 10px;margin-left: 15px" >
-										<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
-									</div>
-								
-								<div class="bot" style="height:100px">
-								
-								
-									<span style="text-align: center; display:block;line-height: 70px;">
-									<c:choose>
+
+								<div class="sb-nav-link-icon"
+									style="margin-bottom: 10px; margin-left: 15px">
+									<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>&emsp;${skills.city}
+								</div>
+
+								<div class="bot" style="height: 100px">
+
+
+									<span
+										style="text-align: center; display: block; line-height: 70px;">
+										<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success"
-													onclick=collection(${skills.publishNo},0)>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+													onclick=collection(${skills.publishNo},0)>
+													加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i>
+												</button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
@@ -161,62 +185,70 @@
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success"
-													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>
+													加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i>
+												</button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger" style="display: none"
-													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>
+													取消收藏 <i class="fa fa-heart" aria-hidden="true"></i>
+												</button>
 											</c:when>
 
 											<c:otherwise>
 												<button type="button" id="add${skills.publishNo}"
 													class="btn btn-success" style="display: none"
-													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
+													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>
+													加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i>
+												</button>
 												<button type="button" id="cancel${skills.publishNo}"
 													class="btn btn-danger"
-													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
+													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>
+													取消收藏 <i class="fa fa-heart" aria-hidden="true"></i>
+												</button>
 											</c:otherwise>
 
-										</c:choose>										
-											<c:choose>
+										</c:choose> <c:choose>
 											<c:when test="${empty memberBean}">
-											<button type="button" id="addchat${skills.publishNo}"
+												<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary"
-													onclick=checkmember(${skills.publishNo},1)>發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
-										    </button>
+													onclick=checkmember(${skills.publishNo},1)>
+													發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
+												</button>
 												<button type="button" id="cancelchat${skills.publishNo}"
 													class="btn btn-danger" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
 											</c:when>
-											
+
 											<c:otherwise>
 												<button type="button" id="addchat${skills.publishNo}"
 													class="btn btn-primary"
-													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
-										    </button>
+													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">
+													發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
+												</button>
 											</c:otherwise>
-											</c:choose>	
-											
-																																	
-									</span>								
-								
-									</div>							
+										</c:choose>
+
+
+									</span>
+
 								</div>
 							</div>
+						</div>
 
-						</c:forEach>
-					</div>
-				</c:otherwise>
-			</c:choose>
-			<div style="flex: 1"></div>
-			<div id="calendar" style="flex: 10"></div>
-			
+					</c:forEach>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		<div style="flex: 1"></div>
+		<div id="calendar" style="flex: 10"></div>
+
 		<!-- ---------------------要加的部份-------------------- -->
-		
+
 	</div>
 	<!-- ---------------------要加的部份-------------------- -->
 
-<jsp:include page="/fragment/bottom.jsp" />
-
+	<jsp:include page="/fragment/bottom.jsp" />
 
 	<script>
 	function checkmember(publishNo,status) {		
@@ -227,7 +259,8 @@
 				}				
 	  	    
 	}
-		
+	<!-- Bootstrap4 -->
+	
 	function collection(publishNo,status,mebNo) {
 		console.log(mebNo);
 		
@@ -308,7 +341,7 @@
 	    });
 	});
 	$(function(){
-	    var len = 42; // Pubulish Detail超過40個字以"..."取代
+	    var len = 32; // Pubulish Detail超過40個字以"..."取代
 	    $(".JQellipsis").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());
@@ -320,7 +353,7 @@
 	
 	
 	$(function(){
-	    var len = 10; // Publish Title超過10個字以"..."取代
+	    var len = 8; // Publish Title超過10個字以"..."取代
 	    $(".JQellipsis2").each(function(i){
 	        if($(this).text().length>len){
 	            $(this).attr("title",$(this).text());
@@ -331,8 +364,8 @@
 	})
 	
 	</script>
-	
-	
+	<script src="pluginstemp/bootstrap/js/bootstrap.min.js"></script>
+
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		crossorigin="anonymous"></script>
 	<script
@@ -353,7 +386,7 @@
     Essential Scripts
     =====================================-->
 	<!-- Main jQuery -->
-	<script src="pluginstemp/jquery/jquery.min.js"></script>
+	<!-- 	<script src="pluginstemp/jquery/jquery.min.js"></script> -->
 	<!-- Google Map -->
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
@@ -377,7 +410,7 @@
 
 	<!-- Custom js -->
 	<script src="jstemp/script.js"></script>
-	
+
 
 	<!-- ---------------------要加的部份-------------------- -->
 
