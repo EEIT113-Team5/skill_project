@@ -41,7 +41,7 @@
 					<h4 class="modal-title" id="alertModalLabel">Oops,有地方出錯了!!</h4>
 				</div>
 				<div class="modal-body">
-					<p id="alertText">即將為您跳轉到前一頁</p>
+					<p id="alertText">即將為您跳轉到首頁</p>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,8 @@
 		});
 		setTimeout(returnpage, 1500);
 		function returnpage() {
-			window.location.href = "${header['referer']}";
+			window.location.href = "${pageContext.request.contextPath}/";
+// 			${header['referer']}
 		}
 	</script>
 
