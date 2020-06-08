@@ -56,7 +56,7 @@ public class ContactUsDaoImpl implements ContactUsDao {
 
 	@Override
 	public ContactUsBean updateReplyContent(Integer contactNo, String replyContent) throws UpdateCollectionsException {
-		String hql = "UPDATE ContactUsBean CU SET CU.isReply = 1,CU.replyContent = :replyContent  WHERE CU.contactNo = :contactNo";
+		String hql = "UPDATE ContactUsBean CU SET CU.isReply = 1,CU.replyContent = :replyContent,CU.updateTime = GetDate()  WHERE CU.contactNo = :contactNo";
 		int n = 0;
 		try {
 			@SuppressWarnings("unchecked")
