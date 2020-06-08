@@ -98,6 +98,31 @@ public class MemberDao {
 		} 
 	}
 	
+	public MemberBean selectByRegNo(Integer memberRegNo) {
+		return factory.getCurrentSession().get(MemberBean.class, memberRegNo);
+	}
+	
+	public int updatePart(MemberBean mbean) {
+		String hql = "Update MemberBean m set m.memberName = :memberName, m.memberAddr = :memberAddr, "
+				   + "m.memberPhone = :memberPhone, m.memberNic = :memberNic, "
+				   + "m.memberAcc = :memberAcc, m.memberMail = :memberMail "
+				   + "Where m.memberRegNo = :memberRegNo";
+		if(mbean.getMemberRegNo() != null) {
+			Query query = getSession().createQuery(hql);
+			query.setParameter("memberName", mbean.getMemberName());
+			query.setParameter("memberAddr", mbean.getMemberAddr());
+			query.setParameter("memberPhone", mbean.getMemberPhone());
+			query.setParameter("memberNic", mbean.getMemberNic());
+			query.setParameter("memberAcc", mbean.getMemberAcc());
+			query.setParameter("memberMail", mbean.getMemberMail());
+			query.setParameter("memberRegNo", mbean.getMemberRegNo());
+			
+			int updateNum = query.executeUpdate();
+			return updateNum;
+		}
+		return 0 ;
+	}
+	
 }
 
 
