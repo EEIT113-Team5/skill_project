@@ -151,28 +151,28 @@
 									<c:choose>
 											<c:when test="${empty memberBean}">
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success btn-lg"
+													class="btn btn-success"
 													onclick=collection(${skills.publishNo},0)>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger btn-lg" style="display: none"
+													class="btn btn-danger" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
 											</c:when>
 
 											<c:when test="${have!=skills.publishNo}">
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success btn-lg"
+													class="btn btn-success"
 													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger btn-lg " style="display: none"
+													class="btn btn-danger" style="display: none"
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 											</c:when>
 
 											<c:otherwise>
 												<button type="button" id="add${skills.publishNo}"
-													class="btn btn-success-lg " style="display: none"
+													class="btn btn-success" style="display: none"
 													onclick=collection(${skills.publishNo},1,${sessionScope.memberBean.memberRegNo})>加入收藏 <i class="fa fa-heart-o" aria-hidden="true"></i></button>
 												<button type="button" id="cancel${skills.publishNo}"
-													class="btn btn-danger btn-lg "
+													class="btn btn-danger"
 													onclick=collection(${skills.publishNo},2,${sessionScope.memberBean.memberRegNo})>取消收藏 <i class="fa fa-heart" aria-hidden="true"></i></button>
 											</c:otherwise>
 
@@ -180,17 +180,17 @@
 											<c:choose>
 											<c:when test="${empty memberBean}">
 											<button type="button" id="addchat${skills.publishNo}"
-													class="btn btn-primary btn-lg"
+													class="btn btn-primary"
 													onclick=checkmember(${skills.publishNo},1)>發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
 										    </button>
 												<button type="button" id="cancelchat${skills.publishNo}"
-													class="btn btn-danger btn-lg" style="display: none"
+													class="btn btn-danger" style="display: none"
 													onclick="location.href='loginInit'">請先登入</button>
 											</c:when>
 											
 											<c:otherwise>
 												<button type="button" id="addchat${skills.publishNo}"
-													class="btn btn-primary btn-lg"
+													class="btn btn-primary"
 													onclick="location.href='publish?num=${skills.publishNo}&hostid=${skills.memberRegNo}&status=1'">發送訊息 <i class="fa fa-commenting" aria-hidden="true"></i>
 										    </button>
 											</c:otherwise>
