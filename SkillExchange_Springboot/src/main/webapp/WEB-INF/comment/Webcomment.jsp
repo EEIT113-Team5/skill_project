@@ -13,6 +13,8 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>SkillExchange</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="imagestemp/SkillLogo2.png" />
 <link href="css/styles.css" rel="stylesheet" />
 <link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"

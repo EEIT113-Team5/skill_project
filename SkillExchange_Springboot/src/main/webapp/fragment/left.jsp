@@ -24,7 +24,9 @@
 	color:white;
 	text-align:center;
 }
+
 </style>
+
 <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap"
 	rel="stylesheet">
 </head>
