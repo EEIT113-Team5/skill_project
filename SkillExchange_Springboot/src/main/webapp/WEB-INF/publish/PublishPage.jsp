@@ -73,12 +73,6 @@ textarea {
 	color: red;
  	margin-left: 5px; 
 }
-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid white;
-}
 </style>
 
 </head>
@@ -127,7 +121,7 @@ hr {
 										<td><font color='red' size='-3'>${error.publishTitle}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">照片:</label></td>
+										<td><label for="">照片:</label><lable class="red-font">*</lable></td>
 										<td><input type="file" onchange="readURL(this)"
 											name='publishPic' targetID="prePic"> <br> <img
 											id="prePic" style="display: none" src="#" width="200px"
@@ -149,7 +143,7 @@ hr {
 												<option value="寵物">寵物</option>
 												<option value="生活">生活</option>
 										</select></td>
-										<td><font color='red' size='-3'>${error.ownSkillType}</font></td>
+										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
 									</tr>
 									<tr>
 										<td><label for="">自己的技能:</label><lable class="red-font">*</lable></td>
@@ -172,7 +166,7 @@ hr {
 												<option value="寵物">寵物</option>
 												<option value="生活">生活</option>
 										</select></td>
-										<td><font color='red' size='-3'>${error.wantSkillType}</font></td>
+										<td><font color='red' size='-3'>${error.ownSkill}</font></td>
 									</tr>
 									<tr>
 										<td><label for="">想學的技能:</label><lable class="red-font">*</lable></td>
@@ -192,7 +186,7 @@ hr {
 								<br>
 								<table>
 									<tr>
-										<td><label for="">刊登地區:</label></td>
+										<td><label for="">刊登地區:</label><lable class="red-font">*</lable></td>
 										<td><select id="selPubArea1" name='publishArea'
 											onchange="showCity()">
 												<option>請選擇</option>
