@@ -14,6 +14,8 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>排程管理-Skill Exchange</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="imagestemp/SkillLogo2.png" />
 <link href="css/styles.css" rel="stylesheet" />
 <link href="css/wickedpicker.min.css" rel="stylesheet" />
 <link

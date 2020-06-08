@@ -237,10 +237,10 @@ function delDetail(collectNo,groupName){
 		<div class="tab-content">
 			<div class="tab-pane  active" id="post">
 				<div class="titleBlock" style="vertical-align: center">
-					<h1 class="mt-4" style="font-family: 微軟正黑體;">我的收藏</h1>
+<!-- 					<h1 class="mt-4" style="font-family: 微軟正黑體;"></h1> -->
 					<a class="btn btn-primary" href="#" id="groupNewBtn"
 						data-toggle="modal" data-target="#insertModal"
-						style="margin: 20px 5px 5px 5px"> <i class='fa fa-plus'></i>新增類別
+						style="margin: 20px 5px 5px 5px;text-align:right"> <i class='fa fa-plus'></i>新增類別
 					</a>
 				</div>
 				<div id="accordion">

@@ -20,6 +20,8 @@
 	crossorigin="anonymous"></script>
 <script src="pluginstemp/jquery/jquery.min.js"></script>
 <script src="js/echarts.min.js"></script>
+<link rel="shortcut icon" type="image/x-icon"
+	href="imagestemp/SkillLogo2.png" />
 <!-- e chart CDN -->
 <!-- e chart CDN -->
 <style>

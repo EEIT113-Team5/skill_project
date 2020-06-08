@@ -31,8 +31,7 @@
 			$("#footer").removeClass("fixed-bottom");
 			var contentHeight = document.body.scrollHeight;
 			var winHeight = window.innerHeight;//可視視窗高度，不包括瀏覽器頂部工具欄
-			console.log(contentHeight);
-			console.log(winHeight);
+
 			
 			if (!(contentHeight > winHeight)) {
 				//當網頁正文高度小於可視視窗高度時，為footer新增類fixed-bottom
