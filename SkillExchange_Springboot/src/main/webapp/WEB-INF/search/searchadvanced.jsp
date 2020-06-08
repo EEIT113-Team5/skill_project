@@ -113,7 +113,7 @@ h4 {
 }
 
 .wrap-level4 {
-	margin: 8px;
+	margin: 8px auto;;
 	/* 	padding: 10px 15px; */
 }
 
@@ -146,9 +146,9 @@ h4 {
 }
 
 .last-btn {
-	width: 90%;
+	width: 85%;
 	height: 40px;
-	margin: 10px 7.5px;
+	margin: 10px 10px;
 	/*  	border: 1px solid gray; */
 }
 
@@ -394,7 +394,7 @@ form {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h2 style="font-family: 微軟正黑體;">進階搜尋</h2>
+					<h2>進階搜尋</h2>
 				</div>
 			</div>
 		</div>
@@ -425,7 +425,7 @@ form {
 						<div id="inputArea" class="wrap-level5 search-btn">${areablock}</div>
 					</c:when>
 					<c:otherwise>
-						<div id="inputArea" class="wrap-level5 search-btn">地區</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 3px;"></i>
+						<div id="inputArea" class="wrap-level5 search-btn">地區</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 4px;font-size:18px;"></i>
 					</c:otherwise>
 				</c:choose>
 			</button>
@@ -446,6 +446,7 @@ form {
 							<div id="cityList" class="input-group-prepend list-level2"></div>
 						</div>
 						<div class="modal-footer">
+							<button id="areaClear" type="button" class="btn btn-secondary">清除</button>
 							<button id="areaClick" type="button" class="btn btn-secondary"
 								data-dismiss="modal">確定</button>
 						</div>
@@ -462,7 +463,7 @@ form {
 						<div id="inputSkill" class="wrap-level5 search-btn">${skillblock}</div>
 					</c:when>
 					<c:otherwise>
-						<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 3px;"></i>
+						<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 4px;font-size:18px;"></i>
 					</c:otherwise>
 				</c:choose>
 			</button>
@@ -483,6 +484,7 @@ form {
 							<div id="skillL2List" class="input-group-prepend list-level2"></div>
 						</div>
 						<div class="modal-footer">
+							<button id="skillClear" type="button" class="btn btn-secondary">清除</button>
 							<button id="skillClick" type="button" class="btn btn-secondary"
 								data-dismiss="modal">確定</button>
 						</div>
@@ -509,6 +511,8 @@ form {
 					<input type="hidden" id="skill3" name="skill3" value="${skill3}">
 					<input type="hidden" id="skill4" name="skill4" value="${skill4}">
 					<input type="hidden" id="skill5" name="skill5" value="${skill5}">
+					<input type="hidden" id="areablock" name="areablock" value="">
+					<input type="hidden" id="skillblock" name="skillblock" value="">
 					<button type="submit" class="btn btn-secondary btn-sm last-btn">
 						<i class="fa fa-search"></i>搜尋
 					</button>
@@ -520,8 +524,10 @@ form {
 	<ul class="ul-sort">
 	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
 	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
-	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
-	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
+<!-- 	<li class="li-sort"><span id="flth" class="badge badge-light div-sort">評價 <i class="fas fa-sort-up" style="font-size:15px"></i></span></li> -->
+<!-- 	<li class="li-sort"><span id="fhtl" class="badge badge-light div-sort">評價 <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li> -->
 	</ul>
 	</div>
 
@@ -572,7 +578,6 @@ form {
 				</div>
 			</c:otherwise>
 		</c:choose>
-
 	</div>
 
 	<!-- ---------------------要加的部份-------------------- -->
@@ -1046,34 +1051,50 @@ form {
 			var n = 1;
 			var str1 = "";
 			var str2 = "";
-			for (var i = 0; i < list.length; i++) {
-				if (list[i].value.includes("部")) {
-					var id1 = "area" + m;
-					var A = document.getElementById(id1);
-					A.value = list[i].value;
-					m++;
-					str1 += list[i].value + "、";
-					// 					console.log("str1=" + str1);
-
-				} else {
-					var id2 = "city" + n;
-					var B = document.getElementById(id2);
-					B.value = list[i].value;
-					n++;
-					str2 += list[i].value + "、";
-					// 					console.log("str2=" + str2);
+			if(list.length != 0){
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].value.includes("部")) {
+						var id1 = "area" + m;
+						var A = document.getElementById(id1);
+						A.value = list[i].value;
+						m++;
+						str1 += list[i].value + "、";
+						// 					console.log("str1=" + str1);
+	
+					} else {
+						var id2 = "city" + n;
+						var B = document.getElementById(id2);
+						B.value = list[i].value;
+						n++;
+						str2 += list[i].value + "、";
+						// 					console.log("str2=" + str2);
+					}
 				}
+			} else {
+				document.getElementById("area1").value = "";
+				document.getElementById("area2").value = "";
+				document.getElementById("area3").value = "";
+				document.getElementById("city1").value = "";
+				document.getElementById("city2").value = "";
+				document.getElementById("city3").value = "";
+				document.getElementById("city4").value = "";
+				document.getElementById("city5").value = "";
 			}
 			// 			把選取值寫回頁面上
 			// 			console.log("Tstr1=" + str1);
 			// 			console.log("Tstr2=" + str2);
 			var txt = document.getElementById("inputArea");
-			if (str2 == "") {
+			if(str1 == "" && str2 == ""){
+				txt.innerHTML = "地區";
+				areablock.value = "";
+			}else if (str2 == "") {
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
+				areablock.value = str1;
 			} else {
 				str2 = str2.substring(0, str2.length - 1);
 				txt.innerHTML = str1 + str2;
+				areablock.value = str1 + str2;
 			}
 		}
 	</script>
@@ -1089,35 +1110,52 @@ form {
 			var n = 1;
 			var str1 = "";
 			var str2 = "";
-			for (var i = 0; i < list.length; i++) {
-				if (list[i].value.includes("才藝")
-						|| list[i].value.includes("生活")
-						|| list[i].value.includes("運動")
-						|| list[i].value.includes("語言")
-						|| list[i].value.includes("寵物")) {
-					var id1 = "type" + m;
-					var A = document.getElementById(id1);
-					A.value = list[i].value;
-					m++;
-					str1 += list[i].value + "、";
-					// 					console.log("str1=" + str1);
-				} else {
-					var id2 = "skill" + n;
-					var B = document.getElementById(id2);
-					B.value = list[i].value;
-					n++;
-					str2 += list[i].value + "、";
-					// 					console.log("str2=" + str2);
+			if(list.length != 0){
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].value.includes("才藝")
+							|| list[i].value.includes("生活")
+							|| list[i].value.includes("運動")
+							|| list[i].value.includes("語言")
+							|| list[i].value.includes("寵物")) {
+						var id1 = "type" + m;
+						var A = document.getElementById(id1);
+						A.value = list[i].value;
+						m++;
+						str1 += list[i].value + "、";
+						// 					console.log("str1=" + str1);
+					} else {
+						var id2 = "skill" + n;
+						var B = document.getElementById(id2);
+						B.value = list[i].value;
+						n++;
+						str2 += list[i].value + "、";
+						// 					console.log("str2=" + str2);
+					}
 				}
+			} else {
+				document.getElementById("type1").value = "";
+				document.getElementById("type2").value = "";
+				document.getElementById("type3").value = "";
+				document.getElementById("type4").value = "";
+				document.getElementById("skill1").value = "";
+				document.getElementById("skill2").value = "";
+				document.getElementById("skill3").value = "";
+				document.getElementById("skill4").value = "";
+				document.getElementById("skill5").value = "";
 			}
 			// 			把選取值寫回頁面上
 			var txt = document.getElementById("inputSkill");
-			if (str2 == "") {
+			if(str1 == "" && str2 == ""){
+				txt.innerHTML = "技能類別";
+				skillblock.value = "";
+			}else if (str2 == "") {
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
+				skillblock.value = str1;
 			} else {
 				str2 = str2.substring(0, str2.length - 1);
 				txt.innerHTML = str1 + str2;
+				skillblock.value = str1 + str2;
 			}
 		}
 	</script>
@@ -1131,6 +1169,18 @@ form {
 				A.value = input;
 			})
 		})
+	</script>
+	
+	<script>
+	$(document).on("click", "#areaClear", function(){
+		$("#cityList input:checkbox:checked").prop("checked", false).attr("disabled", false);
+	})
+	</script>
+	
+	<script>
+	$(document).on("click", "#skillClear", function(){
+		$("#skillL2List input:checkbox:checked").prop("checked", false).attr("disabled", false);
+	})
 	</script>
 	
 	<script>
@@ -1299,6 +1349,48 @@ form {
 		}
 	})
 	</script>
+	
+<!-- 	<script> -->
+<!-- 	$(document).on("click", "#flth", function(){ -->
+<!-- 		var input = document.getElementById("container2"); -->
+<!-- 		var xhr = new XMLHttpRequest(); -->
+<%-- 		xhr.open("GET", "<c:url value='QuerySort5.do' />", true); --%>
+<!-- 		xhr.send(); -->
+<!-- 		xhr.onreadystatechange = function(){ -->
+<!-- 			if(xhr.readyState == 4){ -->
+<!-- 				if(xhr.status == 200){ -->
+<!-- // 					console.log(JSON.parse(xhr.responseText)); -->
+<!-- 					var arr = JSON.parse(xhr.responseText); -->
+<!-- 					var content1 = "<div class='card-deck'>"; -->
+<!-- 					var content2 = ""; -->
+<!-- 					for(var i = 0; i < arr[0].length; i++){ -->
+<!-- 						content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>"; -->
+<!-- 						if(arr[0][i].memberNic == null){ -->
+<!-- 							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>"; -->
+<!-- 						} else { -->
+<!-- 							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>"; -->
+<!-- 						} -->
+<!-- 						content2 += "</div><div class=''>"; -->
+<!-- 						content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>"; -->
+<!-- 						content2 += "<div class='card-body'>"; -->
+<!-- 						content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>"; -->
+<!-- 						content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>"; -->
+<!-- 						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>"; -->
+<!-- 						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>"; -->
+<!-- 						content2 += "<div style='text-align: right'>"; -->
+<!-- 						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>"; -->
+<!-- 						content2 += "<div class='card-footer last-part'>"; -->
+<!-- 						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>"; -->
+<!-- 						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>"; -->
+<!-- 						content2 += "</div></div></div>" -->
+<!-- 					} -->
+<!-- 					var content = content1 + content2 + "</div>"; -->
+<!-- 					input.innerHTML = content; -->
+<!-- 				} -->
+<!-- 			} -->
+<!-- 		} -->
+<!-- 	}) -->
+<!-- 	</script> -->
 
 </body>
 

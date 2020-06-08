@@ -110,7 +110,7 @@
 
 .wrap-level3:hover {
 	width: 30%;
-	border: 2px solid #9D9D9D;
+	border: 2px solid #8E8E8E	;
 	/* 	border-left: 1px solid #E0E0E0; */
 	border-radius: 10px;
 	transition: 0.5s;
@@ -369,6 +369,7 @@ form {
 										<div id="cityList" class="input-group-prepend list-level2"></div>
 									</div>
 									<div class="modal-footer">
+										<button id="areaClear" type="button" class="btn btn-secondary">清除</button>
 										<button id="areaClick" type="button" class="btn btn-secondary"
 											data-dismiss="modal">確定</button>
 									</div>
@@ -400,6 +401,7 @@ form {
 										<div id="skillL2List" class="input-group-prepend list-level2"></div>
 									</div>
 									<div class="modal-footer">
+										<button id="skillClear" type="button" class="btn btn-secondary">清除</button>
 										<button id="skillClick" type="button"
 											class="btn btn-secondary" data-dismiss="modal">確定</button>
 									</div>
@@ -676,20 +678,6 @@ form {
 				}, ".li-bg1");
 	</script>
 
-	<!-- 	<script> -->
-	<!-- 		$(document).on("toggle", ".li-bg2:checkbox", function(){ -->
-	<!-- 			$(this).parent("div").addClass("disabled"); -->
-	<!-- 		}) -->
-	<!-- 	</script> -->
-
-	<!-- 	<script> -->
-	<!-- 		$(document).on("toggle", ".li-bg3", function() { -->
-	<!-- 			$(this).addClass('active2'); -->
-	<!-- 		}, function() { -->
-	<!-- 			$(this).removeClass('active2'); -->
-	<!-- 		}) -->
-	<!-- 	</script> -->
-
 	<script>
 		var north = [ "基隆", "台北", "新北", "桃園", "新竹" ];
 		var center = [ "苗栗", "台中", "彰化", "南投", "雲林" ];
@@ -881,30 +869,44 @@ form {
 			var n = 1;
 			var str1 = "";
 			var str2 = "";
-			for (var i = 0; i < list.length; i++) {
-				if (list[i].value.includes("部")) {
-					var id1 = "area" + m;
-					var A = document.getElementById(id1);
-					A.value = list[i].value;
-					m++;
-					str1 += list[i].value + "、";
-// 					console.log("str1=" + str1);
-					
-				} else {
-					var id2 = "city" + n;
-					var B = document.getElementById(id2);
-					B.value = list[i].value;
-					n++;
-					str2 += list[i].value + "、";
-// 					console.log("str2=" + str2);
+			if(list.length != 0){
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].value.includes("部")) {
+						var id1 = "area" + m;
+						var A = document.getElementById(id1);
+						A.value = list[i].value;
+						m++;
+						str1 += list[i].value + "、";
+	// 					console.log("str1=" + str1);
+						
+					} else {
+						var id2 = "city" + n;
+						var B = document.getElementById(id2);
+						B.value = list[i].value;
+						n++;
+						str2 += list[i].value + "、";
+	// 					console.log("str2=" + str2);
+					}
 				}
+			} else {
+				document.getElementById("area1").value = "";
+				document.getElementById("area2").value = "";
+				document.getElementById("area3").value = "";
+				document.getElementById("city1").value = "";
+				document.getElementById("city2").value = "";
+				document.getElementById("city3").value = "";
+				document.getElementById("city4").value = "";
+				document.getElementById("city5").value = "";
 			}
 // 			把選取值寫回頁面上
 // 			console.log("Tstr1=" + str1);
 // 			console.log("Tstr2=" + str2);
 			var txt = document.getElementById("inputArea");
 			var areablock = document.getElementById("areablock");
-			if(str2 == ""){
+			if(str1 == "" && str2 == ""){
+				txt.innerHTML = "地區";
+				areablock.value = "";
+			} else if(str2 == ""){
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
 				areablock.value = str1;
@@ -927,31 +929,46 @@ form {
 			var n = 1;
 			var str1 = "";
 			var str2 = "";
-			for (var i = 0; i < list.length; i++) {
-				if (list[i].value.includes("才藝")
-						|| list[i].value.includes("生活")
-						|| list[i].value.includes("運動")
-						|| list[i].value.includes("語言")
-						|| list[i].value.includes("寵物")) {
-					var id1 = "type" + m;
-					var A = document.getElementById(id1);
-					A.value = list[i].value;
-					m++;
-					str1 += list[i].value + "、";
-// 					console.log("str1=" + str1);
-				} else {
-					var id2 = "skill" + n;
-					var B = document.getElementById(id2);
-					B.value = list[i].value;
-					n++;
-					str2 += list[i].value + "、";
-// 					console.log("str2=" + str2);
+			if(list.length != 0){
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].value.includes("才藝")
+							|| list[i].value.includes("生活")
+							|| list[i].value.includes("運動")
+							|| list[i].value.includes("語言")
+							|| list[i].value.includes("寵物")) {
+						var id1 = "type" + m;
+						var A = document.getElementById(id1);
+						A.value = list[i].value;
+						m++;
+						str1 += list[i].value + "、";
+	// 					console.log("str1=" + str1);
+					} else {
+						var id2 = "skill" + n;
+						var B = document.getElementById(id2);
+						B.value = list[i].value;
+						n++;
+						str2 += list[i].value + "、";
+	// 					console.log("str2=" + str2);
+					}
 				}
+			} else {
+				document.getElementById("type1").value = "";
+				document.getElementById("type2").value = "";
+				document.getElementById("type3").value = "";
+				document.getElementById("type4").value = "";
+				document.getElementById("skill1").value = "";
+				document.getElementById("skill2").value = "";
+				document.getElementById("skill3").value = "";
+				document.getElementById("skill4").value = "";
+				document.getElementById("skill5").value = "";
 			}
 // 			把選取值寫回頁面上
 			var txt = document.getElementById("inputSkill");
 			var skillblock = document.getElementById("skillblock");
-			if(str2 == ""){
+			if(str1 == "" && str2 == ""){
+				txt.innerHTML = "技能類別";
+				skillblock.value = "";
+			}else if(str2 == ""){
 				str1 = str1.substring(0, str1.length - 1);
 				txt.innerHTML = str1;
 				skillblock.value = str1;
@@ -972,6 +989,18 @@ form {
 				A.value = input;
 			})
 		})
+	</script>
+	
+	<script>
+	$(document).on("click", "#areaClear", function(){
+		$("#cityList input:checkbox:checked").prop("checked", false).attr("disabled", false);
+	})
+	</script>
+	
+	<script>
+	$(document).on("click", "#skillClear", function(){
+		$("#skillL2List input:checkbox:checked").prop("checked", false).attr("disabled", false);
+	})
 	</script>
 </body>
 </html>
