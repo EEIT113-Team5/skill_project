@@ -79,7 +79,7 @@
 <!-- ---------------------要加的部份-------------------- -->
 <body id="body" background="./images/pattern2.jpg">
 	<jsp:include page="/fragment/top1.jsp" />
-	<jsp:include page="/fragment/modal.jsp" />
+	<jsp:include page="/fragment/modal2.jsp" />
 	<section class="single-page-header">
 		<div class="container">
 			<div class="row">
@@ -422,6 +422,8 @@
 		}
 	</script>
 <!--一鍵加入會員 這裡 -->
+
+
 	
 </body>
 
