@@ -2,6 +2,8 @@
 package members.Controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +45,7 @@ public class UpdateServlet extends HttpServlet {
 		
 		model.addAttribute(reloadBean);
 		
-		return "members/update";
+		return "members/updateMember";
 	}
 
 	@PostMapping(value = "/modifyMember")
@@ -52,11 +54,19 @@ public class UpdateServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		httpSession = request.getSession();
+//	卉加	
+		Map<String, String> errorMsg = new HashMap<String, String>();
+		Map<String, String> oKmsg = new HashMap<String, String>();
 		
+		httpSession = request.getSession();
+		request.setAttribute("ErrorMsg", errorMsg);
+		httpSession.setAttribute("OKMsg", oKmsg);
+//		卉加			
 		int updateNum = updateService.updatePart(mbean);
 		
 		if (updateNum != 0) {
 			reloadMemberBean(mbean);
+			oKmsg.put("updatemessage", "修改成功");
 		}
 		
 		return "index" ;

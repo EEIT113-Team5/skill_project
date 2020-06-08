@@ -486,8 +486,13 @@ form {
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
-
-
+	<c:if test="${not empty OKMsg}">
+		<script>
+			let message = "${OKMsg.updatemessage}";
+			$("#alertText").text(message);
+			$("#alertModal").modal('show');
+		</script>
+	</c:if>
 
 	<script>
 		$('.carousel').carousel();
