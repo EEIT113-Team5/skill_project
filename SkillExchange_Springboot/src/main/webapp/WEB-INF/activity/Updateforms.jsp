@@ -21,8 +21,8 @@
 	crossorigin="anonymous"></script>
 
 <!-- 有需要再打開 -->
-<!-- <script type="text/javascript" -->
-<!-- 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzOs6J5tZ4kJbV6hKtxJjr3kEBjGME3i0&libraries=places"></script> -->
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzOs6J5tZ4kJbV6hKtxJjr3kEBjGME3i0&libraries=places"></script>
 
 
 <style>
