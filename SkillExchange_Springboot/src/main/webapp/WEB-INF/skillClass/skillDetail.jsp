@@ -228,7 +228,7 @@ span {
 									<img src="${skills.member.memberPic}"
 										style="float: left; width: 100px; height: 100px;"
 										class="rounded-circle user_img" />
-									<h2 style="line-height: 100px; width: 60%">${skills.member.memberNic}</h2>
+									<h2 style="line-height: 100px; width: 100%">${skills.member.memberNic}</h2>
 								</div>
 								<div id="left_1_center"></div>
 								<div id="left_1_right">

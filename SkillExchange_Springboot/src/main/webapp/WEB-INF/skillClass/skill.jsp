@@ -131,14 +131,14 @@ h5 {
 
 						<div class="col-sm-3">
 							<div class="card"
-								style="width: 100%; height: 540px; margin-top: 20px">
+								style="width: 105%; height: 540px; margin-top: 20px">
 
 								<div>
 									<span> <img src="${skills.member.memberPic}"
-										style="width: 60px; height: 60px; margin-left: 7px; margin-top: 5px"
+										style="width: 60px; height: 60px; margin-left: 7px; margin-top: 5px ; margin-right: 0px"
 										class="collectImg" /> ${skills.member.memberNic}
 									</span> <span class="time321"
-										style="float: right; margin-top: 22px; margin-right: 10px; font-size: 18px;">${skills.updateTime}</span>
+										style="float: right; margin-top: 18px; margin-right: 7px; font-size: 18px;">${skills.updateTime}</span>
 								</div>
 
 								<div class="card" style="height: 360px; margin: 5px">
