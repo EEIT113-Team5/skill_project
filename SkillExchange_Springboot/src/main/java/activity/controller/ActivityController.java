@@ -300,7 +300,7 @@ public class ActivityController {
 	}
 
 	@GetMapping(value = "/FindPlace", produces = { "application/json" })
-	public ResponseEntity<List<ActivityBean>> FindPlace(@RequestParam String category, Model model) {
+	synchronized public ResponseEntity<List<ActivityBean>> FindPlace(@RequestParam String category, Model model) {
 		List<ActivityBean> activity = null;
 		if (category == null) {
 			category = "全部";
