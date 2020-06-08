@@ -73,6 +73,9 @@ textarea {
 	color: red;
  	margin-left: 5px; 
 }
+hr{
+	border-top: 1px solid white;
+}
 </style>
 
 </head>
