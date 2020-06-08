@@ -487,12 +487,16 @@ form {
 
 	<!-- ---------------------要加的部份-------------------- -->
 	<c:if test="${not empty OKMsg}">
-		<script>
-			let message = "${OKMsg.updatemessage}";
-			$("#alertText").text(message);
-			$("#alertModal").modal('show');
-		</script>
+			<script>
+				let message = "${OKMsg.updatemessage}";
+				$("#alertText").text(message);
+				$("#alertModal").modal('show');
+			</script>
 	</c:if>
+	
+	<%
+		session.removeAttribute("OKMsg");
+	%>
 
 	<script>
 		$('.carousel').carousel();

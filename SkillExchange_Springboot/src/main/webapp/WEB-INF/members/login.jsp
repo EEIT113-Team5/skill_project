@@ -395,12 +395,18 @@
 	<!-- ---------------------要加的部份-------------------- -->
 	
 	<c:if test="${not empty OKMsg}">
-		<script> 
-			let message = "${OKMsg.registermessage}";
-			$("#alertText").text(message);
-			$("#alertModal").modal('show'); 
- 		</script>
+		<c:if test="${not empty OKMsg.registermessage}">
+			<script> 
+				let message = "${OKMsg.registermessage}";
+				$("#alertText").text(message);
+				$("#alertModal").modal('show'); 
+	 		</script>
+		</c:if>
 	</c:if>
+	
+	<%
+		session.removeAttribute("OKMsg");
+	%>
 
 	<c:if test="${not empty MsgMap}">
 		<c:if test="${not empty MsgMap.LoginError}">
@@ -412,6 +418,10 @@
 			</script>
 		</c:if>
 	</c:if>
+	
+	<%
+		session.removeAttribute("MsgMap");
+	%>
 
 </body>
 
