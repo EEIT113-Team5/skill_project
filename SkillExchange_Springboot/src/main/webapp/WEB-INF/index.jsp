@@ -80,7 +80,7 @@
 	/* 	border: 1px black solid; */
 	position: relative;
 	width: 80%;
-	margin: 140px auto;
+	margin: 180px auto;
 }
 
 .title {
@@ -119,7 +119,7 @@
 }
 
 .wrap-level4 {
-	margin: 8px;
+	margin: 8px auto;
 	/* 	padding: 10px 15px; */
 }
 
@@ -165,9 +165,9 @@
 }
 
 .last-btn {
-	width: 90%;
+	width:85%;
 	height: 40px;
-	margin: 10px 7.5px;
+	margin: 10px 10px;
 	/*  	border: 1px solid gray; */
 }
 
@@ -328,7 +328,7 @@ form {
 			data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active wrapper">
-					<img class="d-block w-100" src="images/home1.jpg" alt="First slide">
+					<img class="d-block w-100" src="images/home5.jpg" alt="First slide">
 				</div>
 				<div class="carousel-item wrapper">
 					<img class="d-block w-100" src="images/home3.jpg"
@@ -350,7 +350,7 @@ form {
 						<button id="iarea"
 							class="input-group-append wrap-level3 searchbar-bgcolor"
 							data-toggle="modal" data-target="#areaModal">
-							<div id="inputArea" class="wrap-level5 search-btn">地區</div>
+							<div id="inputArea" class="wrap-level5 search-btn">地區 </div><i class="fa fa-angle-down"  style="font-size:24px; line-height: 55px;padding-right: 2px;"></i>
 						</button>
 						<!-- Area Modal -->
 						<div class="modal fade" id="areaModal" tabindex="-1" role="dialog"
@@ -380,7 +380,7 @@ form {
 						<button id="iskill"
 							class="input-group-append wrap-level3 searchbar-bgcolor"
 							data-toggle="modal" data-target="#skillModal">
-							<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div>
+							<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div><i class="fa fa-angle-down"  style="font-size:24px;line-height: 55px;padding-right: 2px;"></i>
 						</button>
 						<!-- Skil Modal -->
 						<div class="modal fade" id="skillModal" tabindex="-1"
@@ -443,8 +443,13 @@ form {
 			</div>
 		</div>
 	</section>
-	<section class="buy-pro" style="padding: 100px 0;"></section>
-
+<!-- 	<section class="buy-pro" style="padding: 100px 0;"> -->
+	
+<!-- 	<div class=container> -->
+<!-- 		<div class="p2"></div> -->
+<!-- 	</div> -->
+	
+<!-- 	</section> -->
 	<jsp:include page="/fragment/bottom.jsp" />
 	<!-- end footer -->
 

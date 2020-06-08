@@ -381,10 +381,7 @@ form {
 	margin-right: 25px;
 	padding-left: 50px;
 	padding-right: 50px;
-/* 	background-color: #E0E0E0; */
-/* 	border: 1px solid #E0E0E0; */
-/* 	border-radius: 5%; */
-/* 	font-size: small; */
+	font-size: 12px;
 }
 </style>
 </head>
@@ -402,7 +399,7 @@ form {
 			</div>
 		</div>
 	</section>
-	<div class="wrap-level1">
+	<div id="searchbar" class="wrap-level1">
 		<div class="input-group wrap-level2">
 			<div class="input-group-prepend wrap-level3">
 				<c:choose>
@@ -428,7 +425,7 @@ form {
 						<div id="inputArea" class="wrap-level5 search-btn">${areablock}</div>
 					</c:when>
 					<c:otherwise>
-						<div id="inputArea" class="wrap-level5 search-btn">地區</div>
+						<div id="inputArea" class="wrap-level5 search-btn">地區</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 3px;"></i>
 					</c:otherwise>
 				</c:choose>
 			</button>
@@ -465,7 +462,7 @@ form {
 						<div id="inputSkill" class="wrap-level5 search-btn">${skillblock}</div>
 					</c:when>
 					<c:otherwise>
-						<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div>
+						<div id="inputSkill" class="wrap-level5 search-btn">技能類別</div><i class="fa fa-angle-down" style="margin-top: 20px;margin-bottom:20px; margin-right: 3px;"></i>
 					</c:otherwise>
 				</c:choose>
 			</button>
@@ -521,10 +518,10 @@ form {
 	</div>
 	<div class="wrap-level1-2">
 	<ul class="ul-sort">
-	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">由新到舊</span></li>
-	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">由舊到新</span></li>
-	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">由多到少</span></li>
-	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">由少到多</span></li>
+	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
 	</ul>
 	</div>
 
@@ -584,21 +581,6 @@ form {
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		crossorigin="anonymous"></script>
-	<!-- 	<script> -->
-	<!-- 		$(function() { -->
-	<!-- 			let divPosition = $("#searchbar").offset().top; -->
-	<!-- 			console.log("divPosition=" + divPosition); -->
-	<!-- 			$(window).scroll(function() { -->
-	<!-- 				let scrollTop = $(this).scrollTop(); -->
-	<!-- 				//             console.log("scrollTop="+scrollTop);     -->
-	<!-- 				if (scrollTop > divPosition) { -->
-	<!-- 					$("#searchbar").addClass("fixed_div"); -->
-	<!-- 				} else { -->
-	<!-- 					$("#searchbar").removeClass("fixed_div"); -->
-	<!-- 				} -->
-	<!-- 			}); -->
-	<!-- 		}); -->
-	<!-- 	</script> -->
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
