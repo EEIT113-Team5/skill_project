@@ -99,7 +99,7 @@ public class LoginCheckFilter implements Filter {
 				|| server.toString().contains(".js") 
 				|| server.toString().contains(".png") || server.toString().contains(".PNG") 
 				|| server.toString().contains(".jpg") || server.toString().contains(".JPG") 
-				|| server.toString().contains(".woff") || server.toString().contains(".ttf")  
+				|| server.toString().contains(".woff") || server.toString().contains(".ttf")
 //				|| server.toString().contains(".do")
 				) {
 			chain.doFilter(request, response);
