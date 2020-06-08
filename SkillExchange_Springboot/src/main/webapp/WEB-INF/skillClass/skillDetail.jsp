@@ -92,7 +92,7 @@ span {
 }
 
 #leftspace {
-	flex: 4;
+	flex: 6;
 }
 
 #left {
@@ -132,7 +132,6 @@ span {
 	position: relative;
 	/* 	float: right; */
 	flex: 1;
-	padding: 10px;
 	/* 	width: 40% */
 }
 
@@ -140,10 +139,12 @@ span {
 	position: relative;
 	/* 	float: right; */
 	flex: 33;
-	padding: 10px;
+	padding: 5px;
 	/* 	width: 40% */
 }
-
+#rightspace{
+	flex: 7;
+}
 #catalog {
 	position: fixed;
 	bottom: 0px;
@@ -268,7 +269,7 @@ span {
 								</div>
 							</div>
 						</div>
-						<hr>
+						<hr style="margin-left:50px">
 						<div id="left_2">
 							<h1 class="text">${skills.publishTitle}</h1>
 							<img style="width: 800px" src="${jspPath}/${skills.publishPic}">
@@ -335,7 +336,7 @@ span {
 
 				</c:when>
 				<c:otherwise>
-					<div class="card-body">
+					<div class="card-body" style="padding:0px;margin-top:20px">
 						<h3>
 							<span class="badge badge-danger">關於${sendTo}</span>
 						</h3>
@@ -372,9 +373,9 @@ span {
 			<div class="scroll-top">
 				<i class="fa fa-angle-up"></i>
 			</div>
-			<div id="catalog" style="width: 10%; height: 54%; right: 510px">
-				<div class="card">
-					<div class="card-header msg_head">
+			<div id="catalog" style="width: 53%; height: 60%; right: 150px">
+				<div class="card" style="width: 60%; height: 100%">
+					<div class="card-header msg_head" style="width: 100%; height: 20%">
 						<div class="d-flex bd-highlight">
 							<div class="img_cont">
 								<c:choose>
@@ -417,9 +418,9 @@ span {
 
 
 					</div>
-					<div id="cardbody" class="card-body msg_card_body"
-						style="background-color: #FAFAFA; height: 50%"></div>
-					<div class="card-footer">
+					<div id="cardbody" class="card-body msg_card_body" 
+						style="background-color: #e0e0d1"></div>
+					<div class="card-footer" style="background-color: #e0e0d1">
 						<div class="input-group">
 							<div class="input-group-append"></div>
 							<textarea name="" class="form-control type_msg" id="textmssg"
@@ -449,6 +450,8 @@ span {
 				</div>
 			</div>
 
+		</div>
+		<div id="rightspace">
 		</div>
 		<!-- 		<div style="clear: both"></div> -->
 	</div>
