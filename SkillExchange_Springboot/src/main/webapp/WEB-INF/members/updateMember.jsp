@@ -59,9 +59,9 @@
 	
 </script>
 
-<!-- <script> 
+<script>
 	var sex = request.getElementsByName('gender');
- </script> -->
+</script>
 
 <!-- 卉加 -->
 
@@ -179,7 +179,7 @@
 	<script
 		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
 		crossorigin="anonymous"></script>
-	<!--<script>
+	<script>
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var imageTagID = input.getAttribute("targetID");
@@ -196,7 +196,7 @@
 		function goToIndex() {
 			window.location.href = "${pageContext.request.contextPath}/";
 		}
-	</script> -->
+	</script>
 	<!-- ---------------------要加的部份-------------------- -->
 	<!-- 
     Essential Scripts

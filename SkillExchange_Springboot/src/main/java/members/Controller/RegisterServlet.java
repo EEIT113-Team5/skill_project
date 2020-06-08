@@ -214,6 +214,7 @@ public class RegisterServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 //			RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
 //			rd.forward(request, response);
+
 			return "members/register";
 		}
 		try {
