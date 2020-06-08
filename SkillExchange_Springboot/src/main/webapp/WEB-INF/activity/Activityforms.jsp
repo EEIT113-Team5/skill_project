@@ -427,7 +427,9 @@ i {
 
 		document.addEventListener('keypress', autofill);
 		function autofill(e) {
-			if (e.keyCode == 13) {
+			console.log(e);
+			if (e.keyCode == 92) 
+				{
 				$("#activity").val("揪團來打羽球喔!");
 
 				$("#category option[value='運動']").attr("selected", "selected");
