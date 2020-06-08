@@ -124,7 +124,7 @@ hr{
 										<td><font color='red' size='-3'>${error.publishTitle}</font></td>
 									</tr>
 									<tr>
-										<td><label for="">照片:</label><lable class="red-font">*</lable></td>
+										<td><label for="">照片:</label></td>
 										<td><input type="file" onchange="readURL(this)"
 											name='publishPic' targetID="prePic"> <br> <img
 											id="prePic" style="display: none" src="#" width="200px"
@@ -183,13 +183,13 @@ hr{
 									</tr>
 								</table>
 							</fieldset>
-
+							<hr style="border-top: 1px solid black;">
 							<fieldset class="fieldest">
 								<legend class="legend">刊登地點</legend>
 								<br>
 								<table>
 									<tr>
-										<td><label for="">刊登地區:</label><lable class="red-font">*</lable></td>
+										<td><label for="">刊登地區:</label></td>
 										<td><select id="selPubArea1" name='publishArea'
 											onchange="showCity()">
 												<option>請選擇</option>

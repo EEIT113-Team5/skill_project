@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +131,45 @@ public class PublishPage {
 		
 //		model.addAttribute("picNameString",picNameString);
 //		System.out.println(picNameString);
+		
+		List<publishSelectBean> list = ipps.Skill();
+		model.addAttribute("skill", list);
+		//判斷是否為空值
+		request.setCharacterEncoding("UTF-8");
+		
+		// 準備存放錯誤訊息的Map物件
+		Map<String, String> error = new HashMap<String, String>();
+		 
+		// 顯示錯誤訊息
+		request.setAttribute("error", error);
+		if (publishTitle == null || publishTitle.trim().length() == 0) {
+			error.put("publishTitle", "(標題必須輸入)");
+		}
+		if (publishDetail == null || publishDetail.trim().length() == 0) {
+			error.put("publishDetail", "(內容必須輸入)");
+		}
+		if (skillType2 == null || skillType2.trim().length() == 0) {
+			error.put("skillType2", "(技能類型必須輸入)");
+		}
+		if (ownSkill == null || ownSkill.trim().length() == 0) {
+			error.put("ownSkill", "(技能必須輸入)");
+		}
+		if (skillType == null || skillType.trim().length() == 0) {
+			error.put("skillType", "(技能類型必須輸入)");
+		}
+		if (wantSkill == null || wantSkill.trim().length() == 0) {
+			error.put("wantSkill", "(技能必須輸入)");
+		}
+		if (City == null || City.trim().length() == 0) {
+			error.put("City", "(刊登城市必須輸入)");
+		}
+		if (publishPlace == null || publishPlace.trim().length() == 0) {
+			error.put("publishPlace", "(希望地點必須輸入)");
+		}
+		if (!error.isEmpty()) {
+			return "publish/PublishPage";
+		}
+		
 		
 		return "publish/PublishCheckPage";
 	}

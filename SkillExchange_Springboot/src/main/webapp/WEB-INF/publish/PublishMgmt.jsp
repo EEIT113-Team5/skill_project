@@ -52,6 +52,7 @@
 						var myChart = echarts.init(document
 								.getElementById('mainPublish'));
 
+// 						var allString = JSON.stringify('${allString}');
 						var allString = JSON.parse('${allString}');
 
 						console.log(allString);
