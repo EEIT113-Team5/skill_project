@@ -284,7 +284,7 @@ function delDetail(collectNo,groupName){
 														<td>
 															<div style="text-align: left">
 																<a id="collectDetail${collection.collectNo}"
-																	href="publish?num=${collection.collectPNo}">${collection.collectPTitle}</a>
+																	href="publish?num=${collection.collectPNo}&hostid=${memberBean.memberRegNo}&status=0">${collection.collectPTitle}</a>
 															</div>
 														</td>
 
