@@ -21,6 +21,8 @@
 <script src="../font-awesome/css/font-awesome.min.css"
 	crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	crossorigin="anonymous"></script>
 
 <script src="js/echarts.min.js"></script>
 <!-- e chart CDN -->
@@ -77,8 +79,8 @@
 									<option value="14">兩週內</option>
 									<option value="21">三週內</option>
 									<option value="30">一個月內</option>
-								</select><input class="btn btn-primary" type="submit"
-									id="queryrecent" value="近況查詢">
+								</select><input class="btn btn-primary" type="submit" id="queryrecent"
+									value="近況查詢">
 
 							</div>
 						</div>
@@ -129,8 +131,6 @@
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
