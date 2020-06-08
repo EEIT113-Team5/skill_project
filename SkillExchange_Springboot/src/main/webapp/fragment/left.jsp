@@ -49,14 +49,14 @@
 					<!-- 				<button class="btn btn-primary" type="button" onclick="callHome()"> -->
 					<!-- 					<i class="fa fa-search"></i> -->
 					<!-- 				</button> -->
-					<button type="button" class="btn btn-info rounded"
+					<button type="button" class="btn"
 						onclick="connect()" id="editConfirm">
-						<i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i>
+						<i class="fa fa-bullhorn text-white" style="font-size:30px" aria-hidden="true"></i>
 					</button>
 					<!-- 登出按鈕 -->
 					<c:if test="${ ! empty memberBean}">
 						<img class="collectImg" src="${ memberBean.memberPic }" />
-						<a href="<c:url value='Logout' />"><button type="button"
+						<a href="<c:url value='Logout' />"><button style="margin-top:5px" type="button"
 								class="btn btn-info">登出</button> </a>
 					</c:if>
 

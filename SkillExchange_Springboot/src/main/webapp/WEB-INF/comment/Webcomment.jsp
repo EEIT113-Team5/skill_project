@@ -37,6 +37,8 @@
 	display: none;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 	<div id="layoutSidenav">
@@ -44,7 +46,8 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1 class="mt-4" style="text-shadow: 1px 1px gray;text-align:center">網站使用回饋分析</h1>
+					<h1 class="mt-4"
+						style="text-shadow: 1px 1px gray; text-align: center">網站使用回饋分析</h1>
 					<div class="card mb-4">
 						<div class="card-body">
 							<h3 class="text-center bg-light py-2">報表查詢</h3>
@@ -69,7 +72,7 @@
 
 							</div>
 							<div style="float: right">
-								<div id="second" style="width: 500px; height:340px;"></div>
+								<div id="second" style="width: 500px; height: 340px;"></div>
 								<input style="float: left" class="btn btn-primary" type="submit"
 									id="queryyear" value="查詢年報表"> <select name="yearmonths"
 									id="yearmonths" class="btn border border-primary">
@@ -115,14 +118,14 @@
 												<td><c:out value="${data.commentNo}" default="無" /></td>
 												<td><c:out value="${data.commentorNo}" default="無" /></td>
 												<td><c:out value="${data.memberName}" default="無" /></td>
-												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}" default="無" /></td>
+												<td><c:out value="${fn:substring(data.msgTime, 0, 19)}"
+														default="無" /></td>
 												<td><c:out value="${data.webGrading}" default="無" /></td>
 												<td><c:out value="${data.webFluency}" default="無" /></td>
 												<td><c:out value="${data.webSatis}" default="無" /></td>
 												<td><c:out value="${data.webRecommend}" default="無" /></td>
 												<td><c:out value="${data.webSugg}" default="無" /></td>
-												<td><a
-													href='DeleteWebCommont/${data.commentNo}'>刪除</a></td>
+												<td><a href='DeleteWebCommont/${data.commentNo}'>刪除</a></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -143,8 +146,7 @@
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
+
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
