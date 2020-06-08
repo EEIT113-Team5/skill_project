@@ -114,9 +114,11 @@ public class RegisterServlet extends HttpServlet {
 		 
 		// 準備存放錯誤訊息的Map物件
 		Map<String, String> errorMsg = new HashMap<String, String>();
+		Map<String, String> oKmsg = new HashMap<String, String>();
 		 
 		// 顯示錯誤訊息
 		request.setAttribute("errorMsg", errorMsg);
+		httpSession.setAttribute("OKMsg", oKmsg);
 		
 		// 讀取使用者所輸入，由瀏覽器送來的 memberAcc 欄位內的資料，注意大小寫
 		String memberAcc = request.getParameter("memberAcc");
@@ -280,6 +282,7 @@ public class RegisterServlet extends HttpServlet {
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
+		oKmsg.put("registermessage", "加入會員成功! 請到信箱收驗證信，驗證帳號 ");
 		return "members/login";
 //		response.sendRedirect(request.getContextPath()+"/index.jsp");
 	}

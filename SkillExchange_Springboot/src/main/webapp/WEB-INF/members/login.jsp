@@ -393,6 +393,14 @@
 	<script src="jstemp/script.js"></script>
 
 	<!-- ---------------------要加的部份-------------------- -->
+	
+	<c:if test="${not empty OKMsg}">
+		<script> 
+			let message = "${OKMsg.registermessage}";
+			$("#alertText").text(message);
+			$("#alertModal").modal('show'); 
+ 		</script>
+	</c:if>
 
 	<c:if test="${not empty MsgMap}">
 		<c:if test="${not empty MsgMap.LoginError}">
