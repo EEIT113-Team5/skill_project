@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,26 +60,47 @@ public class PublishPage {
 			@SessionAttribute("memberBean") MemberBean mBean,
 			Model model
 			) throws IllegalStateException, IOException{
+		
+		//部分欄位空值判斷
+		Map<String, String> error = new HashMap<String, String>();
+		
+		request.setAttribute("error", error);
+		
+		if (publishTitle == null || publishTitle.trim().length() == 0) {
+			error.put("publishTitle", "(標題必須輸入)");
+		}
+		if (publishDetail == null || publishDetail.trim().length() == 0) {
+			error.put("publishDetail", "(內容必須輸入)");
+		}
+		if (skillType2 == null || skillType2.trim().length() == 0) {
+			error.put("ownSkillType", "(技能類型必須輸入)");
+		}
+		if (ownSkill == null || ownSkill.trim().length() == 0) {
+			error.put("ownSkill", "(技能必須輸入)");
+		}
+		if (skillType == null || skillType.trim().length() == 0) {
+			error.put("wantSkillType", "(技能類型必須輸入)");
+		}
+		if (wantSkill == null || wantSkill.trim().length() == 0) {
+			error.put("wantSkill", "(技能必須輸入)");
+		}
+		if (City == null || City.trim().length() == 0) {
+			error.put("City", "(刊登城市必須輸入)");
+		}
+		if (publishPlace == null || publishPlace.trim().length() == 0) {
+			error.put("publishPlace", "(希望地點必須輸入)");
+		}
+		if (!error.isEmpty()) {
+			return "publish/PublishPage";
+		}
+		
+		
+		
+		
 		Date date = new Date();
 		Timestamp updateTime = new java.sql.Timestamp(date.getTime());
 		int memberRegNo = mBean.getMemberRegNo();  
 		
-//		//當下時間
-//		long time = date.getTime();
-//		
-//		//圖片處理
-////		String name = UUID.randomUUID().toString().replaceAll("-", "");
-//		String imageName = file.getOriginalFilename();
-//		String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-//		//上傳路徑
-//		String filePath = request.getSession().getServletContext().getRealPath("images/");
-//		System.out.println(filePath);
-//		
-//		//重新命名
-//		file.transferTo(new File(filePath+time+imageName+"."+ext));
-//		
-//		String picNameString = "images/"+time+imageName+"."+ext;
-//		model.addAttribute("prePicName",picNameString);
 		String imageName = file.getOriginalFilename();
 		PublishBean pBean = new PublishBean();
 		if (imageName == "" || imageName == null) {
@@ -92,10 +115,7 @@ public class PublishPage {
 		}else {
 			//當下時間
 			long time = date.getTime();
-			
-			//圖片處理
-//			String name = UUID.randomUUID().toString().replaceAll("-", "");
-			
+						
 			String ext = FilenameUtils.getExtension(file.getOriginalFilename());
 			//上傳路徑
 			String filePath = request.getSession().getServletContext().getRealPath("images/");

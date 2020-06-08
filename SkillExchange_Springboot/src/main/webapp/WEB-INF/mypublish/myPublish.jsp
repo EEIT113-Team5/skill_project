@@ -267,19 +267,19 @@ tr, td {
 		
 		setTimeout("pad+num.click()", 2000);
 		
-			console.log(num);
+// 			console.log(num);
 			
 			var timeStrings = JSON.parse('${timeStringsGson}');
-			console.log(timeStrings[num]);
+// 			console.log(timeStrings[num]);
 
 			<!-- 分割成日期與時間 -->
 			var timeArray = new Array();
 			timeArray = timeStrings[num].split(" ");
-			console.log(timeArray);
+// 			console.log(timeArray);
 
 			<!-- 分割成年月日-->
 			var timeArray2 = timeArray[0].split("-");
-			console.log(timeArray2);
+// 			console.log(timeArray2);
 
 			var timeArray3 = timeArray[1].split(":");
 
@@ -307,7 +307,7 @@ tr, td {
 			}
 			
 			
-			console.log(str);
+// 			console.log(str);
 		    
 		    document.getElementById("pad"+num).innerHTML = str;
 
