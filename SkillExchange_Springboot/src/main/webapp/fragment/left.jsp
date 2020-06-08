@@ -113,6 +113,8 @@
 							<a class="nav-link" href="PublishMgmt"> <span><i
 									class="fa fa-history"></i> 刊登管理</span>
 							</a>
+							<a class="nav-link" href="getKeyword"> <span><i class='fa fa-key'>	</i> 關鍵字趨勢分析</span>
+							</a>
 						</c:if>
 					</div>
 

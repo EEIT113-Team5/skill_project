@@ -21,6 +21,18 @@ public class KeywordService {
 	public boolean insertKeyword(KeywordBean kbean) {
 		return kDao.insertKeyword(kbean);
 	}
+	
+	public List<KeywordBean> queryKeyword(){
+		return kDao.queryKeyword();
+	}
+	
+	public List<KeywordBean> topChartKeyword(Integer days){
+		return kDao.topChartKeyword(days);
+	}
+	
+	public List<KeywordBean> topChartKeyword2(Integer month){
+		return kDao.topChartKeyword2(month);
+	}
 
 	public List<SearchBean> queryResult(String keyword, String area1, String area2, String area3,
 			String city1, String city2, String city3, String city4, String city5, String type1, String type2,

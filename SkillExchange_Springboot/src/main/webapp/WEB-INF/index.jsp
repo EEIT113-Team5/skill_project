@@ -525,9 +525,9 @@ form {
 //  				console.log(arr[0][0][0]);
 //  				console.log(arr[0][1][0]);
 					var content = "";
-					for (var x = 0; x < 5; x++) {
+					for (var x = 0; x < 10; x++) {
 //  					console.log(arr[0][x][0]);
-						var str = "<c:url value='InsertKeyword1.do?keyword="
+						var str = "<c:url value='InsertKeyword.do?keyword="
 								+ arr[0][x][0] + "' />";
 						content += "<li class='k1 k2'><a href='" + str + "'>"
 								+ arr[0][x][0] + "</a></li>"

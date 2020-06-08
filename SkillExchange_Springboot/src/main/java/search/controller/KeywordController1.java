@@ -2,7 +2,6 @@ package search.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,9 @@ import search.model.SearchBean;
 import search.service.KeywordService;
 
 @Controller
-@SessionAttributes(names = { "searchList", "areablock", "skillblock", "keyword1", "area1", "area2", "area3", "city1", "city2", "city3", "city4",
-		"city5", "type1", "type2", "type3", "type4", "skill1", "skill2", "skill3", "skill4", "skill5" })
+@SessionAttributes(names = { "keywordList", "searchList", "areablock", "skillblock", "keyword1", "area1", "area2",
+		"area3", "city1", "city2", "city3", "city4", "city5", "type1", "type2", "type3", "type4", "skill1", "skill2",
+		"skill3", "skill4", "skill5" })
 public class KeywordController1 {
 	@Autowired
 	KeywordService kService;
@@ -32,6 +32,49 @@ public class KeywordController1 {
 	public String findSearchAdvanced() {
 		return "search/searchadvanced";
 	}
+
+	@GetMapping("/keywordPage")
+	public String findKeywordAnalysis() {
+		return "search/keywordAnalysis";
+	}
+
+	@GetMapping("/getKeyword")
+	public String getKeyword(Model m) {
+		List<KeywordBean> list = kService.queryKeyword();
+		m.addAttribute("keywordList", list);
+
+		return "redirect:/keywordPage";
+	}
+
+	@GetMapping(value = "/GetTopChartKw", produces = { "application/json" })
+	public ResponseEntity<List<Object>> getTopChartKw(Model m, @RequestParam("days") Integer days) {
+		List<KeywordBean> dayList = kService.topChartKeyword(days);
+		List<Object> list = new ArrayList<Object>();
+		
+		list.add(dayList);
+		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
+		return re;
+	}
+	
+	@GetMapping(value = "/GetTopChartKw2", produces = { "application/json" })
+	public ResponseEntity<List<Object>> getTopChartKw2(Model m, @RequestParam("month") Integer month) {
+		List<KeywordBean> monthList = kService.topChartKeyword2(month);
+		List<Object> list = new ArrayList<Object>();
+		
+		list.add(monthList);
+		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
+		return re;
+	}
+
+//	@GetMapping(value= "/getKeyword", produces = {"application/json"})
+//	public ResponseEntity<List<Object>> getKeyword(Model m) {
+//		List<KeywordBean> list1 = kService.queryKeyword();
+//		List<Object> list = new ArrayList<Object>();
+//		list.add(list1);
+//		
+//		ResponseEntity<List<Object>> re = new ResponseEntity<List<Object>>(list, HttpStatus.OK);
+//		return re;
+//	}
 
 	@GetMapping("/InsertKeyword.do")
 	public String insertKeyword(Model m, @RequestParam("keyword") String keyword,
@@ -52,7 +95,6 @@ public class KeywordController1 {
 			@RequestParam(value = "skill3", required = false) String skill3,
 			@RequestParam(value = "skill4", required = false) String skill4,
 			@RequestParam(value = "skill5", required = false) String skill5,
-			@RequestParam(value = "sort", required = false) String sort,
 			@RequestParam(value = "areablock", required = false) String areablock,
 			@RequestParam(value = "skillblock", required = false) String skillblock) {
 

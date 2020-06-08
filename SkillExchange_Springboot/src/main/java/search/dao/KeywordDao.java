@@ -27,6 +27,40 @@ public class KeywordDao {
 		}
 		return false;
 	}
+	
+	public List<KeywordBean> queryKeyword(){
+		@SuppressWarnings("unchecked")
+		Query<KeywordBean> query = getSession().createQuery("from KeywordBean");
+		List<KeywordBean> keywordList = query.list();
+		
+		return keywordList;
+	}
+	
+	public List<KeywordBean> topChartKeyword(Integer days){
+		String hql;
+		hql = "select keyWord, count(keyWord) as subTotal from KeywordBean where createDate <= current_timestamp - :days group by keyWord order by subTotal desc";
+		
+		@SuppressWarnings("unchecked")
+		Query<KeywordBean> query = getSession().createQuery(hql);
+		
+		query.setParameter("days", days);
+		
+		List<KeywordBean> list = query.setMaxResults(5).list();
+		return list;
+	}
+	
+	public List<KeywordBean> topChartKeyword2(Integer month){
+		String hql;
+		hql = "select keyWord, count(keyWord) as subTotal from KeywordBean where Month(createDate) = :m group by keyWord order by subTotal desc";
+		
+		@SuppressWarnings("unchecked")
+		Query<KeywordBean> query = getSession().createQuery(hql);
+		
+		query.setParameter("m", month);
+		
+		List<KeywordBean> list = query.setMaxResults(5).list();
+		return list;
+	}
 
 	public List<SearchBean> queryResult(String keyword, String area1, String area2, String area3, String city1,
 			String city2, String city3, String city4, String city5, String type1, String type2, String type3,

@@ -381,10 +381,10 @@ form {
 	margin-right: 25px;
 	padding-left: 50px;
 	padding-right: 50px;
-	background-color: #E0E0E0;
-	border: 1px solid #E0E0E0;
-	border-radius: 5%;
-	font-size: small;
+/* 	background-color: #E0E0E0; */
+/* 	border: 1px solid #E0E0E0; */
+/* 	border-radius: 5%; */
+/* 	font-size: small; */
 }
 </style>
 </head>
@@ -521,10 +521,10 @@ form {
 	</div>
 	<div class="wrap-level1-2">
 	<ul class="ul-sort">
-	<li class="li-sort"><div id="fnto" class="div-sort">由新到舊</div></li>
-	<li class="li-sort"><div id="fotn" class="div-sort">由舊到新</div></li>
-	<li class="li-sort"><div id="fmtl" class="div-sort">由多到少</div></li>
-	<li class="li-sort"><div id="fltm" class="div-sort">由少到多</div></li>
+	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">由新到舊</span></li>
+	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">由舊到新</span></li>
+	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">由多到少</span></li>
+	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">由少到多</span></li>
 	</ul>
 	</div>
 
