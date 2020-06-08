@@ -100,7 +100,8 @@ public class LoginCheckFilter implements Filter {
 				|| server.toString().contains(".png") || server.toString().contains(".PNG") 
 				|| server.toString().contains(".jpg") || server.toString().contains(".JPG") 
 				|| server.toString().contains(".woff") || server.toString().contains(".ttf")
-//				|| server.toString().contains(".do")
+				|| server.toString().contains(".jfif")|| server.toString().contains(".jpeg")
+				|| server.toString().contains(".JPEG")
 				) {
 			chain.doFilter(request, response);
 		} else if (!mustLogin()) {
