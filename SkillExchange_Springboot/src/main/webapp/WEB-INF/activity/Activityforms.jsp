@@ -280,7 +280,7 @@ i {
 								<span class="icon-case"><i class="fa fa-map-marker"></i></span>
 								<form:input class="input" path="position" id="pac-input"
 									placeholder="請輸入活動地點" />
-																	
+
 								<form:input style="visibility: hidden" path="lat" id="lat" />
 								<form:input style="visibility: hidden" type="text" path="long1"
 									id="long" />
@@ -368,12 +368,11 @@ i {
 		crossorigin="anonymous"></script>
 	<script src="assets/demo/datatables-demo.js"></script>
 	<script>
-
-	   var add = document.getElementById("pac-input");
-	   document.addEventListener('change', codeAddress);
+		var add = document.getElementById("pac-input");
+		document.addEventListener('change', codeAddress);
 		function codeAddress() {
 			console.log("hello");
-// 			var add = document.getElementById("pac-input");
+			// 			var add = document.getElementById("pac-input");
 			var Longitude = document.getElementById("long");
 			var Latitude = document.getElementById("lat");
 			var geocoder = new google.maps.Geocoder();
@@ -389,16 +388,16 @@ i {
 				}
 			});
 		}
-// 		function confirm() {
-//  			if (confirm('確定新增活動?')) {
-// 					    		window.opener.location.reload(); //重新整理父視窗中的網頁
-// 					    		window.alert
-// 							    window.close();//關閉當前窗視窗
-// 				return true;
-// 			} else {
-// 				return false;
-// 			}
-// 		}
+		// 		function confirm() {
+		//  			if (confirm('確定新增活動?')) {
+		// 					    		window.opener.location.reload(); //重新整理父視窗中的網頁
+		// 					    		window.alert
+		// 							    window.close();//關閉當前窗視窗
+		// 				return true;
+		// 			} else {
+		// 				return false;
+		// 			}
+		// 		}
 		$(document).ready(
 				function() {
 					$('input[type=file]').change(
@@ -425,28 +424,29 @@ i {
 								}
 							});
 				})
-				
-				
-		document.addEventListener('keypress', autofill);
-		function autofill() {
-			 $("#activity").val("揪團來打羽球喔!");
 
-			$("#category option[value='運動']").attr("selected","selected");
-// 			 var obj=document.getElementById("category");
-// 			 obj.value=$("#category").val();
-// 			 console.log($("#category").val());
-			 $("#description").val("歡迎新手、老手齊聚一堂，以歡樂的球友為主，也歡迎高手指導，長期台大體育館開團。 程度: 歡樂-中下、使用球：RSL4，場地費150元");
-			 $("#dialog1").prop("checked", true);
-			 $("#beginDay").val("2020-06-20");
-			 $("#beginTime").val("08:00");
-			 $("#endDay").val("2020-06-20");
-			 $("#endTime").val("11:00");
-			 //地點自己手動輸入
-			 $("#group").val("4");
-			 $("#group1").val("10");	
-			 		 
+		document.addEventListener('keypress', autofill);
+		function autofill(e) {
+			if (e.keyCode == 13) {
+				$("#activity").val("揪團來打羽球喔!");
+
+				$("#category option[value='運動']").attr("selected", "selected");
+				// 			 var obj=document.getElementById("category");
+				// 			 obj.value=$("#category").val();
+				// 			 console.log($("#category").val());
+				$("#description")
+						.val(
+								"歡迎新手、老手齊聚一堂，以歡樂的球友為主，也歡迎高手指導，長期台大體育館開團。 程度: 歡樂-中下、使用球：RSL4，場地費150元");
+				$("#dialog1").prop("checked", true);
+				$("#beginDay").val("2020-06-20");
+				$("#beginTime").val("08:00");
+				$("#endDay").val("2020-06-20");
+				$("#endTime").val("11:00");
+				//地點自己手動輸入
+				$("#group").val("4");
+				$("#group1").val("10");
+			}
 		}
-		
 	</script>
 
 </body>
