@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="css/jquery-ui.css">
 <script src="js/echarts.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	crossorigin="anonymous"></script>
 
 <!-- e chart CDN -->
 <style>
@@ -46,13 +48,14 @@
 					<h1 class="mt-4"
 						style="text-shadow: 1px 1px gray; text-align: center">刊登管理</h1>
 
-					<div id="mainPublish" style="width: 600px; height: 400px;margin: auto;"></div>
+					<div id="mainPublish"
+						style="width: 600px; height: 400px; margin: auto;"></div>
 					<script type="text/javascript">
 						// 基于准备好的dom，初始化echarts实例
 						var myChart = echarts.init(document
 								.getElementById('mainPublish'));
 
-// 						var allString = JSON.stringify('${allString}');
+						// 						var allString = JSON.stringify('${allString}');
 						var allString = JSON.parse('${allString}');
 
 						console.log(allString);
@@ -252,8 +255,7 @@
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-		crossorigin="anonymous"></script>
+
 	<script src="js/jquery-ui.js"></script>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
