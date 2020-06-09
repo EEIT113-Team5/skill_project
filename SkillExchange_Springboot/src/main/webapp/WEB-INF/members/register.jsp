@@ -410,9 +410,9 @@
 <!--一鍵加入會員 這裡 -->
 	<script>
 		function oneKey() {
-			$("#name").val("米老鼠");
-			$("#nicname").val("小米");
-			$("#acc").val("happy");
+			$("#name").val("皮卡丘");
+			$("#nicname").val("皮卡");
+			$("#acc").val("zxc123");
 			$("#birthday").val("1993/07/27");
 			$("#pwd").val("123456789");
 			$("#checkpwd").val("123456789");
