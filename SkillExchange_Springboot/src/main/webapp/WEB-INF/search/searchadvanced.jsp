@@ -362,26 +362,23 @@ form {
 
 .ul-sort {
 	width: 80%;
-	margin: 8px auto;
+	margin: 5px auto;
 	text-align: center;
-	
 }
 
 .li-sort {
 	list-style: none;
 	display: inline-block;
-	margin: 0 50px;
-/* 	padding-left: 100px; */
-/* 	padding-right: 100px; */
+/* 	margin: 0 10px; */
 	cursor: pointer;
+	width: 23%;
 }
 
 .div-sort {
-	margin-left: 25px;
-	margin-right: 25px;
-	padding-left: 50px;
-	padding-right: 50px;
-	font-size: 12px;
+ 	padding-left: 30px; 
+ 	padding-right: 30px; 
+	font-size: 14px;
+	line-height: 1.5rem;
 }
 </style>
 </head>
@@ -522,10 +519,10 @@ form {
 	</div>
 	<div class="wrap-level1-2">
 	<ul class="ul-sort">
-	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
-	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">更新時間  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
-	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
-	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">點擊數  <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fotn" class="badge badge-light div-sort">更新時間    <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fnto" class="badge badge-light div-sort">更新時間    <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fltm" class="badge badge-light div-sort">點擊數    <i class="fas fa-sort-up" style="font-size:15px"></i></span></li>
+	<li class="li-sort"><span id="fmtl" class="badge badge-light div-sort">點擊數    <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li>
 <!-- 	<li class="li-sort"><span id="flth" class="badge badge-light div-sort">評價 <i class="fas fa-sort-up" style="font-size:15px"></i></span></li> -->
 <!-- 	<li class="li-sort"><span id="fhtl" class="badge badge-light div-sort">評價 <i class="fas fa-sort-down"  style="font-size:15px"></i></span></li> -->
 	</ul>
@@ -1211,7 +1208,44 @@ form {
 							content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
 							content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
 							content2 += "<div style='text-align: right'>";
-							content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+							var date = new Date(arr[0][i].updateTime);
+							var M = date.getMonth();
+							if(M < 9){
+								M = "0" + (M + 1);
+							} else {
+								M = M + 1;
+							}
+							
+							var D = date.getDate();
+							if(D < 10){
+								D = "0" + D;
+							} else {
+								D
+							}
+							
+							var H = date.getHours();
+							if(H < 10){
+								H = "0" + H;
+							}else {
+								H
+							}
+							
+							var m = date.getMinutes();
+							if(m < 10){
+								m = "0" + ml
+							} else {
+								m
+							}
+							var dformat = [date.getFullYear(), 
+// 						   					date.getMonth()+1,
+											M,
+// 						              		date.getDate()
+						              		D].join('-')+' '+
+						    			  [H,
+// 						    				  date.getHours(),
+// 						    				date.getMinutes()
+						    				m].join(':');
+						    content2 += "<small class='text-muted'>" + "最後更新日期: " +  dformat + "</small></div></div>";
 							content2 += "<div class='card-footer last-part'>";
 							content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
 							content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
@@ -1252,7 +1286,44 @@ form {
 						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
 						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
 						content2 += "<div style='text-align: right'>";
-						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						var date = new Date(arr[0][i].updateTime);
+						var M = date.getMonth();
+						if(M < 9){
+							M = "0" + (M + 1);
+						} else {
+							M = M + 1;
+						}
+						
+						var D = date.getDate();
+						if(D < 10){
+							D = "0" + D;
+						} else {
+							D
+						}
+						
+						var H = date.getHours();
+						if(H < 10){
+							H = "0" + H;
+						}else {
+							H
+						}
+						
+						var m = date.getMinutes();
+						if(m < 10){
+							m = "0" + ml
+						} else {
+							m
+						}
+						var dformat = [date.getFullYear(), 
+//						   					date.getMonth()+1,
+										M,
+//						              		date.getDate()
+					              		D].join('-')+' '+
+					    			  [H,
+//						    				  date.getHours(),
+//						    				date.getMinutes()
+					    				m].join(':');
+					    content2 += "<small class='text-muted'>" + "最後更新日期: " +  dformat + "</small></div></div>";
 						content2 += "<div class='card-footer last-part'>";
 						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
 						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
@@ -1294,7 +1365,44 @@ form {
 						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
 						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
 						content2 += "<div style='text-align: right'>";
-						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						var date = new Date(arr[0][i].updateTime);
+						var M = date.getMonth();
+						if(M < 9){
+							M = "0" + (M + 1);
+						} else {
+							M = M + 1;
+						}
+						
+						var D = date.getDate();
+						if(D < 10){
+							D = "0" + D;
+						} else {
+							D
+						}
+						
+						var H = date.getHours();
+						if(H < 10){
+							H = "0" + H;
+						}else {
+							H
+						}
+						
+						var m = date.getMinutes();
+						if(m < 10){
+							m = "0" + ml
+						} else {
+							m
+						}
+						var dformat = [date.getFullYear(), 
+//						   					date.getMonth()+1,
+										M,
+//						              		date.getDate()
+					              		D].join('-')+' '+
+					    			  [H,
+//						    				  date.getHours(),
+//						    				date.getMinutes()
+					    				m].join(':');
+					    content2 += "<small class='text-muted'>" + "最後更新日期: " +  dformat + "</small></div></div>";
 						content2 += "<div class='card-footer last-part'>";
 						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
 						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
@@ -1336,7 +1444,44 @@ form {
 						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>";
 						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>";
 						content2 += "<div style='text-align: right'>";
-						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>";
+						var date = new Date(arr[0][i].updateTime);
+						var M = date.getMonth();
+						if(M < 9){
+							M = "0" + (M + 1);
+						} else {
+							M = M + 1;
+						}
+						
+						var D = date.getDate();
+						if(D < 10){
+							D = "0" + D;
+						} else {
+							D
+						}
+						
+						var H = date.getHours();
+						if(H < 10){
+							H = "0" + H;
+						}else {
+							H
+						}
+						
+						var m = date.getMinutes();
+						if(m < 10){
+							m = "0" + ml
+						} else {
+							m
+						}
+						var dformat = [date.getFullYear(), 
+//						   					date.getMonth()+1,
+										M,
+//						              		date.getDate()
+					              		D].join('-')+' '+
+					    			  [H,
+//						    				  date.getHours(),
+//						    				date.getMinutes()
+					    				m].join(':');
+					    content2 += "<small class='text-muted'>" + "最後更新日期: " +  dformat + "</small></div></div>";
 						content2 += "<div class='card-footer last-part'>";
 						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>";
 						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>";
@@ -1349,49 +1494,6 @@ form {
 		}
 	})
 	</script>
-	
-<!-- 	<script> -->
-<!-- 	$(document).on("click", "#flth", function(){ -->
-<!-- 		var input = document.getElementById("container2"); -->
-<!-- 		var xhr = new XMLHttpRequest(); -->
-<%-- 		xhr.open("GET", "<c:url value='QuerySort5.do' />", true); --%>
-<!-- 		xhr.send(); -->
-<!-- 		xhr.onreadystatechange = function(){ -->
-<!-- 			if(xhr.readyState == 4){ -->
-<!-- 				if(xhr.status == 200){ -->
-<!-- // 					console.log(JSON.parse(xhr.responseText)); -->
-<!-- 					var arr = JSON.parse(xhr.responseText); -->
-<!-- 					var content1 = "<div class='card-deck'>"; -->
-<!-- 					var content2 = ""; -->
-<!-- 					for(var i = 0; i < arr[0].length; i++){ -->
-<!-- 						content2 += "<div class='result'><div class='card'><div class='card-header bg-transparent'>"; -->
-<!-- 						if(arr[0][i].memberNic == null){ -->
-<!-- 							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + "我是某某某" + "</span>"; -->
-<!-- 						} else { -->
-<!-- 							content2 += "<img class='collectImg' alt='' src='" + arr[0][i].memberPic + "'><span> " + arr[0][i].memberNic + "</span>"; -->
-<!-- 						} -->
-<!-- 						content2 += "</div><div class=''>"; -->
-<!-- 						content2 += "<img class='card-img img' src='" + arr[0][i].publishPic + "' alt='" + arr[0][i].publishPic + "'></div>"; -->
-<!-- 						content2 += "<div class='card-body'>"; -->
-<!-- 						content2 += "<h4 class='card-title text-truncate line-clamp2'>" + arr[0][i].publishTitle + "</h4>"; -->
-<!-- 						content2 += "<div class='card-text text-truncate line-clamp3 detail'>" + arr[0][i].publishDetail + "</div>"; -->
-<!-- 						content2 += "<h6><i class='far fa-handshake' style='font-size:14px'></i>" + " 提供交換技能: " + arr[0][i].ownType + " - " + arr[0][i].ownSkill +"</h6>"; -->
-<!-- 						content2 += "<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i>" + arr[0][i].publishArea + " - " + arr[0][i].city + "</h6>"; -->
-<!-- 						content2 += "<div style='text-align: right'>"; -->
-<!-- 						content2 += "<small class='text-muted'>" + "最後更新日期:" +  arr[0][i].updateTime + "</small></div></div>"; -->
-<!-- 						content2 += "<div class='card-footer last-part'>"; -->
-<!-- 						content2 += "<button type='button' class='btn btn-success btn-o'>" + "加入收藏 " + "<i class='far fa-heart'></i></i></button>"; -->
-<!-- 						content2 += "<button type='button' class='btn btn-primary btn-o'>" + "發送訊息 " + "<i class='far fa-comment-dots'></i></button>"; -->
-<!-- 						content2 += "</div></div></div>" -->
-<!-- 					} -->
-<!-- 					var content = content1 + content2 + "</div>"; -->
-<!-- 					input.innerHTML = content; -->
-<!-- 				} -->
-<!-- 			} -->
-<!-- 		} -->
-<!-- 	}) -->
-<!-- 	</script> -->
-
 </body>
 
 </html>
