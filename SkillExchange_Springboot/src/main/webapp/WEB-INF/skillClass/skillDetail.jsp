@@ -221,6 +221,8 @@ span {
 						<c:set var="sendUser2"
 							value="${sessionScope.memberBean.memberRegNo}" />
 						<c:set var="memberski" value="${skills.member.memberInSkill}" />
+						<c:set var="memberski1" value="${skills.member.memberCountry}" />
+						<c:set var="memberski2" value="${skills.member.memberMail}" />
 						<!-- 左側排版 -->
 						<div id="left_1">
 							<div id="left_1_main">
@@ -347,11 +349,11 @@ span {
 						<h4>
 							<span class="badge badge-secondary">居住區域:</span>
 						</h4>
-						<h4>${sessionScope.memberBean.memberCountry}${sessionScope.memberBean.memberAddr}</h4>
+						<h4>${memberski1}</h4>
 						<h4>
 							<span class="badge badge-secondary">電子信箱:</span>
 						</h4>
-						<h4 style="margin-bottom: 20px">${sessionScope.memberBean.memberMail}</h4>
+						<h4 style="margin-bottom: 20px">${memberski2}</h4>
 
 						<div class="card-text"></div>
 						<c:if test="${status==1}">
@@ -431,7 +433,7 @@ span {
 										test="${memberBean.memberRegNo==allSkills[0].memberRegNo}">
 										<span id="sendmss" class="input-group-text send_btn"
 											onclick="sendMessage_skillowner('${sendUser}','${sendUser2}','${pic2}')">
-											<i class="fas fa-location-arrow"></i>
+											<i class="fa fa-paper-plane"></i>
 										</span>
 									</c:when>
 									<c:otherwise>

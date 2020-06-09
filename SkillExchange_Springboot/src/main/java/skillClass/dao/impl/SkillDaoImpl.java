@@ -66,7 +66,7 @@ public class SkillDaoImpl implements SkillDao {
 
 	@Override
 	public List<Chat> LogQuery(String sendUser,String sendTo) {
-		System.out.println("觸發logquery");
+		System.out.println("觸發Dao logquery");
 
 		String hql = "from Chat C WHERE C.toUser = :toUser and C.sendUser = :sendUser order by LogTime ASC";
 		Session session = getSession();

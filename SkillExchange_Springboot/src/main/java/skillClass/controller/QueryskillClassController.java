@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -124,7 +125,7 @@ public class QueryskillClassController {
 		ResponseEntity<ChatRequest> re = new ResponseEntity<>(result, HttpStatus.OK);
 		return re;
 	}
-	// 後來點擊數比例圖用
+	// 後台點擊數比例圖用
 	@GetMapping(value = "GetBackendCTR", produces = { "application/json" })
 	public ResponseEntity<List<Skill2>> GetBackendCTR(Model model) {
 		List<Skill2> list = service.GetBackendCTR();
@@ -136,15 +137,18 @@ public class QueryskillClassController {
 	@GetMapping(value = "MessageTime", produces = { "application/json" })
 	public ResponseEntity<Long> MessageInterval(Model model,@RequestParam("sendUser") String sendUser,
 			@RequestParam("sendTo") String sendTo) {
+		
 		List<Chat> list = service.LogQuery(sendUser, sendTo);
+		long msgtime = 301;
 		LocalDateTime time1 = LocalDateTime.now(); 
+		if (CollectionUtils.isNotEmpty(list)) {
 		LocalDateTime time2 = list.get(0).getLogTime();
 		Duration duration = Duration.between(time2,time1);
-		System.out.println(duration);
-		long msgtime = duration.getSeconds();
-		System.out.println("秒數:"+msgtime);
+		msgtime = duration.getSeconds();
+		}
+			
 		ResponseEntity<Long> re = new ResponseEntity<>(msgtime, HttpStatus.OK);
-		System.out.println(re);
+		System.out.println("聊天list:"+re);
 		return re;
 	}
 //	@RequestMapping("/index")

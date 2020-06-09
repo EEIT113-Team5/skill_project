@@ -78,7 +78,7 @@ public class DemoWS {
 		}
 		else {	
 			
-				System.out.println("歷史訊息處理中");
+				System.out.println("onopen:歷史訊息處理中");
 				 StringBuilder hmsg = new StringBuilder();
 				for (int i=0;i<history.size();i++) {
 					hmsg.append(history.get(i).getChatLog());															 
@@ -87,9 +87,7 @@ public class DemoWS {
 					hmsg2=hmsg.toString();
 				this.session.getAsyncRemote().sendText(hmsg2);							
 		}
-		System.out.println("這是對面:"+sendTo);
-		System.out.println("有新連接加入！當前在線人數為" + getOnlineCount());
-		System.out.println(text);
+	
 		webSocketMap.put(sendUser, this);// 當前用户的websocket
 		// 刷新在線人數
 //		for (DemoWS Demows : webSocketMap.values()) {
@@ -140,10 +138,7 @@ public class DemoWS {
 //				System.out.println("信息存到數據庫");
 			};
 			
-			System.out.println("保存訊息到資料庫");
-			userSession.getAsyncRemote().sendText(msg);
-			System.out.println("發出訊息者:"+sendUser+"收到訊息者:"+toUser);
-			
+			userSession.getAsyncRemote().sendText(msg);			
 			DemoWS.Dao.LogUpdate(sendNo,receiveNo,sendUser,toUser,msg,currentTime);			
 			DemoWS.Dao.LogUpdate(receiveNo,sendNo,toUser,sendUser,msg1,currentTime);
 			
