@@ -1184,7 +1184,14 @@ form {
 		$(document).on("click", "#fotn", function(){
 			var input = document.getElementById("container2");
 			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "<c:url value='QuerySort1.do' />", true);
+			var url = "area1=" + document.getElementById("area1").value + "&area2=" + document.getElementById("area2").value + "&area3=" + document.getElementById("area3").value
+			+ "&city1=" + document.getElementById("city1").value + "&city2=" + document.getElementById("city2").value + "&city3=" + document.getElementById("city3").value
+			+ "&city4=" + document.getElementById("city4").value + "&city5=" + document.getElementById("city5").value + "&type1=" + document.getElementById("type1").value
+			+ "&type2=" + document.getElementById("type2").value + "&type3=" + document.getElementById("type3").value + "&type4=" + document.getElementById("type4").value
+			+ "&skill1=" + document.getElementById("skill1").value + "&skill2=" + document.getElementById("skill2").value + "&skill3=" + document.getElementById("skill3").value
+			+ "&skill4=" + document.getElementById("skill4").value + "&skill5=" + document.getElementById("skill5").value + "&areablock=" + document.getElementById("areablock").value
+			+ "&skillblock=" + document.getElementById("skillblock").value + "&keyword=" + document.getElementById("keyword").value;
+			xhr.open("GET", "<c:url value='QuerySort1.do?"+ url +"' />", true);
 			xhr.send();
 			xhr.onreadystatechange = function(){
 				if(xhr.readyState == 4){
@@ -1262,12 +1269,20 @@ form {
 	$(document).on("click", "#fnto", function(){
 		var input = document.getElementById("container2");
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='QuerySort2.do' />", true);
+		var url = "area1=" + document.getElementById("area1").value + "&area2=" + document.getElementById("area2").value + "&area3=" + document.getElementById("area3").value
+				+ "&city1=" + document.getElementById("city1").value + "&city2=" + document.getElementById("city2").value + "&city3=" + document.getElementById("city3").value
+				+ "&city4=" + document.getElementById("city4").value + "&city5=" + document.getElementById("city5").value + "&type1=" + document.getElementById("type1").value
+				+ "&type2=" + document.getElementById("type2").value + "&type3=" + document.getElementById("type3").value + "&type4=" + document.getElementById("type4").value
+				+ "&skill1=" + document.getElementById("skill1").value + "&skill2=" + document.getElementById("skill2").value + "&skill3=" + document.getElementById("skill3").value
+				+ "&skill4=" + document.getElementById("skill4").value + "&skill5=" + document.getElementById("skill5").value + "&areablock=" + document.getElementById("areablock").value
+				+ "&skillblock=" + document.getElementById("skillblock").value + "&keyword=" + document.getElementById("keyword").value;
+		xhr.open("GET", "<c:url value='QuerySort2.do?"+ url +"' />", true);
+		console.log("url=" + url);
 		xhr.send();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
 				if(xhr.status == 200){
-// 					console.log(JSON.parse(xhr.responseText));
+					console.log(JSON.parse(xhr.responseText));
 					var arr = JSON.parse(xhr.responseText);
 					var content1 = "<div class='card-deck'>";
 					var content2 = "";
@@ -1341,7 +1356,14 @@ form {
 	$(document).on("click", "#fmtl", function(){
 		var input = document.getElementById("container2");
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='QuerySort3.do' />", true);
+		var url = "area1=" + document.getElementById("area1").value + "&area2=" + document.getElementById("area2").value + "&area3=" + document.getElementById("area3").value
+		+ "&city1=" + document.getElementById("city1").value + "&city2=" + document.getElementById("city2").value + "&city3=" + document.getElementById("city3").value
+		+ "&city4=" + document.getElementById("city4").value + "&city5=" + document.getElementById("city5").value + "&type1=" + document.getElementById("type1").value
+		+ "&type2=" + document.getElementById("type2").value + "&type3=" + document.getElementById("type3").value + "&type4=" + document.getElementById("type4").value
+		+ "&skill1=" + document.getElementById("skill1").value + "&skill2=" + document.getElementById("skill2").value + "&skill3=" + document.getElementById("skill3").value
+		+ "&skill4=" + document.getElementById("skill4").value + "&skill5=" + document.getElementById("skill5").value + "&areablock=" + document.getElementById("areablock").value
+		+ "&skillblock=" + document.getElementById("skillblock").value + "&keyword=" + document.getElementById("keyword").value;
+		xhr.open("GET", "<c:url value='QuerySort3.do?"+ url +"' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
@@ -1420,7 +1442,14 @@ form {
 	$(document).on("click", "#fltm", function(){
 		var input = document.getElementById("container2");
 		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "<c:url value='QuerySort4.do' />", true);
+		var url = "area1=" + document.getElementById("area1").value + "&area2=" + document.getElementById("area2").value + "&area3=" + document.getElementById("area3").value
+		+ "&city1=" + document.getElementById("city1").value + "&city2=" + document.getElementById("city2").value + "&city3=" + document.getElementById("city3").value
+		+ "&city4=" + document.getElementById("city4").value + "&city5=" + document.getElementById("city5").value + "&type1=" + document.getElementById("type1").value
+		+ "&type2=" + document.getElementById("type2").value + "&type3=" + document.getElementById("type3").value + "&type4=" + document.getElementById("type4").value
+		+ "&skill1=" + document.getElementById("skill1").value + "&skill2=" + document.getElementById("skill2").value + "&skill3=" + document.getElementById("skill3").value
+		+ "&skill4=" + document.getElementById("skill4").value + "&skill5=" + document.getElementById("skill5").value + "&areablock=" + document.getElementById("areablock").value
+		+ "&skillblock=" + document.getElementById("skillblock").value + "&keyword=" + document.getElementById("keyword").value;
+		xhr.open("GET", "<c:url value='QuerySort4.do?"+ url +"' />", true);
 		xhr.send();
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
