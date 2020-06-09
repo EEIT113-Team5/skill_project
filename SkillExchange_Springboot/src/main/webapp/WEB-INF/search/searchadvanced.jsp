@@ -1232,7 +1232,7 @@ form {
 							
 							var m = date.getMinutes();
 							if(m < 10){
-								m = "0" + ml
+								m = "0" + m;
 							} else {
 								m
 							}
@@ -1310,7 +1310,7 @@ form {
 						
 						var m = date.getMinutes();
 						if(m < 10){
-							m = "0" + ml
+							m = "0" + m;
 						} else {
 							m
 						}
@@ -1389,7 +1389,7 @@ form {
 						
 						var m = date.getMinutes();
 						if(m < 10){
-							m = "0" + ml
+							m = "0" + m;
 						} else {
 							m
 						}
@@ -1468,7 +1468,7 @@ form {
 						
 						var m = date.getMinutes();
 						if(m < 10){
-							m = "0" + ml
+							m = "0" + m;
 						} else {
 							m
 						}
