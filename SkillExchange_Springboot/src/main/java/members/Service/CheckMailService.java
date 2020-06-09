@@ -45,6 +45,10 @@ public class CheckMailService {
 		//確定字串長度
 		int stringLength = (int) (Math.random()*10);
 		
+		if (stringLength<5) {
+			stringLength = 5;
+		}
+		
 		//再利用 for 迴圈就可以生成一條長度為10以內的隨機字串
 		for (int j = 0; j < stringLength; j++  ) {
 			
