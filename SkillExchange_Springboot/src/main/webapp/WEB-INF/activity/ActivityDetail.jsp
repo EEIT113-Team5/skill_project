@@ -401,7 +401,7 @@
 	     var y = (screen.height - w_height) / 5; 
 // 	url='UpdateActivity?activityid='+activityid+"&memberid="+memberid+"&title="+title+"&category="+category+"&descript="+descript+"&beginDay="+beginDay+"&beginTime="+beginTime+"&endDay="+endDay+"&endTime="+endTime+"&position="+position+"&lat="+lat+"&long1="+long1+"&group1="+group1+"&group2="+group2+"&imgB64="+imgB64;
 	     window.open('OpenMap?activityid='+activityid,'地圖', config = 'height=670,width=936,left=' + x +',location=no,resizable=no,toolbar=no'); }
-   window.setInterval(fetch,20000);
+   window.setInterval(fetch,12000);
    fetch();
    function fetch(){
        $.ajax({
