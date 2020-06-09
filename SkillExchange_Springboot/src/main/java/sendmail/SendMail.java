@@ -36,7 +36,7 @@ public class SendMail {
 		System.out.println("====sending email====");
 
 		Properties props = new Properties();
-		props.setProperty("mail.transport.protocol", "smtp");
+//		props.setProperty("mail.transport.protocol", "smtp");
 		props.setProperty("mail.host", "smtp.gmail.com");
 		props.setProperty("mail.smtp.port", "587");
 		props.setProperty("mail.smtp.auth", "true");
