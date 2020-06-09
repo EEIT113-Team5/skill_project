@@ -25,7 +25,7 @@ public class JobParam {
 	private String cronExpression;
 	private Boolean isSync = false;
 	private String description;
-	private Date updateTime = new Date();
+	private Date updateTime = new Date(System.currentTimeMillis());
 	private String updateTimeStr;
 
 	@Column(name="jobName")
