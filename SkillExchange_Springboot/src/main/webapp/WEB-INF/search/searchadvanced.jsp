@@ -313,7 +313,7 @@ form {
 
 .detail {
 	font-size: 1em;
-	height: 5em;
+	height: 4.5em;
 	vertical-align: top;
 	margin-bottom: 0.75rem;
 }
