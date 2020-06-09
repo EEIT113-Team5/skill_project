@@ -37,7 +37,7 @@ public class SkillDaoImpl implements SkillDao {
 	@Override
 	public List<Publish> skillQuery(String skillType) {
 
-		String hql = "from Publish P join fetch P.member WHERE P.skillType = :skillType order by UpdateTime DESC";
+		String hql = "from Publish P join fetch P.member WHERE P.skillType = :skillType and P.status=1 order by UpdateTime DESC";
 		Session session = getSession();
 		Query<Publish> query = session.createQuery(hql);
 		query.setParameter("skillType", skillType);
@@ -58,7 +58,7 @@ public class SkillDaoImpl implements SkillDao {
 	@SuppressWarnings("unchecked")
 	public List<Publish> allskill() {
 
-		String hql = "from Publish P join fetch P.member order by UpdateTime DESC";
+		String hql = "from Publish P join fetch P.member where P.status=1 order by UpdateTime DESC";
 		Session session = getSession();
 		List<Publish> list = session.createQuery(hql).getResultList();
 		return list;
