@@ -120,32 +120,6 @@
 						<div class="col-xl-6">
 							<div class="card mb-4">
 								<div class="card-header">
-									<i class="fas fa-chart-area mr-1"></i>
-									<h4 style="text-align: center">
-										<b>上週活動刊登情況</b>
-									</h4>
-								</div>
-								<div class="card-body">
-									<div id="myBarChart" style="width: 100%; height: 500px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<i class="fas fa-chart-bar mr-1"></i>
-									<h4 style="text-align: center">
-										<b>今年每月交換次數分布</b>
-									</h4>
-								</div>
-								<div class="card-body">
-									<div id="myBarChart1" style="width: 100%; height: 500px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
 									<i class="fas fa-chart-bar mr-1"></i>
 									<h4 style="text-align: center">
 										<b>技能趨勢</b>
@@ -166,6 +140,33 @@
 								</div>
 								<div class="card-body">
 									<div id="myBarChart3" style="width: 100%; height: 500px;"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-chart-area mr-1"></i>
+									<h4 style="text-align: center">
+										<b>上週活動刊登情況</b>
+									</h4>
+								</div>
+								<div class="card-body">
+									<div id="myBarChart" style="width: 100%; height: 500px;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-chart-bar mr-1"></i>
+									<h4 style="text-align: center">
+										<b>今年每月交換次數分布</b>
+									</h4>
+								</div>
+								<div class="card-body">
+									<div id="myBarChart1" style="width: 100%; height: 500px;"></div>
 								</div>
 							</div>
 						</div>
