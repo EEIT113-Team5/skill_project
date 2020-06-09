@@ -360,7 +360,7 @@ span {
 							<c:set var="chatstatus" value="${status}" />
 						</c:if>
 						<button id="disabled2" class="btn btn-dark"
-							onclick="self.location.href='mailto:${sessionScope.memberBean.memberMail}'">
+							onclick="self.location.href='mailto:${memberski2}'">
 							發送郵件 <i class="fa fa-envelope" aria-hidden="true"></i>
 						</button>
 						<button id="disabled" class="btn btn-primary"
