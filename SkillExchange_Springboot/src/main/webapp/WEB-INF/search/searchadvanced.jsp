@@ -555,7 +555,7 @@ form {
 										alt="${search.publishPic}">
 								</div>
 								<div class="card-body">
-									<h4 class="card-title text-truncate line-clamp2">${search.publishTitle}</h4>
+									<h4 class="card-title text-truncate line-clamp2"><a style="color:black;" href="<c:url value='publish?num=${search.publishNo}&hostid=${search.memberRegNo}&status="${search.status}"' />" title="${search.publishTitle}">${search.publishTitle}</a></h4>
 									<div class="card-text text-truncate line-clamp3 detail">${search.publishDetail}</div>
 									<h6><i class='far fa-handshake' style='font-size:14px'></i> 提供交換技能: ${search.ownType} - ${search.ownSkill}</h6>
 									<h6><i class='fas fa-map-marker-alt' style='font-size:20px'></i> ${search.publishArea} -
