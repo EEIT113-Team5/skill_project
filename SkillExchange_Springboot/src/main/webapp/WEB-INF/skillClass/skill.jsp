@@ -89,6 +89,20 @@ h5 {
 .card-img-top {
 	cursor: pointer;
 }
+.scroll-top {
+	width: 40px;
+	height: 40px;
+	background: #333;
+	color: #f1f1f1;
+	font-size: 1.5em;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 40px;
+	/* 永遠固定在頁面上 */
+	position: fixed;
+	right: 20px;
+	bottom: 80px;
+}
 </style>
 </head>
 
@@ -251,6 +265,25 @@ h5 {
 	<jsp:include page="/fragment/bottom.jsp" />
 
 	<script>
+	
+
+	$(document).ready(function() {
+		  $(".scroll-top").on('click', function(){
+		    console.log('click');
+//		     $('html,body').scrollTop(0);
+		    $("html,body").animate({scrollTop: 0}, 1000);
+		  });
+		  $(window).on('scroll',function() {
+		    console.log($(this).scrollTop());
+		    if ( $(this).scrollTop() > 200){
+		      $('.scroll-top').fadeIn("fast");
+		    } else {
+		      $('.scroll-top').stop().fadeOut("fast");
+		    }
+		  });
+		});
+	
+	
 	function checkmember(publishNo,status) {		
 	    if(status==1){
 	    	
