@@ -134,7 +134,7 @@ public class MyPublishDao implements iMyPublishDao {
 			c.add(Calendar.MONTH, -1);
 			Date m = c.getTime();
 			
-			m.setTime(m.getTime()+15*1000);
+			m.setTime(m.getTime()+10*1000);
 			java.sql.Date updateTime = new java.sql.Date(m.getTime());
 			
 			
