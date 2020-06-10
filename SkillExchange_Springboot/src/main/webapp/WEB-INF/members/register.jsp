@@ -330,6 +330,10 @@
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp." 
                     class="btn" ></div>
+                    <div><input type="button" onclick='oneKey2()' value=".&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp." 
+                    class="btn" ></div>
 
                     </form>
                   </div><!---modal-body--->
@@ -411,13 +415,27 @@
 	<script>
 		function oneKey() {
 			$("#name").val("小熊");
-			$("#nicname").val("維尼");
-			$("#acc").val("qq0911");
+			$("#nicname").val("仙女");
+			$("#acc").val("eeit0610");
 			$("#birthday").val("1993/07/27");
 			$("#pwd").val("123456789");
 			$("#checkpwd").val("123456789");
 			$("#phone").val("0912345678");
 			$("#mail").val("eeit11321@gmail.com");
+			$("#addr").val("杉樹區北森花路6巷5號");
+
+		}
+	</script>
+	<script>
+		function oneKey2() {
+			$("#name").val("陳淑芬");
+			$("#nicname").val("美女");
+			$("#acc").val("eeit0612");
+			$("#birthday").val("1993/07/27");
+			$("#pwd").val("123456789");
+			$("#checkpwd").val("123456789");
+			$("#phone").val("0912345678");
+			$("#mail").val("eeit202005@gmail.com");
 			$("#addr").val("杉樹區北森花路6巷5號");
 
 		}

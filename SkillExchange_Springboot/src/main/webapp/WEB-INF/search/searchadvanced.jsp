@@ -508,8 +508,8 @@ form {
 					<input type="hidden" id="skill3" name="skill3" value="${skill3}">
 					<input type="hidden" id="skill4" name="skill4" value="${skill4}">
 					<input type="hidden" id="skill5" name="skill5" value="${skill5}">
-					<input type="hidden" id="areablock" name="areablock" value="">
-					<input type="hidden" id="skillblock" name="skillblock" value="">
+					<input type="hidden" id="areablock" name="areablock" value="${areablock}">
+					<input type="hidden" id="skillblock" name="skillblock" value="${skillblock}">
 					<button type="submit" class="btn btn-secondary btn-sm last-btn">
 						<i class="fa fa-search"></i>搜尋
 					</button>
@@ -1247,7 +1247,7 @@ form {
 // 						   					date.getMonth()+1,
 											M,
 // 						              		date.getDate()
-						              		D].join('-')+' '+
+						              		D].join('/')+' '+
 						    			  [H,
 // 						    				  date.getHours(),
 // 						    				date.getMinutes()
@@ -1333,7 +1333,7 @@ form {
 //						   					date.getMonth()+1,
 										M,
 //						              		date.getDate()
-					              		D].join('-')+' '+
+					              		D].join('/')+' '+
 					    			  [H,
 //						    				  date.getHours(),
 //						    				date.getMinutes()
@@ -1419,7 +1419,7 @@ form {
 //						   					date.getMonth()+1,
 										M,
 //						              		date.getDate()
-					              		D].join('-')+' '+
+					              		D].join('/')+' '+
 					    			  [H,
 //						    				  date.getHours(),
 //						    				date.getMinutes()
@@ -1505,7 +1505,7 @@ form {
 //						   					date.getMonth()+1,
 										M,
 //						              		date.getDate()
-					              		D].join('-')+' '+
+					              		D].join('/')+' '+
 					    			  [H,
 //						    				  date.getHours(),
 //						    				date.getMinutes()
