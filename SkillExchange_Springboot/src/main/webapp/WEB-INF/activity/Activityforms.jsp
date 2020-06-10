@@ -445,8 +445,8 @@ i {
 				$("#endDay").val("2020-06-20");
 				$("#endTime").val("11:00");
 				//地點自己手動輸入
-				$("#group").val("4");
-				$("#group1").val("10");
+				$("#group").val("0");
+				$("#group1").val("1");
 			}
 		}
 	</script>
