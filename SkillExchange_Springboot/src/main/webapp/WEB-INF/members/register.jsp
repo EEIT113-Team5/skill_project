@@ -414,9 +414,9 @@
 <!--一鍵加入會員 這裡 -->
 	<script>
 		function oneKey() {
-			$("#name").val("小熊");
-			$("#nicname").val("仙女");
-			$("#acc").val("eeit0610");
+			$("#name").val("李光豬");
+			$("#nicname").val("長頸鹿");
+			$("#acc").val("eeit0612");
 			$("#birthday").val("1993/07/27");
 			$("#pwd").val("123456789");
 			$("#checkpwd").val("123456789");
@@ -428,7 +428,7 @@
 	</script>
 	<script>
 		function oneKey2() {
-			$("#name").val("陳淑芬");
+			$("#name").val("張鈞寧");
 			$("#nicname").val("美女");
 			$("#acc").val("eeit0612");
 			$("#birthday").val("1993/07/27");
