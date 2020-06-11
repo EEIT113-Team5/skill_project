@@ -73,8 +73,7 @@ public class DemoWS {
 		List<Chat> history = DemoWS.Dao.LogQuery(sendTo,sendUser);
 		
 		if(CollectionUtils.isEmpty(history)) {
-			this.session.getAsyncRemote().sendText("沒有歷史紀錄");
-//		this.session.getAsyncRemote().sendText(hmsg);
+			
 		}
 		else {	
 			
